@@ -1,0 +1,7 @@
+parameters:
+#    teaching_admin.example.class: Teaching\AdminBundle\Example
+
+services:
+#    teaching_admin.example:
+#        class: %teaching_admin.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,16 @@
+teaching_user:
+    resource: "@TeachingUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+teaching_teacher:
+    resource: "@TeachingTeacherBundle/Resources/config/routing.yml"
+    prefix:   /
+
+teaching_admin:
+    resource: "@TeachingAdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
+teaching_general:
+    resource: "@TeachingGeneralBundle/Resources/config/routing.yml"
+    prefix:   /
+

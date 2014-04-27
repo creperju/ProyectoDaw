@@ -1,0 +1,130 @@
+8=======================================================================================8
+8                                                                                       8
+8       Workbook de Emilio Crespo Perán y Francisco Javier González Navarro.            8
+8                                                                                       8
+8=======================================================================================8
+
+
+++============++=======================================================================++
+||   DATE     ||    DESCRIPTION                                                        ||
+++============++=======================================================================++
+|| 20/03/2014 || Propuesta de modelo E/R con Jesús en clase.                           ||
+++------------++-----------------------------------------------------------------------++
+|| 26/03/2014 || Construcción del proyecto con Symfony2.                               ||
+++------------++-----------------------------------------------------------------------++
+|| 28/03/2014 || Creación de bundle AdministratorBundle para el rol Administradores.   ||
+++------------++-----------------------------------------------------------------------++
+|| 03/04/2014 || Charla de grupo: modelado de tablas mysql y aprobada la propuesta de  ||
+||            || creación de código programático de la aplicación en primer lugar, y   ||
+||            || al finalizar el ejercicio propuesto, diseñar la interfaz gráfica.     ||
+||            ||                                                                       ||
+||            || También se ha aprobado el crear un bundle central, con los            ||
+||            || formularios, plantillas y entidades para tenerlo todo más organizado. ||
+++------------++-----------------------------------------------------------------------++
+|| 04/04/2014 || Creación de formularios con Symfony con login sencillo y password.    ||
+++------------++-----------------------------------------------------------------------++
+|| 05/04/2014 || Formularios con conexión a Mysql.                                     ||
+++------------++-----------------------------------------------------------------------++
+|| 07/04/2014 || Reescritura del Anteproyecto_v2.doc junto con el nuevo modelo de      ||
+||            || tablas y descripción del proyecto, con algunos aspectos mejorados.    ||
+||            ||                                                                       ||
+||            || Falta la implementación en el proyecto de cardinalidad.               ||
+++------------++-----------------------------------------------------------------------++
+|| 10/04/2014 || Reunión de grupo (remodelación de modelo E/R):                        ||
+||            || Acordada la cantidad de grupos por curso(dos grupos, A y B).          ||
+||            ||                                                                       ||
+||            || Programación automática de baja de alumnos en un curso, el problema   ||
+||            || que se presenta es la opción de fin de matrícula antes de que acabe   ||
+||            || el curso, el profesor tutor le dará de baja automáticamente, con lo   ||
+||            || que se mirará si es null para la baja de alumnos.                     ||
+||            ||                                                                       ||
+||            || El verdadero rol que tendrán los profesores será el de altas, bajas   ||
+||            || y modificaciones de alumnos que sean del grupo al que son tutores,    ||
+||            || no pudiendo modificar aquellos alumnos de otros grupos a los que no   ||
+||            || es su tutor. Lo harán en la tabla enrollments.                        ||
+||            ||                                                                       ||
+||            || Los administradores manejan el alta de un profesor tutor de un        ||
+||            || grupo en un curso y también, el alta de un profesor en una            ||
+||            || asignatura de un grupo y curso. Lo hará en la tabla                   ||
+||            || group_subject_teacher (relación N:N:N).                               ||
+||            ||                                                                       ||
+||            || Se ha acordado un patrón de URL:                                      ||
+||            ||    - www.aplicacion.com/admin          =>  Para administradores       ||
+||            ||    - www.aplicacion.com/profesores     =>  Para profesores            ||
+||            ||    - www.aplicacion.com/usuarios       =>  Para usuarios              ||
+||            ||    - www.aplicacion.com/               =>  Para anónimo               ||
+||            || El usuario anónimo sólo verá el inicio de la aplicación y el          ||
+||            || formulario de acceso a la aplicación, que se controlará por patrones. ||
+++------------++-----------------------------------------------------------------------++
+|| 16/04/2014 || Prácticas sobre la interfaz gráfica de lo que verá el administrador.  ||
+++------------++-----------------------------------------------------------------------++
+|| 22/04/2014 || Rutas definidas para la aplicación:                                   ||
+||            ||                                                                       ||
+||            ||    /           -> Login de usuarios, inicio de la aplicación          ||
+||            ||                                                                       ||
+||            ||    Usuarios:                                                          ||
+||            ||        /usuario/                           ->      Home               ||
+||            ||        /usuario/matemáticas                ->      Mates              ||
+||            ||        /usuario/lengua                     ->      Lengua             ||
+||            ||        /usuario/musica                                                ||
+||            ||        /usuario/gimnasia                                              ||            
+||            ||        /usuario/ingles                                                ||
+||            ||        /usuario/conocimientodelmedio                                  ||
+||            ||        /usuario/notas                                                 ||
+||            ||        /usuario/examenes                                              ||
+||            ||        /usuario/tareas                                                ||
+||            ||        /usuario/ayuda                                                 ||
+||            ||        /usuario/mensajes                                              ||
+||            ||                                                                       ||
+||            ||    Profesores:                                                        ||
+||            ||        /profesor/                          ->  Home                   ||
+||            ||        /profesor/tareas                                               ||
+||            ||        /profesor/mensajes                                             ||
+||            ||        /profesor/alumnos                                              ||
+||            ||                                                                       ||
+||            ||    Administradores:                                                   ||
+||            ||        /admin/                             ->  Home                   ||
+||            ||        /admin/usuarios                                                ||
+||            ||        /admin/cursos                                                  ||
+||            ||        /admin/mensajes                                                ||
+||            ||                                                                       ||
+||            ||                                                                       ||
+||            || En nuestra aplicacion no se realizarán altas automaticas de los       ||
+||            || alumnos por "pasar de curso". En cambio si se realizarán altas        ||
+||            || semi-automaticas, que consistiran en que los tutores daran de alta a  ||
+||            || los alumnos de los que son tutores en cada curso, con ayuda de la     ||
+||            || base de datos de cursos anteriores para tener un facil acceso a los   ||
+||            || datos de los alumnos ya registrados en otros cursos. Por otra parte,  ||
+||            || se podran añadir alumnos nuevos en el mismo proceso.                  ||
+||            ||                                                                       ||
+||            || Esto se hace asi porque, de esta forma, se podra asignar              ||
+||            || automaticamente un curso y grupo a los alumnos a traves del tutor,    ||
+||            || y unas asignaturas y profesores a traves del curso y grupo. Esto      ||
+||            || conlleva que, con el simple hecho de que los tutores registren a sus  ||
+||            || alumnos cada año, estos alumnos ya quedaran matriculados en ese curso ||
+||            || y grupo hasta el final del año o hasta que se les de de baja por      ||
+||            || otro motivo.                                                          ||
+++------------++-----------------------------------------------------------------------++      
+
+    
+Recomendaciones próxima reunión:
+    Indexar de la tabla Usuarios, el login para una mayor respuesta de la aplicación.
+    Para ver la aplicación en entorno de produción (como la ven los usuarios), ir a web/app.php y 
+        $kernel = new AppKernel('prod', true); que estaba en false.
+    
+    Modelo de las páginas de la aplicación:
+        admin/mensajes  -> mensajes que manda
+        admin/          -> inicio de la aplicación
+        admin/alta      -> da de alta a usuarios (por ejemplo)
+        
+
+Página de lectura de ayuda con formularios, firewalls y session:
+    http://www.maestrosdelweb.com/editorial/curso-symfony2-seguridad-de-acceso/
+
+
+
+
+
+
+
+

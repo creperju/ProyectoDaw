@@ -1,0 +1,53 @@
+{% extends "TeachingGeneralBundle::template.html.twig" %}
+
+{% block title %}Bienvenido a Teaching!{% endblock %}
+
+
+{% block content %}
+    
+    <div class="row show-grid">
+        
+        {% if error %}
+            <div class="col-md-3">
+                {{ error.message }}
+            </div>
+        {% endif %}
+        
+        <div class="col-md-9">
+            <form action="{{ path('form_check') }}" method="post">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="_username" value="{{ last_username }}" />
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="_password" />
+
+    {#
+        añade lo siguiente si quieres redirigir al usuario a una
+        URL concreta después del login (explicado más adelante)
+        <input type="hidden" name="_target_path" value="/account" />
+    #}
+
+                <button type="submit">login</button>
+            </form>
+        </div>
+    </div>
+    <div class="row show-grid">
+        <div class="col-md-12">
+            <h3>Registrate</h3>
+            {{ form(form) }}
+        </div>
+    </div>
+    
+    {% if js_user == true %}
+        <script type="javascript">
+            return alert("Usuario creado correctamente");
+        </script>
+    {% endif %}
+{% endblock %}
+
+
+
+
+
+
+ 

@@ -1,0 +1,7 @@
+parameters:
+#    teaching_user.example.class: Teaching\UserBundle\Example
+
+services:
+#    teaching_user.example:
+#        class: %teaching_user.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

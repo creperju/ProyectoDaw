@@ -1,0 +1,68 @@
+{% extends "TeachingGeneralBundle::template.html.twig" %}
+
+{% block content %}
+
+<div class="row show-grid">
+    <div class="col-md-12">Cabecera de la página (Bienvenido {{ user }})</div>
+        
+</div>
+
+    <div class="row show-grid"><a href="{{ url('logout') }}">Cerrar Sesión...</a></div>
+{#{% if sesion != null %}    
+    
+    {% for mensaje in sesion.getFlashBag.get('notificacion') %}
+    
+        <div class="row show-grid" id="notificacion">{{ mensaje }}</div>
+    {% endfor %}
+    
+{% endif %}#}
+    
+    
+<div class="row show-grid">
+
+    <div class="col-md-2 col-xs-5">
+        
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi eu tortor vel neque congue congue. Mauris quis erat. Vestibulum dictum ligula vel purus. Vivamus eget purus. Quisque nulla. Proin nonummy elit nec erat. Suspendisse molestie, orci sed molestie congue, erat pede consectetuer tellus, non ultricies turpis purus eget lorem. Fusce ut libero. Donec gravida euismod elit. Sed rhoncus. Vivamus nibh magna, scelerisque id, tempus in, auctor non, ipsum. Vivamus vitae metus id elit consectetuer vestibulum. Etiam augue. Ut velit urna, porta a, commodo vitae, blandit vitae, odio. Ut mi arcu, placerat eu, imperdiet non, molestie quis, elit. Phasellus ligula ipsum, venenatis sit amet, feugiat eget, blandit aliquam, risus. Donec mollis.
+        
+    </div>
+    <div class="col-md-10 col-xs-7">
+        
+        <div class="row">            
+            <div style="height: 100px;" onclick="this.className='col-md-10 col-md-offset-1'" class="col-md-offset-1 col-md-5 col-xs-offset-1 col-xs-10">
+{#                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi eu tortor vel neque congue congue. Mauris quis erat. Vestibulum dictum ligula vel#}
+                Ej1
+            </div>
+            <div class="col-md-4 col-md-offset-1 col-xs-offset-1 col-xs-10">
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-0 col-xs-12">
+                        Ej2
+                    </div>
+                    <div class="col-md-12 col-md-offset-0 col-xs-12">
+                        Ej3
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-offset-1 col-md-2 col-xs-offset-1 col-xs-7">Ej1</div>
+            <div class="col-md-2 col-xs-3">Ej2</div>
+            <div class="col-md-2 col-md-offset-0 col-xs-offset-1 col-xs-3">Ej3</div>
+            <div class="col-md-2 col-xs-4">Ej4</div>
+            <div class="col-md-2 col-xs-3">Ej5</div>
+        </div>
+        
+        {#<div class="row">
+                <div class="col-md-2 col-xs-2">Ej5</div>
+                <div class="col-md-2 col-xs-2">Ej6</div>
+                <div class="col-md-2 col-xs-2">Ej7</div>
+                <div class="col-md-2 col-xs-2">Ej8</div>
+        </div>#}
+        
+        
+    </div>
+
+</div>
+
+{% endblock %}
+       
