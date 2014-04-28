@@ -20,6 +20,7 @@
       <parameter key="TeachingAdminBundle">Teaching\AdminBundle\TeachingAdminBundle</parameter>
       <parameter key="TeachingTeacherBundle">Teaching\TeacherBundle\TeachingTeacherBundle</parameter>
       <parameter key="TeachingUserBundle">Teaching\UserBundle\TeachingUserBundle</parameter>
+      <parameter key="DoctrineFixturesBundle">Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle</parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
     <parameter key="kernel.container_class">appProdDebugProjectContainer</parameter>
@@ -402,7 +403,7 @@
     <parameter key="assetic.read_from">C:/xampp/htdocs/ProyectoDaw/app/../web</parameter>
     <parameter key="assetic.write_to">C:/xampp/htdocs/ProyectoDaw/app/../web</parameter>
     <parameter key="assetic.variables" type="collection"/>
-    <parameter key="assetic.java.bin">C:\WINDOWS\system32\java.EXE</parameter>
+    <parameter key="assetic.java.bin">C:\Windows\system32\java.EXE</parameter>
     <parameter key="assetic.node.bin">/usr/bin/node</parameter>
     <parameter key="assetic.ruby.bin">/usr/bin/ruby</parameter>
     <parameter key="assetic.sass.bin">/usr/bin/sass</parameter>
@@ -1387,7 +1388,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>535c474a3b970</argument>
+            <argument>535d7625bbe0b</argument>
           </service>
         </argument>
       </argument>
@@ -1689,7 +1690,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>535c474a3b970</argument>
+            <argument>535d7625bbe0b</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>

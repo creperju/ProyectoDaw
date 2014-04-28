@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Teaching\AdminBundle\TeachingAdminBundle(),
             new Teaching\TeacherBundle\TeachingTeacherBundle(),
             new Teaching\UserBundle\TeachingUserBundle(),
+	    new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
