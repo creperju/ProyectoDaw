@@ -4,7 +4,7 @@
 
 
 {% block content %}
-    
+    {# Div con login de usuarios #}
     <div class="row show-grid">
         
         {% if error %}
@@ -31,6 +31,8 @@
             </form>
         </div>
     </div>
+    
+    {# Div con registro de usuarios #}
     <div class="row show-grid">
         <div class="col-md-12">
             <h3>Registrate</h3>
@@ -38,14 +40,27 @@
         </div>
     </div>
     
-    {% if js_user == true %}
-        <script type="javascript">
-            return alert("Usuario creado correctamente");
-        </script>
-    {% endif %}
+        
+    {# Muestra un mensaje de creación de usuario #}
+    {% for message in  app.session.flashbag.get('user_create') %}
+        
+        <div class="row show-grid" id="user_create">
+            <div class="col-md-12">
+                {{ message }}
+            </div>
+        </div>
+        
+    {% endfor %}
+
+  
+    
 {% endblock %}
 
-
+{# Incluyo el efecto jquery de creación de usuario #}
+{% block js %}    
+    {{ parent() }}    
+    <script type="text/javascript" src="{{ asset('bootstrap/js/functions_js.js') }}"></script>
+{% endblock%}
 
 
 

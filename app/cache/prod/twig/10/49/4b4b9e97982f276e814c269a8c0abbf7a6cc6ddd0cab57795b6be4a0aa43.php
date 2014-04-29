@@ -12,6 +12,8 @@ class __TwigTemplate_10494b4b9e97982f276e814c269a8c0abbf7a6cc6ddd0cab57795b6be4a
         $this->blocks = array(
             'title' => array($this, 'block_title'),
             'content' => array($this, 'block_content'),
+            'css' => array($this, 'block_css'),
+            'js' => array($this, 'block_js'),
         );
     }
 
@@ -27,27 +29,31 @@ class __TwigTemplate_10494b4b9e97982f276e814c269a8c0abbf7a6cc6ddd0cab57795b6be4a
         echo "</title>
         <!-- Para dispositivos móviles -->
         <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
+        
+        
+        
     </head>
     <body>
         
         <div class=\"container\">
             ";
-        // line 11
-        $this->displayBlock('content', $context, $blocks);
         // line 14
+        $this->displayBlock('content', $context, $blocks);
+        // line 17
         echo "        </div>
         
         <!-- Bootstrap Css -->
-        <link href=\"";
-        // line 17
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bootstrap/css/bootstrap.min.css"), "html", null, true);
-        echo "\" rel=\"stylesheet\" type=\"text/css\" />
-        <link href=\"";
-        // line 18
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bootstrap/css/main.css"), "html", null, true);
-        echo "\" rel=\"stylesheet\" type=\"text/css\" />
-        
-    </body>
+        ";
+        // line 20
+        $this->displayBlock('css', $context, $blocks);
+        // line 24
+        echo "        
+        <!-- JQuery -->
+        ";
+        // line 26
+        $this->displayBlock('js', $context, $blocks);
+        // line 29
+        echo "    </body>
 </html>";
     }
 
@@ -57,12 +63,36 @@ class __TwigTemplate_10494b4b9e97982f276e814c269a8c0abbf7a6cc6ddd0cab57795b6be4a
         echo "Teaching!";
     }
 
-    // line 11
+    // line 14
     public function block_content($context, array $blocks = array())
     {
-        // line 12
+        // line 15
         echo "            
             ";
+    }
+
+    // line 20
+    public function block_css($context, array $blocks = array())
+    {
+        // line 21
+        echo "            <link href=\"";
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bootstrap/css/bootstrap.min.css"), "html", null, true);
+        echo "\" rel=\"stylesheet\" type=\"text/css\" />
+            <link href=\"";
+        // line 22
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bootstrap/css/main.css"), "html", null, true);
+        echo "\" rel=\"stylesheet\" type=\"text/css\" />
+        ";
+    }
+
+    // line 26
+    public function block_js($context, array $blocks = array())
+    {
+        // line 27
+        echo "            <script type=\"text/javascript\" src=\"";
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bootstrap/js/jquery-1.11.0.js"), "html", null, true);
+        echo "\"></script>
+        ";
     }
 
     public function getTemplateName()
@@ -70,13 +100,8 @@ class __TwigTemplate_10494b4b9e97982f276e814c269a8c0abbf7a6cc6ddd0cab57795b6be4a
         return "TeachingGeneralBundle::template.html.twig";
     }
 
-    public function isTraitable()
-    {
-        return false;
-    }
-
     public function getDebugInfo()
     {
-        return array (  64 => 12,  61 => 11,  55 => 4,  47 => 18,  36 => 11,  26 => 4,  21 => 1,  90 => 42,  88 => 41,  81 => 37,  71 => 29,  63 => 19,  58 => 17,  54 => 15,  48 => 12,  45 => 11,  43 => 17,  38 => 14,  35 => 6,  29 => 3,);
+        return array (  92 => 27,  89 => 26,  83 => 22,  78 => 21,  75 => 20,  70 => 15,  67 => 14,  61 => 4,  56 => 29,  54 => 26,  50 => 24,  48 => 20,  43 => 17,  41 => 14,  28 => 4,  23 => 1,  128 => 60,  124 => 59,  121 => 58,  118 => 57,  111 => 52,  100 => 47,  95 => 44,  90 => 43,  82 => 37,  72 => 29,  64 => 19,  59 => 17,  55 => 15,  49 => 12,  46 => 11,  44 => 10,  39 => 7,  36 => 6,  30 => 3,);
     }
 }

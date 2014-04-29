@@ -4,6 +4,9 @@
         <title>{% block title %}Teaching!{% endblock %}</title>
         <!-- Para dispositivos móviles -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        
+        
     </head>
     <body>
         
@@ -14,8 +17,14 @@
         </div>
         
         <!-- Bootstrap Css -->
-        <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('bootstrap/css/main.css') }}" rel="stylesheet" type="text/css" />
+        {% block css %}
+            <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('bootstrap/css/main.css') }}" rel="stylesheet" type="text/css" />
+        {% endblock %}
         
+        <!-- JQuery -->
+        {% block js %}
+            <script type="text/javascript" src="{{ asset('bootstrap/js/jquery-1.11.0.js') }}"></script>
+        {% endblock %}
     </body>
 </html>

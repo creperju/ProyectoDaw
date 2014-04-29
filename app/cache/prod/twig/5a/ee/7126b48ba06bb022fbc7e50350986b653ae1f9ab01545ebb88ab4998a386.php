@@ -12,6 +12,7 @@ class __TwigTemplate_5aee7126b48ba06bb022fbc7e50350986b653ae1f9ab01545ebb88ab499
         $this->blocks = array(
             'title' => array($this, 'block_title'),
             'content' => array($this, 'block_content'),
+            'js' => array($this, 'block_js'),
         );
     }
 
@@ -83,15 +84,51 @@ class __TwigTemplate_5aee7126b48ba06bb022fbc7e50350986b653ae1f9ab01545ebb88ab499
         </div>
     </div>
     
+        
     ";
-        // line 41
-        if (((isset($context["js_user"]) ? $context["js_user"] : $this->getContext($context, "js_user")) == true)) {
-            // line 42
-            echo "        <script type=\"javascript\">
-            return alert(\"Usuario creado correctamente\");
-        </script>
+        // line 43
+        echo "    ";
+        $context['_parent'] = (array) $context;
+        $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "session"), "flashbag"), "get", array(0 => "user_create"), "method"));
+        foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
+            // line 44
+            echo "        
+        <div class=\"row show-grid\" id=\"user_create\">
+            <div class=\"col-md-12\">
+                ";
+            // line 47
+            echo twig_escape_filter($this->env, (isset($context["message"]) ? $context["message"] : $this->getContext($context, "message")), "html", null, true);
+            echo "
+            </div>
+        </div>
+        
     ";
         }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 52
+        echo "
+  
+    
+";
+    }
+
+    // line 57
+    public function block_js($context, array $blocks = array())
+    {
+        // line 58
+        echo "    
+    ";
+        // line 59
+        $this->displayParentBlock("js", $context, $blocks);
+        echo "    
+    <script type=\"text/javascript\" src=\"";
+        // line 60
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bootstrap/js/functions_js.js"), "html", null, true);
+        echo "\"></script>
+    
+";
     }
 
     public function getTemplateName()
@@ -106,6 +143,6 @@ class __TwigTemplate_5aee7126b48ba06bb022fbc7e50350986b653ae1f9ab01545ebb88ab499
 
     public function getDebugInfo()
     {
-        return array (  90 => 42,  88 => 41,  81 => 37,  71 => 29,  63 => 19,  58 => 17,  54 => 15,  48 => 12,  45 => 11,  43 => 10,  38 => 7,  35 => 6,  29 => 3,);
+        return array (  128 => 60,  124 => 59,  121 => 58,  118 => 57,  111 => 52,  100 => 47,  95 => 44,  90 => 43,  82 => 37,  72 => 29,  64 => 19,  59 => 17,  55 => 15,  49 => 12,  46 => 11,  44 => 10,  39 => 7,  36 => 6,  30 => 3,);
     }
 }

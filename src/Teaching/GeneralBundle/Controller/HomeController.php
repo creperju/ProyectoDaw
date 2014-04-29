@@ -10,20 +10,37 @@ use Teaching\GeneralBundle\Form\SignUp;
 
 class HomeController extends Controller
 {
-    public function indexAction(Request $request, $js_user = 0)
+    /**
+     * First method of app that show homepage with login and signup users.
+     * 
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @return type
+     */
+    public function indexAction(Request $request)
     {
-        // Form to SignUp user         
+        // Form to SignUp user
 	$user = new Users();
 	$form = $this->createForm(new SignUp(),$user);
         
         $form->handleRequest($request);
  
-        if ($form->isValid()) {
+	// If form is valid and has been sent from user, it's true
+        if ($form->isValid()){
+	    
             // Array data form
             $data = $form->getData();
+	    
+	    // Signup user with form data
             $this->signUpUser($user, $data);
             
-            return $this->redirect($this->generateUrl('teaching_homepage_created'));
+	    // Message flash
+	    $this->get('session')->getFlashBag()->add(
+		'user_create',
+		'Se ha creado el usuario.'
+	    );
+	    
+            return $this->redirect($this->generateUrl('teaching_homepage'));
+	    
         }
         
         
@@ -32,7 +49,7 @@ class HomeController extends Controller
         
 	$session = $request->getSession();
         
-        // get the login error if there is one
+        // Get the login error if there is one
         if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
             $error = $request->attributes->get(
                 SecurityContext::AUTHENTICATION_ERROR
@@ -49,7 +66,6 @@ class HomeController extends Controller
                 'last_username' => $session->get(SecurityContext::LAST_USERNAME),
                 'error'         => $error,
                 'form'          => $form->createView(),
-                'js_user'       => $js_user,
             )
         );
 	
