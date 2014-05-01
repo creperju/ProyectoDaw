@@ -33,7 +33,7 @@ class HomeController extends Controller
 	    // Signup user with form data
             $this->signUpUser($user, $data);
             
-	    // Message flash
+	    // Flash message
 	    $this->get('session')->getFlashBag()->add(
 		'user_create',
 		'Se ha creado el usuario.'
@@ -72,17 +72,40 @@ class HomeController extends Controller
     }
     
     
-    
+    /**
+     * Signup user of form to home
+     * 
+     * @param type $entity
+     * @param type $data
+     */
     private function signUpUser(&$entity, $data)
     {
-//        echo $data['username'];exit(0);
-        $entity->setUsername($data->getUsername());
-        $this->setSecurePassword($entity, $data->getPassword());
-        $entity->setRole('ROLE_USER');
-        $entity->setName($data->getName());
-        $entity->setSurname($data->getSurname());
-        $entity->setEmail($data->getEmail());
+	// Users signup from home, they have ROLE_USER
+	// Only Admin, can be change the role of users
+	$role = $this->getDoctrine()->getRepository('TeachingGeneralBundle:Roles')->findOneByRole('ROLE_USER');
+	
+	
+	$entity->setUsername($data->getUsername());		    // Set username
+        $this->setSecurePassword($entity, $data->getPassword());    // Set password secure
+        $entity->addRoles($role);				    // Add ROLE_USER
+        $entity->setName($data->getName());			    // Set name
+        $entity->setSurname($data->getSurname());		    // Set surname
+        $entity->setEmail($data->getEmail());			    // Set email
         
+	
+//	$entity->setUsername('emi');		    // Set username
+//        $this->setSecurePassword($entity, 'emi');    // Set password secure
+//        $entity->addRoles($role);				    // Add ROLE_USER
+//        $entity->setName('emi');			    // Set name
+//        $entity->setSurname('emi');		    // Set surname
+//        $entity->setEmail('emi');	
+	
+	
+	
+	
+	
+	
+	// Persist user
         $em = $this->getDoctrine()->getManager();
         $em->persist($entity);
         $em->flush();
@@ -90,21 +113,33 @@ class HomeController extends Controller
     }
     
     
-    
+    /**
+     * Set a secure password
+     * 
+     * @param type $entity
+     * @param type $pass
+     */
     private function setSecurePassword(&$entity, $pass)
     {
-        //$entity->setSalt(md5(time()));
-        $entity->setSalt("");
-        $encoder = new \Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder('sha512', true, 10);
-        $password = $encoder->encodePassword($pass, $entity->getSalt());
-        $entity->setPassword($password);
+        // Get algorithm and encode user
+        $factory = $this->get('security.encoder_factory');
+	$encoder = $factory->getEncoder($entity);
+	
+	// Set salt to encode password
+	$entity->setSalt( md5(time() * rand(1, 9999)) );
+	$password_secure = $encoder->encodePassword($pass, $entity->getSalt()); 
+	
+        // Set a secure password
+        $entity->setPassword($password_secure);
     }
     
     
-    public function createdAction()
+    
+    
+    public function finAction()
     { 
-//        $this->indexAction(new Request(), 1);
-        return new \Symfony\Component\HttpFoundation\Response("<html><body>Usuario credo.</body></html>");
+        return new \Symfony\Component\HttpFoundation\Response("<html><head><title>ENHORABUENA</title></head><body>USUARIO VALIDADO</body></html>");
     }
+    
     
 }

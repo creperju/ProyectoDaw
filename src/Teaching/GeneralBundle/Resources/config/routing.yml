@@ -2,12 +2,14 @@ teaching_homepage:
     pattern:  /
     defaults: { _controller: TeachingGeneralBundle:Home:index }
 
-teaching_homepage_created:
-    pattern:  /j
-    defaults: { _controller: TeachingGeneralBundle:Home:created }
+exito:
+    pattern: /validado
+    defaults: { _controller: TeachingGeneralBundle:Home:fin }
 
-form_check:
-    pattern: /login_check
+
+# For security form login and logout users
+login_check:
+    pattern:    /login_check
     
-form_logout:
-    pattern: /logout
+logout:
+    pattern:    /logout

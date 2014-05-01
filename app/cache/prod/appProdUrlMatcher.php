@@ -54,20 +54,20 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
             return array (  '_controller' => 'Teaching\\GeneralBundle\\Controller\\HomeController::indexAction',  '_route' => 'teaching_homepage',);
         }
 
-        // teaching_homepage_created
-        if ($pathinfo === '/j') {
-            return array (  '_controller' => 'Teaching\\GeneralBundle\\Controller\\HomeController::createdAction',  '_route' => 'teaching_homepage_created',);
+        // exito
+        if ($pathinfo === '/validado') {
+            return array (  '_controller' => 'Teaching\\GeneralBundle\\Controller\\HomeController::finAction',  '_route' => 'exito',);
         }
 
         if (0 === strpos($pathinfo, '/log')) {
-            // form_check
+            // login_check
             if ($pathinfo === '/login_check') {
-                return array('_route' => 'form_check');
+                return array('_route' => 'login_check');
             }
 
-            // form_logout
+            // logout
             if ($pathinfo === '/logout') {
-                return array('_route' => 'form_logout');
+                return array('_route' => 'logout');
             }
 
         }

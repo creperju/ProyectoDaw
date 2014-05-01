@@ -5,9 +5,9 @@ security:
             anonymous: ~
             form_login: 
                 login_path: teaching_homepage
-                check_path: form_check
+                check_path: login_check
             logout: 
-                path: form_logout
+                path: logout
                 target: /
                 
     access_control:
