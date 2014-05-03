@@ -1,0 +1,14 @@
+
+Tema:   LOGIN DE USUARIOS EN SYMFONY2
+Problema:
+    Inicio de sesión con usuarios en firewall de Symfony.
+Solución:
+    El problema se solucionó cambiando el tamaño del campo de la contraseña,
+    ya que al codificarla, ocuparía más tamaño del que podía almacenarse y
+    al comparar contraseñas, siempre daba error de credenciales.
+    El tamaño del campo era de 50 caracteres teniendo sha512, con sha1
+    validaba sin problemas.
+    Se ha incrementado el campo de 50 a 88 caracteres que es justo lo que
+    ocupa la contraseña codificada con sha512.
+    
+    

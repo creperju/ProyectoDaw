@@ -10,8 +10,10 @@ use Teaching\GeneralBundle\Form\SignUp;
 
 class HomeController extends Controller
 {
+     
     /**
-     * First method of app that show homepage with login and signup users.
+     * First method in application, load the home of application, also
+     * load form sign up for new users and form login.
      * 
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return type
@@ -80,30 +82,13 @@ class HomeController extends Controller
      */
     private function signUpUser(&$entity, $data)
     {
-	// Users signup from home, they have ROLE_USER
-	// Only Admin, can be change the role of users
-	$role = $this->getDoctrine()->getRepository('TeachingGeneralBundle:Roles')->findOneByRole('ROLE_USER');
-	
-	
-	$entity->setUsername($data->getUsername());		    // Set username
-        $this->setSecurePassword($entity, $data->getPassword());    // Set password secure
-        $entity->addRoles($role);				    // Add ROLE_USER
-        $entity->setName($data->getName());			    // Set name
-        $entity->setSurname($data->getSurname());		    // Set surname
-        $entity->setEmail($data->getEmail());			    // Set email
+	$entity->setUsername($data->getUsername()); // Set username
+        $this->setSecurePassword($entity, $data->getPassword()); // Set a secure password
+        $entity->addRoles("ROLE_USER"); // Add ROLE_USER
+        $entity->setName($data->getName()); // Set name
+        $entity->setSurname($data->getSurname()); // Set surname
+        $entity->setEmail($data->getEmail()); // Set email
         
-	
-//	$entity->setUsername('emi');		    // Set username
-//        $this->setSecurePassword($entity, 'emi');    // Set password secure
-//        $entity->addRoles($role);				    // Add ROLE_USER
-//        $entity->setName('emi');			    // Set name
-//        $entity->setSurname('emi');		    // Set surname
-//        $entity->setEmail('emi');	
-	
-	
-	
-	
-	
 	
 	// Persist user
         $em = $this->getDoctrine()->getManager();
@@ -135,10 +120,15 @@ class HomeController extends Controller
     
     
     
-    
+    // Control user account
     public function finAction()
     { 
         return new \Symfony\Component\HttpFoundation\Response("<html><head><title>ENHORABUENA</title></head><body>USUARIO VALIDADO</body></html>");
+        
+        /**
+         * SWITCH CASE OF TYPE ACCOUNTS USERS!!
+         */
+        
     }
     
     

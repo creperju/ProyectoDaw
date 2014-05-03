@@ -4,84 +4,152 @@ namespace Teaching\GeneralBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Teaching\GeneralBundle\Entity\Users
  *
  * @ORM\Table(name="users")
- * @ORM\Entity(repositoryClass="Teaching\GeneralBundle\Entity\UserRepository")
+ * @ORM\Entity()
  */
 class Users implements UserInterface, \Serializable
 {
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=20, unique=true)
+     * @ORM\Column(type="string", length=20, unique=true)
      */
     private $username;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=50)
+     * @ORM\Column(type="string", length=88)
      */
     private $password;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="salt", type="string", length=25)
-     */
-    private $salt;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Roles", inversedBy="users")
-     *
-     */
-    private $roles;    
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=20)
-     */
-    private $name;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="surname", type="string", length=20)
-     */
-    private $surname;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=50, unique=true)
+     * @ORM\Column(type="string", length=50, unique=true)
      */
     private $email;
 
+    /**
+     * @ORM\Column(type="string", length=12)
+     *
+     */
+    private $roles = ' ';
+
+     /**
+     * @ORM\Column(type="string", length=32)
+     */
+    private $salt;
+    
+    
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    private $name;
+    
+    
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    private $surname;
+    
+    
+    public function getName(){ return $this->name; }
+    public function setName($name){ $this->name = $name; return; }
+    
+    public function getSurname(){ return $this->surname; }
+    public function setSurname($surname){ $this->surname = $surname; return; }
     
     
     
-    ////////////////////////////////////////////////////////////////////////////
-    //				    METHODS				      //
-    ////////////////////////////////////////////////////////////////////////////
-    
-    
-    public function __construct()
+
+    public function getRoles()
     {
-        $this->roles = new ArrayCollection();
+        return explode(' ',$this->roles);
+    }
+    
+    
+    
+    
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+	return $this;
+	
+    }
+    
+    
+    
+    /**
+     * @inheritDoc
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials()
+    {
+    }
+
+    /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+//            $this->username,
+//            $this->password,
+//            // see section on salt below
+//            $this->salt,
+//            $this->name,
+//            $this->surname,
+//            $this->email,
+        ));
+    }
+
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+//            $this->username,
+//            $this->password,
+//            // see section on salt below
+//            $this->salt,
+//            $this->name,
+//            $this->surname,
+//            $this->email,
+        ) = unserialize($serialized);
     }
 
     /**
@@ -93,22 +161,12 @@ class Users implements UserInterface, \Serializable
     {
         return $this->id;
     }
-    
-    /**
-     * Get username from user
-     * 
-     * @inheritDoc
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-    
+
     /**
      * Set username
      *
      * @param string $username
-     * @return User
+     * @return Users
      */
     public function setUsername($username)
     {
@@ -116,22 +174,12 @@ class Users implements UserInterface, \Serializable
 
         return $this;
     }
-    
-    /**
-     * Get password encode
-     * 
-     * @inheritDoc
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-    
+
     /**
      * Set password
      *
      * @param string $password
-     * @return User
+     * @return Users
      */
     public function setPassword($password)
     {
@@ -139,124 +187,12 @@ class Users implements UserInterface, \Serializable
 
         return $this;
     }
-    
-    /**
-     * Get salt to encode password
-     * 
-     * @inheritDoc
-     */
-    public function getSalt()
-    {
-        return $this->salt;
-    }
-    
-    /**
-     * Set salt to encode password
-     * 
-     * @param type $salt
-     * @return \Teaching\GeneralBundle\Entity\Users
-     */
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
-	return $this;
-	
-    }
-    
-    /**
-     * Add roles
-     *
-     * @param \Teaching\GeneralBundle\Entity\Roles $roles
-     * @return User
-     */
-    public function addRoles(\Teaching\GeneralBundle\Entity\Roles $roles)
-    {
-        $this->roles[] = $roles;
 
-        return $this;
-    }
-    
-    /**
-     * Get roles from user
-     * 
-     * @return type
-     */
-    public function getRoles()
-    {
-        return $this->roles->toArray();
-    }
-    
-    /**
-     * Remove roles
-     *
-     * @param \Teaching\GeneralBundle\Entity\Roles $roles
-     */
-    public function removeRole(\Teaching\GeneralBundle\Entity\Roles $roles)
-    {
-        $this->roles->removeElement($roles);
-    }
-    
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-    
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return Users
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    
-        return $this;
-    }
-
-    /**
-     * Get surname
-     *
-     * @return string 
-     */
-    public function getSurname()
-    {
-        return $this->surname;
-    }
-    
-    /**
-     * Set surname
-     *
-     * @param string $surname
-     * @return Users
-     */
-    public function setSurname($surname)
-    {
-        $this->surname = $surname;
-    
-        return $this;
-    }
-    
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-    
     /**
      * Set email
      *
      * @param string $email
-     * @return User
+     * @return Users
      */
     public function setEmail($email)
     {
@@ -266,39 +202,27 @@ class Users implements UserInterface, \Serializable
     }
 
     /**
-     * @see \Serializable::serialize()
+     * Get email
+     *
+     * @return string 
      */
-    public function serialize()
+    public function getEmail()
     {
-        return serialize(array(
-            $this->id,
-            $this->username,
-            $this->password,            
-            $this->salt
-        ));
+        return $this->email;
     }
 
     /**
-     * @see \Serializable::unserialize()
+     * Add roles
+     *
+     * @param \Teaching\GeneralBundle\Entity\Roles $roles
+     * @return Users
      */
-    public function unserialize($serialized)
+    public function addRoles($rol)
     {
-        list (
-            $this->id,
-            $this->username,
-            $this->password,
-	    $this->salt
-        ) = unserialize($serialized);
-    }
+        $this->roles = $rol;
 
-    /**
-     * @inheritDoc
-     */
-    public function eraseCredentials()
-    {
+        return $this;
     }
-
-    
 
     
 }

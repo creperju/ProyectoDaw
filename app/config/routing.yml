@@ -14,3 +14,10 @@ teaching_general:
     resource: "@TeachingGeneralBundle/Resources/config/routing.yml"
     prefix:   /
 
+
+# For security form login and logout users
+login_check:
+    pattern:    /login_check
+    
+logout:
+    pattern:    /logout

@@ -83,9 +83,11 @@ class __TwigTemplate_5aee7126b48ba06bb022fbc7e50350986b653ae1f9ab01545ebb88ab499
         echo "    <div class=\"row show-grid\">
         <div class=\"col-md-12\">
             <h3>Registrate</h3>
-";
-        // line 40
-        echo "        </div>
+            ";
+        // line 39
+        echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form');
+        echo "
+        </div>
     </div>
     
         
@@ -145,6 +147,6 @@ class __TwigTemplate_5aee7126b48ba06bb022fbc7e50350986b653ae1f9ab01545ebb88ab499
 
     public function getDebugInfo()
     {
-        return array (  131 => 62,  127 => 61,  122 => 60,  115 => 54,  104 => 49,  99 => 46,  94 => 45,  88 => 40,  83 => 36,  73 => 27,  65 => 19,  60 => 17,  56 => 15,  50 => 12,  47 => 11,  45 => 10,  41 => 8,  39 => 7,  36 => 6,  30 => 3,);
+        return array (  133 => 62,  129 => 61,  124 => 60,  117 => 54,  106 => 49,  101 => 46,  96 => 45,  88 => 39,  83 => 36,  73 => 27,  65 => 19,  60 => 17,  56 => 15,  50 => 12,  47 => 11,  45 => 10,  41 => 8,  39 => 7,  36 => 6,  30 => 3,);
     }
 }

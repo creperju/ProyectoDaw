@@ -4,89 +4,43 @@ namespace Teaching\GeneralBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Teaching\GeneralBundle\Entity\Users;
-use Teaching\GeneralBundle\Entity\Roles;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-
+/**
+ * LoadUsersData
+ * 
+ * Add basic examples to run application.
+ * It must be extends Controller, unless not get security encoder to encoder password users.
+ * 
+ */
 class LoadUsersData extends Controller implements FixtureInterface 
 {
     /**
+     * Method to add users example in application.
+     * 
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-	// Load roles
-	$this->loadRoles($manager);
-	
+        // Load an example user
 	$this->loadUser($manager);
-	// If there aren't roles in application, add all roles
-//	if( ! $this->getDoctrine()->getRepository('TeachingGeneralBundle:Roles')->findAll() ){
-	    
-	    
-//	}
-	
-	// Load an user example
-//	if( ! $this->getDoctrine()->getRepository('TeachingGeneralBundle:Users')->findOneByUsername('emilio') ){
-	    
-	    // Role by default user example
-//	    $admin_role = $this->getDoctrine()->getRepository('TeachingGeneralBundle:Roles')->findOneByRole('ROLE_ADMIN');
-//	    
-//	    // Add new user example
-//	    $user = new Users();
-//	    $user->setUsername('emilio');
-//	    $this->setSecurePassword($user);
-//	    $user->addRoles($role_user);
-//	    $user->setName('Emilio');
-//	    $user->setSurname('Crespo Perán');
-//	    $user->setEmail('emiliocresxperia@gmail.com');
-//	    
-//	    // Persist user example
-//	    $manager->persist($user);
-//	    $manager->flush();
-//	}
-	
-        
-       
     }
     
     
     
-    private function loadRoles(ObjectManager $manager)
-    {
-	
-	
-	// Add all roles of application
-	$rol_user = new Roles();	$rol_user->setRole('ROLE_USER');	$rol_user->setName('Rol de usuarios');
-	$rol_teacher = new Roles();	$rol_teacher->setRole('ROLE_TEACHER');  $rol_teacher->setName('Rol de profesores');
-	$rol_admin = new Roles();	$rol_admin->setRole('ROLE_ADMIN');	$rol_admin->setName('Rol de administradores');
-
-	// Persist all roles
-	$manager->persist($rol_user);
-	$manager->persist($rol_teacher);
-	$manager->persist($rol_admin);
-	
-	$manager->flush();
-	
-	
-	
-    }
-    
-    
-    
+    /**
+     * Add new users for example.
+     * 
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     */
     private function loadUser(ObjectManager $manager)
     {
-	
-	
-	
-	// Role by default user example
-	$admin_role = $this->getDoctrine()->getRepository('TeachingGeneralBundle:Roles')->findOneByRole('ROLE_ADMIN');
-
-	// Add new user example
+	// User emilio
 	$user = new Users();
 	$user->setUsername('emilio');
 	$this->setSecurePassword($user);
-	$user->addRoles($admin_role);
+	$user->addRoles("ROLE_ADMIN");
 	$user->setName('Emilio');
 	$user->setSurname('Crespo Perán');
 	$user->setEmail('emiliocresxperia@gmail.com');
@@ -94,10 +48,6 @@ class LoadUsersData extends Controller implements FixtureInterface
 	// Persist user example
 	$manager->persist($user);
 	$manager->flush();
-	
-	
-	
-	
 	
     }
     
@@ -121,17 +71,6 @@ class LoadUsersData extends Controller implements FixtureInterface
         // Set a secure password
         $entity->setPassword($password_secure);
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     

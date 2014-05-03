@@ -7,9 +7,3 @@ exito:
     defaults: { _controller: TeachingGeneralBundle:Home:fin }
 
 
-# For security form login and logout users
-login_check:
-    pattern:    /login_check
-    
-logout:
-    pattern:    /logout

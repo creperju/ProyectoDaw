@@ -124,7 +124,29 @@ Página de lectura de ayuda con formularios, firewalls y session:
 
 
 
+**Nota:
+    La codificacion de contraseña a la hora de inicio de usuarios, se debe
+    hacer con sha1 y no con sha512, esto causa problemas a la hora de
+    codificar contraseñas para el inicio de sesion, es posible que sea por
+    la longitud del campo de la contraseña a la que es menor de lo que
+    tiene que ocupar y de ahi el fallo al intentar codificarla.
 
+** Nota codificación 2:
+    Una contraseña codificada con sha512, debe tener una longitud máxima
+    de 255 caracteres, ya que si es inferior, la contraseña no se
+    codifica bien y al descodificar la contraseña parece estar 'Incompleta'
+    e indica error de logueo.
+    El campo salt siempre tiene como máximo 32 caracteres.
+
+
+CAMPO SALT 32
+PASSWORD CON MD5 ESCRIBE 88 CARACTERES, si lo indicas con menos, la
+contraseña no será válida y no podrá descodificarla bien.
+
+
+NO HACE FALTA ESCRIBIR 2 TABLAS, UNA CON USUARIOS Y OTRA CON ROLES,
+CON TAL DE QUE LA TABLA USUARIOS TENGA UN CAMPO LLAMADO ROLES CON 
+STRING Y QUE TENGA UN METODO GET_ROLES() ES SUFICIENTE Y SE VALIDA
 
 
 
