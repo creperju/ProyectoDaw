@@ -121,13 +121,43 @@ class HomeController extends Controller
     
     
     // Control user account
-    public function finAction()
+    public function finAction(Request $request)
     { 
-        return new \Symfony\Component\HttpFoundation\Response("<html><head><title>ENHORABUENA</title></head><body>USUARIO VALIDADO</body></html>");
+//        return new \Symfony\Component\HttpFoundation\Response("<html><head><title>ENHORABUENA</title></head><body>USUARIO VALIDADO</body></html>");
         
         /**
          * SWITCH CASE OF TYPE ACCOUNTS USERS!!
          */
+        
+        // Get role of user validate
+        $rol = $this->getUser()->getRoles();
+        
+//        echo $session->getUsername()." es el usuario<br/>";
+//        echo $session->getEmail()." es su correo.<br/>";
+//        echo $rol[0]. " es su rol definido<br/>";
+//        echo $session->getName()." es su nombre real.<br/>";
+//        echo $session->getSurname()." son sus apellidos";
+//        
+//        return $this;
+        
+        
+        // Redirect to type of user account
+        switch($rol[0])
+        {
+            case "ROLE_USER":
+                return $this->redirect($this->generateUrl('teaching_user_homepage'));
+                break;
+            case "ROLE_TEACHER":
+                return $this->redirect($this->generateUrl('teaching_teacher_homepage'));
+                break;
+            case "ROLE_ADMIN":
+                return $this->redirect($this->generateUrl('teaching_admin_homepage'));
+                break;
+            default:
+                return $this->redirect($this->generateUrl('teaching_homepage'));
+                
+        }
+        
         
     }
     

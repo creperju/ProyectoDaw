@@ -3,22 +3,26 @@
 namespace Teaching\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-//use Acme\ConfigBundle\Entity\Users;
-//use Acme\ConfigBundle\Form\Login;
 
 
 class AdminController extends Controller
 {
 
-    public function indexAction(Request $request)
+    public function indexAction()
     {
+        $user = $this->getUser();
+        $url = $this->generateUrl("logout");
+        $rol = $user->getRoles();
         
-        
-	$user = $request->getSession()->get('user');
-        
-        return $this->render('TeachingAdminBundle:Default:pruebas.html.twig', array('user' => $user));
+        return new Response("<html><head><title>ENHORABUENA</title></head><body>"
+                . "Tipo de usuario: <h4>".$rol[0]."</h4>"
+                . "<b>Nombre de usuario: </b>".$user->getUsername()."<br/>"
+                . "<b>Email: </b>".$user->getEmail()."<br/>"
+                . "<b>Nombre: </b>".$user->getName()."<br/>"
+                . "<b>Apellidos: </b>".$user->getSurname().""
+                . "<p><a href='".$url."'>SALIR</a></body></html>");
+	
         
     }
     

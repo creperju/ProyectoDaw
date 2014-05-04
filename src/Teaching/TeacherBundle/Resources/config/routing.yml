@@ -1,3 +1,3 @@
 teaching_teacher_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: TeachingTeacherBundle:Default:index }
+    pattern:  /profesor
+    defaults: { _controller: TeachingTeacherBundle:Teacher:index }

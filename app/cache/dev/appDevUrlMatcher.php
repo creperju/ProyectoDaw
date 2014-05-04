@@ -135,17 +135,14 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        if (0 === strpos($pathinfo, '/hello')) {
-            // teaching_user_homepage
-            if (preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'teaching_user_homepage')), array (  '_controller' => 'Teaching\\UserBundle\\Controller\\DefaultController::indexAction',));
-            }
+        // teaching_user_homepage
+        if ($pathinfo === '/usuario') {
+            return array (  '_controller' => 'Teaching\\UserBundle\\Controller\\UserController::indexAction',  '_route' => 'teaching_user_homepage',);
+        }
 
-            // teaching_teacher_homepage
-            if (preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'teaching_teacher_homepage')), array (  '_controller' => 'Teaching\\TeacherBundle\\Controller\\DefaultController::indexAction',));
-            }
-
+        // teaching_teacher_homepage
+        if ($pathinfo === '/profesor') {
+            return array (  '_controller' => 'Teaching\\TeacherBundle\\Controller\\TeacherController::indexAction',  '_route' => 'teaching_teacher_homepage',);
         }
 
         // teaching_admin_homepage
