@@ -1,9 +1,0 @@
-Quehaceres de la aplicación
-===============================================
-Listado de tareas que hacer, en la aplicación.
-
-
- -  Formulario de registro, los campos mostrados en español, y también
-    editar el formulario en la plantilla.
- -  Proteger el formulario de login con CSFR (implementar el código).
- -  Solucionar problemas de cierre de sesión.

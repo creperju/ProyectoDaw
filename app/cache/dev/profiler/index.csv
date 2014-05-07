@@ -312,3 +312,5 @@ c776b9,::1,POST,http://localhost/ProyectoDaw/web/app_dev.php/login_check,1399316
 252ef1,127.0.0.1,POST,http://localhost/ProyectoDaw/web/app_dev.php/login_check,1399316572,
 d88922,::1,GET,http://localhost/ProyectoDaw/web/app_dev.php/validado,1399316573,
 1cf900,127.0.0.1,GET,http://localhost/ProyectoDaw/web/app_dev.php/admin,1399316574,
+805f2f,::1,GET,http://localhost/ProyectoDaw/web/app_dev.php/logout,1399319028,
+c7d318,127.0.0.1,GET,http://localhost/ProyectoDaw/web/app_dev.php/,1399319029,

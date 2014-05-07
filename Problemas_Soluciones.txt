@@ -25,6 +25,18 @@ Solución:
     http://ferdinandfly.blogspot.com.es/2013/06/symfony2-php-warning.html
 
 
+Tema:   RELACIÓN MANY TO ONE
+Problema:
+    No genera bien la relación de Messages a Users
+Solución:
+    La relación entre estas dos tablas es ManyToOne, únicamente está presente
+    en la entidad Messages, concretamente en dos campos: 'from_user' y 'to_user'.
+    No hace falta que en la entidad Users haya un OneToMany, ya que la relación
+    es unidireccional.
+    Lo que se pasará en el método 'setFromUser' de la entidad Messages, será
+    el objeto Users con un usuario determinado.
+    Hacer un @JoinColum es opcional, ya que por defecto lo que grabará será el
+    id del objeto Users.
 
 
 
