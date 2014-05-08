@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Teaching\GeneralBundle\Entity\Users;
 use Teaching\GeneralBundle\Entity\Messages;
+use Teaching\GeneralBundle\Entity\Students;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use DateTime;
 
@@ -68,7 +69,7 @@ class LoadUsersData extends Controller implements FixtureInterface
 	
 	
 	
-	
+	// Load messages examples
 	$this->loadMessages(
 		$manager,
 		$user, 
@@ -76,6 +77,11 @@ class LoadUsersData extends Controller implements FixtureInterface
 		'Ejemplo', 
 		'Esto es un ejemplo de mensaje'
 		);
+	
+	
+	// Add one student with relationship with user
+	$this->loadStudents($manager, $user, 'Hijo de emilio', 'Crespo');
+	
 	
     }
     
@@ -128,7 +134,30 @@ class LoadUsersData extends Controller implements FixtureInterface
     }
     
     
-    
+    /**
+     * Load new student and new relationship with users.
+     * 
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     * @param type $user
+     * @param type $name
+     * @param type $surname
+     */
+    private function loadStudents(ObjectManager $manager, &$user, $name, $surname)
+    {
+	$student = new Students();
+	$student->setName($name);
+	$student->setSurname($surname);
+	
+	$student->addUser($user);
+	
+	$user->addStudent($student);
+	
+	$manager->persist($student);
+	$manager->persist($user);
+	
+	$manager->flush();
+	
+    }
     
     
     

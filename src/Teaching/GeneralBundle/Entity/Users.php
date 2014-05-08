@@ -4,6 +4,8 @@ namespace Teaching\GeneralBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
  * Teaching\GeneralBundle\Entity\Users
@@ -58,8 +60,18 @@ class Users implements UserInterface, \Serializable
      */
     private $surname;
     
+    /**
+     * @ORM\ManyToMany(targetEntity="Students", mappedBy="users")
+     */
+    private $students;
     
     
+    
+    
+    public function __construct()
+    {
+	$this->students = new ArrayCollection();
+    }
     
     
     
@@ -235,4 +247,50 @@ class Users implements UserInterface, \Serializable
     }
 
     
+
+    /**
+     * Set roles
+     *
+     * @param string $roles
+     * @return Users
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+    
+        return $this;
+    }
+
+    /**
+     * Add students
+     *
+     * @param \Teaching\GeneralBundle\Entity\Students $students
+     * @return Users
+     */
+    public function addStudent(\Teaching\GeneralBundle\Entity\Students $students)
+    {
+        $this->students[] = $students;
+    
+        return $this;
+    }
+
+    /**
+     * Remove students
+     *
+     * @param \Teaching\GeneralBundle\Entity\Students $students
+     */
+    public function removeStudent(\Teaching\GeneralBundle\Entity\Students $students)
+    {
+        $this->students->removeElement($students);
+    }
+
+    /**
+     * Get students
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getStudents()
+    {
+        return $this->students;
+    }
 }
