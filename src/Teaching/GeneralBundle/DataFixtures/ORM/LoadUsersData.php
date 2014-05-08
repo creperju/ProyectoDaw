@@ -7,6 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Teaching\GeneralBundle\Entity\Users;
 use Teaching\GeneralBundle\Entity\Messages;
 use Teaching\GeneralBundle\Entity\Students;
+use Teaching\GeneralBundle\Entity\Affilations;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use DateTime;
 
@@ -79,9 +80,12 @@ class LoadUsersData extends Controller implements FixtureInterface
 		);
 	
 	
-	// Add one student with relationship with user
-	$this->loadStudents($manager, $user, 'Hijo de emilio', 'Crespo');
+	// Add student
+	$student = $this->loadStudents($manager, 'Hijo de emilio', 'Crespo');
 	
+	
+	// Add relationship Users <> Students
+	$this->loadAffilations($manager, $user, $student, 'Padre', true);
 	
     }
     
@@ -142,23 +146,42 @@ class LoadUsersData extends Controller implements FixtureInterface
      * @param type $name
      * @param type $surname
      */
-    private function loadStudents(ObjectManager $manager, &$user, $name, $surname)
+    private function loadStudents(ObjectManager $manager, $name, $surname)
     {
 	$student = new Students();
 	$student->setName($name);
 	$student->setSurname($surname);
 	
-	$student->addUser($user);
-	
-	$user->addStudent($student);
-	
 	$manager->persist($student);
-	$manager->persist($user);
+	$manager->flush();
 	
+	return $student;
+    }
+    
+    
+    /**
+     * Add relationship Users <> Students
+     * 
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     * @param type $user Object User
+     * @param type $student Object Student
+     * @param type $relation Padre, Madre, Tutor
+     * @param type $main Main responsible (true, false)
+     */
+    private function loadAffilations(ObjectManager $manager, $user, $student, $relation, $main)
+    {
+	
+	$affilation = new Affilations();
+	
+	$affilation->setUser($user);
+	$affilation->setStudent($student);
+	$affilation->setRelationship($relation);
+	$affilation->setMainResponsible($main);
+		
+	$manager->persist($affilation);
 	$manager->flush();
 	
     }
-    
     
     
 }

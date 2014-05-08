@@ -74,7 +74,7 @@ class Messages
      * @param string $fromUser
      * @return Messages
      */
-    public function setFromUser($fromUser)
+    public function setFromUser(Users $fromUser)
     {
         $this->fromUser = $fromUser;
     

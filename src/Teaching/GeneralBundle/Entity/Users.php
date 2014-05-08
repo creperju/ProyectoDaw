@@ -4,7 +4,6 @@ namespace Teaching\GeneralBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 
 
 /**
@@ -59,20 +58,6 @@ class Users implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=20)
      */
     private $surname;
-    
-    /**
-     * @ORM\ManyToMany(targetEntity="Students", mappedBy="users")
-     */
-    private $students;
-    
-    
-    
-    
-    public function __construct()
-    {
-	$this->students = new ArrayCollection();
-    }
-    
     
     
     
