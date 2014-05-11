@@ -10,6 +10,7 @@ use Teaching\GeneralBundle\Entity\Students;
 use Teaching\GeneralBundle\Entity\Affilations;
 use Teaching\GeneralBundle\Entity\Courses;
 use Teaching\GeneralBundle\Entity\Groups;
+use Teaching\GeneralBundle\Entity\Enrollments;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use DateTime;
 
@@ -47,6 +48,9 @@ class LoadUsersData extends Controller implements FixtureInterface
 	
         // Load groups
         $this->loadGroups($manager);
+        
+        // Load enrollments
+        $this->loadEnrollments($manager);
     }
     
     
@@ -285,6 +289,47 @@ class LoadUsersData extends Controller implements FixtureInterface
     
     
     /**
+     * Load enrollments to students
+     * 
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     */
+    private function loadEnrollments(ObjectManager $manager)
+    {
+        // Data of enrollments
+        $data = array(
+            '0' => array(
+                'student' => 'Pablo',
+                'course' => '1º',
+                'letter' => 'A'
+            ),
+            '1' => array(
+                'student' => 'Pepe',
+                'course' => '1º',
+                'letter' => 'B'
+            ),
+        );
+        
+        // Persists enrollments
+        foreach($data as $enrollments => $enrollment){
+            $class = new Enrollments();
+            
+            $student = $this->search($enrollment['student'], 'Students', 'name');
+            $group = $this->searchGroup($enrollment['course'], $enrollment['letter']);
+            
+            $class->setGroup($group);
+            $class->setStudent($student);
+            $class->setDateStart(new \Datetime());
+            
+            $manager->persist($class);
+        }
+        
+        $manager->flush();
+        
+    }
+    
+    
+    
+    /**
      * Set a secure password
      * 
      * @param type $entity Object users
@@ -306,22 +351,47 @@ class LoadUsersData extends Controller implements FixtureInterface
     
     
     /**
-     * Find user/student in database
+     * Find object in database
      * 
-     * @param type $user Username, name student, etc
+     * @param type $data Username, name student, course, etc
      * @param type $entity Entity
      * @param type $field Entity's field
-     * @return type User exists
+     * @return type Object exists
      */
-    private function search($user, $entity, $field)
+    private function search($data, $entity, $field)
     {
         // Entity to find user/student... Etc
         $em = $this->getDoctrine()->getRepository('TeachingGeneralBundle:'.$entity);
         
         // Find user exists
-        $query = $em->findOneBy(array($field => $user));
+        $query = $em->findOneBy(array($field => $data));
         
         // Return user
+        return $query;
+    }
+    
+    
+    
+    /**
+     * Find course group
+     * 
+     * @param type $course Get Course
+     * @param type $letter Get Letter
+     * @return type Course Group
+     */
+    private function searchGroup($course, $letter)
+    {
+        // Search course
+        $course_id = $this->search($course, 'Courses', 'course');
+        
+        // Entity to find a course group
+        $em = $this->getDoctrine()
+                ->getRepository('TeachingGeneralBundle:Groups');
+        
+        // Find group
+        $query = $em->findOneBy(array('course' => $course_id, 'letter' => $letter));
+        
+        // Return group
         return $query;
     }
     
