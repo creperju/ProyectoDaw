@@ -60,7 +60,10 @@ class Users implements UserInterface, \Serializable
     private $surname;
     
     
-    
+    /**
+     * @ORM\OneToOne(targetEntity="Groups", mappedBy="tutor") 
+     */
+    private $courseTutor;
     
     
     
@@ -277,5 +280,28 @@ class Users implements UserInterface, \Serializable
     public function getStudents()
     {
         return $this->students;
+    }
+
+    /**
+     * Set courseTutor
+     *
+     * @param \Teaching\GeneralBundle\Entity\Groups $courseTutor
+     * @return Users
+     */
+    public function setCourseTutor(\Teaching\GeneralBundle\Entity\Groups $courseTutor = null)
+    {
+        $this->courseTutor = $courseTutor;
+    
+        return $this;
+    }
+
+    /**
+     * Get courseTutor
+     *
+     * @return \Teaching\GeneralBundle\Entity\Groups 
+     */
+    public function getCourseTutor()
+    {
+        return $this->courseTutor;
     }
 }

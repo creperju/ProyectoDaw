@@ -8,6 +8,8 @@ use Teaching\GeneralBundle\Entity\Users;
 use Teaching\GeneralBundle\Entity\Messages;
 use Teaching\GeneralBundle\Entity\Students;
 use Teaching\GeneralBundle\Entity\Affilations;
+use Teaching\GeneralBundle\Entity\Courses;
+use Teaching\GeneralBundle\Entity\Groups;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use DateTime;
 
@@ -28,65 +30,256 @@ class LoadUsersData extends Controller implements FixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        // Load an example user
-	$this->loadUser($manager);
+        // Load users
+	$this->loadUsers($manager);
+        
+        // Load messages
+	$this->loadMessages($manager);
+        
+        // Load students
+	$this->loadStudents($manager);
+        
+        // Add relationship Users <> Students
+	$this->loadAffilations($manager);
+	
+        // Load courses
+        $this->loadCourses($manager);
+	
+        // Load groups
+        $this->loadGroups($manager);
     }
     
     
     
     /**
-     * Add new users for example.
+     * Add new users for example
      * 
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    private function loadUser(ObjectManager $manager)
+    private function loadUsers(ObjectManager $manager)
     {
-	// User emilio
-	$user = new Users();
-	$user->setUsername('emilio');
-	$this->setSecurePassword($user, 'emilio');
-	$user->addRoles("ROLE_ADMIN");
-	$user->setName('Emilio');
-	$user->setSurname('Crespo Perán');
-	$user->setEmail('emiliocresxperia@gmail.com');
-
-	
-	// User fran
-	$user2 = new Users();
-	$user2->setUsername('fran');
-	$this->setSecurePassword($user2, 'fran');
-	$user2->addRoles("ROLE_ADMIN");
-	$user2->setName('Fran');
-	$user2->setSurname('González Navarro');
-	$user2->setEmail('fran@gmail.com');
-	
-	
-	
-	
-	// Persist users example
-	$manager->persist($user);
-	$manager->persist($user2);
+        // Contain users examples
+        $data = array(
+            '0' => array(
+                'username' => 'emilio',
+                'password' => 'emilio',
+                'rol' => 'ROLE_ADMIN',
+                'name' => 'Emilio',
+                'surname' => 'Crespo Perán',
+                'email' => 'emiliocresxperia@gmail.com'
+            ),
+            '1' => array(
+                'username' => 'fran',
+                'password' => 'fran',
+                'rol' => 'ROLE_ADMIN',
+                'name' => 'Fran',
+                'surname' => 'González Navarro',
+                'email' => 'fran@gmail.com'
+            ),
+        );
+        
+        // Persist some users into database
+        foreach($data as $users => $user){
+            $class = new Users();
+            $class->setUsername($user['username']);
+            $this->setSecurePassword($class, $user['password']);
+            $class->addRoles($user['rol']);
+            $class->setName($user['name']);
+            $class->setSurname($user['surname']);
+            $class->setEmail($user['email']);
+            $manager->persist($class);
+        }
+        
 	$manager->flush();
 	
+    }
+    
+    
+    
+    /**
+     * Load some messages examples.
+     * 
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     * @param type $from_user
+     * @param type $to_user
+     * @param type $subject
+     * @param type $text
+     */
+    private function loadMessages(ObjectManager $manager)
+    {
+        // Messages examples
+        $data = array(
+            '0' => array(
+                'from_user' => 'emilio',
+                'to_user' => 'fran',
+                'subject' => 'Ej',
+                'message' => 'Ejemplo de mensaje'
+            )
+        );
+        
+        // Persist some messages into database
+        foreach($data as $messages => $message){
+            $class = new Messages();
+            
+            $from = $this->search($message['from_user'], 'Users', 'username');
+            $to = $this->search($message['to_user'], 'Users', 'username');
+            
+            $class->setFromUser($from);
+            $class->setToUser($to);
+            $class->setSubject($message['subject']);
+            $class->setMessage($message['message']);
+            $class->setDate(new \Datetime());
+            
+            $manager->persist($class);
+        }
+        
+	$manager->flush();
+        
+    }
+    
+    
+    
+    /**
+     * Load new student and new relationship with users
+     * 
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     * @param type $user
+     * @param type $name
+     * @param type $surname
+     */
+    private function loadStudents(ObjectManager $manager)
+    {
+        // Contain some students
+        $data = array(
+            '0' => array(
+                'name' => 'Pablo',
+                'surname' => 'Crespo Perán'
+            ),
+            '1' => array(
+                'name' => 'Pepe',
+                'surname' => 'González Navarro'
+            )
+        );
+        
+        // Persist some students into database
+        foreach($data as $students => $student){
+            $class = new Students();
+            $class->setName($student['name']);
+            $class->setSurname($student['surname']);
+            $manager->persist($class);
+        }        
+                
+	$manager->flush();
 	
+    }
+    
+    
+    
+    /**
+     * Add relationship Users <> Students
+     * 
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     * @param type $user Object User
+     * @param type $student Object Student
+     * @param type $relation Padre, Madre, Tutor
+     * @param type $main Main responsible (true, false)
+     */
+    private function loadAffilations(ObjectManager $manager)
+    {
+	// Affilations examples
+        $data = array(
+            '0' => array(
+                'user' => 'emilio',
+                'student' => 'Pablo',
+                'relation' => 'Padre',
+                'main' => true
+            )
+        );
+        
+        // Persist users and students relation
+        foreach($data as $affilations => $affilation){
+            $class = new Affilations();
+            
+            $user = $this->search($affilation['user'], 'Users', 'username');
+            $student = $this->search($affilation['student'], 'Students', 'name');
+            
+            $class->setUser($user);
+            $class->setStudent($student);
+            $class->setRelationship($affilation['relation']);
+            $class->setMainResponsible($affilation['main']);
+            
+            $manager->persist($class);
+            
+        }
+        
+	$manager->flush();
 	
-	// Load messages examples
-	$this->loadMessages(
-		$manager,
-		$user, 
-		$user2, 
-		'Ejemplo', 
-		'Esto es un ejemplo de mensaje'
-		);
-	
-	
-	// Add student
-	$student = $this->loadStudents($manager, 'Hijo de emilio', 'Crespo');
-	
-	
-	// Add relationship Users <> Students
-	$this->loadAffilations($manager, $user, $student, 'Padre', true);
-	
+    }
+    
+    
+    
+    /**
+     * Load courses in application
+     * 
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     */
+    private function loadCourses(ObjectManager $manager)
+    {
+        // Contain all courses in application
+        $data = array(
+            '1º','2º','3º','4º','5º','6º'
+        );
+        
+        // Persist each course to insert in database
+        foreach($data as $course){
+            $class = new Courses();
+            $class->setCourse($course);
+            $manager->persist($class);
+        }
+        
+        $manager->flush();
+        
+    }
+    
+    
+    
+    /**
+     * Load groups in application
+     * 
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     */
+    private function loadGroups(ObjectManager $manager)
+    {
+        // Groups with tutor and course
+        $data = array(
+            '0' => array(
+                'course' => '1º',
+                'letter' => 'A',
+                'tutor' => 'emilio'
+            ),
+            '1' => array(
+                'course' => '1º',
+                'letter' => 'B',
+                'tutor' => 'fran'
+            ),
+        );
+        
+        // Persist groups to insert into database
+        foreach($data as $groups => $group){
+            $class = new Groups();
+            
+            $course = $this->search($group['course'], 'Courses', 'course');
+            $tutor = $this->search($group['tutor'], 'Users', 'username');
+            
+            $class->setCourse($course);
+            $class->setLetter($group['letter']);
+            $class->setTutor($tutor);
+            
+            $manager->persist($class);
+        }
+        
+        $manager->flush();
+        
     }
     
     
@@ -112,76 +305,26 @@ class LoadUsersData extends Controller implements FixtureInterface
     
     
     
-    
     /**
-     * Load some messages examples.
+     * Find user/student in database
      * 
-     * @param \Doctrine\Common\Persistence\ObjectManager $manager
-     * @param type $from_user
-     * @param type $to_user
-     * @param type $subject
-     * @param type $text
+     * @param type $user Username, name student, etc
+     * @param type $entity Entity
+     * @param type $field Entity's field
+     * @return type User exists
      */
-    private function loadMessages(ObjectManager $manager, $from_user, $to_user, $subject, $text)
+    private function search($user, $entity, $field)
     {
-	// Insert new Message
-	$message = new Messages();
-	
-	$message->setFromUser($from_user);
-	$message->setToUser($to_user);	
-	$message->setSubject($subject);
-	$message->setMessage($text);
-	$message->setDate(new Datetime());
-	
-	$manager->persist($message);	
-	$manager->flush();
+        // Entity to find user/student... Etc
+        $em = $this->getDoctrine()->getRepository('TeachingGeneralBundle:'.$entity);
+        
+        // Find user exists
+        $query = $em->findOneBy(array($field => $user));
+        
+        // Return user
+        return $query;
     }
     
-    
-    /**
-     * Load new student and new relationship with users.
-     * 
-     * @param \Doctrine\Common\Persistence\ObjectManager $manager
-     * @param type $user
-     * @param type $name
-     * @param type $surname
-     */
-    private function loadStudents(ObjectManager $manager, $name, $surname)
-    {
-	$student = new Students();
-	$student->setName($name);
-	$student->setSurname($surname);
-	
-	$manager->persist($student);
-	$manager->flush();
-	
-	return $student;
-    }
-    
-    
-    /**
-     * Add relationship Users <> Students
-     * 
-     * @param \Doctrine\Common\Persistence\ObjectManager $manager
-     * @param type $user Object User
-     * @param type $student Object Student
-     * @param type $relation Padre, Madre, Tutor
-     * @param type $main Main responsible (true, false)
-     */
-    private function loadAffilations(ObjectManager $manager, $user, $student, $relation, $main)
-    {
-	
-	$affilation = new Affilations();
-	
-	$affilation->setUser($user);
-	$affilation->setStudent($student);
-	$affilation->setRelationship($relation);
-	$affilation->setMainResponsible($main);
-		
-	$manager->persist($affilation);
-	$manager->flush();
-	
-    }
     
     
 }
