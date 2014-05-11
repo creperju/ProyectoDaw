@@ -23,6 +23,7 @@ class Enrollments
 
     /**
      * @ORM\OneToOne(targetEntity="Groups")
+     * ORM\Column(type="integer", unique=false)
      */
     private $group;
     

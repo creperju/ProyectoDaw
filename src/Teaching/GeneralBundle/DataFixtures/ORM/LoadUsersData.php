@@ -11,6 +11,7 @@ use Teaching\GeneralBundle\Entity\Affilations;
 use Teaching\GeneralBundle\Entity\Courses;
 use Teaching\GeneralBundle\Entity\Groups;
 use Teaching\GeneralBundle\Entity\Enrollments;
+use Teaching\GeneralBundle\Entity\Subjects;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use DateTime;
 
@@ -51,6 +52,10 @@ class LoadUsersData extends Controller implements FixtureInterface
         
         // Load enrollments
         $this->loadEnrollments($manager);
+        
+        // Load subjects
+        $this->loadSubjects($manager);
+        
     }
     
     
@@ -320,6 +325,30 @@ class LoadUsersData extends Controller implements FixtureInterface
             $class->setStudent($student);
             $class->setDateStart(new \Datetime());
             
+            $manager->persist($class);
+        }
+        
+        $manager->flush();
+        
+    }
+    
+    
+    /**
+     * Load subjects in application
+     * 
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     */
+    private function loadSubjects(ObjectManager $manager)
+    {
+        // Contain all subjects in application
+        $data = array(
+            'Lengua', 'Matemáticas', 'Inglés', 'Música', 'Conocimiento del Medio', 'Gimnasia'
+        );
+        
+        // Persists each subject
+        foreach($data as $subject){
+            $class = new Subjects();
+            $class->setName($subject);
             $manager->persist($class);
         }
         
