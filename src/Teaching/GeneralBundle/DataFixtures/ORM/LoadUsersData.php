@@ -56,6 +56,8 @@ class LoadUsersData extends Controller implements FixtureInterface
         // Load subjects
         $this->loadSubjects($manager);
         
+        // Load Subjects <> Courses
+        $this->loadSubjectsCourses($manager);
     }
     
     
