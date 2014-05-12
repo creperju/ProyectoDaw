@@ -111,7 +111,13 @@
 || 07/05/2014 || Realizado el mapeo de la entidad Messages y las asociaciones a la     ||
 ||            || entidad Users.                                                        ||
 ++------------++-----------------------------------------------------------------------++
-    
+|| 08/05/2014 || Añadidas entidades Students, Affilations y sus respectivas            ||
+||            || relaciones.                                                           ||
+||            ||                                                                       ||
+++------------++-----------------------------------------------------------------------++
+
+
+
 Recomendaciones próxima reunión:
     Indexar de la tabla Usuarios, el login para una mayor respuesta de la aplicación.
     Para ver la aplicación en entorno de produción (como la ven los usuarios), ir a web/app.php y 

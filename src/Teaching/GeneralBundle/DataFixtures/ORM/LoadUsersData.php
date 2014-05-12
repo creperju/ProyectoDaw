@@ -12,6 +12,7 @@ use Teaching\GeneralBundle\Entity\Courses;
 use Teaching\GeneralBundle\Entity\Groups;
 use Teaching\GeneralBundle\Entity\Enrollments;
 use Teaching\GeneralBundle\Entity\Subjects;
+use Teaching\GeneralBundle\Entity\CourseGroupsSubjects;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use DateTime;
 
@@ -57,7 +58,7 @@ class LoadUsersData extends Controller implements FixtureInterface
         $this->loadSubjects($manager);
         
         // Load Subjects <> Courses
-        $this->loadSubjectsCourses($manager);
+        $this->loadCoursesGroupsSubjects($manager);
     }
     
     
@@ -356,6 +357,81 @@ class LoadUsersData extends Controller implements FixtureInterface
         
         $manager->flush();
         
+    }
+    
+    
+    
+    /**
+     * Load subjects in courses
+     * 
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     */
+    private function loadCoursesGroupsSubjects(ObjectManager $manager)
+    {
+	// Courses with groups
+//	$courses = array(
+//	    '1º' => array(
+//		'A' => array(),
+//		'B' => array()
+//	    ),
+//	    '2º' => array(
+//		'A' => array(),
+//		'B' => array()
+//	    ),
+//	    '3º' => array(
+//		'A' => array(),
+//		'B' => array()
+//	    ),
+//	    '4º' => array(
+//		'A' => array(),
+//		'B' => array()
+//	    ),
+//	    '5º' => array(
+//		'A' => array(),
+//		'B' => array()
+//	    ),
+//	    '6º' => array(
+//		'A' => array(),
+//		'B' => array()
+//	    )
+//	);
+	
+	// Subjects in courses
+//	$subjects = array('Lengua', 'Matemáticas', 'Inglés', 'Música', 'Conocimiento del Medio', 'Gimnasia');
+	
+	
+	$courses = array(
+	    '1º' => array(
+		'A' => array('emilio')
+	    )
+	);
+	
+	
+	$subjects = array('Matemáticas');
+	
+	
+	// Persist teacher, subject, group
+	foreach($courses as $course => $groups){
+	    
+	    foreach($groups as $group => $teachers){
+		
+		// For every group, there are a teacher wich teach a subject
+		for($i = 0; $i < count($group); $i++){
+		    $class = new CourseGroupsSubjects();
+		    
+		    $class->setGroup($this->searchGroup($course, $group));
+		    $class->setSubject($this->search($subjects[$i], 'Subjects', 'name'));
+		    $class->setTeacher($this->search($teachers[$i], 'Users', 'username'));
+		    
+		    $manager->persist($class);
+		}
+		
+	    }
+		
+	}
+	
+	$manager->flush();
+	
     }
     
     

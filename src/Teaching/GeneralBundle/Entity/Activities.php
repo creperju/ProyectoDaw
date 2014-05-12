@@ -22,7 +22,7 @@ class Activities
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Groups")
+     * @ORM\ManyToOne(targetEntity="CourseGroupsSubjects")
      */
     private $groupSubject;
     
