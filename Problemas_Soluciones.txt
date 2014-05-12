@@ -39,7 +39,26 @@ Solución:
     id del objeto Users.
 
 
-
+Tema:   UNIQUE
+Problema:
+    Cómo hacer dos o más campos como unique a la vez
+Solución:
+    En la anotación @Table, hay un atributo llamado uniqueConstraints, en el que
+    su valor contiene @UniqueConstraint(), y a su vez, contiene los atributos
+    name (clave de index) y columns (columnas unique). Se pueden indicar más de
+    un atributo columns para tener más campos como unique. En el ejemplo se
+    muestra una entidad real que tiene como unique varios campos, y que además
+    tiene otros dos campos como unique.
+Ejemplo:
+    @ORM\Table(
+ 	name="courses_groups_subjects", 
+ 	uniqueConstraints=
+ 		{@ORM\UniqueConstraint(
+ 		    name="cgs_idx", 
+ 		    columns={"group_id", "subject_id", "teacher_id"},
+                    columns={"group_id", "subject_id"}
+ 		)}
+    )
 
 
 

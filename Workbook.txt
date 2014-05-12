@@ -115,8 +115,15 @@
 ||            || relaciones.                                                           ||
 ||            ||                                                                       ||
 ++------------++-----------------------------------------------------------------------++
-
-
+|| 10/05/2014 || Añadidas entidades Courses, Groups, Enrollments con sus datos de      ||
+||            || prueba.                                                               ||
+++------------++-----------------------------------------------------------------------++
+|| 11/05/2014 || Añadidas entidades Subjects, CourseGroupsSubjects, Activities con     ||
+||            || datos de prueba salvo de Activities.                                  ||
+++------------++-----------------------------------------------------------------------++
+|| 12/05/2014 || Entidad CourseGroupsSubjects modificada con unique en varios campos   ||
+||            || a la vez.                                                             ||
+++------------++-----------------------------------------------------------------------++
 
 Recomendaciones próxima reunión:
     Indexar de la tabla Usuarios, el login para una mayor respuesta de la aplicación.
