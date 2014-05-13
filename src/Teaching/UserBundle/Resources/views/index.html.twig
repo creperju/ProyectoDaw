@@ -3,10 +3,10 @@
 {% block breadcrumps %}Bienvenido {{ user }}{% endblock %}
 
 {% block content %}
-
-    <div class="row show-grid">
-        <div class="col-md-5"><a href="{{ path('teaching_user_messages') }}">Mensajes</a></div>
-        <div class="col-md-7">Configuración</div>
+    <div class="container">
+        <div class="row show-grid">
+            <div class="col-md-5" onclick="window.location.assign('{{ path('teaching_user_messages') }}')">Mensajes</div>
+            <div class="col-md-7">Configuración</div>
+        </div>
     </div>
-
 {% endblock %}

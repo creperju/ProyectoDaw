@@ -4,8 +4,9 @@ namespace Teaching\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Teaching\GeneralBundle\Entity\Messages;
-
+use Datetime;
 
 class UserController extends Controller
 {
@@ -59,26 +60,67 @@ class UserController extends Controller
             $data = $form->getData();
             
             if( $data['Para'] != $user->getUsername()){
-                // Grabo el mensaje
-                $message = new Messages();
+                $to = $this->search($data['Para']);
                 
-                $message->setFromUser($fromUser)
+                if($to != null){
+                    // Grabo el mensaje
+                    $message = new Messages();
+
+                    $message->setFromUser($this->search($user->getUsername()));
+                    $message->setToUser($this->search($data['Para']));
+                    $message->setSubject($data['Asunto']);
+                    $message->setMessage($data['Mensaje']);
+                    $message->setDate(new \Datetime());
+
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($message);
+                    $em->flush();
+
+                    $msg_flash = 'Mensaje enviado.';
+                }
+                else{ $msg_flash = 'El usuario no existe.'; }
+                
             }
+            else{ $msg_flash = 'No puedes enviarte tú mismo un mensaje.'; }
+            
+            
+            // Flash message
+            $this->get('session')->getFlashBag()->add('message_send', $msg_flash);
+
+            return $this->redirect($this->generateUrl('teaching_user_messages'));
+
             
         }
         
+        $em = $this->getDoctrine()->getRepository('TeachingGeneralBundle:Messages');
+        
+        $messages_send = $em->findBy(array('fromUser' => $user->getId()));
+        $messages_receibe = $em->findBy(array('toUser' => $user->getId()));
+        //echo "<pre>";print_r($messages);echo "</pre>";exit(0);
+        if( ! count($messages_send) ) $messages_send = 'No hay mensajessss';
+        if( ! count($messages_receibe) ) $messages_receibe = 'No hay mensajessss';
         
         return $this->render(
-            'TeachingUserBundle::index.html.twig',
+            'TeachingUserBundle::messages.html.twig',
             array(
-                'messages' => $messages,
-                ''    => $form,
+                'controller' => 'Mensajes',
+                'messages_send' => $messages_send,
+                'messages_receibe' => $messages_receibe,
+                'form'    => $form->createView(),
             )
         );
         
     }
     
     
-    
+    private function search($user)
+    {
+        $em = $this->getDoctrine()->getRepository('TeachingGeneralBundle:Users');
+        
+        $result = $em->findOneBy(array('username' => $user));
+        
+        
+        return $result;
+    }
     
 }

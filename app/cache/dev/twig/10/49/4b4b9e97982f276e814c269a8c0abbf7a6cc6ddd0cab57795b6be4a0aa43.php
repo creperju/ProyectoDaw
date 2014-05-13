@@ -35,31 +35,53 @@ class __TwigTemplate_10494b4b9e97982f276e814c269a8c0abbf7a6cc6ddd0cab57795b6be4a
         
     </head>
     <body>
-        <div class=\"container-fluid\" style=\"height: 50px; background-color: gold;\">
+        <div class=\"container-fluid\" style=\"height: 100px; background-color: gold;\">
             Cabecera
             <div>";
         // line 14
+        if ((!(null === $this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "user")))) {
+            echo "<a href=\"";
+            echo $this->env->getExtension('routing')->getPath("logout");
+            echo "\">Cerrar sesión</a>";
+        }
+        echo "</div><div>";
         $this->displayBlock('breadcrumps', $context, $blocks);
-        echo "</div>
-        </div>
-        <div class=\"container\">
+        echo "<br/>
             ";
+        // line 15
+        if ($this->env->getExtension('security')->isGranted("ROLE_USER")) {
+            echo "ROLE_USER";
+        }
+        // line 16
+        echo "            ";
+        if ($this->env->getExtension('security')->isGranted("ROLE_ADMIN")) {
+            echo "ROLE_ADMIN";
+        }
         // line 17
+        echo "            ";
+        if ($this->env->getExtension('security')->isGranted("ROLE_TEACHER")) {
+            echo "ROLE_TEACHER";
+        }
+        // line 18
+        echo "                </div>
+        </div>
+            
+        ";
+        // line 21
         $this->displayBlock('content', $context, $blocks);
-        // line 20
-        echo "        </div>
-        
+        // line 24
+        echo "        
         <!-- Bootstrap Css -->
         ";
-        // line 23
+        // line 26
         $this->displayBlock('css', $context, $blocks);
-        // line 27
+        // line 30
         echo "        
         <!-- JQuery -->
         ";
-        // line 29
-        $this->displayBlock('js', $context, $blocks);
         // line 32
+        $this->displayBlock('js', $context, $blocks);
+        // line 36
         echo "    </body>
 </html>";
     }
@@ -75,34 +97,38 @@ class __TwigTemplate_10494b4b9e97982f276e814c269a8c0abbf7a6cc6ddd0cab57795b6be4a
     {
     }
 
-    // line 17
+    // line 21
     public function block_content($context, array $blocks = array())
     {
-        // line 18
-        echo "            
-            ";
+        // line 22
+        echo "
+        ";
     }
 
-    // line 23
+    // line 26
     public function block_css($context, array $blocks = array())
     {
-        // line 24
+        // line 27
         echo "            <link href=\"";
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bootstrap/css/bootstrap.min.css"), "html", null, true);
         echo "\" rel=\"stylesheet\" type=\"text/css\" />
             <link href=\"";
-        // line 25
+        // line 28
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bootstrap/css/main.css"), "html", null, true);
         echo "\" rel=\"stylesheet\" type=\"text/css\" />
         ";
     }
 
-    // line 29
+    // line 32
     public function block_js($context, array $blocks = array())
     {
-        // line 30
+        // line 33
         echo "            <script type=\"text/javascript\" src=\"";
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bootstrap/js/jquery-1.11.0.js"), "html", null, true);
+        echo "\"></script>
+            <script type=\"text/javascript\" src=\"";
+        // line 34
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bootstrap/js/functions_js.js"), "html", null, true);
         echo "\"></script>
         ";
     }
@@ -112,8 +138,13 @@ class __TwigTemplate_10494b4b9e97982f276e814c269a8c0abbf7a6cc6ddd0cab57795b6be4a
         return "TeachingGeneralBundle::template.html.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  104 => 30,  101 => 29,  95 => 25,  90 => 24,  87 => 23,  82 => 18,  79 => 17,  74 => 14,  68 => 4,  63 => 32,  61 => 29,  57 => 27,  55 => 23,  50 => 20,  48 => 17,  42 => 14,  29 => 4,  24 => 1,);
+        return array (  131 => 34,  126 => 33,  123 => 32,  117 => 28,  112 => 27,  109 => 26,  104 => 22,  101 => 21,  96 => 14,  90 => 4,  85 => 36,  83 => 32,  79 => 30,  77 => 26,  73 => 24,  71 => 21,  66 => 18,  61 => 17,  56 => 16,  52 => 15,  42 => 14,  29 => 4,  24 => 1,);
     }
 }

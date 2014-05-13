@@ -44,7 +44,7 @@
     {# Muestra un mensaje de creación de usuario #}
     {% for message in  app.session.flashbag.get('user_create') %}
         
-        <div class="row show-grid" id="user_create">
+        <div class="row show-grid" id="msg_flash">
             <div class="col-md-12">
                 {{ message }}
             </div>
@@ -56,11 +56,7 @@
     
 {% endblock %}
 
-{# Incluyo el efecto jquery de creación de usuario #}
-{% block js %}    
-    {{ parent() }}    
-    <script type="text/javascript" src="{{ asset('bootstrap/js/functions_js.js') }}"></script>
-{% endblock%}
+
 
 
 

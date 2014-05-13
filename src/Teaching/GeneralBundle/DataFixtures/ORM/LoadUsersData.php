@@ -75,7 +75,7 @@ class LoadUsersData extends Controller implements FixtureInterface
             '0' => array(
                 'username' => 'emilio',
                 'password' => 'emilio',
-                'rol' => 'ROLE_ADMIN',
+                'rol' => 'ROLE_USER',
                 'name' => 'Emilio',
                 'surname' => 'Crespo Perán',
                 'email' => 'emiliocresxperia@gmail.com'
@@ -83,7 +83,7 @@ class LoadUsersData extends Controller implements FixtureInterface
             '1' => array(
                 'username' => 'fran',
                 'password' => 'fran',
-                'rol' => 'ROLE_ADMIN',
+                'rol' => 'ROLE_USER',
                 'name' => 'Fran',
                 'surname' => 'González Navarro',
                 'email' => 'fran@gmail.com'

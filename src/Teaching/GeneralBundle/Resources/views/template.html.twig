@@ -9,15 +9,18 @@
         
     </head>
     <body>
-        <div class="container-fluid" style="height: 50px; background-color: gold;">
+        <div class="container-fluid" style="height: 100px; background-color: gold;">
             Cabecera
-            <div>{% block breadcrumps %}{% endblock %}</div>
+            <div>{% if app.user is not null %}<a href="{{ path('logout')}}">Cerrar sesión</a>{% endif %}</div><div>{% block breadcrumps %}{% endblock %}<br/>
+            {% if is_granted('ROLE_USER') %}ROLE_USER{% endif %}
+            {% if is_granted('ROLE_ADMIN') %}ROLE_ADMIN{% endif %}
+            {% if is_granted('ROLE_TEACHER') %}ROLE_TEACHER{% endif %}
+                </div>
         </div>
-        <div class="container">
-            {% block content %}
             
-            {% endblock %}
-        </div>
+        {% block content %}
+
+        {% endblock %}
         
         <!-- Bootstrap Css -->
         {% block css %}
@@ -28,6 +31,7 @@
         <!-- JQuery -->
         {% block js %}
             <script type="text/javascript" src="{{ asset('bootstrap/js/jquery-1.11.0.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bootstrap/js/functions_js.js') }}"></script>
         {% endblock %}
     </body>
 </html>

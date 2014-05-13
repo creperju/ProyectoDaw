@@ -4,6 +4,6 @@ teaching_homepage:
 
 exito:
     pattern: /validado
-    defaults: { _controller: TeachingGeneralBundle:Home:fin }
+    defaults: { _controller: TeachingGeneralBundle:Home:redirect }
 
 

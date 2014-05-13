@@ -121,7 +121,7 @@ class HomeController extends Controller
     
     
     // Control user account
-    public function finAction(Request $request)
+    public function redirectAction(Request $request)
     { 
 //        return new \Symfony\Component\HttpFoundation\Response("<html><head><title>ENHORABUENA</title></head><body>USUARIO VALIDADO</body></html>");
         
