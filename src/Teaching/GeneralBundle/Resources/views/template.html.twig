@@ -9,7 +9,10 @@
         
     </head>
     <body>
-        
+        <div class="container-fluid" style="height: 50px; background-color: gold;">
+            Cabecera
+            <div>{% block breadcrumps %}{% endblock %}</div>
+        </div>
         <div class="container">
             {% block content %}
             

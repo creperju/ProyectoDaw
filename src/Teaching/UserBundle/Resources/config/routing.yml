@@ -1,3 +1,7 @@
 teaching_user_homepage:
     pattern:  /usuario
     defaults: { _controller: TeachingUserBundle:User:index }
+   
+teaching_user_messages:
+    pattern:  /usuario/mensajes
+    defaults: { _controller: TeachingUserBundle:User:messages }

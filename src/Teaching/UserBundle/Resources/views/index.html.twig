@@ -1,0 +1,12 @@
+{% extends "TeachingGeneralBundle::template.html.twig" %}
+
+{% block breadcrumps %}Bienvenido {{ user }}{% endblock %}
+
+{% block content %}
+
+    <div class="row show-grid">
+        <div class="col-md-5"><a href="{{ path('teaching_user_messages') }}">Mensajes</a></div>
+        <div class="col-md-7">Configuración</div>
+    </div>
+
+{% endblock %}

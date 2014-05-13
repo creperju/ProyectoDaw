@@ -1,0 +1,32 @@
+{% extends "TeachingGeneralBundle::template.html.twig" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-2">Menú</div>
+    <div class="col-md-offset-9">
+        <!-- Div contenido de mensajes -->
+        
+        <div class="row show-grid">
+            <div class="col-md-12">Mensajes</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">{{ messages }}</div>
+        </div>
+        <p/>
+        <div class="row show-grid">
+            <div class="col-md-12">Redactar</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">{{ form(form) }}</div>
+        </div>
+             
+     </div>
+</div>
+     
+     
+    
+
+{% endblock %}
