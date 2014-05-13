@@ -64,10 +64,10 @@ class Users extends \Teaching\GeneralBundle\Entity\Users implements \Doctrine\OR
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'username', 'password', 'salt', 'role', 'name', 'surname', 'email');
+            return array('__isInitialized__', 'id', 'username', 'password', 'email', 'roles', 'salt', 'name', 'surname', 'courseTutor');
         }
 
-        return array('__isInitialized__', 'id', 'username', 'password', 'salt', 'role', 'name', 'surname', 'email');
+        return array('__isInitialized__', 'id', 'username', 'password', 'email', 'roles', 'salt', 'name', 'surname', 'courseTutor');
     }
 
     /**
@@ -176,6 +176,138 @@ class Users extends \Teaching\GeneralBundle\Entity\Users implements \Doctrine\OR
     /**
      * {@inheritDoc}
      */
+    public function getName()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getName', array());
+
+        return parent::getName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setName($name)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setName', array($name));
+
+        return parent::setName($name);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSurname()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSurname', array());
+
+        return parent::getSurname();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setSurname($surname)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setSurname', array($surname));
+
+        return parent::setSurname($surname);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRoles()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getRoles', array());
+
+        return parent::getRoles();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setSalt($salt)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setSalt', array($salt));
+
+        return parent::setSalt($salt);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUsername()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUsername', array());
+
+        return parent::getUsername();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSalt()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSalt', array());
+
+        return parent::getSalt();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPassword()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPassword', array());
+
+        return parent::getPassword();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function eraseCredentials()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'eraseCredentials', array());
+
+        return parent::eraseCredentials();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function serialize()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'serialize', array());
+
+        return parent::serialize();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function unserialize($serialized)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'unserialize', array($serialized));
+
+        return parent::unserialize($serialized);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getId()
     {
         if ($this->__isInitialized__ === false) {
@@ -202,122 +334,12 @@ class Users extends \Teaching\GeneralBundle\Entity\Users implements \Doctrine\OR
     /**
      * {@inheritDoc}
      */
-    public function getUsername()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUsername', array());
-
-        return parent::getUsername();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function setPassword($password)
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPassword', array($password));
 
         return parent::setPassword($password);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getPassword()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPassword', array());
-
-        return parent::getPassword();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setSalt($salt)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setSalt', array($salt));
-
-        return parent::setSalt($salt);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getSalt()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSalt', array());
-
-        return parent::getSalt();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setRole($role)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setRole', array($role));
-
-        return parent::setRole($role);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getRoles()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getRoles', array());
-
-        return parent::getRoles();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setName($name)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setName', array($name));
-
-        return parent::setName($name);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getName()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getName', array());
-
-        return parent::getName();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setSurname($surname)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setSurname', array($surname));
-
-        return parent::setSurname($surname);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getSurname()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSurname', array());
-
-        return parent::getSurname();
     }
 
     /**
@@ -345,12 +367,78 @@ class Users extends \Teaching\GeneralBundle\Entity\Users implements \Doctrine\OR
     /**
      * {@inheritDoc}
      */
-    public function eraseCredentials()
+    public function addRoles($rol)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'eraseCredentials', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addRoles', array($rol));
 
-        return parent::eraseCredentials();
+        return parent::addRoles($rol);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setRoles($roles)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setRoles', array($roles));
+
+        return parent::setRoles($roles);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addStudent(\Teaching\GeneralBundle\Entity\Students $students)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addStudent', array($students));
+
+        return parent::addStudent($students);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeStudent(\Teaching\GeneralBundle\Entity\Students $students)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeStudent', array($students));
+
+        return parent::removeStudent($students);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getStudents()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getStudents', array());
+
+        return parent::getStudents();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCourseTutor(\Teaching\GeneralBundle\Entity\Groups $courseTutor = NULL)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCourseTutor', array($courseTutor));
+
+        return parent::setCourseTutor($courseTutor);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCourseTutor()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCourseTutor', array());
+
+        return parent::getCourseTutor();
     }
 
 }

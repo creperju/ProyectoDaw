@@ -21,12 +21,12 @@
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="_password" />
 
-    {#
-        añade lo siguiente si quieres redirigir al usuario a una
-        URL concreta después del login (explicado más adelante) #}
-        <input type="hidden" name="_target_path" value="/validado" />
+                {# Protection to CSRF attacks #}
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+                
+                {# Redirect to account user #}
+                <input type="hidden" name="_target_path" value="/validado" />
    
-
                 <button type="submit">login</button>
             </form>
         </div>

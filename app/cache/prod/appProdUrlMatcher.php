@@ -27,18 +27,42 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
         $context = $this->context;
         $request = $this->request;
 
-        // teaching_user_homepage
-        if ($pathinfo === '/usuario') {
-            return array (  '_controller' => 'Teaching\\UserBundle\\Controller\\UserController::indexAction',  '_route' => 'teaching_user_homepage',);
+        if (0 === strpos($pathinfo, '/usuario')) {
+            // teaching_user_homepage
+            if (rtrim($pathinfo, '/') === '/usuario') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'teaching_user_homepage');
+                }
+
+                return array (  '_controller' => 'Teaching\\UserBundle\\Controller\\UserController::indexAction',  '_route' => 'teaching_user_homepage',);
+            }
+
+            // teaching_user_messages
+            if (rtrim($pathinfo, '/') === '/usuario/mensajes') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'teaching_user_messages');
+                }
+
+                return array (  '_controller' => 'Teaching\\UserBundle\\Controller\\UserController::messagesAction',  '_route' => 'teaching_user_messages',);
+            }
+
         }
 
         // teaching_teacher_homepage
-        if ($pathinfo === '/profesor') {
+        if (rtrim($pathinfo, '/') === '/profesor') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'teaching_teacher_homepage');
+            }
+
             return array (  '_controller' => 'Teaching\\TeacherBundle\\Controller\\TeacherController::indexAction',  '_route' => 'teaching_teacher_homepage',);
         }
 
         // teaching_admin_homepage
-        if ($pathinfo === '/admin') {
+        if (rtrim($pathinfo, '/') === '/admin') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'teaching_admin_homepage');
+            }
+
             return array (  '_controller' => 'Teaching\\AdminBundle\\Controller\\AdminController::indexAction',  '_route' => 'teaching_admin_homepage',);
         }
 
@@ -53,7 +77,7 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
 
         // exito
         if ($pathinfo === '/validado') {
-            return array (  '_controller' => 'Teaching\\GeneralBundle\\Controller\\HomeController::finAction',  '_route' => 'exito',);
+            return array (  '_controller' => 'Teaching\\GeneralBundle\\Controller\\HomeController::redirectAction',  '_route' => 'exito',);
         }
 
         if (0 === strpos($pathinfo, '/log')) {

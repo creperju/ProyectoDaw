@@ -11,6 +11,7 @@ class __TwigTemplate_10494b4b9e97982f276e814c269a8c0abbf7a6cc6ddd0cab57795b6be4a
 
         $this->blocks = array(
             'title' => array($this, 'block_title'),
+            'breadcrumps' => array($this, 'block_breadcrumps'),
             'content' => array($this, 'block_content'),
             'css' => array($this, 'block_css'),
             'js' => array($this, 'block_js'),
@@ -34,25 +35,53 @@ class __TwigTemplate_10494b4b9e97982f276e814c269a8c0abbf7a6cc6ddd0cab57795b6be4a
         
     </head>
     <body>
-        
-        <div class=\"container\">
-            ";
+        <div class=\"container-fluid\" style=\"height: 100px; background-color: gold;\">
+            Cabecera
+            <div>";
         // line 14
-        $this->displayBlock('content', $context, $blocks);
+        if ((!(null === $this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "user")))) {
+            echo "<a href=\"";
+            echo $this->env->getExtension('routing')->getPath("logout");
+            echo "\">Cerrar sesión</a>";
+        }
+        echo "</div><div>";
+        $this->displayBlock('breadcrumps', $context, $blocks);
+        echo "<br/>
+            ";
+        // line 15
+        if ($this->env->getExtension('security')->isGranted("ROLE_USER")) {
+            echo "ROLE_USER";
+        }
+        // line 16
+        echo "            ";
+        if ($this->env->getExtension('security')->isGranted("ROLE_ADMIN")) {
+            echo "ROLE_ADMIN";
+        }
         // line 17
-        echo "        </div>
-        
+        echo "            ";
+        if ($this->env->getExtension('security')->isGranted("ROLE_TEACHER")) {
+            echo "ROLE_TEACHER";
+        }
+        // line 18
+        echo "                </div>
+        </div>
+            
+        ";
+        // line 21
+        $this->displayBlock('content', $context, $blocks);
+        // line 24
+        echo "        
         <!-- Bootstrap Css -->
         ";
-        // line 20
+        // line 26
         $this->displayBlock('css', $context, $blocks);
-        // line 24
+        // line 30
         echo "        
         <!-- JQuery -->
         ";
-        // line 26
+        // line 32
         $this->displayBlock('js', $context, $blocks);
-        // line 29
+        // line 36
         echo "    </body>
 </html>";
     }
@@ -64,33 +93,42 @@ class __TwigTemplate_10494b4b9e97982f276e814c269a8c0abbf7a6cc6ddd0cab57795b6be4a
     }
 
     // line 14
-    public function block_content($context, array $blocks = array())
+    public function block_breadcrumps($context, array $blocks = array())
     {
-        // line 15
-        echo "            
-            ";
     }
 
-    // line 20
+    // line 21
+    public function block_content($context, array $blocks = array())
+    {
+        // line 22
+        echo "
+        ";
+    }
+
+    // line 26
     public function block_css($context, array $blocks = array())
     {
-        // line 21
+        // line 27
         echo "            <link href=\"";
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bootstrap/css/bootstrap.min.css"), "html", null, true);
         echo "\" rel=\"stylesheet\" type=\"text/css\" />
             <link href=\"";
-        // line 22
+        // line 28
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bootstrap/css/main.css"), "html", null, true);
         echo "\" rel=\"stylesheet\" type=\"text/css\" />
         ";
     }
 
-    // line 26
+    // line 32
     public function block_js($context, array $blocks = array())
     {
-        // line 27
+        // line 33
         echo "            <script type=\"text/javascript\" src=\"";
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bootstrap/js/jquery-1.11.0.js"), "html", null, true);
+        echo "\"></script>
+            <script type=\"text/javascript\" src=\"";
+        // line 34
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bootstrap/js/functions_js.js"), "html", null, true);
         echo "\"></script>
         ";
     }
@@ -100,8 +138,13 @@ class __TwigTemplate_10494b4b9e97982f276e814c269a8c0abbf7a6cc6ddd0cab57795b6be4a
         return "TeachingGeneralBundle::template.html.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  92 => 27,  89 => 26,  78 => 21,  75 => 20,  70 => 15,  67 => 14,  61 => 4,  54 => 26,  48 => 20,  43 => 17,  28 => 4,  23 => 1,  133 => 62,  129 => 61,  124 => 60,  117 => 54,  106 => 49,  101 => 46,  96 => 45,  88 => 39,  83 => 22,  73 => 27,  65 => 19,  60 => 17,  56 => 29,  50 => 24,  47 => 11,  45 => 10,  41 => 14,  39 => 7,  36 => 6,  30 => 3,);
+        return array (  131 => 34,  126 => 33,  123 => 32,  117 => 28,  112 => 27,  109 => 26,  104 => 22,  101 => 21,  96 => 14,  90 => 4,  85 => 36,  83 => 32,  79 => 30,  77 => 26,  73 => 24,  71 => 21,  66 => 18,  61 => 17,  56 => 16,  52 => 15,  42 => 14,  24 => 1,  121 => 54,  110 => 49,  105 => 46,  100 => 45,  92 => 39,  87 => 36,  78 => 28,  72 => 25,  64 => 19,  59 => 17,  55 => 15,  49 => 12,  46 => 11,  44 => 10,  40 => 8,  38 => 7,  35 => 6,  29 => 4,);
     }
 }

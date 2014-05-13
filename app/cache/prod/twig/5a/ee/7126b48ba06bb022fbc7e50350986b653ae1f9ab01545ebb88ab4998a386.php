@@ -12,7 +12,6 @@ class __TwigTemplate_5aee7126b48ba06bb022fbc7e50350986b653ae1f9ab01545ebb88ab499
         $this->blocks = array(
             'title' => array($this, 'block_title'),
             'content' => array($this, 'block_content'),
-            'js' => array($this, 'block_js'),
         );
     }
 
@@ -68,11 +67,16 @@ class __TwigTemplate_5aee7126b48ba06bb022fbc7e50350986b653ae1f9ab01545ebb88ab499
                 <label for=\"password\">Password:</label>
                 <input type=\"password\" id=\"password\" name=\"_password\" />
 
-    ";
-        // line 27
-        echo "        <input type=\"hidden\" name=\"_target_path\" value=\"/validado\" />
+                ";
+        // line 25
+        echo "                <input type=\"hidden\" name=\"_csrf_token\" value=\"";
+        echo twig_escape_filter($this->env, $this->env->getExtension('form')->renderer->renderCsrfToken("authenticate"), "html", null, true);
+        echo "\" />
+                
+                ";
+        // line 28
+        echo "                <input type=\"hidden\" name=\"_target_path\" value=\"/validado\" />
    
-
                 <button type=\"submit\">login</button>
             </form>
         </div>
@@ -99,7 +103,7 @@ class __TwigTemplate_5aee7126b48ba06bb022fbc7e50350986b653ae1f9ab01545ebb88ab499
         foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
             // line 46
             echo "        
-        <div class=\"row show-grid\" id=\"user_create\">
+        <div class=\"row show-grid\" id=\"msg_flash\">
             <div class=\"col-md-12\">
                 ";
             // line 49
@@ -120,21 +124,6 @@ class __TwigTemplate_5aee7126b48ba06bb022fbc7e50350986b653ae1f9ab01545ebb88ab499
 ";
     }
 
-    // line 60
-    public function block_js($context, array $blocks = array())
-    {
-        echo "    
-    ";
-        // line 61
-        $this->displayParentBlock("js", $context, $blocks);
-        echo "    
-    <script type=\"text/javascript\" src=\"";
-        // line 62
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bootstrap/js/functions_js.js"), "html", null, true);
-        echo "\"></script>
-";
-    }
-
     public function getTemplateName()
     {
         return "TeachingGeneralBundle:Home:index.html.twig";
@@ -147,6 +136,6 @@ class __TwigTemplate_5aee7126b48ba06bb022fbc7e50350986b653ae1f9ab01545ebb88ab499
 
     public function getDebugInfo()
     {
-        return array (  133 => 62,  129 => 61,  124 => 60,  117 => 54,  106 => 49,  101 => 46,  96 => 45,  88 => 39,  83 => 36,  73 => 27,  65 => 19,  60 => 17,  56 => 15,  50 => 12,  47 => 11,  45 => 10,  41 => 8,  39 => 7,  36 => 6,  30 => 3,);
+        return array (  121 => 54,  110 => 49,  105 => 46,  100 => 45,  92 => 39,  87 => 36,  78 => 28,  72 => 25,  64 => 19,  59 => 17,  55 => 15,  49 => 12,  46 => 11,  44 => 10,  40 => 8,  38 => 7,  35 => 6,  29 => 3,);
     }
 }

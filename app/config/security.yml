@@ -16,6 +16,8 @@ security:
             form_login: 
                 login_path: teaching_homepage
                 check_path: login_check
+                # Protection to CSRF attacks in form login
+                csrf_provider: form.csrf_provider
             logout: 
                 path: logout
                 target: /

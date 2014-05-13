@@ -67,11 +67,16 @@ class __TwigTemplate_5aee7126b48ba06bb022fbc7e50350986b653ae1f9ab01545ebb88ab499
                 <label for=\"password\">Password:</label>
                 <input type=\"password\" id=\"password\" name=\"_password\" />
 
-    ";
-        // line 27
-        echo "        <input type=\"hidden\" name=\"_target_path\" value=\"/validado\" />
+                ";
+        // line 25
+        echo "                <input type=\"hidden\" name=\"_csrf_token\" value=\"";
+        echo twig_escape_filter($this->env, $this->env->getExtension('form')->renderer->renderCsrfToken("authenticate"), "html", null, true);
+        echo "\" />
+                
+                ";
+        // line 28
+        echo "                <input type=\"hidden\" name=\"_target_path\" value=\"/validado\" />
    
-
                 <button type=\"submit\">login</button>
             </form>
         </div>
@@ -131,6 +136,6 @@ class __TwigTemplate_5aee7126b48ba06bb022fbc7e50350986b653ae1f9ab01545ebb88ab499
 
     public function getDebugInfo()
     {
-        return array (  116 => 54,  105 => 49,  100 => 46,  95 => 45,  87 => 39,  82 => 36,  72 => 27,  64 => 19,  59 => 17,  55 => 15,  49 => 12,  46 => 11,  44 => 10,  40 => 8,  38 => 7,  35 => 6,  29 => 3,);
+        return array (  121 => 54,  110 => 49,  105 => 46,  100 => 45,  92 => 39,  87 => 36,  78 => 28,  72 => 25,  64 => 19,  59 => 17,  55 => 15,  49 => 12,  46 => 11,  44 => 10,  40 => 8,  38 => 7,  35 => 6,  29 => 3,);
     }
 }
