@@ -36,7 +36,28 @@
     <div class="row show-grid">
         <div class="col-md-12">
             <h3>Registrate</h3>
-            {{ form(form) }}
+            {{ form_start(form) }}
+                <p>
+                    {{ form_label(form.username, 'Usuario') }}
+                    {{ form_widget(form.username) }}
+                </p>
+                <p>
+                    {{ form_label(form.password, 'Contraseña') }}
+                    {{ form_widget(form.password) }}
+                </p>
+                <p>
+                    {{ form_label(form.email, 'Email') }}
+                    {{ form_widget(form.email) }}
+                </p>
+                <p>
+                    {{ form_label(form.name, 'Nombre') }}
+                    {{ form_widget(form.name) }}
+                </p>
+                <p>
+                    {{ form_label(form.surname, 'Apellidos') }}
+                    {{ form_widget(form.surname) }}
+                </p>
+            {{ form_end(form) }}
         </div>
     </div>
     

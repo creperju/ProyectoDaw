@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 use Teaching\GeneralBundle\Entity\Users;
 use Teaching\GeneralBundle\Form\SignUp;
+use Teaching\GeneralBundle\Controller\UtilitiesController;
 
 class HomeController extends Controller
 {
@@ -32,17 +33,29 @@ class HomeController extends Controller
             // Array data form
             $data = $form->getData();
 	    
-	    // Signup user with form data
-            $this->signUpUser($user, $data);
+//            $exists = \UtilitiesController::search($data['username'], 'Users', 'username');
             
-	    // Flash message
-	    $this->get('session')->getFlashBag()->add(
-		'user_create',
-		'Se ha creado el usuario.'
-	    );
-	    
+            // If user not exits
+//            if(! $exists ){
+                // Signup user with form data
+                $this->signUpUser($user, $data);
+
+                // Flash message
+                $this->get('session')->getFlashBag()->add(
+                    'user_create',
+                    'Se ha creado el usuario.'
+                );
+
+//            }
+//            else{
+//                // Flash message
+//                $this->get('session')->getFlashBag()->add(
+//                    'user_create',
+//                    'El usuario ya está registrado.'
+//                );}
+            
+            
             return $this->redirect($this->generateUrl('teaching_homepage'));
-	    
         }
         
         
