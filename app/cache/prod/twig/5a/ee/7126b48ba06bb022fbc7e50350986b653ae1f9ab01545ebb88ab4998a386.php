@@ -35,92 +35,143 @@ class __TwigTemplate_5aee7126b48ba06bb022fbc7e50350986b653ae1f9ab01545ebb88ab499
     public function block_content($context, array $blocks = array())
     {
         // line 7
-        echo "    ";
-        // line 8
-        echo "    <div class=\"row show-grid\">
-        
+        echo "    <div class=\"container\">
         ";
-        // line 10
+        // line 9
+        echo "        <div class=\"row show-grid\">
+
+            ";
+        // line 11
         if ((isset($context["error"]) ? $context["error"] : $this->getContext($context, "error"))) {
-            // line 11
-            echo "            <div class=\"col-md-3\">
-                ";
             // line 12
+            echo "                <div class=\"col-md-3\">
+                    ";
+            // line 13
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["error"]) ? $context["error"] : $this->getContext($context, "error")), "message"), "html", null, true);
             echo "
-            </div>
-        ";
+                </div>
+            ";
         }
-        // line 15
-        echo "        
-        <div class=\"col-md-9\">
-            <form action=\"";
-        // line 17
+        // line 16
+        echo "
+            <div class=\"col-md-12\">
+                <form action=\"";
+        // line 18
         echo $this->env->getExtension('routing')->getPath("login_check");
         echo "\" method=\"post\">
-                <label for=\"username\">Username:</label>
-                <input type=\"text\" id=\"username\" name=\"_username\" value=\"";
-        // line 19
+                    <label for=\"username\">Username:</label>
+                    <input type=\"text\" id=\"username\" name=\"_username\" value=\"";
+        // line 20
         echo twig_escape_filter($this->env, (isset($context["last_username"]) ? $context["last_username"] : $this->getContext($context, "last_username")), "html", null, true);
         echo "\" />
 
-                <label for=\"password\">Password:</label>
-                <input type=\"password\" id=\"password\" name=\"_password\" />
+                    <label for=\"password\">Password:</label>
+                    <input type=\"password\" id=\"password\" name=\"_password\" />
 
-                ";
-        // line 25
-        echo "                <input type=\"hidden\" name=\"_csrf_token\" value=\"";
+                    ";
+        // line 26
+        echo "                    <input type=\"hidden\" name=\"_csrf_token\" value=\"";
         echo twig_escape_filter($this->env, $this->env->getExtension('form')->renderer->renderCsrfToken("authenticate"), "html", null, true);
         echo "\" />
-                
-                ";
-        // line 28
-        echo "                <input type=\"hidden\" name=\"_target_path\" value=\"/validado\" />
-   
-                <button type=\"submit\">login</button>
-            </form>
+
+                    ";
+        // line 29
+        echo "                    <input type=\"hidden\" name=\"_target_path\" value=\"/validado\" />
+
+                    <button type=\"submit\">login</button>
+                </form>
+            </div>
         </div>
-    </div>
     
-    ";
-        // line 36
-        echo "    <div class=\"row show-grid\">
-        <div class=\"col-md-12\">
-            <h3>Registrate</h3>
-            ";
-        // line 39
-        echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form');
+        ";
+        // line 37
+        echo "        <div class=\"row show-grid\">
+            <div class=\"col-md-12\">
+                <h3>Registrate</h3>
+                ";
+        // line 40
+        echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_start');
         echo "
+                    
+                        <div style=\"float:left; clear: both;\">";
+        // line 42
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "username"), 'label', array("label" => "Usuario"));
+        echo "</div>
+                        <div style=\"float:right;\">";
+        // line 43
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "username"), 'widget');
+        echo "</div>
+                    
+                        <div style=\"float:left; clear: both;\">";
+        // line 45
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "password"), 'label', array("label" => "Contraseña"));
+        echo "</div>
+                        <div style=\"float:right;\">";
+        // line 46
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "password"), 'widget');
+        echo "</div>
+                    
+                        <div style=\"float:left; clear: both;\">";
+        // line 48
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "email"), 'label', array("label" => "Email"));
+        echo "</div>
+                        <div style=\"float:right;\">";
+        // line 49
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "email"), 'widget');
+        echo "</div>
+                    
+                        <div style=\"float:left; clear: both;\">";
+        // line 51
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "name"), 'label', array("label" => "Nombre"));
+        echo "</div>
+                        <div style=\"float:right;\">";
+        // line 52
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "name"), 'widget');
+        echo "</div>
+                    
+                        <div style=\"float:left; clear: both;\">";
+        // line 54
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "surname"), 'label', array("label" => "Apellidos"));
+        echo "</div>
+                        <div style=\"float:right;\">";
+        // line 55
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "surname"), 'widget');
+        echo "</div>
+                    
+                ";
+        // line 57
+        echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_end');
+        echo "
+            </div>
         </div>
-    </div>
     
         
-    ";
-        // line 45
-        echo "    ";
+        ";
+        // line 63
+        echo "        ";
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "session"), "flashbag"), "get", array(0 => "user_create"), "method"));
         foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-            // line 46
-            echo "        
-        <div class=\"row show-grid\" id=\"msg_flash\">
-            <div class=\"col-md-12\">
-                ";
-            // line 49
+            // line 64
+            echo "
+            <div class=\"row show-grid\" id=\"msg_flash\">
+                <div class=\"col-md-12\">
+                    ";
+            // line 67
             echo twig_escape_filter($this->env, (isset($context["message"]) ? $context["message"] : $this->getContext($context, "message")), "html", null, true);
             echo "
+                </div>
             </div>
-        </div>
-        
-    ";
+
+        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 54
+        // line 72
         echo "
   
-    
+   </div> 
 ";
     }
 
@@ -136,6 +187,6 @@ class __TwigTemplate_5aee7126b48ba06bb022fbc7e50350986b653ae1f9ab01545ebb88ab499
 
     public function getDebugInfo()
     {
-        return array (  121 => 54,  110 => 49,  105 => 46,  100 => 45,  92 => 39,  87 => 36,  78 => 28,  72 => 25,  64 => 19,  59 => 17,  55 => 15,  49 => 12,  46 => 11,  44 => 10,  40 => 8,  38 => 7,  35 => 6,  29 => 3,);
+        return array (  172 => 72,  161 => 67,  156 => 64,  151 => 63,  143 => 57,  138 => 55,  134 => 54,  129 => 52,  125 => 51,  120 => 49,  116 => 48,  111 => 46,  107 => 45,  102 => 43,  98 => 42,  93 => 40,  88 => 37,  79 => 29,  73 => 26,  65 => 20,  60 => 18,  56 => 16,  50 => 13,  47 => 12,  45 => 11,  41 => 9,  38 => 7,  35 => 6,  29 => 3,);
     }
 }

@@ -11,7 +11,8 @@ use Teaching\GeneralBundle\Controller\UtilitiesController;
 
 class HomeController extends Controller
 {
-     
+    
+    
     /**
      * First method in application, load the home of application, also
      * load form sign up for new users and form login.
@@ -21,6 +22,8 @@ class HomeController extends Controller
      */
     public function indexAction(Request $request)
     {
+        
+        
         // Form to SignUp user
 	$user = new Users();
 	$form = $this->createForm(new SignUp(),$user);
@@ -29,14 +32,12 @@ class HomeController extends Controller
  
 	// If form is valid and has been sent from user, it's true
         if ($form->isValid()){
-	    
+            
             // Array data form
             $data = $form->getData();
-	    
-//            $exists = \UtilitiesController::search($data['username'], 'Users', 'username');
             
             // If user not exits
-//            if(! $exists ){
+            if(! $this->search($data->getUsername(), 'Users', 'username') ){
                 // Signup user with form data
                 $this->signUpUser($user, $data);
 
@@ -46,13 +47,15 @@ class HomeController extends Controller
                     'Se ha creado el usuario.'
                 );
 
-//            }
-//            else{
-//                // Flash message
-//                $this->get('session')->getFlashBag()->add(
-//                    'user_create',
-//                    'El usuario ya está registrado.'
-//                );}
+            }
+            else{
+                // Flash message
+                $this->get('session')->getFlashBag()->add(
+                    'user_create',
+                    'El usuario ya está registrado.'
+                );
+                
+            }
             
             
             return $this->redirect($this->generateUrl('teaching_homepage'));
@@ -129,6 +132,28 @@ class HomeController extends Controller
 	
         // Set a secure password
         $entity->setPassword($password_secure);
+    }
+    
+    
+    /**
+     * Search something in database
+     * 
+     * @param type $data
+     * @param type $entity
+     * @param type $field
+     * @return type
+     */
+    private function search($data, $entity, $field)
+    {
+        // Entity to find user/student... Etc
+        $em = $this->getDoctrine()->getRepository('TeachingGeneralBundle:'.$entity);
+        
+        // Find user exists
+        $query = $em->findOneBy(array($field => $data));
+        
+        // Return user
+        return $query;
+        
     }
     
     

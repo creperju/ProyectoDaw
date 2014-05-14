@@ -36,7 +36,7 @@ class __TwigTemplate_10494b4b9e97982f276e814c269a8c0abbf7a6cc6ddd0cab57795b6be4a
     </head>
     <body>
         <div class=\"container-fluid\" style=\"height: 100px; background-color: gold;\">
-            Cabecera
+            <h1>Teaching!</h1>
             <div>";
         // line 14
         if ((!(null === $this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "user")))) {
@@ -44,44 +44,46 @@ class __TwigTemplate_10494b4b9e97982f276e814c269a8c0abbf7a6cc6ddd0cab57795b6be4a
             echo $this->env->getExtension('routing')->getPath("logout");
             echo "\">Cerrar sesión</a>";
         }
-        echo "</div><div>";
+        echo "</div>
+            <div>";
+        // line 15
         $this->displayBlock('breadcrumps', $context, $blocks);
         echo "<br/>
             ";
-        // line 15
+        // line 16
         if ($this->env->getExtension('security')->isGranted("ROLE_USER")) {
             echo "ROLE_USER";
         }
-        // line 16
+        // line 17
         echo "            ";
         if ($this->env->getExtension('security')->isGranted("ROLE_ADMIN")) {
             echo "ROLE_ADMIN";
         }
-        // line 17
+        // line 18
         echo "            ";
         if ($this->env->getExtension('security')->isGranted("ROLE_TEACHER")) {
             echo "ROLE_TEACHER";
         }
-        // line 18
+        // line 19
         echo "                </div>
         </div>
             
         ";
-        // line 21
+        // line 22
         $this->displayBlock('content', $context, $blocks);
-        // line 24
+        // line 25
         echo "        
         <!-- Bootstrap Css -->
         ";
-        // line 26
+        // line 27
         $this->displayBlock('css', $context, $blocks);
-        // line 30
+        // line 31
         echo "        
         <!-- JQuery -->
         ";
-        // line 32
+        // line 33
         $this->displayBlock('js', $context, $blocks);
-        // line 36
+        // line 37
         echo "    </body>
 </html>";
     }
@@ -92,42 +94,42 @@ class __TwigTemplate_10494b4b9e97982f276e814c269a8c0abbf7a6cc6ddd0cab57795b6be4a
         echo "Teaching!";
     }
 
-    // line 14
+    // line 15
     public function block_breadcrumps($context, array $blocks = array())
     {
     }
 
-    // line 21
+    // line 22
     public function block_content($context, array $blocks = array())
     {
-        // line 22
+        // line 23
         echo "
         ";
     }
 
-    // line 26
+    // line 27
     public function block_css($context, array $blocks = array())
     {
-        // line 27
+        // line 28
         echo "            <link href=\"";
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bootstrap/css/bootstrap.min.css"), "html", null, true);
         echo "\" rel=\"stylesheet\" type=\"text/css\" />
             <link href=\"";
-        // line 28
+        // line 29
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bootstrap/css/main.css"), "html", null, true);
         echo "\" rel=\"stylesheet\" type=\"text/css\" />
         ";
     }
 
-    // line 32
+    // line 33
     public function block_js($context, array $blocks = array())
     {
-        // line 33
+        // line 34
         echo "            <script type=\"text/javascript\" src=\"";
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bootstrap/js/jquery-1.11.0.js"), "html", null, true);
         echo "\"></script>
             <script type=\"text/javascript\" src=\"";
-        // line 34
+        // line 35
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bootstrap/js/functions_js.js"), "html", null, true);
         echo "\"></script>
         ";
@@ -145,6 +147,6 @@ class __TwigTemplate_10494b4b9e97982f276e814c269a8c0abbf7a6cc6ddd0cab57795b6be4a
 
     public function getDebugInfo()
     {
-        return array (  131 => 34,  126 => 33,  123 => 32,  117 => 28,  112 => 27,  109 => 26,  104 => 22,  101 => 21,  96 => 14,  90 => 4,  85 => 36,  83 => 32,  79 => 30,  77 => 26,  73 => 24,  71 => 21,  66 => 18,  61 => 17,  56 => 16,  52 => 15,  42 => 14,  24 => 1,  121 => 54,  110 => 49,  105 => 46,  100 => 45,  92 => 39,  87 => 36,  78 => 28,  72 => 25,  64 => 19,  59 => 17,  55 => 15,  49 => 12,  46 => 11,  44 => 10,  40 => 8,  38 => 7,  35 => 6,  29 => 4,);
+        return array (  133 => 35,  128 => 34,  119 => 29,  114 => 28,  106 => 23,  103 => 22,  92 => 4,  87 => 37,  85 => 33,  81 => 31,  75 => 25,  68 => 19,  63 => 18,  58 => 17,  54 => 16,  42 => 14,  24 => 1,  172 => 72,  161 => 67,  156 => 64,  151 => 63,  143 => 57,  138 => 55,  134 => 54,  129 => 52,  125 => 33,  120 => 49,  116 => 48,  111 => 27,  107 => 45,  102 => 43,  98 => 15,  93 => 40,  88 => 37,  79 => 27,  73 => 22,  65 => 20,  60 => 18,  56 => 16,  50 => 15,  47 => 12,  45 => 11,  41 => 9,  38 => 7,  35 => 6,  29 => 4,);
     }
 }

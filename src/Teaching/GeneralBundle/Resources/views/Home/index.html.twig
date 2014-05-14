@@ -4,77 +4,76 @@
 
 
 {% block content %}
-    {# Div con login de usuarios #}
-    <div class="row show-grid">
-        
-        {% if error %}
-            <div class="col-md-3">
-                {{ error.message }}
-            </div>
-        {% endif %}
-        
-        <div class="col-md-9">
-            <form action="{{ path('login_check') }}" method="post">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="_username" value="{{ last_username }}" />
+    <div class="container">
+        {# Div con login de usuarios #}
+        <div class="row show-grid">
 
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="_password" />
+            {% if error %}
+                <div class="col-md-3">
+                    {{ error.message }}
+                </div>
+            {% endif %}
 
-                {# Protection to CSRF attacks #}
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
-                
-                {# Redirect to account user #}
-                <input type="hidden" name="_target_path" value="/validado" />
-   
-                <button type="submit">login</button>
-            </form>
-        </div>
-    </div>
-    
-    {# Div con registro de usuarios #}
-    <div class="row show-grid">
-        <div class="col-md-12">
-            <h3>Registrate</h3>
-            {{ form_start(form) }}
-                <p>
-                    {{ form_label(form.username, 'Usuario') }}
-                    {{ form_widget(form.username) }}
-                </p>
-                <p>
-                    {{ form_label(form.password, 'Contraseña') }}
-                    {{ form_widget(form.password) }}
-                </p>
-                <p>
-                    {{ form_label(form.email, 'Email') }}
-                    {{ form_widget(form.email) }}
-                </p>
-                <p>
-                    {{ form_label(form.name, 'Nombre') }}
-                    {{ form_widget(form.name) }}
-                </p>
-                <p>
-                    {{ form_label(form.surname, 'Apellidos') }}
-                    {{ form_widget(form.surname) }}
-                </p>
-            {{ form_end(form) }}
-        </div>
-    </div>
-    
-        
-    {# Muestra un mensaje de creación de usuario #}
-    {% for message in  app.session.flashbag.get('user_create') %}
-        
-        <div class="row show-grid" id="msg_flash">
             <div class="col-md-12">
-                {{ message }}
+                <form action="{{ path('login_check') }}" method="post">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="_password" />
+
+                    {# Protection to CSRF attacks #}
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+
+                    {# Redirect to account user #}
+                    <input type="hidden" name="_target_path" value="/validado" />
+
+                    <button type="submit">login</button>
+                </form>
             </div>
         </div>
+    
+        {# Div con registro de usuarios #}
+        <div class="row show-grid">
+            <div class="col-md-12">
+                <h3>Registrate</h3>
+                {{ form_start(form) }}
+                    
+                        <div style="float:left; clear: both;">{{ form_label(form.username, 'Usuario') }}</div>
+                        <div style="float:right;">{{ form_widget(form.username) }}</div>
+                    
+                        <div style="float:left; clear: both;">{{ form_label(form.password, 'Contraseña') }}</div>
+                        <div style="float:right;">{{ form_widget(form.password) }}</div>
+                    
+                        <div style="float:left; clear: both;">{{ form_label(form.email, 'Email') }}</div>
+                        <div style="float:right;">{{ form_widget(form.email) }}</div>
+                    
+                        <div style="float:left; clear: both;">{{ form_label(form.name, 'Nombre') }}</div>
+                        <div style="float:right;">{{ form_widget(form.name) }}</div>
+                    
+                        <div style="float:left; clear: both;">{{ form_label(form.surname, 'Apellidos') }}</div>
+                        <div style="float:right;">{{ form_widget(form.surname) }}</div>
+                        
+                        <div style="float:left; clear: both;">{{ form_widget(form.registrar) }}</div>
+                        
+                {{ form_end(form) }}
+            </div>
+        </div>
+    
         
-    {% endfor %}
+        {# Muestra un mensaje de creación de usuario #}
+        {% for message in  app.session.flashbag.get('user_create') %}
+
+            <div class="row show-grid" id="msg_flash">
+                <div class="col-md-12">
+                    {{ message }}
+                </div>
+            </div>
+
+        {% endfor %}
 
   
-    
+   </div> 
 {% endblock %}
 
 
