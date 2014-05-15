@@ -24,7 +24,7 @@ class Subjects
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=25)
+     * @ORM\Column(name="name", type="string", length=25, unique=true)
      */
     private $name;
 

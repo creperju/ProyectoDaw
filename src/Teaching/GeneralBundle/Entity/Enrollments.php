@@ -7,7 +7,13 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Enrollments
  *
- * @ORM\Table(name="enrollments")
+ * @ORM\Table(  name="enrollments",
+ *              uniqueConstraints=
+ *                  {@ORM\UniqueConstraint(
+ *                      name="e_idx", 
+ *                      columns={"student_id", "date_start"}
+ *                  )}
+ * )
  * @ORM\Entity
  */
 class Enrollments
@@ -22,17 +28,14 @@ class Enrollments
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Groups")
-     * ORM\Column(type="integer", unique=false)
+     * @ORM\ManyToOne(targetEntity="Groups")
      */
     private $group;
     
     /**
-     * @ORM\OneToOne(targetEntity="Students")
+     * @ORM\ManyToOne(targetEntity="Students")
      */
     private $student;
-    
-    
     
     /**
      * @var \DateTime

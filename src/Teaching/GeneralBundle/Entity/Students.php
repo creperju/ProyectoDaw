@@ -37,6 +37,13 @@ class Students
     private $surname;
 
 
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="dni", type="string", length=9, unique=true) 
+     */
+    private $dni;
+    
     
     /**
      * Get id
@@ -95,4 +102,27 @@ class Students
     }
 
     
+
+    /**
+     * Set dni
+     *
+     * @param string $dni
+     * @return Students
+     */
+    public function setDni($dni)
+    {
+        $this->dni = $dni;
+    
+        return $this;
+    }
+
+    /**
+     * Get dni
+     *
+     * @return string 
+     */
+    public function getDni()
+    {
+        return $this->dni;
+    }
 }
