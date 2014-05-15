@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * Teaching\GeneralBundle\Entity\Users
  *
  * @ORM\Table(name="users")
- * @ORM\Entity()
+ * @ORM\Entity
  */
 class Users implements UserInterface, \Serializable
 {

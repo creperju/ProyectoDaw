@@ -12,7 +12,8 @@ use Teaching\GeneralBundle\Entity\Courses;
 use Teaching\GeneralBundle\Entity\Groups;
 use Teaching\GeneralBundle\Entity\Enrollments;
 use Teaching\GeneralBundle\Entity\Subjects;
-use Teaching\GeneralBundle\Entity\CourseGroupsSubjects;
+use Teaching\GeneralBundle\Entity\GroupsSubjects;
+use Teaching\GeneralBundle\Entity\Activities;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use DateTime;
 
@@ -58,7 +59,11 @@ class LoadUsersData extends Controller implements FixtureInterface
         $this->loadSubjects($manager);
         
         // Load Subjects <> Courses
-        $this->loadCoursesGroupsSubjects($manager);
+        $this->loadGroupsSubjects($manager);
+	
+	// Load activities in groups 
+	$this->loadActivities($manager);
+	
     }
     
     
@@ -366,7 +371,7 @@ class LoadUsersData extends Controller implements FixtureInterface
      * 
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    private function loadCoursesGroupsSubjects(ObjectManager $manager)
+    private function loadGroupsSubjects(ObjectManager $manager)
     {
 	// Courses with groups
 //	$courses = array(
@@ -417,7 +422,7 @@ class LoadUsersData extends Controller implements FixtureInterface
 		
 		// For every group, there are a teacher wich teach a subject
 		for($i = 0; $i < count($group); $i++){
-		    $class = new CourseGroupsSubjects();
+		    $class = new GroupsSubjects();
 		    
 		    $class->setGroup($this->searchGroup($course, $group));
 		    $class->setSubject($this->search($subjects[$i], 'Subjects', 'name'));
@@ -428,6 +433,63 @@ class LoadUsersData extends Controller implements FixtureInterface
 		
 	    }
 		
+	}
+	
+	$manager->flush();
+	
+    }
+    
+    
+    
+    /**
+     * Load activities
+     * 
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     */
+    private function loadActivities(ObjectManager $manager)
+    {
+	//
+	$data = array(
+	    '1º' => array(
+		'A' => array(
+		    'Matemáticas' => array(
+			'0' => array(
+			    'Activity_name' => 'Tarea para casa',
+			    'Type' => 'Ejercicios',
+			    'Description' => 'Ejercicios 1, 2, 3 y 4 de la página 17.',
+			    'Date_start' => new \Datetime(),
+			    'Date_end' => new \Datetime(),
+			),
+		    ),
+		),
+	    ),
+	);
+	
+	// Add activities
+	foreach($data as $courses => $course){
+	    
+	    foreach($course as $groups => $group){
+
+		foreach($group as $subjects => $subject){
+
+		    foreach($subject as $activities => $activity){
+
+			$class = new Activities();
+
+			$class->setGroupSubject($this->searchGroupSubject($courses, $groups, $subjects));
+			$class->setActivityName($activity['Activity_name']);
+			$class->setType($activity['Type']);
+			$class->setDescription($activity['Description']);
+			$class->setDateStart($activity['Date_start']);
+			$class->setDateEnd($activity['Date_end']);
+			
+			$manager->persist($class);
+		    }
+
+		}
+
+	    }
+	    
 	}
 	
 	$manager->flush();
@@ -499,6 +561,34 @@ class LoadUsersData extends Controller implements FixtureInterface
         $query = $em->findOneBy(array('course' => $course_id, 'letter' => $letter));
         
         // Return group
+        return $query;
+    }
+    
+    
+    
+    /**
+     * Find course subjects
+     * 
+     * @param type $course
+     * @param type $letter
+     * @param type $subject
+     * @return type
+     */
+    private function searchGroupSubject($course, $letter, $subject)
+    {
+	// Search subject
+	$subject_id = $this->search($subject, 'Subjects', 'name');
+	// Search group
+	$group_id = $this->searchGroup($course, $letter);
+	
+	// Entity to find a course group
+        $em = $this->getDoctrine()
+                ->getRepository('TeachingGeneralBundle:GroupsSubjects');
+        
+	// Find group subject
+	$query = $em->findOneBy(array('group' => $group_id, 'subject' => $subject_id));
+        
+        // Return group subject
         return $query;
     }
     
