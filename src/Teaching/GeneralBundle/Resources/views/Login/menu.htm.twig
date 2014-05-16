@@ -1,0 +1,22 @@
+{% extends "TeachingGeneralBundle::template.html.twig" %}
+
+{% block breadcrumps %}Bienvenido {{ user }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row show-grid">
+            
+            {% for m in menu %}
+                
+                <a href="{{ path('teaching_user_homepage') }}{{ m.link }}/">
+                    <div class="col-md-{{ m.dimension }} col-sm-{{ m.dimension }} col-lg-{{ m.dimension }}" 
+                         style="color: {{ m.color }}; background-color: {{ m.background }};">
+                        {{ m.name }}
+                    </div>
+                </a>
+                
+            {% endfor %}
+            
+        </div>
+    </div>
+{% endblock %}

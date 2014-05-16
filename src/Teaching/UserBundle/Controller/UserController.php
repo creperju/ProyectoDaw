@@ -13,11 +13,7 @@ class UserController extends Controller
     public function indexAction()
     {
         
-        
-        
         $user = $this->getUser();
-        $url = $this->generateUrl("logout");
-        $rol = $user->getRoles();
         
 //        return new Response("<html><head><title>ENHORABUENA</title></head><body>"
 //                . "Tipo de usuario: <h4>".$rol[0]."</h4>"
@@ -28,11 +24,84 @@ class UserController extends Controller
 //                . "<p><a href='".$url."'>SALIR</a></body></html>");
 //	
         
+	$menu = array(
+	    '0' => array(
+		'name' => 'Matemáticas',
+		'color' => 'white',
+		'background' => 'gold',
+		'dimension' => '4',
+		'link' => 'matematicas'
+	    ),
+	    '1' => array(
+		'name' => 'Lengua',
+		'color' => 'white',
+		'background' => 'blue',
+		'dimension' => '4',
+		'link' => 'lengua'
+	    ),
+	    '2' => array(
+		'name' => 'Inglés',
+		'color' => 'white',
+		'background' => 'red',
+		'dimension' => '4',
+		'link' => 'ingles'
+	    ),
+	    '3' => array(
+		'name' => 'Música',
+		'color' => 'white',
+		'background' => 'purple',
+		'dimension' => '4',
+		'link' => 'musica'
+	    ),
+	    '4' => array(
+		'name' => 'Gimnasia',
+		'color' => 'white',
+		'background' => 'orange',
+		'dimension' => '4',
+		'link' => 'gimnasia'
+	    ),
+	    '5' => array(
+		'name' => 'Conocimiento del Medio',
+		'color' => 'white',
+		'background' => 'green',
+		'dimension' => '4',
+		'link' => 'conocimientodelmedio'
+	    ),
+	    '6' => array(
+		'name' => 'Mensajes',
+		'color' => 'white',
+		'background' => 'blue',
+		'dimension' => '3',
+		'link' => 'mensajes'
+	    ),
+	    '7' => array(
+		'name' => 'Configuración',
+		'color' => 'white',
+		'background' => 'gray',
+		'dimension' => '3',
+		'link' => 'configuracion'
+	    ),
+	    '8' => array(
+		'name' => 'Ayuda',
+		'color' => 'black',
+		'background' => 'white',
+		'dimension' => '6',
+		'link' => 'ayuda'
+	    ),
+	);
+	
+	
+	
+                    
+	
+	
+	
         
         return $this->render(
-            'TeachingUserBundle::index.html.twig',
+            'TeachingGeneralBundle:Login:menu.html.twig',
             array(
                 'user' => $user->getUsername(),
+		'menu' => $menu
             )
         );
         
