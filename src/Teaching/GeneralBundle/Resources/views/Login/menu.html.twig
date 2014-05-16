@@ -1,6 +1,6 @@
 {% extends "TeachingGeneralBundle::template.html.twig" %}
 
-{% block breadcrumps %}Bienvenido {{ user }}{% endblock %}
+{% block breadcrumps %}Bienvenido {{ app.user.username }}{% endblock %}
 
 {% block content %}
     <div class="container">

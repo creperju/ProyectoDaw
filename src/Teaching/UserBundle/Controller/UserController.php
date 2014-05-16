@@ -13,7 +13,6 @@ class UserController extends Controller
     public function indexAction()
     {
         
-        $user = $this->getUser();
         
 //        return new Response("<html><head><title>ENHORABUENA</title></head><body>"
 //                . "Tipo de usuario: <h4>".$rol[0]."</h4>"
@@ -92,15 +91,9 @@ class UserController extends Controller
 	
 	
 	
-                    
-	
-	
-	
-        
         return $this->render(
             'TeachingGeneralBundle:Login:menu.html.twig',
             array(
-                'user' => $user->getUsername(),
 		'menu' => $menu
             )
         );
@@ -110,6 +103,23 @@ class UserController extends Controller
     
     
     
+    private function mathsAction(){}
+    private function spanishAction(){}
+    private function englishAction(){}
+    private function musicAction(){}
+    private function gymnasticsAction(){}
+    private function natureAction(){}
+    private function configAction(){}
+    private function helpAction(){}
+    
+    
+    
+    /**
+     * Controller to view, send messages.
+     * 
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @return type
+     */
     public function messagesAction(Request $request)
     {
         
@@ -129,7 +139,7 @@ class UserController extends Controller
             $data = $form->getData();
             
             if( $data['Para'] != $user->getUsername()){
-                $to = $this->search($data['Para']);
+                $to = $this->search($data['Para'], 'Users', 'username');
                 
                 if($to != null){
                     // Grabo el mensaje
@@ -165,14 +175,14 @@ class UserController extends Controller
         
         $messages_send = $em->findBy(array('fromUser' => $user->getId()));
         $messages_receibe = $em->findBy(array('toUser' => $user->getId()));
-        //echo "<pre>";print_r($messages);echo "</pre>";exit(0);
-        if( ! count($messages_send) ) $messages_send = 'No hay mensajessss';
-        if( ! count($messages_receibe) ) $messages_receibe = 'No hay mensajessss';
+	
+	$menu = $this->loadMenu('Mensajes');
         
         return $this->render(
             'TeachingUserBundle::messages.html.twig',
             array(
                 'controller' => 'Mensajes',
+		'menu' => $menu,
                 'messages_send' => $messages_send,
                 'messages_receibe' => $messages_receibe,
                 'form'    => $form->createView(),
@@ -182,14 +192,64 @@ class UserController extends Controller
     }
     
     
-    private function search($user)
+    
+    /**
+     * Search one result.
+     * 
+     * @param type $data Data to find
+     * @param type $entity Entity
+     * @param type $field FindOneBy field
+     * @return type Result
+     */
+    private function search($data, $entity, $field)
     {
-        $em = $this->getDoctrine()->getRepository('TeachingGeneralBundle:Users');
+        // Find entity
+	$em = $this->getDoctrine()->getRepository('TeachingGeneralBundle:' . $entity);
         
-        $result = $em->findOneBy(array('username' => $user));
+	// Find data
+        $result = $em->findOneBy(array($field => $data));
         
-        
+	// Return data
         return $result;
     }
+    
+    
+    
+    /**
+     * Load a dynamic menu
+     * 
+     * @param type $drop This controller not view in menu
+     * @return string Html code to insert in twig
+     */
+    private function loadMenu($drop)
+    {
+	$content = array(
+	    'Matemáticas' => '1', 
+	    'Lengua' => '1', 
+	    'Inglés' => '1', 
+	    'Música' => '1', 
+	    'Gimnasia' => '1', 
+	    'Conocimiento del Medio' => '2', 
+	    'Mensajes' => '1', 
+	    'Configuración' => '1', 
+	    'Ayuda' => '1'
+	);
+	
+	unset($content[$drop]);
+	
+	//$menu = '<div class="col-sm-offset-1 col-md-offset-1 col-lg-offset-1">k</div>';
+	
+	$menu = '';
+	
+	foreach($content as $element => $value){
+	    
+	    $menu .= '<div class="col-sm-'.$value.' col-md-'.$value.' col-lg-'.$value.'"><center>'.$element.'</center></div>';
+	    
+	}
+	
+	return $menu;
+	
+    }
+    
     
 }
