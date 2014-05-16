@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<<<<<<< OURS
+>>>>>>> origin/master
 ﻿8=======================================================================================8
 8                                                                                       8
 8       Workbook de Emilio Crespo Perán y Francisco Javier González Navarro.            8
