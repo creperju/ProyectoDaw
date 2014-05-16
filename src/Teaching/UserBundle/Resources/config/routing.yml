@@ -2,6 +2,46 @@ teaching_user_homepage:
     pattern:  /usuario/
     defaults: { _controller: TeachingUserBundle:User:index }
    
+   
+   
+teaching_user_maths:
+    pattern:  /usuario/matematicas/
+    defaults: { _controller: TeachingUserBundle:User:maths }
+
+teaching_user_spanish:
+    pattern:  /usuario/lengua/
+    defaults: { _controller: TeachingUserBundle:User:spanish }
+   
+teaching_user_english:
+    pattern:  /usuario/ingles/
+    defaults: { _controller: TeachingUserBundle:User:english }
+   
+   
+   
+teaching_user_music:
+    pattern:  /usuario/musica/
+    defaults: { _controller: TeachingUserBundle:User:music }
+   
+teaching_user_gymnastics:
+    pattern:  /usuario/gimnasia/
+    defaults: { _controller: TeachingUserBundle:User:gymnastics }
+   
+teaching_user_nature:
+    pattern:  /usuario/conocimientodelmedio/
+    defaults: { _controller: TeachingUserBundle:User:nature }
+   
+   
+   
 teaching_user_messages:
     pattern:  /usuario/mensajes/
     defaults: { _controller: TeachingUserBundle:User:messages }
+
+teaching_user_config:
+    pattern:  /usuario/configuracion/
+    defaults: { _controller: TeachingUserBundle:User:config }
+
+teaching_user_help:
+    pattern:  /usuario/ayuda/
+    defaults: { _controller: TeachingUserBundle:User:help }
+
+
