@@ -286,6 +286,13 @@ class UserController extends Controller
      public function mathsAction()
     {
         
+	 $em = $this->getDoctrine()->getManager();
+	 $query = $em->createQuery( "SELECT u FROM Teaching\GeneralBundle\Entity\Users u JOIN");
+	 $result = $query->getResult();
+	 print_r($result[0]->getName());
+	 exit(0);
+	 
+	 
         $student = $this->loadStudents();
         
         if(count($student))
