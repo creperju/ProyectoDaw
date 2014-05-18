@@ -51,21 +51,21 @@ class ActivitiesStudents
     /**
      * @var integer
      *
-     * @ORM\Column(name="score", type="integer")
+     * @ORM\Column(name="score", type="integer", nullable=true)
      */
     private $score;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="file", type="string", length=255, nullable=true)
+     * @ORM\Column(name="state", type="string", length=9, nullable=true)
      */
-    private $file;
+    private $state;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="observations", type="string", length=255)
+     * @ORM\Column(name="observations", type="string", length=255, nullable=true)
      */
     private $observations;
 
@@ -124,29 +124,6 @@ class ActivitiesStudents
     public function getScore()
     {
         return $this->score;
-    }
-
-    /**
-     * Set file
-     *
-     * @param string $file
-     * @return ActivitiesStudents
-     */
-    public function setFile($file)
-    {
-        $this->file = $file;
-    
-        return $this;
-    }
-
-    /**
-     * Get file
-     *
-     * @return string 
-     */
-    public function getFile()
-    {
-        return $this->file;
     }
 
     /**
@@ -216,5 +193,28 @@ class ActivitiesStudents
     public function getStudent()
     {
         return $this->student;
+    }
+
+    /**
+     * Set state
+     *
+     * @param string $state
+     * @return ActivitiesStudents
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+    
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return string 
+     */
+    public function getState()
+    {
+        return $this->state;
     }
 }

@@ -1,0 +1,76 @@
+{% extends "TeachingGeneralBundle:Login:template_with_actions.html.twig" %}
+
+
+{% block menu %}
+    
+    {{ menu |raw }}
+    
+{% endblock %}
+
+{% block actions %}
+    
+    <p>Actividades</p>
+    <p>Entregadas</p>
+    <p>No entregadas</p>
+    
+{% endblock %}
+
+{% block result %}
+
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-1
+                    col-md-9 col-md-offset-1
+                    col-lg-9 col-lg-offset-1">
+
+            
+            <div class="row show-grid">
+                <div class="col-sm-12 col-md-12 col-lg-12">Actividades</div>
+            </div>
+
+            
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    
+                    {% if activities | length > 0 %}
+                        {% for activity in activities %}
+                            {% for list in activity %}
+                                {% for a in list %}
+                                <div class="col-sm-3
+                                            col-md-3
+                                            col-lg-3">
+                                    {{ a.activity }}
+                                </div>
+                                <div class="col-sm-3
+                                            col-md-3
+                                            col-lg-3">
+                                    {{ a.score }}
+                                </div>
+                                <div class="col-sm-3
+                                            col-md-3
+                                            col-lg-3">
+                                    {{ a.dateStart | date('d-m-Y, H:m') }}
+                                </div>
+                                <div class="col-sm-3
+                                            col-md-3
+                                            col-lg-3">
+                                    {{ a.dateEnd | date('d-m-Y, H:m') }}
+                                </div>
+                                {% endfor %}
+                            {% endfor %}
+                        {% endfor %}
+                    {% else %}
+                        <p>No hay actividades para esta asignatura.</p>
+                    {% endif %}
+                    
+                </div>
+            </div>
+
+                    
+                    
+                    
+                    
+        </div>
+    </div>
+                       
+{% endblock %}
+

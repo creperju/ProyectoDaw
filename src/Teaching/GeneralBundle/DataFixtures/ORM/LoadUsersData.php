@@ -530,16 +530,16 @@ class LoadUsersData extends Controller implements FixtureInterface
                             'students' => array(
                                 '0' => array(
                                     'student'       => '55578963A',
-                                    'file'          => null,
-                                    'score'         => 6,
-                                    'observations'  => 'Entregado',
+                                    'state'         => null,
+                                    'score'         => null,
+                                    'observations'  => 'No Entregado',
                                     'date'          => new \Datetime()
                                 ),
                                 '1' => array(
                                     'student'       => '50281490K',
-                                    'file'          => 'Hoja de ejercicios.',
+                                    'state'         => 'Entregado.',
                                     'score'         => 8,
-                                    'observations'  => 'Entregado',
+                                    'observations'  => 'Entregado correctamente',
                                     'date'          => new \Datetime()
                                 ),
                             ),
@@ -557,7 +557,7 @@ class LoadUsersData extends Controller implements FixtureInterface
                 foreach($group as $subjects => $subject){
                     
                     foreach($subject as $activities => $activity){
-//                        print_r($activity); echo "    ";
+;
                         $activity_name = $activity['name'];
                         $activity_type = $activity['type'];
                         $activity_description = $activity['description'];
@@ -570,7 +570,7 @@ class LoadUsersData extends Controller implements FixtureInterface
                             $class->setActivity($this->searchActivity($activity_name, $activity_type, $activity_description, $courses, $groups, $subjects)); 
                             $class->setStudent($this->search($student['student'], 'Students', 'dni'));
                             $class->setDate($student['date']);
-                            $class->setFile($student['file']);
+                            $class->setState($student['state']);
                             $class->setScore($student['score']);
                             $class->setObservations($student['observations']);
                             

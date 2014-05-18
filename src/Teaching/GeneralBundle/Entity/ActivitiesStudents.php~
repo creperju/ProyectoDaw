@@ -9,7 +9,13 @@ use Teaching\GeneralBundle\Entity\Students;
 /**
  * ActivitiesStudents
  *
- * @ORM\Table(name="activities_students")
+ * @ORM\Table(  name="activities_students",
+ *              uniqueConstraints=
+ *                  {@ORM\UniqueConstraint(
+ *                      name="as_idx", 
+ *                      columns={"activity_id", "student_id"}
+ *                  )}
+ * )
  * @ORM\Entity
  */
 class ActivitiesStudents
@@ -38,28 +44,28 @@ class ActivitiesStudents
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="date", type="datetime", nullable=true)
      */
     private $date;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="score", type="integer")
+     * @ORM\Column(name="score", type="integer", nullable=true)
      */
     private $score;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="file", type="string", length=255)
+     * @ORM\Column(name="state", type="string", length=9, nullable=true)
      */
-    private $file;
+    private $state;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="observations", type="string", length=255)
+     * @ORM\Column(name="observations", type="string", length=255, nullable=true)
      */
     private $observations;
 
