@@ -1,7 +1,9 @@
 
 Tema:   LOGIN DE USUARIOS EN SYMFONY2
+
 Problema:
     Inicio de sesión con usuarios en firewall de Symfony.
+
 Solución:
     El problema se solucionó cambiando el tamaño del campo de la contraseña,
     ya que al codificarla, ocuparía más tamaño del que podía almacenarse y
@@ -12,9 +14,12 @@ Solución:
     ocupa la contraseña codificada con sha512.
     
 
+
 Tema:   CIERRE DE SESIÓN DE USUARIOS
+
 Problema:
     Genera error al cerrar la sesión de un usuario.
+
 Solución:
     Añadir parámetro a logout, tal que quedaría así:
     logout: 
@@ -25,9 +30,12 @@ Solución:
     http://ferdinandfly.blogspot.com.es/2013/06/symfony2-php-warning.html
 
 
+
 Tema:   RELACIÓN MANY TO ONE
+
 Problema:
-    No genera bien la relación de Messages a Users
+    No genera bien la relación de Messages a Users.
+
 Solución:
     La relación entre estas dos tablas es ManyToOne, únicamente está presente
     en la entidad Messages, concretamente en dos campos: 'from_user' y 'to_user'.
@@ -39,9 +47,12 @@ Solución:
     id del objeto Users.
 
 
+
 Tema:   UNIQUE
+
 Problema:
-    Cómo hacer dos o más campos como unique a la vez
+    Cómo hacer dos o más campos como unique a la vez.
+
 Solución:
     En la anotación @Table, hay un atributo llamado uniqueConstraints, en el que
     su valor contiene @UniqueConstraint(), y a su vez, contiene los atributos
@@ -49,6 +60,7 @@ Solución:
     un atributo columns para tener más campos como unique. En el ejemplo se
     muestra una entidad real que tiene como unique varios campos, y que además
     tiene otros dos campos como unique.
+
 Ejemplo:
     @ORM\Table(
  	name="courses_groups_subjects", 
@@ -62,3 +74,61 @@ Ejemplo:
 
 
 
+Tema:   SENTENCIAS DQL (SQL CON DOCTRINE)
+
+Problema:
+    Error en hacer la consulta DQL con doctrine.
+
+Solución:
+    Como práctica, lo primero realizar bien el JOIN en SQL, luego exportarlo a
+    DQL y aquí modificar unos ligeros ajustes para que funcione bien. Estos
+    ajustes son:
+        - Nombre de las tablas por las rutas de las entidades
+            (TeachingGeneralBundle:Users)
+        - Al hacer el JOIN, cambiar la preposición 'on' por 'with'
+        - Únicamente poner JOIN en vez de RIGHT JOIN, INNER JOIN o LEFT JOIN.
+        - Los campos a consultar, SON LAS VARIABLES DE LAS ENTIDADES.
+    Todo este ejemplo, se encuentra en el método getActivitiesStudentsToHave
+    en Teaching\GeneralBundle\Controller\UserController.php
+
+Ejemplo:
+    SQL:
+        select
+     	     ac.activity_name
+     	    ,s.name
+     	    ,acs.state
+	from users u 
+	    right join affilations af on u.id = af.user_id
+	    right join students s on af.student_id = s.id
+	    right join activities_students acs on s.id = acs.student_id
+	    right join activities ac on acs.activity_id = ac.id
+	    right join groups_subjects gs on ac.groupSubject_id = gs.id
+	    right join subjects sub on gs.subject_id = sub.id
+	where s.id = 1
+	;
+
+    DQL (las variables corresponden a las rutas de las entidades y parámetros):
+        $em = $this->getDoctrine()->getManager();
+	
+	$query = $em->createQuery("
+		SELECT 
+		      ac.activityName
+		    , s.name
+		    , acs.state
+		FROM $users u
+		    JOIN $affilations af with u.id = af.user
+		    JOIN $students s with af.student = s.id
+		    JOIN $activities_students acs with s.id = acs.student
+		    JOIN $activities ac with acs.activity = ac.id
+		    JOIN $groups_subjects gs with ac.groupSubject = gs.id
+		    JOIN $subjects  sub with gs.subject = sub.id
+		WHERE s.id = $student_id and sub.id = $subject_id and acs.state is null
+		 
+	");
+
+        return $query->getResult();
+
+    Una vez recuperado el objeto, viene en forma de array, tal que haremos:
+        $user[0]->getName()
+    Recupera del primer usuario, su nombre.
+        

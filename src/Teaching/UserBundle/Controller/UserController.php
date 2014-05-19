@@ -210,8 +210,8 @@ class UserController extends Controller
                     // Grabo el mensaje
                     $message = new Messages();
 
-                    $message->setFromUser($this->search($user->getUsername()));
-                    $message->setToUser($this->search($data['Para']));
+                    $message->setFromUser($this->search($user->getUsername(), 'Users', 'username'));
+                    $message->setToUser($this->search($data['Para'], 'Users', 'username'));
                     $message->setSubject($data['Asunto']);
                     $message->setMessage($data['Mensaje']);
                     $message->setDate(new \Datetime());
@@ -274,26 +274,34 @@ class UserController extends Controller
     
     
     
-    
-    
-    
-    
-    
-    
+    /**
+     * 
+     * SENTENCIA SQL PARA MIRAR SI UN ALUMNO HA HECHO LAS TAREAS!!
+     * 
+     *	select
+     *	     ac.activity_name
+     *	    ,s.name
+     *	    ,acs.state
+	from users u 
+	    right join affilations af on u.id = af.user_id
+	    right join students s on af.student_id = s.id
+	    right join activities_students acs on s.id = acs.student_id
+	    right join activities ac on acs.activity_id = ac.id
+	    right join groups_subjects gs on ac.groupSubject_id = gs.id
+	    right join subjects sub on gs.subject_id = sub.id
+	where s.id = 1
+	;
+     * 
+     * 
+     * 
+     */
     
     
     
      public function mathsAction()
     {
         
-	 $em = $this->getDoctrine()->getManager();
-	 $query = $em->createQuery( "SELECT u FROM Teaching\GeneralBundle\Entity\Users u JOIN");
-	 $result = $query->getResult();
-	 print_r($result[0]->getName());
-	 exit(0);
-	 
-	 
-        $student = $this->loadStudents();
+        $student = $this->findStudents();
         
         if(count($student))
             return $this->actionSubjects($student, 'Matemáticas');
@@ -316,16 +324,42 @@ class UserController extends Controller
      * 
      * @return type Return students of user
      */
-    private function loadStudents()
+    private function findStudents()
     {
         // Get current user
         $user = $this->getUser()->getId();
         
-        // Get students
-        $students = $this->search($user, 'Affilations', 'user', true);
+	
+	$users = "TeachingGeneralBundle:Users";
+	$affilations = "TeachingGeneralBundle:Affilations";
+	$students = "TeachingGeneralBundle:Students";
+	
+	
+	$em = $this->getDoctrine()->getManager();
+	
+	
+	// Query 
+	$query = $em->createQuery("
+		SELECT s		      
+		FROM $users u
+		    JOIN $affilations af with u.id = af.user
+		    JOIN $students s with af.student = s.id
+		WHERE u.id = $user
+	");
+	
+	
+	
+	
+//        // Get students
+//        $students = $this->search($user, 'Affilations', 'user', true);
+//        
+//	echo "<pre>";print_r($students);echo "</pre>";exit(0);
+//	
+//        return $students;
         
-        return $students;
-        
+	
+	return $query->getResult();
+	
     }
 
 
@@ -337,39 +371,23 @@ class UserController extends Controller
 
     private function actionSubjects($students, $subject)
     {
+	
+	$student_id = $students[0]->getId();
+	$subject_id = $this->search('Matemáticas', 'Subjects', "name")->getId();
+	
         
-        for($i = 0; $i < count($students); $i++){
-            
-            // Get student ID
-            $student_id = $students[$i]->getStudent();
-            
-            $enrollment = $this->search($student_id, 'Enrollments', 'student');
-            
-            $group_id = $enrollment->getGroup();
-            $subject_id = $this->search($subject, 'Subjects', 'name');
-            
-            $group_subject = $this->findGroupsSubjects($group_id, $subject_id);
-            
-            
-            // Show activities
-            $activities = $this->loadActivities($group_subject->getId());
-            
-            $activities_send[] = $this->loadActivitiesSend($student_id, $activities);
-            
-        }
+        $activities = $this->getActivitiesStudentsToHave($student_id, $subject_id);
+	
+	print_r($activities);exit(0);
         
         $menu = $this->loadMenu($subject);
-        
-//        foreach($activities_send as $activity => $id)
-//            echo "<pre>";print_r($id->getActivity());echo "</pre>";
-//        exit(0);
         
         return $this->render(
             'TeachingUserBundle::subjects.html.twig',
             array(
                 'controller' => $subject,
 		'menu' => $menu,
-                'activities' => $activities_send
+                'activities' => $activities
             )
         );
         
@@ -411,6 +429,62 @@ class UserController extends Controller
 	// Return data
         return $result;
     }
+    
+    
+    
+    
+    /**
+     * Load view from students and activities that they have to do.
+     * 
+     * @param type $student_id Student id
+     * @param type $subject_id Subject id
+     * @return type Query
+     */
+    private function getActivitiesStudentsToHave($student_id, $subject_id)
+    {
+	// Entities required
+	$users = "TeachingGeneralBundle:Users";
+	$affilations = "TeachingGeneralBundle:Affilations";
+	$students = "TeachingGeneralBundle:Students";
+	$activities_students = "TeachingGeneralBundle:ActivitiesStudents";
+	$activities = "TeachingGeneralBundle:Activities";
+	$groups_subjects = "TeachingGeneralBundle:GroupsSubjects";
+	$subjects = "TeachingGeneralBundle:Subjects";
+	
+	
+	$em = $this->getDoctrine()->getManager();
+	
+	
+	// Query 
+	$query = $em->createQuery("
+		SELECT 
+		      ac.activityName
+		    , ac.type
+		    , ac.dateStart
+		    , ac.dateEnd
+		    , s.name
+		    , acs.state
+		FROM $users u
+		    JOIN $affilations af with u.id = af.user
+		    JOIN $students s with af.student = s.id
+		    JOIN $activities_students acs with s.id = acs.student
+		    JOIN $activities ac with acs.activity = ac.id
+		    JOIN $groups_subjects gs with ac.groupSubject = gs.id
+		    JOIN $subjects  sub with gs.subject = sub.id
+		WHERE s.id = $student_id and sub.id = $subject_id and acs.state is null
+		 
+	");
+	
+	
+//	$result = $query->getResult();
+//	print_r($result[0]);
+//	exit(0);
+	
+	
+	return $query->getResult();
+	
+    }
+    
     
     
     
