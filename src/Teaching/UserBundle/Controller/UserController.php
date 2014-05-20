@@ -65,36 +65,54 @@ class UserController extends Controller
 		'background' => 'green',
 		'dimension' => '4',
 		'link' => 'conocimientodelmedio'
-	    ),
-	    '6' => array(
-		'name' => 'Mensajes',
-		'color' => 'white',
-		'background' => 'blue',
-		'dimension' => '3',
-		'link' => 'mensajes'
-	    ),
-	    '7' => array(
-		'name' => 'Configuración',
-		'color' => 'white',
-		'background' => 'gray',
-		'dimension' => '3',
-		'link' => 'configuracion'
-	    ),
-	    '8' => array(
-		'name' => 'Ayuda',
-		'color' => 'black',
-		'background' => 'white',
-		'dimension' => '6',
-		'link' => 'ayuda'
-	    ),
-	);
+	    )
+        );
+          
+        
+        $message = array(
+            '0' => array(
+                'name' => 'Mensajes',
+                'color' => 'white',
+                'background' => 'blue',
+                'dimension' => '3',
+                'link' => 'mensajes',
+                'intro_s' => '2',
+                'intro_m' => 'Aquí podrás ver, enviar o recibir mensajes.',
+                'intro_p' => 'right'
+            )
+        );
+	    
+        $config = array(
+            '0' => array(
+                'name' => 'Configuración',
+                'color' => 'white',
+                'background' => 'gray',
+                'dimension' => '3',
+                'link' => 'configuracion',
+                'intro_s' => '3',
+                'intro_m' => 'Aquí podrás cambiar tu contraseña o tu correo.',
+                'intro_p' => 'left'
+            )
+        );
+	    
+//	    ),
+//	    '8' => array(
+//		'name' => 'Ayuda',
+//		'color' => 'black',
+//		'background' => 'white',
+//		'dimension' => '6',
+//		'link' => 'ayuda'
+//	    ),
+//	);
 	
 	
 	
         return $this->render(
             'TeachingGeneralBundle:Login:menu.html.twig',
             array(
-		'menu' => $menu
+		'subjects' => $menu,
+                'message' => $message,
+                'config' => $config
             )
         );
         

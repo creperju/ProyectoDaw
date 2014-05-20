@@ -4,18 +4,68 @@
 
 {% block content %}
     <div class="container">
+        <!-- Div subjects in menu -->
+        <div class="row show-grid" data-step="1" data-intro="Asignaturas" data-position="bottom">
+            
+            {% for s in subjects %}
+                
+                <a href="{{ path('teaching_user_homepage') }}{{ s.link }}/">
+                    <div class="col-md-{{ s.dimension }} col-sm-{{ s.dimension }} col-lg-{{ s.dimension }}" 
+                         style="color: {{ s.color }}; background-color: {{ s.background }};">
+                        {{ s.name }}
+                    </div>
+                </a>
+                
+            {% endfor %}
+            
+        </div>
+        
+        <!-- Div messages, configuration and help -->
         <div class="row show-grid">
             
-            {% for m in menu %}
+            
+            {# Div message #}
+            {% for m in message %}
                 
                 <a href="{{ path('teaching_user_homepage') }}{{ m.link }}/">
                     <div class="col-md-{{ m.dimension }} col-sm-{{ m.dimension }} col-lg-{{ m.dimension }}" 
-                         style="color: {{ m.color }}; background-color: {{ m.background }};">
+                         style="color: {{ m.color }}; background-color: {{ m.background }};"
+                         data-step="{{ m.intro_s}}" data-intro="{{ m.intro_m }}" data-position="{{ m.intro_p }}">
                         {{ m.name }}
                     </div>
                 </a>
                 
             {% endfor %}
+            
+                
+                
+                
+            {# Div configuration #}
+                
+            {% for c in config %}
+                
+                <a href="{{ path('teaching_user_homepage') }}{{ c.link }}/">
+                    <div class="col-md-{{ c.dimension }} col-sm-{{ c.dimension }} col-lg-{{ c.dimension }}" 
+                         style="color: {{ c.color }}; background-color: {{ c.background }};"
+                         data-step="{{ c.intro_s }}" data-intro="{{ c.intro_m }}" data-position="{{ c.intro_p }}">
+                        {{ c.name }}
+                    </div>
+                </a>
+                
+            {% endfor %}
+                
+            
+            {# Div help #}
+            
+            <a href="javascript:void(0);"> 
+                <div class="col-md-6 col-sm-6 col-lg-6" 
+                    style="color: 'black'; background-color: 'white';"
+                    onclick='javascript:introJs().start().setOption("skipLabel", "Salir");'>
+                   Ayuda
+               </div>
+            </a>
+            
+            
             
         </div>
     </div>
