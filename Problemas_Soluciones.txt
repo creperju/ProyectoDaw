@@ -1,4 +1,16 @@
 
+Tema:   VER ENTORNO DE PRODUCCIÓN
+
+Solución:
+    Para ver el entorno de producción, es decir, la vista que ven los usuarios,
+    hay que retocar un fichero, concretamente en la ruta:
+        <Proyecto>/web/app.php
+    Se modifica la línea:
+        $kernel = new AppKernel('prod', false);
+    Sólo hay que cambiar de false a true y listo.
+
+
+
 Tema:   LOGIN DE USUARIOS EN SYMFONY2
 
 Problema:

@@ -9,10 +9,13 @@
 ||   DATE     ||    DESCRIPTION                                                        ||
 ++============++=======================================================================++
 || 20/03/2014 || Propuesta de modelo E/R con Jesús en clase.                           ||
+||            ||                                                                       ||
 ++------------++-----------------------------------------------------------------------++
 || 26/03/2014 || Construcción del proyecto con Symfony2.                               ||
+||            ||                                                                       ||
 ++------------++-----------------------------------------------------------------------++
 || 28/03/2014 || Creación de bundle AdministratorBundle para el rol Administradores.   ||
+||            ||                                                                       ||
 ++------------++-----------------------------------------------------------------------++
 || 03/04/2014 || Charla de grupo: modelado de tablas mysql y aprobada la propuesta de  ||
 ||            || creación de código programático de la aplicación en primer lugar, y   ||
@@ -20,15 +23,19 @@
 ||            ||                                                                       ||
 ||            || También se ha aprobado el crear un bundle central, con los            ||
 ||            || formularios, plantillas y entidades para tenerlo todo más organizado. ||
+||            ||                                                                       ||
 ++------------++-----------------------------------------------------------------------++
 || 04/04/2014 || Creación de formularios con Symfony con login sencillo y password.    ||
+||            ||                                                                       ||
 ++------------++-----------------------------------------------------------------------++
 || 05/04/2014 || Formularios con conexión a Mysql.                                     ||
+||            ||                                                                       ||
 ++------------++-----------------------------------------------------------------------++
 || 07/04/2014 || Reescritura del Anteproyecto_v2.doc junto con el nuevo modelo de      ||
 ||            || tablas y descripción del proyecto, con algunos aspectos mejorados.    ||
 ||            ||                                                                       ||
 ||            || Falta la implementación en el proyecto de cardinalidad.               ||
+||            ||                                                                       ||
 ++------------++-----------------------------------------------------------------------++
 || 10/04/2014 || Reunión de grupo (remodelación de modelo E/R):                        ||
 ||            || Acordada la cantidad de grupos por curso(dos grupos, A y B).          ||
@@ -55,8 +62,10 @@
 ||            ||    - www.aplicacion.com/               =>  Para anónimo               ||
 ||            || El usuario anónimo sólo verá el inicio de la aplicación y el          ||
 ||            || formulario de acceso a la aplicación, que se controlará por patrones. ||
+||            ||                                                                       ||
 ++------------++-----------------------------------------------------------------------++
 || 16/04/2014 || Prácticas sobre la interfaz gráfica de lo que verá el administrador.  ||
+||            ||                                                                       ||
 ++------------++-----------------------------------------------------------------------++
 || 22/04/2014 || Rutas definidas para la aplicación:                                   ||
 ||            ||                                                                       ||
@@ -104,12 +113,15 @@
 ||            || alumnos cada año, estos alumnos ya quedaran matriculados en ese curso ||
 ||            || y grupo hasta el final del año o hasta que se les de de baja por      ||
 ||            || otro motivo.                                                          ||
+||            ||                                                                       ||
 ++------------++-----------------------------------------------------------------------++
 || 02/05/2014 || Realizado correctamente el logueo, registro de usuarios en el         ||
 ||            || firewall y su correspondiente redirección según el tipo de usuario.   ||
+||            ||                                                                       |1
 ++------------++-----------------------------------------------------------------------++      
 || 07/05/2014 || Realizado el mapeo de la entidad Messages y las asociaciones a la     ||
 ||            || entidad Users.                                                        ||
+||            ||                                                                       ||
 ++------------++-----------------------------------------------------------------------++
 || 08/05/2014 || Añadidas entidades Students, Affilations y sus respectivas            ||
 ||            || relaciones.                                                           ||
@@ -117,12 +129,15 @@
 ++------------++-----------------------------------------------------------------------++
 || 10/05/2014 || Añadidas entidades Courses, Groups, Enrollments con sus datos de      ||
 ||            || prueba.                                                               ||
+||            ||                                                                       ||
 ++------------++-----------------------------------------------------------------------++
 || 11/05/2014 || Añadidas entidades Subjects, CourseGroupsSubjects, Activities con     ||
 ||            || datos de prueba salvo de Activities.                                  ||
+||            ||                                                                       ||
 ++------------++-----------------------------------------------------------------------++
 || 12/05/2014 || Entidad CourseGroupsSubjects modificada con unique en varios campos   ||
 ||            || a la vez.                                                             ||
+||            ||                                                                       ||
 ++------------++-----------------------------------------------------------------------++
 || 14/05/2014 || Creacion de ramas, fran y emilio. Práctica.  			       ||
 ||            ||                                                                       ||
@@ -130,23 +145,20 @@
 || 15/05/2014 || Creacion de todas las entidades con ejemplos en fixtures.             ||
 ||            ||                                                                       ||
 ++------------++-----------------------------------------------------------------------++
-
-Recomendaciones próxima reunión:
-    Indexar de la tabla Usuarios, el login para una mayor respuesta de la aplicación.
-    Para ver la aplicación en entorno de produción (como la ven los usuarios), ir a web/app.php y 
-        $kernel = new AppKernel('prod', true); que estaba en false.
-    
-    Modelo de las páginas de la aplicación:
-        admin/mensajes  -> mensajes que manda
-        admin/          -> inicio de la aplicación
-        admin/alta      -> da de alta a usuarios (por ejemplo)
-        
-
-Página de lectura de ayuda con formularios, firewalls y session:
-    http://www.maestrosdelweb.com/editorial/curso-symfony2-seguridad-de-acceso/
-
-
-
+|| 18/05/2014 || Creación de la primera sentencia DQL sin JOIN para ver datos del      ||
+||            || usuario.                                                              ||
+||            ||                                                                       ||
+++------------++-----------------------------------------------------------------------++
+|| 19/05/2014 || Creación de una consulta SQL con JOIN y exportada a DQL con éxito.    ||
+||            ||                                                                       ||
+++------------++-----------------------------------------------------------------------++
+|| 20/05/2014 || Añadido IntroJS al item Ayuda del menú principal del usuario.         ||
+||            ||                                                                       ||
+++------------++-----------------------------------------------------------------------++
+|| 21/05/2014 || Generada todas las acciones de las asignaturas, tales como mirar      ||
+||            || todas las tareas, las tareas hechas, las tareas que le faltan... Etc. ||
+||            ||                                                                       ||
+++------------++-----------------------------------------------------------------------++
 
 
 
