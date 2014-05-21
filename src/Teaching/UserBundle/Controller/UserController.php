@@ -121,7 +121,8 @@ class UserController extends Controller
     
     public function spanishAction()
     {
-        $student = $this->loadStudents();
+       
+        $student = $this->findStudents();
         
         if(count($student))
             return $this->actionSubjects($student, 'Lengua');
@@ -133,10 +134,14 @@ class UserController extends Controller
                     'message' => 'No tiene asignado ningún alumno, contacte con el administrador.'
                 )
             );
+        
+        
     }
+    
     public function englishAction()
     {
-        $student = $this->loadStudents();
+        
+        $student = $this->findStudents();
         
         if(count($student))
             return $this->actionSubjects($student, 'Inglés');
@@ -148,10 +153,15 @@ class UserController extends Controller
                     'message' => 'No tiene asignado ningún alumno, contacte con el administrador.'
                 )
             );
+        
+        
     }
+    
     public function musicAction()
     {
-        $student = $this->loadStudents();
+        
+        
+        $student = $this->findStudents();
         
         if(count($student))
             return $this->actionSubjects($student, 'Música');
@@ -163,10 +173,14 @@ class UserController extends Controller
                     'message' => 'No tiene asignado ningún alumno, contacte con el administrador.'
                 )
             );
+        
+        
     }
+    
     public function gymnasticsAction()
     {
-        $student = $this->loadStudents();
+        
+        $student = $this->findStudents();
         
         if(count($student))
             return $this->actionSubjects($student, 'Gimnasia');
@@ -178,10 +192,13 @@ class UserController extends Controller
                     'message' => 'No tiene asignado ningún alumno, contacte con el administrador.'
                 )
             );
+        
+        
     }
+    
     public function natureAction()
     {
-        $student = $this->loadStudents();
+        $student = $this->findStudents();
         
         if(count($student))
             return $this->actionSubjects($student, 'Conocimiento del Medio');
@@ -259,13 +276,13 @@ class UserController extends Controller
         $messages_send = $em->findBy(array('fromUser' => $user->getId()));
         $messages_receibe = $em->findBy(array('toUser' => $user->getId()));
 	
-	$menu = $this->loadMenu('Mensajes');
+	//$menu = $this->loadMenu('Mensajes');
         
         return $this->render(
             'TeachingUserBundle::messages.html.twig',
             array(
                 'controller' => 'Mensajes',
-		'menu' => $menu,
+		//'menu' => $menu,
                 'messages_send' => $messages_send,
                 'messages_receibe' => $messages_receibe,
                 'form'    => $form->createView(),
@@ -277,7 +294,6 @@ class UserController extends Controller
     
     
     private function configAction(){}
-    private function helpAction(){}
     
     
     
@@ -391,21 +407,35 @@ class UserController extends Controller
     {
 	
 	$student_id = $students[0]->getId();
-	$subject_id = $this->search('Matemáticas', 'Subjects', "name")->getId();
+	$subject_id = $this->search($subject, 'Subjects', "name")->getId();
 	
+//        echo "Student id: " . $student_id;
+//        echo "<br/>";
+//        echo "Subject id " . $subject_id;
+//        exit(0);
         
         $activities = $this->getActivitiesStudentsToHave($student_id, $subject_id);
-	
-	print_r($activities);exit(0);
+	$activities_send = $this->getActivitiesStudentsSend($student_id, $subject_id);
+        $activities_pending = $this->getActivitiesStudentsPending($student_id, $subject_id);
         
-        $menu = $this->loadMenu($subject);
+        
+//        echo "<pre>";
+//        if(count($activities))
+//            echo print_r($activities);
+//        else
+//            echo "No hay actividades";
+//        echo "</pre>";exit(0);
+        
+        //$menu = $this->loadMenu($subject);
         
         return $this->render(
             'TeachingUserBundle::subjects.html.twig',
             array(
                 'controller' => $subject,
-		'menu' => $menu,
-                'activities' => $activities
+		//'menu' => $menu,
+                'activities' => $activities,
+                'activities_send' => $activities_send,
+                'activities_pending' => $activities_pending
             )
         );
         
@@ -489,7 +519,7 @@ class UserController extends Controller
 		    JOIN $activities ac with acs.activity = ac.id
 		    JOIN $groups_subjects gs with ac.groupSubject = gs.id
 		    JOIN $subjects  sub with gs.subject = sub.id
-		WHERE s.id = $student_id and sub.id = $subject_id and acs.state is null
+		WHERE s.id = $student_id and sub.id = $subject_id 
 		 
 	");
 	
@@ -503,6 +533,94 @@ class UserController extends Controller
 	
     }
     
+    private function getActivitiesStudentsSend($student_id, $subject_id)
+    {
+        // Entities required
+	$users = "TeachingGeneralBundle:Users";
+	$affilations = "TeachingGeneralBundle:Affilations";
+	$students = "TeachingGeneralBundle:Students";
+	$activities_students = "TeachingGeneralBundle:ActivitiesStudents";
+	$activities = "TeachingGeneralBundle:Activities";
+	$groups_subjects = "TeachingGeneralBundle:GroupsSubjects";
+	$subjects = "TeachingGeneralBundle:Subjects";
+	
+	
+	$em = $this->getDoctrine()->getManager();
+	
+	
+	// Query 
+	$query = $em->createQuery("
+		SELECT 
+		      ac.activityName
+		    , ac.type
+		    , acs.date
+		    , acs.observations
+		FROM $users u
+		    JOIN $affilations af with u.id = af.user
+		    JOIN $students s with af.student = s.id
+		    JOIN $activities_students acs with s.id = acs.student
+		    JOIN $activities ac with acs.activity = ac.id
+		    JOIN $groups_subjects gs with ac.groupSubject = gs.id
+		    JOIN $subjects  sub with gs.subject = sub.id
+		WHERE s.id = $student_id and sub.id = $subject_id and acs.state is not null
+		 
+	");
+	
+	
+//	$result = $query->getResult();
+//	print_r($result[0]);
+//	exit(0);
+	
+	
+	return $query->getResult();
+    }
+    
+    
+    
+    private function getActivitiesStudentsPending($student_id, $subject_id)
+    {
+        
+        // Entities required
+	$users = "TeachingGeneralBundle:Users";
+	$affilations = "TeachingGeneralBundle:Affilations";
+	$students = "TeachingGeneralBundle:Students";
+	$activities_students = "TeachingGeneralBundle:ActivitiesStudents";
+	$activities = "TeachingGeneralBundle:Activities";
+	$groups_subjects = "TeachingGeneralBundle:GroupsSubjects";
+	$subjects = "TeachingGeneralBundle:Subjects";
+	
+	
+	$em = $this->getDoctrine()->getManager();
+	
+	
+	// Query 
+	$query = $em->createQuery("
+		SELECT 
+		      ac.activityName
+		    , ac.type
+		    , ac.description
+		    , ac.dateStart
+                    , ac.dateEnd
+		FROM $users u
+		    JOIN $affilations af with u.id = af.user
+		    JOIN $students s with af.student = s.id
+		    JOIN $activities_students acs with s.id = acs.student
+		    JOIN $activities ac with acs.activity = ac.id
+		    JOIN $groups_subjects gs with ac.groupSubject = gs.id
+		    JOIN $subjects  sub with gs.subject = sub.id
+		WHERE s.id = $student_id and sub.id = $subject_id and acs.state is null
+		 
+	");
+	
+	
+//	$result = $query->getResult();
+//	print_r($result[0]);
+//	exit(0);
+	
+	
+	return $query->getResult();
+        
+    }
     
     
     

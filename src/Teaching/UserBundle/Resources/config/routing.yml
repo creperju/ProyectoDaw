@@ -40,8 +40,5 @@ teaching_user_config:
     pattern:  /usuario/configuracion/
     defaults: { _controller: TeachingUserBundle:User:config }
 
-teaching_user_help:
-    pattern:  /usuario/ayuda/
-    defaults: { _controller: TeachingUserBundle:User:help }
 
 

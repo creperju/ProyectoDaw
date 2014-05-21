@@ -223,6 +223,12 @@ class LoadUsersData extends Controller implements FixtureInterface
                 'student'   => '55578963A',
                 'relation'  => 'Padre',
                 'main'      => true
+            ),
+            '1' => array(
+                'user'      => 'fran',
+                'student'   => '50281490K',
+                'relation'  => 'Padre',
+                'main'      => false
             )
         );
         

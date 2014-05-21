@@ -9,34 +9,68 @@
         
     </head>
     <body>
+        
+        {# Header of application #}
         <div class="container-fluid" style="height: 100px; background-color: gold;">
             <h1>Teaching!</h1>
             <div>{% if app.user is not null %}<a href="{{ path('logout')}}">Cerrar sesión</a>{% endif %}</div>
             <div>{% block breadcrumps %}{% endblock %}<br/>
-            {% if is_granted('ROLE_USER') %}ROLE_USER{% endif %}
-            {% if is_granted('ROLE_ADMIN') %}ROLE_ADMIN{% endif %}
-            {% if is_granted('ROLE_TEACHER') %}ROLE_TEACHER{% endif %}
-                </div>
+                {% if is_granted('ROLE_USER') %}ROLE_USER{% endif %}
+                {% if is_granted('ROLE_ADMIN') %}ROLE_ADMIN{% endif %}
+                {% if is_granted('ROLE_TEACHER') %}ROLE_TEACHER{% endif %}
+            </div>
         </div>
             
+            
+        {# Content of application #}
         {% block content %}
 
         {% endblock %}
         
-        <!-- Bootstrap Css -->
+        
+        
+        {# Footer #}
+        <div class="container-fluid" style="margin-top: 20px; padding: 20px;  background-color: gold;">
+            <div class="row-fluid">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    Proyecto Daw realizado por Emilio Crespo Perán y Francisco Javier González Navarro
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    Last update: 21/05/2014
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <b>Todos los derechos reservados &copy; </b>
+                </div>
+            </div>
+        </div>
+            
+            
+        
+        
+        
+        {# Bootstrap Css #}
         {% block css %}
             <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
             <link href="{{ asset('bootstrap/css/main.css') }}" rel="stylesheet" type="text/css" />
         {% endblock %}
         
-        <!-- JQuery -->
+            
+        {# JQuery #}
         {% block js %}
             <script type="text/javascript" src="{{ asset('bootstrap/js/jquery-1.11.0.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bootstrap/js/functions_js.js') }}"></script>
-            <!-- Intro JS -->
-            <script type="text/javascript" src="{{ asset('introjs/intro.js') }}"></script>
-            <link href="{{ asset('introjs/introjs.css') }}" rel="stylesheet" type="text/css" />
-            <link href="{{ asset('introjs/minified/introjs-rtl.min.css') }}" rel="stylesheet" type="text/css" />
         {% endblock %}
+        
+            
+        {# Intro JS #}
+        <script type="text/javascript" src="{{ asset('introjs/intro.js') }}"></script>
+        <link href="{{ asset('introjs/introjs.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('introjs/minified/introjs-rtl.min.css') }}" rel="stylesheet" type="text/css" />
+        
+        
     </body>
 </html>

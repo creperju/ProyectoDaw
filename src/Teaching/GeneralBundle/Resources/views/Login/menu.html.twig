@@ -4,9 +4,15 @@
 
 {% block content %}
     <div class="container">
-        <!-- Div subjects in menu -->
+        
         <div class="row show-grid" data-step="1" data-intro="Asignaturas" data-position="bottom">
             
+            
+            
+            
+            {##################################}
+            {#         Div's subjects         #}
+            {##################################}
             {% for s in subjects %}
                 
                 <a href="{{ path('teaching_user_homepage') }}{{ s.link }}/">
@@ -18,13 +24,12 @@
                 
             {% endfor %}
             
-        </div>
-        
-        <!-- Div messages, configuration and help -->
-        <div class="row show-grid">
             
             
-            {# Div message #}
+            
+            {###############################}
+            {#         Div message         #}
+            {###############################}
             {% for m in message %}
                 
                 <a href="{{ path('teaching_user_homepage') }}{{ m.link }}/">
@@ -37,11 +42,12 @@
                 
             {% endfor %}
             
-                
-                
-                
-            {# Div configuration #}
-                
+            
+            
+            
+            {#####################################}    
+            {#         Div configuration         #}
+            {#####################################}
             {% for c in config %}
                 
                 <a href="{{ path('teaching_user_homepage') }}{{ c.link }}/">
@@ -55,8 +61,11 @@
             {% endfor %}
                 
             
-            {# Div help #}
             
+            
+            {############################}
+            {#         Div help         #}
+            {############################}
             <a href="javascript:void(0);"> 
                 <div class="col-md-6 col-sm-6 col-lg-6" 
                     style="color: 'black'; background-color: 'white';"
@@ -64,9 +73,9 @@
                    Ayuda
                </div>
             </a>
+                
             
             
-            
-        </div>
+        </div> 
     </div>
 {% endblock %}
