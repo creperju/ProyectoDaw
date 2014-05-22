@@ -1,7 +1,8 @@
-parameters:
-#    teaching_general.example.class: Teaching\GeneralBundle\Example
-
 services:
-#    teaching_general.example:
-#        class: %teaching_general.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    kernel.listener.teaching_general_exception_listener:
+      class: Teaching\GeneralBundle\Listener\ExceptionListener
+      arguments: [@templating, @kernel]
+      tags:
+        - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+
+        

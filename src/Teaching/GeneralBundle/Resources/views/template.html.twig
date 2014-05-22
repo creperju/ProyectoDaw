@@ -15,9 +15,10 @@
             <h1>Teaching!</h1>
             <div>{% if app.user is not null %}<a href="{{ path('logout')}}">Cerrar sesión</a>{% endif %}</div>
             <div>{% block breadcrumps %}{% endblock %}<br/>
-                {% if is_granted('ROLE_USER') %}ROLE_USER{% endif %}
-                {% if is_granted('ROLE_ADMIN') %}ROLE_ADMIN{% endif %}
-                {% if is_granted('ROLE_TEACHER') %}ROLE_TEACHER{% endif %}
+                {# Causa error al generar la página de error 404 si no se pone 'app.user' #}
+                {% if (app.user and is_granted('ROLE_USER')) %}ROLE_USER{% endif %}
+                {% if (app.user and is_granted('ROLE_ADMIN')) %}ROLE_ADMIN{% endif %}
+                {% if (app.user and is_granted('ROLE_TEACHER')) %}ROLE_TEACHER{% endif %}
             </div>
         </div>
             
