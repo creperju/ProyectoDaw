@@ -2,8 +2,38 @@
 
 {% block title %}Bienvenido a Teaching!{% endblock %}
 
+{% block header %}
+
+    <form action="{{ path('login_check') }}" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}" />
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="_password" />
+
+        {# Protection to CSRF attacks #}
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+
+        {# Redirect to account user #}
+        <input type="hidden" name="_target_path" value="/validado" />
+
+        <button type="submit">login</button>
+    </form>
+
+{% endblock %}
+
 
 {% block content %}
+    
+    {# Slider JS #}
+    <div class="container">
+        
+        
+        
+    </div>
+    
+    
+    
     <div class="container">
         {# Div con login de usuarios #}
         <div class="row show-grid">
@@ -34,7 +64,7 @@
         </div>
     
         {# Div con registro de usuarios #}
-        <div class="row show-grid">
+        <div id="registro" class="row show-grid">
             <div class="col-md-12">
                 <h3>Registrate</h3>
                 {{ form_start(form) }}

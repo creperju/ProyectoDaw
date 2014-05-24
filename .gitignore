@@ -4,8 +4,6 @@ app/bootstrap_cache.php.cache
 app/cache/*
 app/logs/*
 vendor/*
-web/css/*
-web/js/*
 web/uploads/*
 
 # -- netbeans -----------------------------------------
