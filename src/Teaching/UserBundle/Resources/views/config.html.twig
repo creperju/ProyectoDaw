@@ -1,0 +1,89 @@
+{% extends "TeachingGeneralBundle:Login:template_with_actions.html.twig" %}
+
+
+
+{% block actions %}
+    
+    <p>Cambiar Nombre</p>
+    <p>Cambiar Apellidos</p>
+    <p>Cambiar Correo electrónico</p>
+    <p>Cambiar Contraseña</p>
+    <p>Borrar Usuario</p>
+    
+{% endblock %}
+
+{% block result %}
+
+    {% for message in  app.session.flashbag.get('message_send') %}
+
+        <div class="row show-grid" id="msg_flash">
+            <div class="col-md-9 col-md-offset-1">
+                {{ message }}
+            </div>
+        </div>
+
+    {% endfor %}
+
+    <div class="row">
+        <div class="col-md-9 col-md-offset-1">
+            <!-- Div contenido de mensajes -->
+
+            
+            <div class="row show-grid">
+                <div class="col-md-12">Mensajes recibidos</div>
+            </div>
+
+            
+            <div class="row">
+                <div class="col-md-12">
+                    
+                    {% if messages_receibe | length > 0 %}
+                        {% for m in messages_receibe %}
+                            <div class="col-md-4">{{ m.fromUser.username }}</div>
+                            <div class="col-md-4">{{ m.subject }}</div>
+                            <div class="col-md-4">{{ m.date | date('d-m-Y, H:m') }}</div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No tienes mensajes.</p>
+                    {% endif %}
+                    
+                </div>
+            </div>
+
+
+            <div class="row show-grid">
+                <div class="col-md-12">Mensajes enviados</div>
+            </div>
+
+                    
+            <div class="row">
+                <div class="col-md-12">
+                    {% if messages_send | length > 0 %}
+                        {% for m in messages_send %}
+                            <div class="col-md-4">{{ m.toUser.username }}</div>
+                            <div class="col-md-4">{{ m.subject }}</div>
+                            <div class="col-md-4">{{ m.date | date('d-m-Y, H:m') }}</div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No tienes mensajes.</p>
+                    {% endif %}
+                </div>
+            </div>
+                
+                
+            <p/>
+            <div class="row show-grid">
+                <div class="col-md-12">Redactar</div>
+            </div>
+
+            
+            <div class="row">
+                <div class="col-md-12">{{ form(form) }}</div>
+            </div>
+
+            
+         </div>
+    </div>
+                       
+{% endblock %}
+
