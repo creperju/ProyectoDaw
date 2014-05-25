@@ -27,43 +27,52 @@ class UserController extends Controller
 	    '0' => array(
 		'name' => 'Matemáticas',
 		'color' => 'white',
-		'background' => 'gold',
+		'background' => '#E6BC2F',
 		'dimension' => '4',
+                'offset' => '0',
 		'link' => 'matematicas'
 	    ),
 	    '1' => array(
 		'name' => 'Lengua',
 		'color' => 'white',
-		'background' => 'blue',
+		'background' => '#1B53BA',
 		'dimension' => '4',
+                'offset' => '1',
 		'link' => 'lengua'
 	    ),
 	    '2' => array(
 		'name' => 'Inglés',
 		'color' => 'white',
-		'background' => 'red',
-		'dimension' => '4',
+		'background' => '#E3350D',
+		'dimension' => '2',
+                'offset' => '1',
 		'link' => 'ingles'
-	    ),
-	    '3' => array(
+	    )
+        );
+            
+        $menu2 = array(
+	    '0' => array(
 		'name' => 'Música',
 		'color' => 'white',
 		'background' => 'purple',
-		'dimension' => '4',
+		'dimension' => '3',
+                'offset' => '0',
 		'link' => 'musica'
 	    ),
-	    '4' => array(
+	    '1' => array(
 		'name' => 'Gimnasia',
 		'color' => 'white',
-		'background' => 'orange',
-		'dimension' => '4',
+		'background' => '#EE6B2F',
+		'dimension' => '3',
+                'offset' => '1',
 		'link' => 'gimnasia'
 	    ),
-	    '5' => array(
+	    '2' => array(
 		'name' => 'Conocimiento del Medio',
 		'color' => 'white',
-		'background' => 'green',
+		'background' => '#4DAD5B',
 		'dimension' => '4',
+                'offset' => '1',
 		'link' => 'conocimientodelmedio'
 	    )
         );
@@ -73,8 +82,9 @@ class UserController extends Controller
             '0' => array(
                 'name' => 'Mensajes',
                 'color' => 'white',
-                'background' => 'blue',
+                'background' => '#30A7D7',
                 'dimension' => '3',
+                'offset' => '0',
                 'link' => 'mensajes',
                 'intro_s' => '2',
                 'intro_m' => 'Aquí podrás ver, enviar o recibir mensajes.',
@@ -88,6 +98,7 @@ class UserController extends Controller
                 'color' => 'white',
                 'background' => 'gray',
                 'dimension' => '3',
+                'offset' => '1',
                 'link' => 'configuracion',
                 'intro_s' => '3',
                 'intro_m' => 'Aquí podrás cambiar tu contraseña o tu correo.',
@@ -95,22 +106,13 @@ class UserController extends Controller
             )
         );
 	    
-//	    ),
-//	    '8' => array(
-//		'name' => 'Ayuda',
-//		'color' => 'black',
-//		'background' => 'white',
-//		'dimension' => '6',
-//		'link' => 'ayuda'
-//	    ),
-//	);
-	
 	
 	
         return $this->render(
             'TeachingGeneralBundle:Login:menu.html.twig',
             array(
 		'subjects' => $menu,
+                'subjects2' => $menu2,
                 'message' => $message,
                 'config' => $config
             )

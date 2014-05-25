@@ -20,3 +20,5 @@ a:hover { text-decoration: none; color: #003bb3; }
 hr{border: solid 2px gainsboro;}
 
 img{ width: 100px; }
+
+#menu { margin: 10px 0px 10px 0px; }
