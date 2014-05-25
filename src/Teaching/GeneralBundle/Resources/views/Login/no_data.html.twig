@@ -1,6 +1,13 @@
 {% extends "TeachingGeneralBundle::template.html.twig" %}
 
-{% block breadcrumps %}{{ controller }}, <a href="{{ path('teaching_user_homepage') }}">Volver</a>{% endblock %}
+{% block header %}
+    
+    <h2>Te encuentras en <b>{{ controller }}</b></h2>, 
+    
+    <a href="{{ path('teaching_user_homepage') }}">
+        Volver</a>
+
+{% endblock %}
 
 {% block content %}
 

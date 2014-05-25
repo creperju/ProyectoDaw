@@ -8,8 +8,15 @@ and open the template in the editor.
     Author     : Emili
 */
 
-body{ background-color: #E7E7E7;}
+body{ background: linear-gradient(#E2E2E2, #E7E7E7, #E2E2E2); font-size: large; }
 
-hr{border: solid 2px #000;}
+a { text-decoration: none; }
+a:hover { text-decoration: none; color: #003bb3; }
 
-img{ max-width: 100%; }
+#header { margin-top: 10px; }
+
+#footer {  margin-bottom: 50px; }
+
+hr{border: solid 2px gainsboro;}
+
+img{ width: 100px; }

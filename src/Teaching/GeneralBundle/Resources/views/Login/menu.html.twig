@@ -1,6 +1,6 @@
 {% extends "TeachingGeneralBundle::template.html.twig" %}
 
-{% block breadcrumps %}Bienvenido {{ app.user.username }}{% endblock %}
+{% block header %}Bienvenido {{ app.user.username }}{% endblock %}
 
 {% block content %}
     <div class="container">
@@ -10,9 +10,7 @@
             
             
             
-            {##################################}
-            {#         Div's subjects         #}
-            {##################################}
+            {# Div subjects #}
             {% for s in subjects %}
                 
                 <a href="{{ path('teaching_user_homepage') }}{{ s.link }}/">
@@ -26,10 +24,7 @@
             
             
             
-            
-            {###############################}
-            {#         Div message         #}
-            {###############################}
+            {# Div message #}
             {% for m in message %}
                 
                 <a href="{{ path('teaching_user_homepage') }}{{ m.link }}/">
@@ -44,10 +39,7 @@
             
             
             
-            
-            {#####################################}    
-            {#         Div configuration         #}
-            {#####################################}
+            {# Div configuration #}
             {% for c in config %}
                 
                 <a href="{{ path('teaching_user_homepage') }}{{ c.link }}/">
@@ -63,9 +55,7 @@
             
             
             
-            {############################}
-            {#         Div help         #}
-            {############################}
+            {# Div ayuda #}
             <a href="javascript:void(0);"> 
                 <div class="col-md-6 col-sm-6 col-lg-6" 
                     style="color: 'black'; background-color: 'white';"

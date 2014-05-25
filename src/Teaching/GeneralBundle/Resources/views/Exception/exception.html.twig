@@ -3,25 +3,43 @@
 
 {% block title %}Página no encontrada{% endblock %}
 
+{% block header %}
+    
+    <h1 style="margin-top: 30px; ">
+        Error {{ exception.statusCode }}
+    </h1>
+    
+{% endblock %}
 
 {% block content %}
 
-    <div style="text-align: center">
-        <br/><br/>
-        <h1>Error {{ exception.statusCode }}</h1>
+    <div class="container" style="border-radius: 5px; text-align: center; background-color: white;">
+        
 
-        <br/><br/><br/>
+        <br/>
 
-        <p style="font-size: 20px;">
-            El recurso al que querías acceder no se encuentra disponible.
+        <p>
             
+            {% if exception.statusCode == 404 %}
+                <h2>No disponible</h2>
+                <br/>
+                El recurso al que querías acceder no existe.
+            {% endif %}
+            {% if exception.statusCode == 403 %}
+                <h2>Acceso prohibido</h2>
+                <br/>
+                No tienes los permisos suficientes para ver esta zona de la aplicación.
+            {% endif %}
             <br/><br/>
-            <p style="font-size: 17px;">
-                Puedes volver a <a href="{{ path('teaching_homepage') }}">Inicio</a>
-                <br/><br/><br/>
-                
+            
+            <p style="font-size: 20px;">
+                <a href="{{ path('teaching_homepage') }}">Volver</a>
             </p>
+            
+            <br/>
         </p>
     </div>
     
 {% endblock %}
+
+

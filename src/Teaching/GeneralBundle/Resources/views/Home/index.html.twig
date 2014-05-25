@@ -4,21 +4,47 @@
 
 {% block header %}
 
-    <form action="{{ path('login_check') }}" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" />
+    {% if app.user is not null %}
+        <div> 
+            Ya se encuentra logueado<br/>
+            <a href="
+                {% if (app.user and is_granted('ROLE_USER')) %}
+                    {{ path('teaching_user_homepage')}}
+                {% endif %}
+                {% if (app.user and is_granted('ROLE_ADMIN')) %}
+                    {{ path('teaching_admin_homepage')}}
+                {% endif %}
+                {% if (app.user and is_granted('ROLE_TEACHER')) %}
+                    {{ path('teaching_teacher_homepage')}}
+                {% endif %}
+            ">Volver</a><br/>
+            <a href="{{ path('logout')}}">
+                Cerrar sesión
+            </a>
+        </div>
+    {% else %}
+        <form action="{{ path('login_check') }}" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" />
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password" />
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="_password" />
 
-        {# Protection to CSRF attacks #}
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+            {# Protection to CSRF attacks #}
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
 
-        {# Redirect to account user #}
-        <input type="hidden" name="_target_path" value="/validado" />
+            {# Redirect to account user #}
+            <input type="hidden" name="_target_path" value="/validado" />
 
-        <button type="submit">login</button>
-    </form>
+            <button type="submit">login</button>
+        </form>
+    {% endif %}
+    
+    
+    
+    
+    
+    
 
 {% endblock %}
 
@@ -36,7 +62,7 @@
     
     <div class="container">
         {# Div con login de usuarios #}
-        <div class="row show-grid">
+        {#<div class="row show-grid">
 
             {% if error %}
                 <div class="col-md-3">
@@ -44,24 +70,7 @@
                 </div>
             {% endif %}
 
-            <div class="col-md-12">
-                <form action="{{ path('login_check') }}" method="post">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="_username" value="{{ last_username }}" />
-
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="_password" />
-
-                    {# Protection to CSRF attacks #}
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
-
-                    {# Redirect to account user #}
-                    <input type="hidden" name="_target_path" value="/validado" />
-
-                    <button type="submit">login</button>
-                </form>
-            </div>
-        </div>
+        </div>#}
     
         {# Div con registro de usuarios #}
         <div id="registro" class="row show-grid">
