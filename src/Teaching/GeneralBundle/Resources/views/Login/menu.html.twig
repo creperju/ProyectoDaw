@@ -1,6 +1,9 @@
 {% extends "TeachingGeneralBundle::template.html.twig" %}
 
-{% block header %}Bienvenido {{ app.user.username }}{% endblock %}
+{% block header %}
+    <h1 style="margin-top: 10px;">Bienvenido a Teaching! {{ app.user.username }}</h1>
+    <a href="{{ path('logout') }}"><h3>Cerrar sesión</h3></a>
+{% endblock %}
 
 {% block content %}
     <div class="container" style="text-align: center;">

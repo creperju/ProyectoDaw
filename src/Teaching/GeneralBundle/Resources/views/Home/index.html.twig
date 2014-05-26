@@ -5,8 +5,9 @@
 {% block header %}
 
     {% if app.user is not null %}
-        <div> 
-            Ya se encuentra logueado<br/>
+        <h3>Logueado como: {{ app.user.username }}</h3>
+         
+            
             <a href="
                 {% if (app.user and is_granted('ROLE_USER')) %}
                     {{ path('teaching_user_homepage')}}

@@ -23,10 +23,10 @@ class AdminController extends Controller
         $url = $this->generateUrl("logout");
         $rol = $user->getRoles();
         
-        // User <> Group <> Course to get Course 
-        $course = $user->getCourseTutor()->getCourse()->getCourse();
-        $letter = $user->getCourseTutor()->getLetter();
-        
+//        // User <> Group <> Course to get Course 
+//        $course = $user->getCourseTutor()->getCourse()->getCourse();
+//        $letter = $user->getCourseTutor()->getLetter();
+//        
         
 //        echo "<pre>";print_r($courses);echo "</pre>";exit(0);
         
@@ -37,7 +37,7 @@ class AdminController extends Controller
                 . "<b>Nombre: </b>".$user->getName()."<br/>"
                 . "<b>Apellidos: </b>".$user->getSurname().""
                 . "<p><a href='".$url."'>SALIR</a>"
-                . "<p>Es tutor de:<br/>Curso: ".$course." Grupo: ".$letter."</p>"
+                
                 . "</body></html>");
 	
         
