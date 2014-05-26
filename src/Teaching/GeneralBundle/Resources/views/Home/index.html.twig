@@ -58,28 +58,96 @@
 {% block content %}
     
     {# Slider JS #}
-    <div class="container">
+    <div class="container" >
+            
         
         
+        {# Slider JS #}
+        <div class="row" id="wowslider-container1"
+             style="width:100%; height:50%;max-width:100%;overflow:hidden;border:solid 2px white;padding:0;margin:0 auto;display:block;" 
+             marginheight="0" 
+             marginwidth="0">
         
-    </div>
-    
-    
-    
-    <div class="container">
-        {# Div con login de usuarios #}
-        {#<div class="row show-grid">
-
-            {% if error %}
-                <div class="col-md-3">
-                    {{ error.message }}
+            
+            {# Tittle #}
+            <div class="ws_bullets">
+                <div>
+                    <a href="#" 
+                       title="Sigue su aprendizaje">
+                        <img src="{{ asset('img/galeria/img/img11.jpg') }}" 
+                             alt="Sigue su aprendizaje"/>
+                        1
+                    </a>
+                    <a href="#" 
+                       title="Consulta asignaturas">
+                        <img src="{{ asset('img/galeria/img/img22.jpg') }}" 
+                             alt="Consulta asignaturas"/>
+                        2
+                    </a>
+                    <a href="#" 
+                       title="Ayuda a tu hijo a estudiar">
+                        <img src="{{ asset('img/galeria/img/img33.jpg') }}" 
+                             alt="Ayuda a tu hijo a estudiar"/>
+                        3
+                    </a>
+                    <a href="#registro" 
+                       title="Registrate">
+                        <img src="{{ asset('img/galeria/img/img44.jpg') }}" 
+                             alt="Registrate"/>
+                        4
+                    </a>
                 </div>
-            {% endif %}
-
-        </div>#}
+            </div>
+                
+                             
+            {# Subtittle #}
+            <div class="ws_images">
+                <ul>
+                    <li>
+                        <img src="{{ asset('img/galeria/img/img11.jpg') }}" 
+                             alt="Sigue su aprendizaje" 
+                             title="Sigue su aprendizaje" 
+                             id="wows1_0"/>
+                        A través de Teaching!
+                    </li>
+                    <li>
+                        <img src="{{ asset('img/galeria/img/img22.jpg') }}" 
+                             alt="Consulta asignaturas" 
+                             title="Consulta asignaturas" 
+                             id="wows1_1"/>
+                        Matemáticas, Lengua, Inglés...
+                    </li>
+                    <li>
+                        <img src="{{ asset('img/galeria/img/img33.jpg') }}" 
+                             alt="Ayuda a tu hijo a estudiar" 
+                             title="Ayuda a tu hijo a estudiar" 
+                             id="wows1_2"/>
+                        Gracias a Teaching!</li>
+                    <li>
+                        <img src="{{ asset('img/galeria/img/img44.jpg') }}" 
+                             alt="Registrate" 
+                             title="Registrate" 
+                             id="wows1_3"/>
+                        ¡Es gratis!
+                    </li>
+                </ul>
+            </div>
+                                 
+            {# Styles Slider JS #}
+            <link rel="stylesheet" type="text/css" href="{{ asset('img/galeria/engine/style.css') }}" />
+            <script type="text/javascript" src="{{ asset('img/galeria/engine/jquery.js') }}"></script>
     
-        {# Div con registro de usuarios #}
-        <div id="registro" class="row show-grid">
+            <script type="text/javascript" src="{{ asset('img/galeria/engine/wowslider.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('img/galeria/engine/script.js') }}"></script>
+        
+        </div>
+        
+            
+            
+            
+            
+        {# Sign in form #}
+        <div id="registro" class="row">
             <div class="col-md-12">
                 <h3>Registrate</h3>
                 {{ form_start(form) }}

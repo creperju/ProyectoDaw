@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 use Teaching\GeneralBundle\Entity\Users;
 use Teaching\GeneralBundle\Form\SignUp;
-use Teaching\GeneralBundle\Controller\UtilitiesController;
 
 class HomeController extends Controller
 {
@@ -77,6 +76,8 @@ class HomeController extends Controller
             $session->remove(SecurityContext::AUTHENTICATION_ERROR);
         }
  
+	
+	
         return $this->render(
             'TeachingGeneralBundle:Home:index.html.twig',
             array(
