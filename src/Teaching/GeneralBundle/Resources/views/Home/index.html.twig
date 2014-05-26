@@ -24,12 +24,17 @@
             </a>
         </div>
     {% else %}
+        <h1>Bienvenido a Teaching!</h1>
         <form action="{{ path('login_check') }}" method="post">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="_username" value="{{ last_username }}" />
+            <label for="username">Usuario:</label>
+            <input style="border-radius: 10px; border-color: blue; text-align: center; background-color: white; color: #b3b3b3;" 
+                   type="text" 
+                   id="username" name="_username" 
+                   value="{% if last_username %}{{ last_username }}{% else %}Usuario{% endif %}" />
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="_password" />
+            <label for="password">Contraseña:</label>
+            <input type="password" 
+                   id="password" name="_password" />
 
             {# Protection to CSRF attacks #}
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
@@ -37,7 +42,7 @@
             {# Redirect to account user #}
             <input type="hidden" name="_target_path" value="/validado" />
 
-            <button type="submit">login</button>
+            <button type="submit">Entrar</button>
         </form>
     {% endif %}
     

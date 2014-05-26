@@ -1,24 +1,74 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 23-may-2014, 21:56:00
-    Author     : Emili
-*/
 
+
+/*****************************/    
+/*      General styles       */
+/*****************************/
+
+/* Body styles */
 body{ background: linear-gradient(#E2E2E2, #E7E7E7, #E2E2E2); font-size: large; }
 
-a { text-decoration: none; }
-a:hover { text-decoration: none; color: #003bb3; }
 
+/* Header styles */    
 #header { margin-top: 10px; }
 
+
+/* Footer styles */
 #footer {  margin-bottom: 50px; }
+
+
+
+
+
+/*****************************/    
+/*       Links styles        */
+/*****************************/
+
+a { text-decoration: none; }
+    /* On link */
+    a:hover { text-decoration: none; color: #003bb3; }
+
+
+    
+    
+/*****************************/    
+/*       Input styles        */
+/*****************************/
+
+/* Input form login */
+input #username, #password
+{ 
+    border-radius: 10px; 
+    border-color: blue; 
+    text-align: center; 
+    background-color: white; 
+    color: #b3b3b3; 
+}
+    /* On click, don't see border in input */
+    input:focus {  outline: 0px; }
+
+    
+    
+
+/*****************************/    
+/*         Hr styles         */
+/*****************************/
 
 hr{border: solid 2px gainsboro;}
 
+
+
+
+/*****************************/    
+/*         Img styles        */
+/*****************************/
+
 img{ width: 100px; }
+
+
+
+
+/*****************************/    
+/*        Menu styles        */
+/*****************************/
 
 #menu { margin: 10px 0px 10px 0px; }
