@@ -1,6 +1,16 @@
 {% extends "TeachingGeneralBundle:Login:template_with_actions.html.twig" %}
 
 
+{% block header %}
+    <h2>Te encuentras en <b>{{ controller }}</b></h2>
+    
+    <a href="{{ path('teaching_user_homepage') }}">
+        <h3>Volver</h3>
+    </a>
+
+{% endblock %}
+
+
 
 {% block actions %}
     

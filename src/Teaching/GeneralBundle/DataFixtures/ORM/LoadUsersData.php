@@ -101,6 +101,14 @@ class LoadUsersData extends Controller implements FixtureInterface
                 'surname'   => 'González Navarro',
                 'email'     => 'fran@gmail.com'
             ),
+            '2' => array(
+                'username'  => 'admin',
+                'password'  => 'admin',
+                'rol'       => 'ROLE_ADMIN',
+                'name'      => 'Emilio',
+                'surname'   => 'Crespo Perán',
+                'email'     => 'admin@teaching.es'
+            ),
         );
         
         // Persist some users into database

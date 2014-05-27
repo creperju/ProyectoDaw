@@ -18,8 +18,8 @@ div.separate-rows div.row {
 }
 
 .show-grid [class^="col-"] {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   border: 1px solid #AAA;
   background-color: #EEE;
   background-color: rgba(200, 200, 200, 0.3);

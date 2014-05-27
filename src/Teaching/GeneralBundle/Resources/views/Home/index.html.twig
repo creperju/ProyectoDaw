@@ -2,39 +2,152 @@
 
 {% block title %}Bienvenido a Teaching!{% endblock %}
 
+{% block header %}
+
+    {% if app.user is not null %}
+        <h3>Logueado como: {{ app.user.username }}</h3>
+         
+            
+            <a href="
+                {% if (app.user and is_granted('ROLE_USER')) %}
+                    {{ path('teaching_user_homepage')}}
+                {% endif %}
+                {% if (app.user and is_granted('ROLE_ADMIN')) %}
+                    {{ path('teaching_admin_homepage')}}
+                {% endif %}
+                {% if (app.user and is_granted('ROLE_TEACHER')) %}
+                    {{ path('teaching_teacher_homepage')}}
+                {% endif %}
+            ">Volver</a><br/>
+            <a href="{{ path('logout')}}">
+                Cerrar sesión
+            </a>
+        </div>
+    {% else %}
+        <h1>Bienvenido a Teaching!</h1>
+        <form action="{{ path('login_check') }}" method="post">
+            <label for="username">Usuario:</label>
+            <input style="border-radius: 10px; border-color: blue; text-align: center; background-color: white; color: #b3b3b3;" 
+                   type="text" 
+                   id="username" name="_username" 
+                   value="{% if last_username %}{{ last_username }}{% else %}Usuario{% endif %}" />
+
+            <label for="password">Contraseña:</label>
+            <input type="password" 
+                   id="password" name="_password" />
+
+            {# Protection to CSRF attacks #}
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+
+            {# Redirect to account user #}
+            <input type="hidden" name="_target_path" value="/validado" />
+
+            <button type="submit">Entrar</button>
+        </form>
+    {% endif %}
+    
+    
+    
+    
+    
+    
+
+{% endblock %}
+
 
 {% block content %}
-    <div class="container">
-        {# Div con login de usuarios #}
-        <div class="row show-grid">
-
-            {% if error %}
-                <div class="col-md-3">
-                    {{ error.message }}
-                </div>
-            {% endif %}
-
-            <div class="col-md-12">
-                <form action="{{ path('login_check') }}" method="post">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="_username" value="{{ last_username }}" />
-
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="_password" />
-
-                    {# Protection to CSRF attacks #}
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
-
-                    {# Redirect to account user #}
-                    <input type="hidden" name="_target_path" value="/validado" />
-
-                    <button type="submit">login</button>
-                </form>
-            </div>
-        </div>
     
-        {# Div con registro de usuarios #}
-        <div class="row show-grid">
+    {# Slider JS #}
+    <div class="container" >
+            
+        
+        
+        {# Slider JS #}
+        <div class="row" id="wowslider-container1"
+             style="width:100%; height:50%;max-width:100%;overflow:hidden;border:solid 2px white;padding:0;margin:0 auto;display:block;" 
+             marginheight="0" 
+             marginwidth="0">
+        
+            
+            {# Tittle #}
+            <div class="ws_bullets">
+                <div>
+                    <a href="#" 
+                       title="Sigue su aprendizaje">
+                        <img src="{{ asset('img/galeria/img/img1.png') }}" 
+                             alt="Sigue su aprendizaje"/>
+                        1
+                    </a>
+                    <a href="#" 
+                       title="Consulta asignaturas">
+                        <img src="{{ asset('img/galeria/img/img2.png') }}" 
+                             alt="Consulta asignaturas"/>
+                        2
+                    </a>
+                    <a href="#" 
+                       title="Ayuda a tu hijo a estudiar">
+                        <img src="{{ asset('img/galeria/img/img3.png') }}" 
+                             alt="Ayuda a tu hijo a estudiar"/>
+                        3
+                    </a>
+                    <a href="#registro" 
+                       title="Registrate">
+                        <img src="{{ asset('img/galeria/img/img4.png') }}" 
+                             alt="Registrate"/>
+                        4
+                    </a>
+                </div>
+            </div>
+                
+                             
+            {# Subtittle #}
+            <div class="ws_images">
+                <ul>
+                    <li>
+                        <img src="{{ asset('img/galeria/img/img1.png') }}" 
+                             alt="Sigue su aprendizaje" 
+                             title="Sigue su aprendizaje" 
+                             id="wows1_0"/>
+                        A través de Teaching!
+                    </li>
+                    <li>
+                        <img src="{{ asset('img/galeria/img/img2.png') }}" 
+                             alt="Consulta asignaturas" 
+                             title="Consulta asignaturas" 
+                             id="wows1_1"/>
+                        Matemáticas, Lengua, Inglés...
+                    </li>
+                    <li>
+                        <img src="{{ asset('img/galeria/img/img3.png') }}" 
+                             alt="Ayuda a tu hijo a estudiar" 
+                             title="Ayuda a tu hijo a estudiar" 
+                             id="wows1_2"/>
+                        Gracias a Teaching!</li>
+                    <li>
+                        <img src="{{ asset('img/galeria/img/img4.png') }}" 
+                             alt="Registrate" 
+                             title="Registrate" 
+                             id="wows1_3"/>
+                        ¡Es gratis!
+                    </li>
+                </ul>
+            </div>
+                                 
+            {# Styles Slider JS #}
+            <link rel="stylesheet" type="text/css" href="{{ asset('img/galeria/engine/style.css') }}" />
+            <script type="text/javascript" src="{{ asset('img/galeria/engine/jquery.js') }}"></script>
+    
+            <script type="text/javascript" src="{{ asset('img/galeria/engine/wowslider.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('img/galeria/engine/script.js') }}"></script>
+        
+        </div>
+        
+            
+            
+            
+            
+        {# Sign in form #}
+        <div id="registro" class="row">
             <div class="col-md-12">
                 <h3>Registrate</h3>
                 {{ form_start(form) }}

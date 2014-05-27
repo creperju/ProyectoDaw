@@ -1,22 +1,24 @@
 {% extends "TeachingGeneralBundle::template.html.twig" %}
 
-{% block breadcrumps %}Bienvenido {{ app.user.username }}{% endblock %}
+{% block header %}
+    <h1 style="margin-top: 10px;">Bienvenido a Teaching! {{ app.user.username }}</h1>
+    <a href="{{ path('logout') }}"><h3>Cerrar sesión</h3></a>
+{% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container" style="text-align: center;">
         
-        <div class="row show-grid" data-step="1" data-intro="Asignaturas" data-position="bottom">
+        <div data-step="1" data-intro="Asignaturas" data-position="bottom">
+        <div class="row show-grid">
             
-            
-            
-            
-            {##################################}
-            {#         Div's subjects         #}
-            {##################################}
+            {# Div subjects #}
             {% for s in subjects %}
                 
                 <a href="{{ path('teaching_user_homepage') }}{{ s.link }}/">
-                    <div class="col-md-{{ s.dimension }} col-sm-{{ s.dimension }} col-lg-{{ s.dimension }}" 
+                    <div 
+                         class="col-md-{{ s.dimension }} col-md-offset-{{ s.offset }}
+                                col-sm-{{ s.dimension }} col-sm-offset-{{ s.offset }}
+                                col-lg-{{ s.dimension }} col-lg-offset-{{ s.offset }}" 
                          style="color: {{ s.color }}; background-color: {{ s.background }};">
                         {{ s.name }}
                     </div>
@@ -24,16 +26,39 @@
                 
             {% endfor %}
             
+        </div>
+        
+        <div class="row show-grid" data-step="1" data-intro="Asignaturas" data-position="bottom">
             
+            {# Div subjects #}
+            {% for s in subjects2 %}
+                
+                <a href="{{ path('teaching_user_homepage') }}{{ s.link }}/">
+                    <div 
+                         class="col-md-{{ s.dimension }} col-md-offset-{{ s.offset }}
+                                col-sm-{{ s.dimension }} col-sm-offset-{{ s.offset }}
+                                col-lg-{{ s.dimension }} col-lg-offset-{{ s.offset }}" 
+                         style="color: {{ s.color }}; background-color: {{ s.background }};">
+                        {{ s.name }}
+                    </div>
+                </a>
+                
+            {% endfor %}
             
+        </div>
             
-            {###############################}
-            {#         Div message         #}
-            {###############################}
+        </div>   
+            
+        
+        <div class="row show-grid">
+            {# Div message #}
             {% for m in message %}
                 
                 <a href="{{ path('teaching_user_homepage') }}{{ m.link }}/">
-                    <div class="col-md-{{ m.dimension }} col-sm-{{ m.dimension }} col-lg-{{ m.dimension }}" 
+                    <div 
+                         class="col-md-{{ m.dimension }} col-md-offset-{{ m.offset }}
+                                col-sm-{{ m.dimension }} col-sm-offset-{{ m.offset }}
+                                col-lg-{{ m.dimension }} col-lg-offset-{{ m.offset }}" 
                          style="color: {{ m.color }}; background-color: {{ m.background }};"
                          data-step="{{ m.intro_s}}" data-intro="{{ m.intro_m }}" data-position="{{ m.intro_p }}">
                         {{ m.name }}
@@ -44,14 +69,14 @@
             
             
             
-            
-            {#####################################}    
-            {#         Div configuration         #}
-            {#####################################}
+            {# Div configuration #}
             {% for c in config %}
                 
                 <a href="{{ path('teaching_user_homepage') }}{{ c.link }}/">
-                    <div class="col-md-{{ c.dimension }} col-sm-{{ c.dimension }} col-lg-{{ c.dimension }}" 
+                    <div 
+                         class="col-md-{{ c.dimension }} col-md-offset-{{ c.offset }}
+                                col-sm-{{ c.dimension }} col-sm-offset-{{ c.offset }}
+                                col-lg-{{ c.dimension }} col-lg-offset-{{ c.offset }}" 
                          style="color: {{ c.color }}; background-color: {{ c.background }};"
                          data-step="{{ c.intro_s }}" data-intro="{{ c.intro_m }}" data-position="{{ c.intro_p }}">
                         {{ c.name }}
@@ -63,13 +88,14 @@
             
             
             
-            {############################}
-            {#         Div help         #}
-            {############################}
+            {# Div ayuda #}
             <a href="javascript:void(0);"> 
-                <div class="col-md-6 col-sm-6 col-lg-6" 
-                    style="color: 'black'; background-color: 'white';"
-                    onclick='javascript:introJs().start().setOption("skipLabel", "Salir");'>
+                <div 
+                     class="col-md-4 col-md-offset-1
+                            col-sm-4 col-sm-offset-1
+                            col-lg-4 col-lg-offset-1" 
+                     style="color: black; background-color: white;"
+                     onclick='javascript:introJs().start().setOption("skipLabel", "Salir");'>
                    Ayuda
                </div>
             </a>

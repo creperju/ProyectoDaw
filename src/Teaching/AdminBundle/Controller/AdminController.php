@@ -4,21 +4,29 @@ namespace Teaching\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class AdminController extends Controller
 {
 
     public function indexAction()
     {
+        
+        // Deny users if they are admin
+        if (!$this->get('security.context')->isGranted("ROLE_ADMIN")) {
+            throw new AccessDeniedException();
+        }
+        
+        
+        
         $user = $this->getUser();
         $url = $this->generateUrl("logout");
         $rol = $user->getRoles();
         
-        // User <> Group <> Course to get Course 
-        $course = $user->getCourseTutor()->getCourse()->getCourse();
-        $letter = $user->getCourseTutor()->getLetter();
-        
+//        // User <> Group <> Course to get Course 
+//        $course = $user->getCourseTutor()->getCourse()->getCourse();
+//        $letter = $user->getCourseTutor()->getLetter();
+//        
         
 //        echo "<pre>";print_r($courses);echo "</pre>";exit(0);
         
@@ -29,7 +37,7 @@ class AdminController extends Controller
                 . "<b>Nombre: </b>".$user->getName()."<br/>"
                 . "<b>Apellidos: </b>".$user->getSurname().""
                 . "<p><a href='".$url."'>SALIR</a>"
-                . "<p>Es tutor de:<br/>Curso: ".$course." Grupo: ".$letter."</p>"
+                
                 . "</body></html>");
 	
         

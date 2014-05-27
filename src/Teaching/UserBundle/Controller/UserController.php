@@ -3,6 +3,7 @@
 namespace Teaching\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Teaching\GeneralBundle\Entity\Messages;
@@ -10,8 +11,23 @@ use Datetime;
 
 class UserController extends Controller
 {
+    
+    private function havePermissions()
+    {
+        // Deny users if they are admin
+        if (!$this->get('security.context')->isGranted("ROLE_USER")) {
+            throw new AccessDeniedException();
+        }
+    }
+    
+    
     public function indexAction()
     {
+        
+        $this->havePermissions();
+        
+        
+        
         
         
 //        return new Response("<html><head><title>ENHORABUENA</title></head><body>"
@@ -27,43 +43,52 @@ class UserController extends Controller
 	    '0' => array(
 		'name' => 'Matemáticas',
 		'color' => 'white',
-		'background' => 'gold',
+		'background' => '#E6BC2F',
 		'dimension' => '4',
+                'offset' => '0',
 		'link' => 'matematicas'
 	    ),
 	    '1' => array(
 		'name' => 'Lengua',
 		'color' => 'white',
-		'background' => 'blue',
+		'background' => '#1B53BA',
 		'dimension' => '4',
+                'offset' => '1',
 		'link' => 'lengua'
 	    ),
 	    '2' => array(
 		'name' => 'Inglés',
 		'color' => 'white',
-		'background' => 'red',
-		'dimension' => '4',
+		'background' => '#E3350D',
+		'dimension' => '2',
+                'offset' => '1',
 		'link' => 'ingles'
-	    ),
-	    '3' => array(
+	    )
+        );
+            
+        $menu2 = array(
+	    '0' => array(
 		'name' => 'Música',
 		'color' => 'white',
 		'background' => 'purple',
-		'dimension' => '4',
+		'dimension' => '3',
+                'offset' => '0',
 		'link' => 'musica'
 	    ),
-	    '4' => array(
+	    '1' => array(
 		'name' => 'Gimnasia',
 		'color' => 'white',
-		'background' => 'orange',
-		'dimension' => '4',
+		'background' => '#EE6B2F',
+		'dimension' => '3',
+                'offset' => '1',
 		'link' => 'gimnasia'
 	    ),
-	    '5' => array(
+	    '2' => array(
 		'name' => 'Conocimiento del Medio',
 		'color' => 'white',
-		'background' => 'green',
+		'background' => '#4DAD5B',
 		'dimension' => '4',
+                'offset' => '1',
 		'link' => 'conocimientodelmedio'
 	    )
         );
@@ -73,8 +98,9 @@ class UserController extends Controller
             '0' => array(
                 'name' => 'Mensajes',
                 'color' => 'white',
-                'background' => 'blue',
+                'background' => '#30A7D7',
                 'dimension' => '3',
+                'offset' => '0',
                 'link' => 'mensajes',
                 'intro_s' => '2',
                 'intro_m' => 'Aquí podrás ver, enviar o recibir mensajes.',
@@ -88,6 +114,7 @@ class UserController extends Controller
                 'color' => 'white',
                 'background' => 'gray',
                 'dimension' => '3',
+                'offset' => '1',
                 'link' => 'configuracion',
                 'intro_s' => '3',
                 'intro_m' => 'Aquí podrás cambiar tu contraseña o tu correo.',
@@ -95,22 +122,13 @@ class UserController extends Controller
             )
         );
 	    
-//	    ),
-//	    '8' => array(
-//		'name' => 'Ayuda',
-//		'color' => 'black',
-//		'background' => 'white',
-//		'dimension' => '6',
-//		'link' => 'ayuda'
-//	    ),
-//	);
-	
 	
 	
         return $this->render(
             'TeachingGeneralBundle:Login:menu.html.twig',
             array(
 		'subjects' => $menu,
+                'subjects2' => $menu2,
                 'message' => $message,
                 'config' => $config
             )
@@ -121,7 +139,8 @@ class UserController extends Controller
     
     public function spanishAction()
     {
-       
+        $this->havePermissions();
+        
         $student = $this->findStudents();
         
         if(count($student))
@@ -140,6 +159,7 @@ class UserController extends Controller
     
     public function englishAction()
     {
+        $this->havePermissions();
         
         $student = $this->findStudents();
         
@@ -159,7 +179,7 @@ class UserController extends Controller
     
     public function musicAction()
     {
-        
+        $this->havePermissions();
         
         $student = $this->findStudents();
         
@@ -179,6 +199,7 @@ class UserController extends Controller
     
     public function gymnasticsAction()
     {
+        $this->havePermissions();
         
         $student = $this->findStudents();
         
@@ -198,6 +219,8 @@ class UserController extends Controller
     
     public function natureAction()
     {
+        $this->havePermissions();
+        
         $student = $this->findStudents();
         
         if(count($student))
@@ -222,6 +245,7 @@ class UserController extends Controller
      */
     public function messagesAction(Request $request)
     {
+        $this->havePermissions();
         
         $user = $this->getUser();
         
@@ -334,6 +358,7 @@ class UserController extends Controller
     
      public function mathsAction()
     {
+        $this->havePermissions();
         
         $student = $this->findStudents();
         
