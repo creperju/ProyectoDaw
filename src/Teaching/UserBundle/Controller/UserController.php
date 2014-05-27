@@ -317,7 +317,118 @@ class UserController extends Controller
     
     
         
-    private function configAction(){}
+    private function configAction(){
+         $user = $this->getUser();
+        /* Change Name*/
+        $nameForm = $this->createFormBuilder()
+            ->add('Nuevo nombre', 'text')
+            ->add('Cambiar', 'submit')
+            ->getForm();
+ 
+        $nameForm->handleRequest($request);
+
+        if ($nameForm->isValid()) { 
+            $data = $nameForm->getData();
+            if($data['Nuevo nombre']!= ""){
+                      $user -> setName($data['Nuevo nombre']);
+                      
+                    $msg_flash = 'Nombre cambiado correctamente';
+            }
+            else{ $msg_flash = 'Debe introducir un nombre para poder cambiarlo'; }
+             
+            
+            // Flash message
+            $this->get('session')->getFlashBag()->add('message_send', $msg_flash);
+
+            return $this->redirect($this->generateUrl('teaching_user_config'));
+        }
+        /* End of Change Name*/
+        
+        /* Change Surname*/
+        $surnameForm = $this->createFormBuilder()
+            ->add('Nuevos Apelidos', 'text')
+            ->add('Cambiar', 'submit')
+            ->getForm();
+ 
+        $surnameForm->handleRequest($request);
+
+        if ($surnameForm->isValid()) {
+            $data = $surnameForm->getData();
+            if($data['Nuevos Apellidos']!= ""){
+                      $user -> setSurname($data['Nuevos Apellidos']);
+                      
+                    $msg_flash = 'Apellidos cambiados correctamente';
+            }
+            else { $msg_flash = 'Debe introducir sus apellidos para poder cambiarlos'; }
+            
+            // Flash message
+            $this->get('session')->getFlashBag()->add('message_send', $msg_flash);
+
+            return $this->redirect($this->generateUrl('teaching_user_config'));
+        }
+        /* End of Change Surname*/
+        
+        /* Change Email*/
+        $emailForm = $this->createFormBuilder()
+            ->add('Nuevo Email', 'email')
+            ->add('Cambiar', 'submit')
+            ->getForm();
+ 
+        $emailForm->handleRequest($request);
+
+        if ($emailForm->isValid()) {
+            $data = $emailForm->getData();
+            if($data['Nuevo Email']!= ""){
+                      $user -> setEmail($data['Nuevo Email']);
+                      
+                    $msg_flash = 'Email cambiado correctamente';
+            }
+            else { $msg_flash = 'Debe introducir un Email válido para cambiarlo'; }
+            
+            // Flash message
+            $this->get('session')->getFlashBag()->add('message_send', $msg_flash);
+
+            return $this->redirect($this->generateUrl('teaching_user_config'));
+        }
+        /* End of Change Email*/
+        
+        /* Change Password*/
+        $passForm = $this->createFormBuilder()
+            ->add('Su contraseña actual', 'password')
+            ->add('Su nueva contraseña', 'password')
+            ->add('Repita su nueva contraseña', 'password')
+            ->add('Cambiar', 'submit')
+            ->getForm();
+ 
+        $passForm->handleRequest($request);
+
+        if ($passForm->isValid()) {
+            
+            $data = $passForm->getData();
+            
+            if( $data['Su contraseña actual'] == $user->getPasword()){
+//                $to = $this->search($data['Para'], 'Users', 'username');
+                
+                if($data['Su nueva contraseña']==$data['Repita su nueva contraseña']){
+                    
+                    // Cambio la contraseña
+                      $user -> setPassword($data['Su nueva contraseña']);
+                      
+                    $msg_flash = 'Contraseña cambiada correctamente.';
+                }
+                else{ $msg_flash = 'La nueva contraseña no coincide en los dos campos'; }
+                
+            }
+            else{ $msg_flash = 'La contraseña es incorrecta.'; }
+            
+            
+            // Flash message
+            $this->get('session')->getFlashBag()->add('message_send', $msg_flash);
+
+            return $this->redirect($this->generateUrl('teaching_user_config'));
+
+            
+    }
  
 
                       
