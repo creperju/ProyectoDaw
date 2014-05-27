@@ -329,14 +329,8 @@ class UserController extends Controller
 
         if ($nameForm->isValid()) { 
             $data = $nameForm->getData();
-            if($data['Nuevo nombre']!= ""){
-                      $user -> setName($data['Nuevo nombre']);
-                      
-                    $msg_flash = 'Nombre cambiado correctamente';
-            }
-            else{ $msg_flash = 'Debe introducir un nombre para poder cambiarlo'; }
-             
-            
+            $user -> setName($data['Nuevo nombre']);
+            $msg_flash = 'Nombre cambiado correctamente';
             // Flash message
             $this->get('session')->getFlashBag()->add('message_send', $msg_flash);
 
@@ -354,13 +348,8 @@ class UserController extends Controller
 
         if ($surnameForm->isValid()) {
             $data = $surnameForm->getData();
-            if($data['Nuevos Apellidos']!= ""){
-                      $user -> setSurname($data['Nuevos Apellidos']);
-                      
-                    $msg_flash = 'Apellidos cambiados correctamente';
-            }
-            else { $msg_flash = 'Debe introducir sus apellidos para poder cambiarlos'; }
-            
+            $user -> setSurname($data['Nuevos Apellidos']);
+            $msg_flash = 'Apellidos cambiados correctamente';
             // Flash message
             $this->get('session')->getFlashBag()->add('message_send', $msg_flash);
 
@@ -378,17 +367,11 @@ class UserController extends Controller
 
         if ($emailForm->isValid()) {
             $data = $emailForm->getData();
-            if($data['Nuevo Email']!= ""){
-                      $user -> setEmail($data['Nuevo Email']);
-                      
-                    $msg_flash = 'Email cambiado correctamente';
-            }
-            else { $msg_flash = 'Debe introducir un Email válido para cambiarlo'; }
-            
+            $user -> setEmail($data['Nuevo Email']);
+            $msg_flash = 'Email cambiado correctamente';
             // Flash message
             $this->get('session')->getFlashBag()->add('message_send', $msg_flash);
-
-            return $this->redirect($this->generateUrl('teaching_user_config'));
+            return $this->redirect($this->generateUrl('teaching_user_config'));        
         }
         /* End of Change Email*/
         
@@ -407,7 +390,6 @@ class UserController extends Controller
             $data = $passForm->getData();
             
             if( $data['Su contraseña actual'] == $user->getPasword()){
-//                $to = $this->search($data['Para'], 'Users', 'username');
                 
                 if($data['Su nueva contraseña']==$data['Repita su nueva contraseña']){
                     
@@ -427,7 +409,11 @@ class UserController extends Controller
 
             return $this->redirect($this->generateUrl('teaching_user_config'));
 
-            
+            /**
+             * HE QUITADO LO DE BORRAR USUARIO PORQUE ME PARECE COMPLICARSE DEMASIADO A ESTAS ALTURAS
+             * SI AL FINAL TENEMOS TIEMPO Y NOS ACORDAMOS TENEMOS QUE AÑADIRLO.
+             */
+        }
     }
  
 
