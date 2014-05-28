@@ -4,10 +4,13 @@
 
 {% block header %}
 
+
     {% if app.user is not null %}
-        <h3>Logueado como: {{ app.user.username }}</h3>
-         
-            
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h3>Logueado como: {{ app.user.username }}</h3>
+        </div>
+        
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
             <a href="
                 {% if (app.user and is_granted('ROLE_USER')) %}
                     {{ path('teaching_user_homepage')}}
@@ -18,17 +21,21 @@
                 {% if (app.user and is_granted('ROLE_TEACHER')) %}
                     {{ path('teaching_teacher_homepage')}}
                 {% endif %}
-            ">Volver</a><br/>
+            ">Volver</a>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <a href="{{ path('logout')}}">
                 Cerrar sesión
             </a>
         </div>
     {% else %}
-        <h1>Bienvenido a Teaching!</h1>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h1>Bienvenido a Teaching!</h1>
+        </div>
+
         <form action="{{ path('login_check') }}" method="post">
             <label for="username">Usuario:</label>
-            <input style="border-radius: 10px; border-color: blue; text-align: center; background-color: white; color: #b3b3b3;" 
-                   type="text" 
+            <input type="text" 
                    id="username" name="_username" 
                    value="{% if last_username %}{{ last_username }}{% else %}Usuario{% endif %}" />
 
@@ -42,16 +49,12 @@
             {# Redirect to account user #}
             <input type="hidden" name="_target_path" value="/validado" />
 
-            <button type="submit">Entrar</button>
+            <button type="submit" id="boton">Entrar</button>
         </form>
     {% endif %}
-    
-    
-    
-    
-    
-    
 
+    
+    
 {% endblock %}
 
 
@@ -132,7 +135,8 @@
                     </li>
                 </ul>
             </div>
-                                 
+                  
+
             {# Styles Slider JS #}
             <link rel="stylesheet" type="text/css" href="{{ asset('img/galeria/engine/style.css') }}" />
             <script type="text/javascript" src="{{ asset('img/galeria/engine/jquery.js') }}"></script>

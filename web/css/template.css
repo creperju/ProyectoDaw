@@ -5,7 +5,12 @@
 /*****************************/
 
 /* Body styles */
-body{ background: linear-gradient(#E2E2E2, #E7E7E7, #E2E2E2); font-size: large; }
+body
+{ 
+	font-size: large;
+	background-attachment: fixed;
+	background-image: url('../img/fondo.png');
+}
 
 
 /* Header styles */    
@@ -35,17 +40,15 @@ a { text-decoration: none; }
 /*****************************/
 
 /* Input form login */
-input #username, #password
+input #username2, #password
 { 
-    border-radius: 10px; 
-    border-color: blue; 
+    border-color: gray; 
     text-align: center; 
-    background-color: white; 
     color: #b3b3b3; 
 }
     /* On click, don't see border in input */
     input:focus {  outline: 0px; }
-
+    button boton { background-color: red; border-radius: 2px; }
     
     
 
@@ -53,7 +56,7 @@ input #username, #password
 /*         Hr styles         */
 /*****************************/
 
-hr{border: solid 2px gainsboro;}
+hr{border: solid 2px gray;}
 
 
 
@@ -71,4 +74,18 @@ img{ width: 100px; }
 /*        Menu styles        */
 /*****************************/
 
-#menu { margin: 10px 0px 10px 0px; }
+
+
+
+
+/*****************************/    
+/*     Exception styles      */
+/*****************************/
+
+#exception 
+{
+	text-align: center;
+	background-color: white;
+	border-radius: 3px;
+	box-shadow: 3px 3px 10px gray;
+}
