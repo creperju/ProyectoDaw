@@ -16,8 +16,7 @@ class SignUp extends AbstractType
             ->add('password', 'password')
             ->add('email', 'text')
             ->add('name', 'text')
-            ->add('surname', 'text')
-            ->add('registrar', 'submit');
+            ->add('surname', 'text');
     }
  
     public function getName()

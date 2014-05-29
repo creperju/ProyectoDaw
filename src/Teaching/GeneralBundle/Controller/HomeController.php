@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Teaching\GeneralBundle\Entity\Users;
 use Teaching\GeneralBundle\Form\SignUp;
 
-class HomeController extends Controller
+class HomeController extends Controller 
 {
     
     
@@ -34,33 +34,46 @@ class HomeController extends Controller
             
             // Array data form
             $data = $form->getData();
-            
+	
             // If user not exits
             if(! $this->search($data->getUsername(), 'Users', 'username') ){
-                // Signup user with form data
+                
+		// Signup user with form data
                 $this->signUpUser($user, $data);
-
-                // Flash message
+		
+                // Flash message success
                 $this->get('session')->getFlashBag()->add(
                     'user_create',
                     'Se ha creado el usuario.'
                 );
-
+		$this->get('session')->getFlashBag()->add(
+                    'verificate',
+                    'success'
+                );
+		
+		
+		
+		
             }
             else{
-                // Flash message
+		
+                // Flash message error
                 $this->get('session')->getFlashBag()->add(
                     'user_create',
                     'El usuario ya está registrado.'
                 );
-                
+		$this->get('session')->getFlashBag()->add(
+                    'verificate',
+                    'error'
+                );
+		
             }
             
             
             return $this->redirect($this->generateUrl('teaching_homepage'));
         }
         
-        
+	
         
         // Security firewalls to access
         

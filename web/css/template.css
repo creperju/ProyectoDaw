@@ -83,3 +83,10 @@ img{ width: 100px; }
 	border-radius: 3px;
 	box-shadow: 3px 3px 10px gray;
 }
+
+
+
+.shadow{ box-shadow: 0px 3px 20px gray; }
+.center{ text-align: center; }
+.margin-top-15{ margin-top: 15px; }
+.margin-bottom-15{ margin-bottom: 15px; }
