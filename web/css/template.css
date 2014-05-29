@@ -39,16 +39,18 @@ a { text-decoration: none; }
 /*       Input styles        */
 /*****************************/
 
+
 /* Input form login */
-input #username2, #password
+#username, #password
 { 
     border-color: gray; 
     text-align: center; 
-    color: #b3b3b3; 
+    color: #b3b3b3;
+
 }
     /* On click, don't see border in input */
-    input:focus {  outline: 0px; }
-    button boton { background-color: red; border-radius: 2px; }
+    /*#username:focus, #password:focus {  outline: 0px; }*/
+    #boton { background-color: #E3350D; border-radius: 5px; border: solid 1px black; }
     
     
 
@@ -66,14 +68,6 @@ hr{border: solid 2px gray;}
 /*****************************/
 
 img{ width: 100px; }
-
-
-
-
-/*****************************/    
-/*        Menu styles        */
-/*****************************/
-
 
 
 
