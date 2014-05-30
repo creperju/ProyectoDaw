@@ -16,7 +16,7 @@
         <div class="container " id="header">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                    <center><a href="{{ url('teaching_homepage')}}" ><img src="{{ asset('img/logo.png') }}" class="img-responsive" /></a> </center>
+                    <center><a href="{{ url('teaching_homepage')}}" ><img src="{{ asset('img/logo.png') }}" class="img-responsive" title="Teaching!" /></a> </center>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
                     {% block header %}{% endblock %}
@@ -55,7 +55,7 @@
         <div class="container" id="footer">
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 center">
-                    <h4 class="h3">Proyecto Daw realizado por Emilio Crespo Perán y Francisco Javier González Navarro</h4>
+                    <h3 class="h3">Proyecto Daw realizado por Emilio Crespo Perán y Francisco Javier González Navarro</h3>
                     <br/>
                     <b>Todos los derechos reservados &copy;</b>
                     <br/><br/>
@@ -68,15 +68,15 @@
         
         
         
-        {# Bootstrap Css #}
+        {# Bootstrap CSS #}
         {% block css %}
             <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+            <script type="text/javascript" src="{{ asset('bootstrap/js/jquery-1.11.0.js') }}"></script>
         {% endblock %}
         
             
-        {# JQuery #}
+        {# JS #}
         {% block js %}
-            <script type="text/javascript" src="{{ asset('bootstrap/js/jquery-1.11.0.js') }}"></script>
             <script type="text/javascript" src="{{ asset('js/functions.js') }}"></script>
         {% endblock %}
         
