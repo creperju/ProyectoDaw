@@ -39,7 +39,6 @@ a { text-decoration: none; }
 /*       Input styles        */
 /*****************************/
 
-
 /* Input form login */
 #username, #password
 { 
@@ -52,7 +51,34 @@ a { text-decoration: none; }
     /*#username:focus, #password:focus {  outline: 0px; }*/
     #boton { background-color: #E3350D; border-radius: 5px; border: solid 1px black; }
     
-    
+
+
+
+/*****************************/    
+/*       Input styles        */
+/*****************************/
+
+
+/*.item-menu
+{
+    padding-top: 15px; padding-bottom: 15px;
+}
+.item-menu-help
+{
+    padding-top: 58px; padding-bottom: 58px;
+}*/
+
+.item-menu
+{
+    padding-top: 30px; padding-bottom: 30px;
+}
+.item-menu-help
+{
+    padding-top: 88px; padding-bottom: 88px;
+}
+
+
+
 
 /*****************************/    
 /*         Hr styles         */
@@ -101,3 +127,7 @@ img{ width: 100px; }
 
 .margin-top-10{ margin-top: 10px; }
 .margin-botom-10{ margin-bottom: 10px; }
+
+
+
+

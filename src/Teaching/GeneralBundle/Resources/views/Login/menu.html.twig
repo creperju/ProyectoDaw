@@ -1,107 +1,214 @@
 {% extends "TeachingGeneralBundle::template.html.twig" %}
 
 {% block header %}
-    <h1 style="margin-top: 10px;">Bienvenido a Teaching! {{ app.user.username }}</h1>
-    <a href="{{ path('logout') }}"><h3>Cerrar sesión</h3></a>
+    
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7">
+        <h1>Bienvenido a Teaching! <span class="">{{ app.user.username }}</span></h1>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-3 col-lg-offset-2 col-lg-3">
+        <a href="{{ path('logout')}}">
+            <button class="btn btn-danger margin-top-25 margin-bottom-25" title="Cerrar sesión"><h4>Cerrar sesión</h4></button>
+        </a>
+    </div>
+
 {% endblock %}
 
 {% block content %}
-    <div class="container" style="text-align: center;">
+
+    <div class="container center">
         
-        <div data-step="1" data-intro="Asignaturas" data-position="bottom">
-        <div class="row show-grid">
+        <br/>
+        <div class="row">
             
-            {# Div subjects #}
-            {% for s in subjects %}
+            <div class="col-sm-7" data-step="1" data-intro="Asignaturas" data-position="right">
                 
-                <a href="{{ path('teaching_user_homepage') }}{{ s.link }}/">
-                    <div 
-                         class="col-md-{{ s.dimension }} col-md-offset-{{ s.offset }}
-                                col-sm-{{ s.dimension }} col-sm-offset-{{ s.offset }}
-                                col-lg-{{ s.dimension }} col-lg-offset-{{ s.offset }}" 
-                         style="color: {{ s.color }}; background-color: {{ s.background }};">
-                        {{ s.name }}
-                    </div>
-                </a>
-                
-            {% endfor %}
-            
-        </div>
-        
-        <div class="row show-grid" data-step="1" data-intro="Asignaturas" data-position="bottom">
-            
-            {# Div subjects #}
-            {% for s in subjects2 %}
-                
-                <a href="{{ path('teaching_user_homepage') }}{{ s.link }}/">
-                    <div 
-                         class="col-md-{{ s.dimension }} col-md-offset-{{ s.offset }}
-                                col-sm-{{ s.dimension }} col-sm-offset-{{ s.offset }}
-                                col-lg-{{ s.dimension }} col-lg-offset-{{ s.offset }}" 
-                         style="color: {{ s.color }}; background-color: {{ s.background }};">
-                        {{ s.name }}
-                    </div>
-                </a>
-                
-            {% endfor %}
-            
-        </div>
-            
-        </div>   
-            
-        
-        <div class="row show-grid">
-            {# Div message #}
-            {% for m in message %}
-                
-                <a href="{{ path('teaching_user_homepage') }}{{ m.link }}/">
-                    <div 
-                         class="col-md-{{ m.dimension }} col-md-offset-{{ m.offset }}
-                                col-sm-{{ m.dimension }} col-sm-offset-{{ m.offset }}
-                                col-lg-{{ m.dimension }} col-lg-offset-{{ m.offset }}" 
-                         style="color: {{ m.color }}; background-color: {{ m.background }};"
-                         data-step="{{ m.intro_s}}" data-intro="{{ m.intro_m }}" data-position="{{ m.intro_p }}">
-                        {{ m.name }}
-                    </div>
-                </a>
-                
-            {% endfor %}
-            
-            
-            
-            {# Div configuration #}
-            {% for c in config %}
-                
-                <a href="{{ path('teaching_user_homepage') }}{{ c.link }}/">
-                    <div 
-                         class="col-md-{{ c.dimension }} col-md-offset-{{ c.offset }}
-                                col-sm-{{ c.dimension }} col-sm-offset-{{ c.offset }}
-                                col-lg-{{ c.dimension }} col-lg-offset-{{ c.offset }}" 
-                         style="color: {{ c.color }}; background-color: {{ c.background }};"
-                         data-step="{{ c.intro_s }}" data-intro="{{ c.intro_m }}" data-position="{{ c.intro_p }}">
-                        {{ c.name }}
-                    </div>
-                </a>
-                
-            {% endfor %}
-                
-            
-            
-            
-            {# Div ayuda #}
-            <a href="javascript:void(0);"> 
-                <div 
-                     class="col-md-4 col-md-offset-1
-                            col-sm-4 col-sm-offset-1
-                            col-lg-4 col-lg-offset-1" 
-                     style="color: black; background-color: white;"
-                     onclick='javascript:introJs().start().setOption("skipLabel", "Salir");'>
-                   Ayuda
+                    
+                <div class="row">
+                        
+                    {% for s in subjects1 %}
+                        
+                        <a href="{{ path('teaching_user_homepage') }}{{ s.link }}/">
+                            <div id="{{ s.link }}"
+                                 class="item-menu
+                                        col-xs-{{ s.dxs }} col-xs-offset-{{ s.oxs }}
+                                        col-md-{{ s.dimension }} col-md-offset-{{ s.offset }}
+                                        col-sm-{{ s.dimension }} col-sm-offset-{{ s.offset }}
+                                        col-lg-{{ s.dimension }} col-lg-offset-{{ s.offset }}" 
+                                 style="color: {{ s.color }}; background-color: {{ s.background }};">
+                                {{ s.name }}
+                            </div>
+                        </a>
+                        
+                    {% endfor %}
+
+                </div>
+                    
+                <br/>
+
+                <div class="row">
+                    
+                    {% for s in subjects2 %}
+                        
+                        <a href="{{ path('teaching_user_homepage') }}{{ s.link }}/">
+                            <div 
+                                 class="item-menu
+                                        col-xs-{{ s.dxs }} col-xs-offset-{{ s.oxs }}
+                                        col-md-{{ s.dimension }} col-md-offset-{{ s.offset }}
+                                        col-sm-{{ s.dimension }} col-sm-offset-{{ s.offset }}
+                                        col-lg-{{ s.dimension }} col-lg-offset-{{ s.offset }}" 
+                                 style="color: {{ s.color }}; background-color: {{ s.background }};">
+                                {{ s.name }}
+                            </div>
+                        </a>
+                        
+                    {% endfor %}
+
+                </div>
+
+                <br/>
+
+                <div class="row">
+                    
+                    {% for s in subjects3 %}
+                        
+                        <a href="{{ path('teaching_user_homepage') }}{{ s.link }}/">
+                            <div 
+                                 class="item-menu
+                                        col-xs-10 col-xs-offset-1
+                                        col-md-{{ s.dimension }} col-md-offset-{{ s.offset }}
+                                        col-sm-{{ s.dimension }} col-sm-offset-{{ s.offset }}
+                                        col-lg-{{ s.dimension }} col-lg-offset-{{ s.offset }}" 
+                                 style="color: {{ s.color }}; background-color: {{ s.background }};">
+                                {{ s.name }}
+                            </div>
+                        </a>
+                        
+                    {% endfor %}
+
+                </div>
+
+                <br/>
+
+                <div class="row">
+                    
+                    {% for s in subjects4 %}
+                        
+                        <a href="{{ path('teaching_user_homepage') }}{{ s.link }}/">
+                            <div 
+                                 class="item-menu
+                                        col-xs-10 col-xs-offset-1
+                                        col-md-{{ s.dimension }} col-md-offset-{{ s.offset }}
+                                        col-sm-{{ s.dimension }} col-sm-offset-{{ s.offset }}
+                                        col-lg-{{ s.dimension }} col-lg-offset-{{ s.offset }}" 
+                                 style="color: {{ s.color }}; background-color: {{ s.background }};">
+                                {{ s.name }}
+                            </div>
+                        </a>
+                        
+                    {% endfor %}
+                    
+
+                </div>
+
+                <br/>
+            </div>
+
+
+
+            <div class="col-sm-5">
+                <div class="row">
+
+                    <div class="item-menu-help
+                                col-xs-10 col-xs-offset-1
+                                col-md-11 col-md-offset-1
+                                col-sm-11 col-sm-offset-1
+                                col-lg-11 col-lg-offset-1" 
+                         style="color: white; background-color: #3a87ad;"
+                         onclick='javascript:introJs().start().setOption("skipLabel", "Salir");'>
+                        Ayuda
+                   </div>
+
                </div>
-            </a>
+
+
+               <br/>
+
+
+               <div class="row">
+
+                    {% for m in message %}
                 
-            
-            
-        </div> 
+                        <a href="{{ path('teaching_user_homepage') }}{{ m.link }}/">
+                            <div 
+                                 class="item-menu
+                                        col-xs-10 col-xs-offset-1
+                                        col-md-{{ m.dimension }} col-md-offset-{{ m.offset }}
+                                        col-sm-{{ m.dimension }} col-sm-offset-{{ m.offset }}
+                                        col-lg-{{ m.dimension }} col-lg-offset-{{ m.offset }}" 
+                                 style="color: {{ m.color }}; background-color: {{ m.background }};"
+                                 data-step="{{ m.intro_s}}" data-intro="{{ m.intro_m }}" data-position="{{ m.intro_p }}">
+                                {{ m.name }}
+                            </div>
+                        </a>
+                        
+                    {% endfor %}
+
+                </div>
+
+                <br/>
+
+                <div class="row">
+
+                    {% for c in config %}
+                
+                        <a href="{{ path('teaching_user_homepage') }}{{ c.link }}/">
+                            <div 
+                                 class="item-menu
+                                        col-xs-10 col-xs-offset-1
+                                        col-md-{{ c.dimension }} col-md-offset-{{ c.offset }}
+                                        col-sm-{{ c.dimension }} col-sm-offset-{{ c.offset }}
+                                        col-lg-{{ c.dimension }} col-lg-offset-{{ c.offset }}" 
+                                 style="color: {{ c.color }}; background-color: {{ c.background }};"
+                                 data-step="{{ c.intro_s }}" data-intro="{{ c.intro_m }}" data-position="{{ c.intro_p }}"
+                                 onmousein="in(this);"
+                                 onmouseleave="out(this);">
+                                {{ c.name }}
+                            </div>
+                        </a>
+                        
+                    {% endfor %}
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+
     </div>
+                         
+
+
+{# Script for onmousein add shadow, onmouseleave erase shadow #}
+<script type="text/javascript">
+    
+    function in(item)
+    {
+        var class = "shadow";
+
+        document.getElementById(item).style = 'box-shadow: 0px 3px 20px gray;';
+
+    }
+
+    function out(item)
+    {
+        document.getElementById(item).style = 'box-shadow: 0px;';
+    }
+
+</script>
+
 {% endblock %}
