@@ -39,101 +39,119 @@ class UserController extends Controller
 //                . "<p><a href='".$url."'>SALIR</a></body></html>");
 //	
         
-	$menu = array(
-	    '0' => array(
-		'name' => 'Matemáticas',
-		'color' => 'white',
-		'background' => '#E6BC2F',
-		'dimension' => '4',
-                'offset' => '0',
-		'link' => 'matematicas'
-	    ),
-	    '1' => array(
-		'name' => 'Lengua',
-		'color' => 'white',
-		'background' => '#1B53BA',
-		'dimension' => '4',
-                'offset' => '1',
-		'link' => 'lengua'
-	    ),
-	    '2' => array(
-		'name' => 'Inglés',
-		'color' => 'white',
-		'background' => '#E3350D',
-		'dimension' => '2',
-                'offset' => '1',
-		'link' => 'ingles'
-	    )
-        );
-            
-        $menu2 = array(
-	    '0' => array(
-		'name' => 'Música',
-		'color' => 'white',
-		'background' => 'purple',
-		'dimension' => '3',
-                'offset' => '0',
-		'link' => 'musica'
-	    ),
-	    '1' => array(
-		'name' => 'Gimnasia',
-		'color' => 'white',
-		'background' => '#EE6B2F',
-		'dimension' => '3',
-                'offset' => '1',
-		'link' => 'gimnasia'
-	    ),
-	    '2' => array(
-		'name' => 'Conocimiento del Medio',
-		'color' => 'white',
-		'background' => '#4DAD5B',
-		'dimension' => '4',
-                'offset' => '1',
-		'link' => 'conocimientodelmedio'
-	    )
-        );
-          
+    $menu1 = array(
+        '0' => array(
+            'name' => 'Lengua',
+            'color' => 'white',
+            'background' => '#005580',
+            'dimension' => '5',
+            'offset' => '0',
+            'oxs' => '1',
+            'dxs' => '5',
+            'link' => 'lengua'
+        ),
+        '1' => array(
+            'name' => 'Inglés',
+            'color' => 'white',
+            'background' => '#E3350D',
+            'dimension' => '6',
+            'offset' => '1',
+            'oxs' => '1',
+            'dxs' => '4',
+            'link' => 'ingles'
+        )
+    );
+
+    
+
+    $menu2 = array(
+        '0' => array(
+            'name' => 'Música',
+            'color' => 'white',
+            'background' => '#7a43b6',
+            'dimension' => '5',
+            'offset' => '0',
+            'oxs' => '1',
+            'dxs' => '5',
+            'link' => 'musica'
+        ),
+        '1' => array(
+            'name' => 'Gimnasia',
+            'color' => 'white',
+            'background' => '#f89406',
+            'dimension' => '6',
+            'offset' => '1',
+            'oxs' => '1',
+            'dxs' => '4',
+            'link' => 'gimnasia'
+        )
+    );
+
+    $menu3 = array(
+        '0' => array(
+            'name' => 'Matemáticas',
+            'color' => 'white',
+            'background' => '#ffc40d',
+            'dimension' => '12',
+            'offset' => '0',
+            'link' => 'matematicas'
+        )
+    );
+
+
+    $menu4 = array(
+        '0' => array(
+            'name' => 'Conocimiento del Medio',
+            'color' => 'white',
+            'background' => '#46a546',
+            'dimension' => '12',
+            'offset' => '0',
+            'link' => 'conocimientodelmedio'
+        )
+    );
+
+
+    $message = array(
+        '0' => array(
+            'name' => 'Mensajes',
+            'color' => 'white',
+            'background' => '#30A7D7',
+            'dimension' => '11',
+            'offset' => '1',
+            'link' => 'mensajes',
+            'intro_s' => '2',
+            'intro_m' => 'Aquí podrás ver, enviar o recibir mensajes.',
+            'intro_p' => 'top'
+        )
+    );
         
-        $message = array(
-            '0' => array(
-                'name' => 'Mensajes',
-                'color' => 'white',
-                'background' => '#30A7D7',
-                'dimension' => '3',
-                'offset' => '0',
-                'link' => 'mensajes',
-                'intro_s' => '2',
-                'intro_m' => 'Aquí podrás ver, enviar o recibir mensajes.',
-                'intro_p' => 'right'
-            )
-        );
-	    
-        $config = array(
-            '0' => array(
-                'name' => 'Configuración',
-                'color' => 'white',
-                'background' => 'gray',
-                'dimension' => '3',
-                'offset' => '1',
-                'link' => 'configuracion',
-                'intro_s' => '3',
-                'intro_m' => 'Aquí podrás cambiar tu contraseña o tu correo.',
-                'intro_p' => 'left'
-            )
-        );
-	    
-	
-	
+    $config = array(
+        '0' => array(
+            'name' => 'Configuración',
+            'color' => 'white',
+            'background' => '#333',
+            'dimension' => '11',
+            'offset' => '1',
+            'link' => 'configuracion',
+            'intro_s' => '3',
+            'intro_m' => 'Aquí podrás cambiar tu contraseña o tu correo.',
+            'intro_p' => 'top'
+        )
+    );
+
+        
+
         return $this->render(
             'TeachingGeneralBundle:Login:menu.html.twig',
             array(
-		'subjects' => $menu,
+                'subjects1' => $menu1,
                 'subjects2' => $menu2,
+                'subjects3' => $menu3,
+                'subjects4' => $menu4,
                 'message' => $message,
                 'config' => $config
             )
         );
-        
         
     }
     
@@ -253,7 +271,6 @@ class UserController extends Controller
             ->add('Para', 'text')
             ->add('Asunto', 'text')
             ->add('Mensaje', 'textarea')
-            ->add('Enviar', 'submit')
             ->getForm();
  
         $form->handleRequest($request);
@@ -280,33 +297,58 @@ class UserController extends Controller
                     $em->flush();
 
                     $msg_flash = 'Mensaje enviado.';
+
+                    $this->get('session')->getFlashBag()->add(
+                        'verificate',
+                        'success'
+                    );
+        
                 }
-                else{ $msg_flash = 'El usuario no existe.'; }
-                
+                else
+                { 
+                    $msg_flash = 'El usuario no existe.'; 
+
+                    $this->get('session')->getFlashBag()->add(
+                        'verificate',
+                        'error'
+                    );
+        
+                }
+            }  
+            else
+            { 
+                $msg_flash = 'No puedes enviarte tú mismo un mensaje.'; 
+
+                $this->get('session')->getFlashBag()->add(
+                    'verificate',
+                    'error'
+                );
+        
             }
-            else{ $msg_flash = 'No puedes enviarte tú mismo un mensaje.'; }
-            
-            
+
             // Flash message
             $this->get('session')->getFlashBag()->add('message_send', $msg_flash);
 
             return $this->redirect($this->generateUrl('teaching_user_messages'));
 
-            
+
         }
+            
+            
+        
+            
+        
         
         $em = $this->getDoctrine()->getRepository('TeachingGeneralBundle:Messages');
         
         $messages_send = $em->findBy(array('fromUser' => $user->getId()));
         $messages_receibe = $em->findBy(array('toUser' => $user->getId()));
 	
-	//$menu = $this->loadMenu('Mensajes');
         
         return $this->render(
             'TeachingUserBundle::messages.html.twig',
             array(
                 'controller' => 'Mensajes',
-		//'menu' => $menu,
                 'messages_send' => $messages_send,
                 'messages_receibe' => $messages_receibe,
                 'form'    => $form->createView(),
@@ -630,9 +672,7 @@ class UserController extends Controller
 		SELECT 
 		      ac.activityName
 		    , ac.type
-		    , ac.dateStart
-		    , ac.dateEnd
-		    , s.name
+		    , ac.description
 		    , acs.state
 		FROM $users u
 		    JOIN $affilations af with u.id = af.user
