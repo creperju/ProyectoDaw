@@ -55,7 +55,7 @@ a { text-decoration: none; }
 
 
 /*****************************/    
-/*       Input styles        */
+/*        Menu styles        */
 /*****************************/
 
 
@@ -77,6 +77,11 @@ a { text-decoration: none; }
     padding-top: 88px; padding-bottom: 88px;
 }
 
+.menu-actions
+{
+    padding-top: 15px; padding-bottom: 15px; 
+    color: white; background-color: #333;
+}
 
 
 

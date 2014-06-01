@@ -1,42 +1,56 @@
 {% extends "TeachingGeneralBundle::template.html.twig" %}
 
+
 {% block header %}
-    <div class="row" style="text-align: center;">
-        <div class="col-sm-3 col-md-6 col-lg-6">
-            Estás en <b>{{ controller }}</b>
-        </div>
-        <div class="col-sm-3 col-md-3 col-lg-3">
-            <a href="{{ path('teaching_user_homepage') }}">
-                Volver
-            </a>
-        </div>
-        <div class="col-sm-3 col-md-3 col-lg-3">
-            <a href="{{ path('logout') }}">
-                Cerrar sesión
-            </a>
-        </div>
+    
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7">
+        <h1>Estás en {{ controller }}</h1>
+    </div>
+    
+    
+    <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">  
+        <a href="
+            {% if (app.user and is_granted('ROLE_USER')) %}
+                {{ path('teaching_user_homepage')}}
+            {% endif %}
+            {% if (app.user and is_granted('ROLE_ADMIN')) %}
+                {{ path('teaching_admin_homepage')}}
+            {% endif %}
+            {% if (app.user and is_granted('ROLE_TEACHER')) %}
+                {{ path('teaching_teacher_homepage')}}
+            {% endif %}
+            ">
+            <button class="btn btn-primary margin-top-25 margin-bottom-25" title="Volver"><h4>Volver</h4></button>
+        </a>
+    </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        <a href="{{ path('logout')}}">
+            <button class="btn btn-danger margin-top-25 margin-bottom-25" title="Cerrar sesión"><h4>Cerrar sesión</h4></button>
+        </a>
     </div>
         
-        
 {% endblock %}
+
+
 
 {% block content %}
     
     <div class="container">
-        <div class="row">
+
+        <div class="row center menu-actions">
             
             {# Show actions in controller #}
             {% block actions %}{% endblock%}
             
         </div>
-        <div class="row">
-            {# Show result of action #}
-            <div class="col-sm-12 col-md-12 col-lg-12">
-                {% block result %}{% endblock %}
-            </div>
+        <br/>
+        
+        {# Show result of action #}
+        {% block result %}{% endblock %}
             
-        </div>
     </div>
+
 {% endblock %}
 
         
