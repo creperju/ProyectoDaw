@@ -1,97 +1,225 @@
 {% extends "TeachingGeneralBundle:Login:template_with_actions.html.twig" %}
 
 
-{% block header %}
-    <h2>Te encuentras en <b>{{ controller }}</b></h2>
-    
-    <a href="{{ path('teaching_user_homepage') }}">
-        <h3>Volver</h3>
-    </a>
-
-{% endblock %}
 
 
 
 {% block actions %}
     
-    <p>Redactar</p>
-    <p>Recibidos</p>
-    <p>Enviados</p>
+    <div class="col-xs-12
+                col-sm-4
+                col-md-4
+                col-lg-4">
+        Recibidos
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+        Enviados
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+        Redactar
+    </div>
     
 {% endblock %}
 
+
+
 {% block result %}
 
+    {# Message flash #}
     {% for message in  app.session.flashbag.get('message_send') %}
+    {% for verificate in app.session.flashbag.get('verificate') %}
 
-        <div class="row show-grid" id="msg_flash">
-            <div class="col-md-9 col-md-offset-1">
+        {% if verificate == 'success' %}
+            
+            <div class="alert alert-success" id="msg_flash">
                 {{ message }}
             </div>
-        </div>
+            
+        {% else %}
+            
+            <div class="alert alert-danger" id="msg_flash">
+                {{ message }}
+            </div>
+            
+        {% endif %}
+
 
     {% endfor %}
-
-    <div class="row">
-        <div class="col-md-9 col-md-offset-1">
-            <!-- Div contenido de mensajes -->
-
-            
-            <div class="row show-grid">
-                <div class="col-md-12">Mensajes recibidos</div>
-            </div>
-
-            
-            <div class="row">
-                <div class="col-md-12">
-                    
-                    {% if messages_receibe | length > 0 %}
-                        {% for m in messages_receibe %}
-                            <div class="col-md-4">{{ m.fromUser.username }}</div>
-                            <div class="col-md-4">{{ m.subject }}</div>
-                            <div class="col-md-4">{{ m.date | date('d-m-Y, H:m') }}</div>
-                        {% endfor %}
-                    {% else %}
-                        <p>No tienes mensajes.</p>
-                    {% endif %}
-                    
-                </div>
-            </div>
+    {% endfor %}
+    {# End message flash #}
 
 
-            <div class="row show-grid">
-                <div class="col-md-12">Mensajes enviados</div>
-            </div>
+    <div class="panel center padding-bottom-25 shadow" id="recibidos">
+        
+        <div class="panel-heading">
+            <h2>Mensajes recibidos</h2>
 
-                    
-            <div class="row">
-                <div class="col-md-12">
-                    {% if messages_send | length > 0 %}
-                        {% for m in messages_send %}
-                            <div class="col-md-4">{{ m.toUser.username }}</div>
-                            <div class="col-md-4">{{ m.subject }}</div>
-                            <div class="col-md-4">{{ m.date | date('d-m-Y, H:m') }}</div>
-                        {% endfor %}
-                    {% else %}
-                        <p>No tienes mensajes.</p>
-                    {% endif %}
-                </div>
-            </div>
-                
-                
-            <p/>
-            <div class="row show-grid">
-                <div class="col-md-12">Redactar</div>
-            </div>
+            {% if messages_receibe | length > 0 %}
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    De</div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    Asunto</div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    Mensaje</div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    Fecha</div>
+            {% endif %}
 
-            
-            <div class="row">
-                <div class="col-md-12">{{ form(form) }}</div>
-            </div>
+        </div>
 
-            
-         </div>
+        <div class="panel-body">
+            {% if messages_receibe | length > 0 %}
+                {% for m in messages_receibe %}
+                    <div class="col-xs-2
+                                col-sm-2
+                                col-md-2
+                                col-lg-2">
+                        {{ m.fromUser.username }}</div>
+                    <div class="col-xs-3
+                                col-sm-3
+                                col-md-3
+                                col-lg-3">
+                        {{ m.subject }}</div>
+                    <div class="col-xs-4
+                                col-sm-4
+                                col-md-4
+                                col-lg-4">
+                        {{ m.message }}</div>
+                    <div class="col-xs-3
+                                col-sm-3
+                                col-md-3
+                                col-lg-3">
+                        {{ m.date | date('d-m-Y, H:m') }}</div>
+                {% endfor %}
+            {% else %}
+                <p>No tienes mensajes.</p>
+            {% endif %}
+        </div>
+
     </div>
+
+
+    <div class="panel center padding-bottom-25 shadow" id="enviados">
+        
+        <div class="panel-heading">
+            <h2>Mensajes enviados</h2>
+
+            {% if messages_send | length > 0 %}
+                <div class="col-sm-2 col-md-2 col-lg-2">
+                    Para</div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    Asunto</div>
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    Mensaje</div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    Fecha</div>
+            {% endif %}
+
+        </div>
+
+        <div class="panel-body">
+            {% if messages_send | length > 0 %}
+                {% for m in messages_send %}
+                    <div class="col-xs-2
+                                col-sm-2
+                                col-md-2
+                                col-lg-2">
+                        {{ m.toUser.username }}</div>
+                    <div class="col-xs-3
+                                col-sm-3
+                                col-md-3
+                                col-lg-3">
+                        {{ m.subject }}</div>
+                    <div class="col-xs-4
+                                col-sm-4
+                                col-md-4
+                                col-lg-4">
+                        {{ m.message }}</div>
+                    <div class="col-xs-3
+                                col-sm-3
+                                col-md-3
+                                col-lg-3">
+                        {{ m.date | date('d-m-Y, H:m') }}</div>
+                {% endfor %}
+            {% else %}
+                <p>No tienes mensajes.</p>
+            {% endif %}
+        </div>
+
+    </div>
+
+
+    
+
+    
+    <div class="panel center padding-bottom-25 shadow" id="redactar">
+        
+        <div class="panel-heading">
+            <h2>Enviar mensaje</h2>
+        </div>
+
+        <div class="panel-body">
+            {{ form_start(form) }}
+
+                <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                    <div class="left
+                                col-xs-12
+                                col-md-offset-3
+                                col-md-2" >
+                        <h3 class="h3">
+                            {{ form_label(form.Para) }}
+                        </h3>
+                    </div>
+                    <div class="col-xs-12
+                                col-md-4 margin-top-15">
+                        {{ form_widget(form.Para, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+                </div>
+
+
+                <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                    <div class="left
+                                col-xs-12
+                                col-md-offset-3
+                                col-md-2" >
+                        <h3 class="h3">
+                            {{ form_label(form.Asunto) }}
+                        </h3>
+                    </div>
+                    <div class="col-xs-12
+                                col-md-4 margin-top-15">
+                        {{ form_widget(form.Asunto, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                    <div class="left
+                                col-xs-12
+                                col-md-offset-3 col-md-2" >
+                        <h3 class="h3">
+                            {{ form_label(form.Mensaje) }}
+                        </h3>
+                    </div>
+                    <div class="col-xs-12
+                                col-md-4 margin-top-15">
+                        {{ form_widget(form.Mensaje, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                    <br/>
+                    <button class="btn btn-info">
+                        <h3>Enviar</h3>
+                    </button>
+                </div>
+
+            {{ form_end(form) }}
+        </div>
+
+    </div>
+
+
+   
                        
 {% endblock %}
 
