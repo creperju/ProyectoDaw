@@ -120,7 +120,7 @@ class UserController extends Controller
             'offset' => '1',
             'link' => 'mensajes',
             'intro_s' => '2',
-            'intro_m' => 'Aquí podrás ver, enviar o recibir mensajes.',
+            'intro_m' => 'Aquí podrás ver tus mensajes recibidos, tus mensajes enviados y enviar mensajes a otros usuarios.',
             'intro_p' => 'top'
         )
     );
@@ -134,7 +134,7 @@ class UserController extends Controller
             'offset' => '1',
             'link' => 'configuracion',
             'intro_s' => '3',
-            'intro_m' => 'Aquí podrás cambiar tu contraseña o tu correo.',
+            'intro_m' => 'Aquí podrás cambiar tus datos personales, tales como tu nombre, correo electrónico o tu contraseña.',
             'intro_p' => 'top'
         )
     );

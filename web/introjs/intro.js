@@ -31,13 +31,13 @@
 
     this._options = {
       /* Next button label in tooltip box */
-      nextLabel: 'Next &rarr;',
+      nextLabel: 'Sig &rarr;',
       /* Previous button label in tooltip box */
-      prevLabel: '&larr; Back',
+      prevLabel: '&larr; Atrás',
       /* Skip button label in tooltip box */
-      skipLabel: 'Skip',
+      skipLabel: 'Salir',
       /* Done button label in tooltip box */
-      doneLabel: 'Done',
+      doneLabel: '¡Hecho!',
       /* Default tooltip box position */
       tooltipPosition: 'bottom',
       /* Next CSS class for tooltip boxes */
