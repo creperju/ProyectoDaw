@@ -4,16 +4,22 @@
 
 {% block actions %}
 
-        <div class="col-xs-12
+        <div id="actividades"
+             class="col-xs-12
                     col-sm-4
                     col-md-4
-                    col-lg-4">
+                    col-lg-4 menu-actions"
+             onmouseover="menuOver('actividades');" onmouseout="menuOut('actividades');" onclick="menuShow('actividades');">
             Actividades
         </div>
-        <div class="col-sm-4 col-md-4 col-lg-4">
+        <div id="entregadas"
+             class="col-sm-4 col-md-4 col-lg-4 menu-actions"
+             onmouseover="menuOver('entregadas');" onmouseout="menuOut('entregadas');" onclick="menuShow('entregadas');">
             Entregadas
         </div>
-        <div class="col-sm-4 col-md-4 col-lg-4">
+        <div id="pendientes"
+             class="col-sm-4 col-md-4 col-lg-4 menu-actions"
+             onmouseover="menuOver('pendientes');" onmouseout="menuOut('pendientes');" onclick="menuShow('pendientes');">
             Pendientes
         </div>
     
@@ -23,14 +29,15 @@
 
 {% block result %}
 
-
+    
     {# All activities #}
-    <div class="panel center shadow" id="activities">
+    <div class="panel center shadow contenido active" id="actividades-mostrar">
 
         <div class="panel-heading">
             <h2>Actividades</h2>
 
             {% if activities | length > 0 %}
+                <br/>
                 <div class="col-sm-3 col-md-3 col-lg-3">
                     Actividad</div>
                 <div class="col-sm-2 col-md-2 col-lg-2">
@@ -87,12 +94,13 @@
 
 
     {# Activities send #}
-    <div class="panel center shadow" id="entregadas">
+    <div class="panel center shadow contenido" id="entregadas-mostrar">
         
         <div class="panel-heading">
             <h2>Actividades entregadas</h2>
 
             {% if activities_send | length > 0 %}
+                <br/>
                 <div class="col-sm-3 col-md-3 col-lg-3">
                     Actividad</div>
                 <div class="col-sm-2 col-md-2 col-lg-2">
@@ -144,12 +152,13 @@
           
 
     {# Activities not finish #}
-    <div class="panel center shadow" id="pendientes">  
+    <div class="panel center shadow contenido" id="pendientes-mostrar">  
 
         <div class="panel-heading">
             <h2>Actividades pendientes</h2>
 
             {% if activities_pending | length > 0 %}
+                <br/>
                 <div class="col-sm-3 col-md-3 col-lg-3">
                     Actividad</div>
                 <div class="col-sm-2 col-md-2 col-lg-2">
@@ -206,5 +215,7 @@
 
     </div>    
                        
+            
+
 {% endblock %}
 

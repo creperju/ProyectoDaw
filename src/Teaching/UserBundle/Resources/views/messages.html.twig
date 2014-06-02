@@ -6,18 +6,24 @@
 
 {% block actions %}
     
-    <div class="col-xs-12
-                col-sm-4
-                col-md-4
-                col-lg-4">
-        Recibidos
-    </div>
-    <div class="col-sm-4 col-md-4 col-lg-4">
-        Enviados
-    </div>
-    <div class="col-sm-4 col-md-4 col-lg-4">
-        Redactar
-    </div>
+    <div id="recibidos"
+        class="col-xs-12
+               col-sm-4
+               col-md-4
+               col-lg-4 menu-actions"
+        onmouseover="menuOver('recibidos');" onmouseout="menuOut('recibidos');" onclick="menuShow('recibidos');">
+       Recibidos
+   </div>
+   <div id="enviados"
+        class="col-sm-4 col-md-4 col-lg-4 menu-actions"
+        onmouseover="menuOver('enviados');" onmouseout="menuOut('enviados');" onclick="menuShow('enviados');">
+       Enviados
+   </div>
+   <div id="redactar"
+        class="col-sm-4 col-md-4 col-lg-4 menu-actions"
+        onmouseover="menuOver('redactar');" onmouseout="menuOut('redactar');" onclick="menuShow('redactar');">
+       Redactar
+   </div>
     
 {% endblock %}
 
@@ -49,7 +55,7 @@
     {# End message flash #}
 
 
-    <div class="panel center padding-bottom-25 shadow" id="recibidos">
+    <div class="panel center padding-bottom-25 shadow contenido active" id="recibidos-mostrar">
         
         <div class="panel-heading">
             <h2>Mensajes recibidos</h2>
@@ -99,7 +105,7 @@
     </div>
 
 
-    <div class="panel center padding-bottom-25 shadow" id="enviados">
+    <div class="panel center padding-bottom-25 shadow contenido" id="enviados-mostrar">
         
         <div class="panel-heading">
             <h2>Mensajes enviados</h2>
@@ -152,7 +158,7 @@
     
 
     
-    <div class="panel center padding-bottom-25 shadow" id="redactar">
+    <div class="panel center padding-bottom-25 shadow contenido" id="redactar-mostrar">
         
         <div class="panel-heading">
             <h2>Enviar mensaje</h2>

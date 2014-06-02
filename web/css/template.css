@@ -47,9 +47,6 @@ a { text-decoration: none; }
     color: #b3b3b3;
 
 }
-    /* On click, don't see border in input */
-    /*#username:focus, #password:focus {  outline: 0px; }*/
-    #boton { background-color: #E3350D; border-radius: 5px; border: solid 1px black; }
     
 
 
@@ -57,16 +54,6 @@ a { text-decoration: none; }
 /*****************************/    
 /*        Menu styles        */
 /*****************************/
-
-
-/*.item-menu
-{
-    padding-top: 15px; padding-bottom: 15px;
-}
-.item-menu-help
-{
-    padding-top: 58px; padding-bottom: 58px;
-}*/
 
 .item-menu
 {
@@ -81,7 +68,20 @@ a { text-decoration: none; }
 {
     padding-top: 15px; padding-bottom: 15px; 
     color: white; background-color: #333;
+    
+    opacity:0.8;
+    filter:alpha(opacity=80); /* For IE8 and earlier */
 }
+
+.menu-select
+{
+    padding-top: 15px; padding-bottom: 15px; 
+    color: white; background-color: rgba(51,200,243,0.8);
+    
+    opacity:0.8;
+    filter:alpha(opacity=80); /* For IE8 and earlier */
+}
+
 
 
 
@@ -140,3 +140,5 @@ img{ width: 100px; }
 .left{ text-align: left; }
 
 
+.contenido { display: none; }
+.active { display: block; }

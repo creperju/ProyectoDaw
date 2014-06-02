@@ -37,13 +37,12 @@
 {% block content %}
     
     <div class="container">
-
-        <div class="row center menu-actions">
-            
+  
+        <div class="row center">
             {# Show actions in controller #}
             {% block actions %}{% endblock%}
-            
         </div>
+        
         <br/>
         
         {# Show result of action #}
@@ -53,4 +52,15 @@
 
 {% endblock %}
 
-        
+
+
+
+
+{% block js %}
+
+    {{ parent() }}
+
+    <script type="text/javascript" src="{{ asset('js/menu_secondary.js') }}"></script>
+    
+{% endblock %}
+

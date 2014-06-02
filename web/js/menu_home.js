@@ -14,5 +14,5 @@ function over(item)
 /* Remove black shadow onmouseout */
 function out(item)
 {
-    document.getElementById(item).className = document.getElementById(item).className.replace("shadow-black", "") ;
+    document.getElementById(item).className = document.getElementById(item).className.replace("shadow-black", "");
 }
