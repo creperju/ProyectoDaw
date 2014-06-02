@@ -35,7 +35,8 @@
                                         col-md-{{ s.dimension }} col-md-offset-{{ s.offset }}
                                         col-sm-{{ s.dimension }} col-sm-offset-{{ s.offset }}
                                         col-lg-{{ s.dimension }} col-lg-offset-{{ s.offset }}" 
-                                 style="color: {{ s.color }}; background-color: {{ s.background }};">
+                                 style="color: {{ s.color }}; background-color: {{ s.background }};"
+                                 onmouseover="over('{{ s.link }}');" onmouseout="out('{{ s.link }}');">
                                 {{ s.name }}
                             </div>
                         </a>
@@ -51,13 +52,14 @@
                     {% for s in subjects2 %}
                         
                         <a href="{{ path('teaching_user_homepage') }}{{ s.link }}/">
-                            <div 
+                            <div id="{{ s.link }}"
                                  class="item-menu
                                         col-xs-{{ s.dxs }} col-xs-offset-{{ s.oxs }}
                                         col-md-{{ s.dimension }} col-md-offset-{{ s.offset }}
                                         col-sm-{{ s.dimension }} col-sm-offset-{{ s.offset }}
                                         col-lg-{{ s.dimension }} col-lg-offset-{{ s.offset }}" 
-                                 style="color: {{ s.color }}; background-color: {{ s.background }};">
+                                 style="color: {{ s.color }}; background-color: {{ s.background }};"
+                                 onmouseover="over('{{ s.link }}');" onmouseout="out('{{ s.link }}');">
                                 {{ s.name }}
                             </div>
                         </a>
@@ -73,13 +75,14 @@
                     {% for s in subjects3 %}
                         
                         <a href="{{ path('teaching_user_homepage') }}{{ s.link }}/">
-                            <div 
+                            <div id="{{ s.link }}"
                                  class="item-menu
                                         col-xs-10 col-xs-offset-1
                                         col-md-{{ s.dimension }} col-md-offset-{{ s.offset }}
                                         col-sm-{{ s.dimension }} col-sm-offset-{{ s.offset }}
                                         col-lg-{{ s.dimension }} col-lg-offset-{{ s.offset }}" 
-                                 style="color: {{ s.color }}; background-color: {{ s.background }};">
+                                 style="color: {{ s.color }}; background-color: {{ s.background }};"
+                                 onmouseover="over('{{ s.link }}');" onmouseout="out('{{ s.link }}');">
                                 {{ s.name }}
                             </div>
                         </a>
@@ -95,13 +98,14 @@
                     {% for s in subjects4 %}
                         
                         <a href="{{ path('teaching_user_homepage') }}{{ s.link }}/">
-                            <div 
+                            <div id="{{ s.link }}"
                                  class="item-menu
                                         col-xs-10 col-xs-offset-1
                                         col-md-{{ s.dimension }} col-md-offset-{{ s.offset }}
                                         col-sm-{{ s.dimension }} col-sm-offset-{{ s.offset }}
                                         col-lg-{{ s.dimension }} col-lg-offset-{{ s.offset }}" 
-                                 style="color: {{ s.color }}; background-color: {{ s.background }};">
+                                 style="color: {{ s.color }}; background-color: {{ s.background }};"
+                                 onmouseover="over('{{ s.link }}');" onmouseout="out('{{ s.link }}');">
                                 {{ s.name }}
                             </div>
                         </a>
@@ -119,12 +123,14 @@
             <div class="col-sm-5">
                 <div class="row">
 
-                    <div class="item-menu-help
+                    <div id="ayuda"
+                         class="item-menu-help
                                 col-xs-10 col-xs-offset-1
                                 col-md-11 col-md-offset-1
                                 col-sm-11 col-sm-offset-1
                                 col-lg-11 col-lg-offset-1" 
                          style="color: white; background-color: #3a87ad;"
+                         onmouseover="over('ayuda');" onmouseout="out('ayuda');"
                          onclick='javascript:introJs().start().setOption("skipLabel", "Salir");'>
                         Ayuda
                    </div>
@@ -140,14 +146,15 @@
                     {% for m in message %}
                 
                         <a href="{{ path('teaching_user_homepage') }}{{ m.link }}/">
-                            <div 
+                            <div id="{{ m.link }}"
                                  class="item-menu
                                         col-xs-10 col-xs-offset-1
                                         col-md-{{ m.dimension }} col-md-offset-{{ m.offset }}
                                         col-sm-{{ m.dimension }} col-sm-offset-{{ m.offset }}
                                         col-lg-{{ m.dimension }} col-lg-offset-{{ m.offset }}" 
                                  style="color: {{ m.color }}; background-color: {{ m.background }};"
-                                 data-step="{{ m.intro_s}}" data-intro="{{ m.intro_m }}" data-position="{{ m.intro_p }}">
+                                 data-step="{{ m.intro_s}}" data-intro="{{ m.intro_m }}" data-position="{{ m.intro_p }}"
+                                 onmouseover="over('{{ m.link }}');" onmouseout="out('{{ m.link }}');">
                                 {{ m.name }}
                             </div>
                         </a>
@@ -163,7 +170,7 @@
                     {% for c in config %}
                 
                         <a href="{{ path('teaching_user_homepage') }}{{ c.link }}/">
-                            <div 
+                            <div id="{{ c.link }}"
                                  class="item-menu
                                         col-xs-10 col-xs-offset-1
                                         col-md-{{ c.dimension }} col-md-offset-{{ c.offset }}
@@ -171,8 +178,7 @@
                                         col-lg-{{ c.dimension }} col-lg-offset-{{ c.offset }}" 
                                  style="color: {{ c.color }}; background-color: {{ c.background }};"
                                  data-step="{{ c.intro_s }}" data-intro="{{ c.intro_m }}" data-position="{{ c.intro_p }}"
-                                 onmousein="in(this);"
-                                 onmouseleave="out(this);">
+                                 onmouseover="over('{{ c.link }}');" onmouseout="out('{{ c.link }}');">
                                 {{ c.name }}
                             </div>
                         </a>
@@ -193,22 +199,15 @@
                          
 
 
-{# Script for onmousein add shadow, onmouseleave erase shadow #}
-<script type="text/javascript">
+{% endblock %}
+
+
+{% block js %}
     
-    function in(item)
-    {
-        var class = "shadow";
+    {# Mantiene el js anterior más, lo que añadimos aquí #}
+    {{ parent() }}
 
-        document.getElementById(item).style = 'box-shadow: 0px 3px 20px gray;';
-
-    }
-
-    function out(item)
-    {
-        document.getElementById(item).style = 'box-shadow: 0px;';
-    }
-
-</script>
-
+    {# Añade sombreado a los elementos del menú #}
+    <script type="text/javascript" src="{{ asset('js/menu_home.js') }}"></script>
+    
 {% endblock %}
