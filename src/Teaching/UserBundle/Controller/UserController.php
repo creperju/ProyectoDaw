@@ -47,7 +47,7 @@ class UserController extends Controller
             'dimension' => '5',
             'offset' => '0',
             'oxs' => '1',
-            'dxs' => '5',
+            'dxs' => '4',
             'link' => 'lengua'
         ),
         '1' => array(
@@ -56,7 +56,7 @@ class UserController extends Controller
             'background' => '#E3350D',
             'dimension' => '6',
             'offset' => '1',
-            'oxs' => '1',
+            'oxs' => '2',
             'dxs' => '4',
             'link' => 'ingles'
         )
@@ -72,7 +72,7 @@ class UserController extends Controller
             'dimension' => '5',
             'offset' => '0',
             'oxs' => '1',
-            'dxs' => '5',
+            'dxs' => '4',
             'link' => 'musica'
         ),
         '1' => array(
@@ -81,7 +81,7 @@ class UserController extends Controller
             'background' => '#f89406',
             'dimension' => '6',
             'offset' => '1',
-            'oxs' => '1',
+            'oxs' => '2',
             'dxs' => '4',
             'link' => 'gimnasia'
         )

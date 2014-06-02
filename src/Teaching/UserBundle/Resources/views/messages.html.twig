@@ -15,12 +15,12 @@
        Recibidos
    </div>
    <div id="enviados"
-        class="col-sm-4 col-md-4 col-lg-4 menu-actions"
+        class="col-xs-12 col-sm-4 col-md-4 col-lg-4 menu-actions"
         onmouseover="menuOver('enviados');" onmouseout="menuOut('enviados');" onclick="menuShow('enviados');">
        Enviados
    </div>
    <div id="redactar"
-        class="col-sm-4 col-md-4 col-lg-4 menu-actions"
+        class="col-xs-12 col-sm-4 col-md-4 col-lg-4 menu-actions"
         onmouseover="menuOver('redactar');" onmouseout="menuOut('redactar');" onclick="menuShow('redactar');">
        Redactar
    </div>
@@ -55,20 +55,22 @@
     {# End message flash #}
 
 
-    <div class="panel center padding-bottom-25 shadow contenido active" id="recibidos-mostrar">
-        
-        <div class="panel-heading">
-            <h2>Mensajes recibidos</h2>
+    <div class="panel padding-bottom-25 shadow contenido active" id="recibidos-mostrar">
+        <h2 class="center">Mensajes recibidos</h2>
+        <div class="panel-heading hidden-xs">
+            
 
             {% if messages_receibe | length > 0 %}
-                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                    De</div>
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                    Asunto</div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    Mensaje</div>
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                    Fecha</div>
+                <br/>
+                <div class="col-sm-2 col-md-2 col-lg-2">
+                    <b>De</b></div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <b>Asunto</b></div>
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <b>Mensaje</b></div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <b>Fecha</b></div>
+                <hr/>
             {% endif %}
 
         </div>
@@ -76,26 +78,31 @@
         <div class="panel-body">
             {% if messages_receibe | length > 0 %}
                 {% for m in messages_receibe %}
-                    <div class="col-xs-2
-                                col-sm-2
-                                col-md-2
-                                col-lg-2">
+                    
+                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>De:</b></span>
+                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
                         {{ m.fromUser.username }}</div>
-                    <div class="col-xs-3
-                                col-sm-3
-                                col-md-3
-                                col-lg-3">
+                        
+                        
+                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Asunto:</b></span>
+                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
                         {{ m.subject }}</div>
-                    <div class="col-xs-4
-                                col-sm-4
-                                col-md-4
-                                col-lg-4">
+                        
+                        
+                    <div class="hidden-xs col-sm-4 col-md-4 col-lg-4">
                         {{ m.message }}</div>
-                    <div class="col-xs-3
-                                col-sm-3
-                                col-md-3
-                                col-lg-3">
+                        
+                        
+                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Fecha:</b></span>
+                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
                         {{ m.date | date('d-m-Y, H:m') }}</div>
+                        
+                        
+                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Mensaje:</b></span>
+                    <div class="col-xs-12 hidden-sm hidden-md hidden-lg margin-bottom-50">
+                        {{ m.message }}</div>
+                    
+                    <div class="hidden-xs col-sm-12 margin-bottom-50"></div>
                 {% endfor %}
             {% else %}
                 <p>No tienes mensajes.</p>
@@ -105,47 +112,58 @@
     </div>
 
 
-    <div class="panel center padding-bottom-25 shadow contenido" id="enviados-mostrar">
+    <div class="panel padding-bottom-25 shadow contenido" id="enviados-mostrar">
         
-        <div class="panel-heading">
-            <h2>Mensajes enviados</h2>
+        
+        <h2 class="center">Mensajes enviados</h2>
+        <div class="panel-heading hidden-xs">
+            
 
-            {% if messages_send | length > 0 %}
+            {% if messages_receibe | length > 0 %}
+                <br/>
                 <div class="col-sm-2 col-md-2 col-lg-2">
-                    Para</div>
+                    <b>Para</b></div>
                 <div class="col-sm-3 col-md-3 col-lg-3">
-                    Asunto</div>
+                    <b>Asunto</b></div>
                 <div class="col-sm-4 col-md-4 col-lg-4">
-                    Mensaje</div>
+                    <b>Mensaje</b></div>
                 <div class="col-sm-3 col-md-3 col-lg-3">
-                    Fecha</div>
+                    <b>Fecha</b></div>
+                <hr/>
             {% endif %}
 
         </div>
-
+        
         <div class="panel-body">
             {% if messages_send | length > 0 %}
                 {% for m in messages_send %}
-                    <div class="col-xs-2
-                                col-sm-2
-                                col-md-2
-                                col-lg-2">
+                    
+                    
+                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>De:</b></span>
+                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
                         {{ m.toUser.username }}</div>
-                    <div class="col-xs-3
-                                col-sm-3
-                                col-md-3
-                                col-lg-3">
+                        
+                        
+                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Asunto:</b></span>
+                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
                         {{ m.subject }}</div>
-                    <div class="col-xs-4
-                                col-sm-4
-                                col-md-4
-                                col-lg-4">
+                        
+                        
+                    <div class="hidden-xs col-sm-4 col-md-4 col-lg-4">
                         {{ m.message }}</div>
-                    <div class="col-xs-3
-                                col-sm-3
-                                col-md-3
-                                col-lg-3">
+                        
+                        
+                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Fecha:</b></span>
+                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
                         {{ m.date | date('d-m-Y, H:m') }}</div>
+                        
+                        
+                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Mensaje:</b></span>
+                    <div class="col-xs-12 hidden-sm hidden-md hidden-lg margin-bottom-50">
+                        {{ m.message }}</div>
+                    
+                    <div class="hidden-xs col-sm-12 margin-bottom-50"></div>
+                    
                 {% endfor %}
             {% else %}
                 <p>No tienes mensajes.</p>
