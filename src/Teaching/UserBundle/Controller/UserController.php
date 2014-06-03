@@ -3,7 +3,6 @@
 namespace Teaching\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Teaching\GeneralBundle\Entity\Messages;
@@ -11,133 +10,116 @@ use Datetime;
 
 class UserController extends Controller
 {
-    
-    private function havePermissions()
-    {
-        // Deny users if they are admin
-        if (!$this->get('security.context')->isGranted("ROLE_USER")) {
-            throw new AccessDeniedException();
-        }
-    }
-    
-    
+        
+    /**
+     * Home user
+     * 
+     * @return type
+     */
     public function indexAction()
     {
         
-        $this->havePermissions();
-        
-        
-        
-        
-        
-//        return new Response("<html><head><title>ENHORABUENA</title></head><body>"
-//                . "Tipo de usuario: <h4>".$rol[0]."</h4>"
-//                . "<b>Nombre de usuario: </b>".$user->getUsername()."<br/>"
-//                . "<b>Email: </b>".$user->getEmail()."<br/>"
-//                . "<b>Nombre: </b>".$user->getName()."<br/>"
-//                . "<b>Apellidos: </b>".$user->getSurname().""
-//                . "<p><a href='".$url."'>SALIR</a></body></html>");
-//	
-        
-    $menu1 = array(
-        '0' => array(
-            'name' => 'Lengua',
-            'color' => 'white',
-            'background' => '#005580',
-            'dimension' => '5',
-            'offset' => '0',
-            'oxs' => '1',
-            'dxs' => '4',
-            'link' => 'lengua'
-        ),
-        '1' => array(
-            'name' => 'Inglés',
-            'color' => 'white',
-            'background' => '#E3350D',
-            'dimension' => '6',
-            'offset' => '1',
-            'oxs' => '2',
-            'dxs' => '4',
-            'link' => 'ingles'
-        )
-    );
+        // Many arrays to show differents subjects and items, also can be customize
+	
+	$menu1 = array(
+	    '0' => array(
+		'name' => 'Lengua',
+		'color' => 'white',
+		'background' => '#005580',
+		'dimension' => '5',
+		'offset' => '0',
+		'oxs' => '1',
+		'dxs' => '4',
+		'link' => 'lengua'
+	    ),
+	    '1' => array(
+		'name' => 'Inglés',
+		'color' => 'white',
+		'background' => '#E3350D',
+		'dimension' => '6',
+		'offset' => '1',
+		'oxs' => '2',
+		'dxs' => '4',
+		'link' => 'ingles'
+	    )
+	);
 
     
 
-    $menu2 = array(
-        '0' => array(
-            'name' => 'Música',
-            'color' => 'white',
-            'background' => '#7a43b6',
-            'dimension' => '5',
-            'offset' => '0',
-            'oxs' => '1',
-            'dxs' => '4',
-            'link' => 'musica'
-        ),
-        '1' => array(
-            'name' => 'Gimnasia',
-            'color' => 'white',
-            'background' => '#f89406',
-            'dimension' => '6',
-            'offset' => '1',
-            'oxs' => '2',
-            'dxs' => '4',
-            'link' => 'gimnasia'
-        )
-    );
+	$menu2 = array(
+	    '0' => array(
+		'name' => 'Música',
+		'color' => 'white',
+		'background' => '#7a43b6',
+		'dimension' => '5',
+		'offset' => '0',
+		'oxs' => '1',
+		'dxs' => '4',
+		'link' => 'musica'
+	    ),
+	    '1' => array(
+		'name' => 'Gimnasia',
+		'color' => 'white',
+		'background' => '#f89406',
+		'dimension' => '6',
+		'offset' => '1',
+		'oxs' => '2',
+		'dxs' => '4',
+		'link' => 'gimnasia'
+	    )
+	);
 
-    $menu3 = array(
-        '0' => array(
-            'name' => 'Matemáticas',
-            'color' => 'white',
-            'background' => '#ffc40d',
-            'dimension' => '12',
-            'offset' => '0',
-            'link' => 'matematicas'
-        )
-    );
-
-
-    $menu4 = array(
-        '0' => array(
-            'name' => 'Conocimiento del Medio',
-            'color' => 'white',
-            'background' => '#46a546',
-            'dimension' => '12',
-            'offset' => '0',
-            'link' => 'conocimientodelmedio'
-        )
-    );
+	$menu3 = array(
+	    '0' => array(
+		'name' => 'Matemáticas',
+		'color' => 'white',
+		'background' => '#ffc40d',
+		'dimension' => '12',
+		'offset' => '0',
+		'link' => 'matematicas'
+	    )
+	);
 
 
-    $message = array(
-        '0' => array(
-            'name' => 'Mensajes',
-            'color' => 'white',
-            'background' => '#30A7D7',
-            'dimension' => '11',
-            'offset' => '1',
-            'link' => 'mensajes',
-            'intro_s' => '2',
-            'intro_m' => 'Aquí podrás ver tus mensajes recibidos, tus mensajes enviados y enviar mensajes a otros usuarios.',
-            'intro_p' => 'top'
-        )
-    );
-        
-    $config = array(
-        '0' => array(
-            'name' => 'Configuración',
-            'color' => 'white',
-            'background' => '#333',
-            'dimension' => '11',
-            'offset' => '1',
-            'link' => 'configuracion',
-            'intro_s' => '3',
-            'intro_m' => 'Aquí podrás cambiar tus datos personales, tales como tu nombre, correo electrónico o tu contraseña.',
-            'intro_p' => 'top'
-        )
-    );
+	$menu4 = array(
+	    '0' => array(
+		'name' => 'Conocimiento del Medio',
+		'color' => 'white',
+		'background' => '#46a546',
+		'dimension' => '12',
+		'offset' => '0',
+		'link' => 'conocimientodelmedio'
+	    )
+	);
+
+
+	$message = array(
+	    '0' => array(
+		'name' => 'Mensajes',
+		'color' => 'white',
+		'background' => '#30A7D7',
+		'dimension' => '11',
+		'offset' => '1',
+		'link' => 'mensajes',
+		'intro_s' => '2',
+		'intro_m' => 'Aquí podrás ver tus mensajes recibidos, tus mensajes enviados y enviar mensajes a otros usuarios.',
+		'intro_p' => 'top'
+	    )
+	);
+
+	$config = array(
+	    '0' => array(
+		'name' => 'Configuración',
+		'color' => 'white',
+		'background' => '#333',
+		'dimension' => '11',
+		'offset' => '1',
+		'link' => 'configuracion',
+		'intro_s' => '3',
+		'intro_m' => 'Aquí podrás cambiar tus datos personales, tales como tu nombre, correo electrónico o tu contraseña.',
+		'intro_p' => 'top'
+	    )
+	);
 
         
 
@@ -155,10 +137,15 @@ class UserController extends Controller
         
     }
     
+    
+    
+    /**
+     * View Spanish
+     * @return type
+     */
     public function spanishAction()
     {
-        $this->havePermissions();
-        
+	// Return students assign into user
         $student = $this->findStudents();
         
         if(count($student))
@@ -171,14 +158,17 @@ class UserController extends Controller
                     'message' => 'No tiene asignado ningún alumno, contacte con el administrador.'
                 )
             );
-        
-        
     }
     
+    
+    
+    /**
+     * View English
+     * @return type
+     */
     public function englishAction()
     {
-        $this->havePermissions();
-        
+        // Return students assign into user
         $student = $this->findStudents();
         
         if(count($student))
@@ -191,14 +181,18 @@ class UserController extends Controller
                     'message' => 'No tiene asignado ningún alumno, contacte con el administrador.'
                 )
             );
-        
-        
     }
     
+    
+    
+    /**
+     * View Music
+     * 
+     * @return type
+     */
     public function musicAction()
     {
-        $this->havePermissions();
-        
+        // Return students assign into user
         $student = $this->findStudents();
         
         if(count($student))
@@ -211,14 +205,17 @@ class UserController extends Controller
                     'message' => 'No tiene asignado ningún alumno, contacte con el administrador.'
                 )
             );
-        
-        
     }
     
+    
+    
+    /**
+     * View Gymnastics
+     * @return type
+     */
     public function gymnasticsAction()
     {
-        $this->havePermissions();
-        
+        // Return students assign into user
         $student = $this->findStudents();
         
         if(count($student))
@@ -231,14 +228,40 @@ class UserController extends Controller
                     'message' => 'No tiene asignado ningún alumno, contacte con el administrador.'
                 )
             );
-        
-        
     }
     
+    
+    
+    /**
+     * View Maths
+     * @return type
+     */
+    public function mathsAction()
+    {
+        // Return students assign into user
+        $student = $this->findStudents();
+        
+        if(count($student))
+            return $this->actionSubjects($student, 'Matemáticas');
+        else
+            return $this->render(
+                'TeachingGeneralBundle:Login:no_data.html.twig',
+                array(
+                    'controller' => 'Matemáticas',
+                    'message' => 'No tiene asignado ningún alumno, contacte con el administrador.'
+                )
+            );
+    }
+    
+    
+    
+    /**
+     * View Nature
+     * @return type
+     */
     public function natureAction()
     {
-        $this->havePermissions();
-        
+        // Return students assign into user
         $student = $this->findStudents();
         
         if(count($student))
@@ -256,17 +279,17 @@ class UserController extends Controller
     
     
     /**
-     * Controller to view, send messages.
+     * View Messages
      * 
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return type
      */
     public function messagesAction(Request $request)
     {
-        $this->havePermissions();
         
         $user = $this->getUser();
         
+	// Form to send message
         $form = $this->createFormBuilder()
             ->add('Para', 'text')
             ->add('Asunto', 'text')
@@ -275,17 +298,26 @@ class UserController extends Controller
  
         $form->handleRequest($request);
 
+	
+	// Only if user send a message
         if ($form->isValid()) {
             
+	    // Get data of message
             $data = $form->getData();
             
+	    // Not send message if user receibe is hisself
             if( $data['Para'] != $user->getUsername()){
+		
+		// Find user receibe message
                 $to = $this->search($data['Para'], 'Users', 'username');
                 
+		// If there is a user with this username, entry
                 if($to != null){
-                    // Grabo el mensaje
+                    
+		    // Create new class Messages
                     $message = new Messages();
 
+		    // Edit fields of message
                     $message->setFromUser($this->search($user->getUsername(), 'Users', 'username'));
                     $message->setToUser($this->search($data['Para'], 'Users', 'username'));
                     $message->setSubject($data['Asunto']);
@@ -294,7 +326,8 @@ class UserController extends Controller
 
                     $em = $this->getDoctrine()->getManager();
                     $em->persist($message);
-                    $em->flush();
+                    
+		    $em->flush(); // Send message
 
                     $msg_flash = 'Mensaje enviado.';
 
@@ -312,7 +345,6 @@ class UserController extends Controller
                         'verificate',
                         'error'
                     );
-        
                 }
             }  
             else
@@ -331,20 +363,14 @@ class UserController extends Controller
 
             return $this->redirect($this->generateUrl('teaching_user_messages'));
 
-
         }
             
-            
-        
-            
-        
-        
         $em = $this->getDoctrine()->getRepository('TeachingGeneralBundle:Messages');
         
+	// Get messages send and messages receibe
         $messages_send = $em->findBy(array('fromUser' => $user->getId()));
         $messages_receibe = $em->findBy(array('toUser' => $user->getId()));
 	
-        
         return $this->render(
             'TeachingUserBundle::messages.html.twig',
             array(
@@ -495,24 +521,7 @@ class UserController extends Controller
     
     
     
-     public function mathsAction()
-    {
-        $this->havePermissions();
-        
-        $student = $this->findStudents();
-        
-        if(count($student))
-            return $this->actionSubjects($student, 'Matemáticas');
-        else
-            return $this->render(
-                'TeachingGeneralBundle:Login:no_data.html.twig',
-                array(
-                    'controller' => 'Matemáticas',
-                    'message' => 'No tiene asignado ningún alumno, contacte con el administrador.'
-                )
-            );
-        
-    }
+    
     
     
     
@@ -527,14 +536,12 @@ class UserController extends Controller
         // Get current user
         $user = $this->getUser()->getId();
         
-	
+	// Fields in use
 	$users = "TeachingGeneralBundle:Users";
 	$affilations = "TeachingGeneralBundle:Affilations";
 	$students = "TeachingGeneralBundle:Students";
 	
-	
 	$em = $this->getDoctrine()->getManager();
-	
 	
 	// Query 
 	$query = $em->createQuery("
@@ -545,31 +552,22 @@ class UserController extends Controller
 		WHERE u.id = $user
 	");
 	
-	
-	
-	
-//        // Get students
-//        $students = $this->search($user, 'Affilations', 'user', true);
-//        
-//	echo "<pre>";print_r($students);echo "</pre>";exit(0);
-//	
-//        return $students;
-        
-	
 	return $query->getResult();
 	
     }
 
-
-
-
-
-
-
-
+    
+    
+    /**
+     * Load differents activities of a subject and student
+     * 
+     * @param type $students
+     * @param type $subject
+     * @return type
+     */
     private function actionSubjects($students, $subject)
     {
-	
+	// Get student ID and subject ID
 	$student_id = $students[0]->getId();
 	$subject_id = $this->search($subject, 'Subjects', "name")->getId();
 	
@@ -578,6 +576,7 @@ class UserController extends Controller
 //        echo "Subject id " . $subject_id;
 //        exit(0);
         
+	// Load all activities
         $activities = $this->getActivitiesStudentsToHave($student_id, $subject_id);
 	$activities_send = $this->getActivitiesStudentsSend($student_id, $subject_id);
         $activities_pending = $this->getActivitiesStudentsPending($student_id, $subject_id);
@@ -590,29 +589,16 @@ class UserController extends Controller
 //            echo "No hay actividades";
 //        echo "</pre>";exit(0);
         
-        //$menu = $this->loadMenu($subject);
         
         return $this->render(
             'TeachingUserBundle::subjects.html.twig',
             array(
                 'controller' => $subject,
-		//'menu' => $menu,
                 'activities' => $activities,
                 'activities_send' => $activities_send,
                 'activities_pending' => $activities_pending
             )
         );
-        
-    }
-    
-    
-    
-    private function loadActivities($id)
-    {
-        
-        $activities = $this->search($id, 'Activities', 'groupSubject', true);
-        
-        return $activities;
         
     }
     
@@ -637,11 +623,9 @@ class UserController extends Controller
         else
             $result = $em->findBy(array($field => $data));
         
-        
 	// Return data
         return $result;
     }
-    
     
     
     
@@ -663,9 +647,7 @@ class UserController extends Controller
 	$groups_subjects = "TeachingGeneralBundle:GroupsSubjects";
 	$subjects = "TeachingGeneralBundle:Subjects";
 	
-	
 	$em = $this->getDoctrine()->getManager();
-	
 	
 	// Query 
 	$query = $em->createQuery("
@@ -695,9 +677,18 @@ class UserController extends Controller
 	
     }
     
+    
+    
+    /**
+     * Get activities send of a student
+     * 
+     * @param type $student_id
+     * @param type $subject_id
+     * @return type
+     */
     private function getActivitiesStudentsSend($student_id, $subject_id)
     {
-        // Entities required
+        // Entities required to generate JOIN
 	$users = "TeachingGeneralBundle:Users";
 	$affilations = "TeachingGeneralBundle:Affilations";
 	$students = "TeachingGeneralBundle:Students";
@@ -706,9 +697,7 @@ class UserController extends Controller
 	$groups_subjects = "TeachingGeneralBundle:GroupsSubjects";
 	$subjects = "TeachingGeneralBundle:Subjects";
 	
-	
 	$em = $this->getDoctrine()->getManager();
-	
 	
 	// Query 
 	$query = $em->createQuery("
@@ -739,9 +728,16 @@ class UserController extends Controller
     
     
     
+    /**
+     * Return activities pending of a student
+     * 
+     * @param type $student_id
+     * @param type $subject_id
+     * @return type
+     */
     private function getActivitiesStudentsPending($student_id, $subject_id)
     {
-        
+	
         // Entities required
 	$users = "TeachingGeneralBundle:Users";
 	$affilations = "TeachingGeneralBundle:Affilations";
@@ -751,9 +747,7 @@ class UserController extends Controller
 	$groups_subjects = "TeachingGeneralBundle:GroupsSubjects";
 	$subjects = "TeachingGeneralBundle:Subjects";
 	
-	
 	$em = $this->getDoctrine()->getManager();
-	
 	
 	// Query 
 	$query = $em->createQuery("
@@ -781,113 +775,6 @@ class UserController extends Controller
 	
 	
 	return $query->getResult();
-        
-    }
-    
-    
-    
-    private function findGroupsSubjects($group, $subject)
-    {
-        
-        $em = $this->getDoctrine()->getRepository('TeachingGeneralBundle:GroupsSubjects');
-        
-        
-        $id = $em->findOneBy(array(
-                    'group'     => $group,
-                    'subject'   => $subject
-                ));
-        
-        
-        return $id;
-        
-    }
-    
-    
-    
-    /**
-     * Load a dynamic menu
-     * 
-     * @param type $drop This controller not view in menu
-     * @return string Html code to insert in twig
-     */
-    private function loadMenu($drop)
-    {
-	$content = array(
-	    'Matemáticas' => '1', 
-	    'Lengua' => '1', 
-	    'Inglés' => '1', 
-	    'Música' => '1', 
-	    'Gimnasia' => '1', 
-	    'Conocimiento del Medio' => '2', 
-	    'Mensajes' => '1', 
-	    'Configuración' => '2', 
-	    'Ayuda' => '1'
-	);
-	
-	unset($content[$drop]);
-	
-	
-	$i = 1;
-	foreach($content as $element => $value){
-	    
-            if($i == 1){
-                $menu = '<div class="col-sm-'.$value.' col-sm-offset-1 col-md-'.$value.' col-md-offset-1 col-lg-'.$value.' col-lg-offset-1"><center>'.$element.'</center></div>';
-            
-                $i++;
-                continue;
-            }
-            
-            $menu .= '<div class="col-sm-'.$value.' col-md-'.$value.' col-lg-'.$value.'"><center>'.$element.'</center></div>';
-            
-	}
-	
-	return $menu;
-	
-    }
-    
-    
-    
-    
-    
-    private function loadActivitiesSend($student, $activities)
-    {
-        
-        foreach($activities as $activity){
-            
-            
-            $query = $this->findStudentActivities($student, $activity->getId());
-            
-            $activities_send[] = $query;
-            
-        }
-        
-//        foreach($activities as $activity){
-//            echo "<pre>";print_r($activity->getId());echo "</pre>";
-//            
-//        }
-//        exit(0);
-        
-        
-        
-        return $activities_send;
-        
-    }
-    
-    
-    
-    
-    
-    private function findStudentActivities($student, $activity)
-    {
-        
-        // Find entity
-	$em = $this->getDoctrine()->getRepository('TeachingGeneralBundle:ActivitiesStudents');
-        
-        
-        $query = $em->findOneBy(array('student' => $student, 'activity' => $activity));
-        
-        
-        return $query;
         
     }
     
