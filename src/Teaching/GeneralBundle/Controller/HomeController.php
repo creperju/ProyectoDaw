@@ -22,7 +22,6 @@ class HomeController extends Controller
     public function indexAction(Request $request)
     {
         
-        
         // Form to SignUp user
 	$user = new Users();
 	$form = $this->createForm(new SignUp(),$user);
@@ -38,29 +37,94 @@ class HomeController extends Controller
             // If user not exits
             if(! $this->search($data->getUsername(), 'Users', 'username') ){
                 
+		$c = 0;
 		
-		if(strlen($data->getUsername()) > 20)
-		    $error['username'] = "Longitud de usuario no permitida, 20 caracteres máximo.";
+		if(strlen($data->getUsername()) > 20){
+		    
+		    $msg_flash= "Error: Longitud de máxima de usuario 20 caracteres.";
+		    
+		    $this->get('session')->getFlashBag()->add(
+			'error_user', $msg_flash
+		    );
+		    
+		    $c++;
+		}
+		    
 		
-		if(strlen($data->getPassword()) > 20)
-		    $error['password'] = "Longitud de usuario no permitida, 20 caracteres máximo.";
+		if(strlen($data->getPassword()) > 50){
+		    
+		    $msg_flash= "Error: Longitud máxima de contraseña 50 caracteres.";
+		    
+		    $this->get('session')->getFlashBag()->add(
+			'error_password', $msg_flash
+		    );
+		    
+		    $c++;
+		}
+		    
+		
+		if( $this->errorEmail( $data->getEmail() ) > 0 ){
+		    
+		    $msg_flash= "Error: Email no válido o máximo 50 caracteres.";
+		    
+		    $this->get('session')->getFlashBag()->add(
+			'error_email', $msg_flash
+		    );
+		    
+		    $c++;
+		}
+		    
+		
+		if(strlen($data->getName()) > 20){
+		    
+		    $msg_flash= "Error: Longitud máxima de nombre 20 caracteres.";
+		    
+		    $this->get('session')->getFlashBag()->add(
+			'error_name', $msg_flash
+		    );
+		    
+		    $c++;
+		}
+		
+		if(strlen($data->getSurname()) > 20){
+		    
+		    $msg_flash= "Error: Longitud máxima de apellidos 20 caracteres.";
+		    
+		    $this->get('session')->getFlashBag()->add(
+			'error_surname', $msg_flash
+		    );
+		    
+		    $c++;
+		}
 		
 		
+		if( $c == 0 ){
+		    
+		    // Signup user with form data
+		    $this->signUpUser($user, $data);
+
+		    // Flash message success
+		    $this->get('session')->getFlashBag()->add(
+			'user_create',
+			'Se ha creado el usuario.'
+		    );
+		    $this->get('session')->getFlashBag()->add(
+			'verificate',
+			'success'
+		    );
 		
-		
-		// Signup user with form data
-                $this->signUpUser($user, $data);
-		
-                // Flash message success
-                $this->get('session')->getFlashBag()->add(
-                    'user_create',
-                    'Se ha creado el usuario.'
-                );
-		$this->get('session')->getFlashBag()->add(
-                    'verificate',
-                    'success'
-                );
-		
+		}
+		else{
+		    // Flash message error
+		    $this->get('session')->getFlashBag()->add(
+			'user_create',
+			'Revisa los errores.'
+		    );
+		    $this->get('session')->getFlashBag()->add(
+			'verificate',
+			'error'
+		    );
+		}
 		
 		
 		
@@ -80,7 +144,8 @@ class HomeController extends Controller
             }
             
             
-            return $this->redirect($this->generateUrl('teaching_homepage'));
+	    return $this->redirect($this->generateUrl('teaching_homepage'));
+	    
         }
         
 	
@@ -107,7 +172,7 @@ class HomeController extends Controller
                 // last username entered by the user
                 'last_username' => $session->get(SecurityContext::LAST_USERNAME),
                 'error'         => $error,
-                'form'          => $form->createView(),
+                'form'          => $form->createView()
             )
         );
 	
@@ -214,6 +279,26 @@ class HomeController extends Controller
     }
     
     
+    
+    /**
+     * Check email errors
+     * 
+     * @param type $email
+     * @return int
+     */
+    private function errorEmail($email)
+    {
+	
+	$errors = 0;
+	
+	//$pattern = "/^([a-z0-9]+)|| [@][a-z0-9]+[.][a-z]{2,3}$/i";
+	
+	if(strlen($email) > 50) $errors++;
+	//if(preg_match($pattern, $email)) $errors++;
+	
+	return $errors;
+	
+    }
     
     
     

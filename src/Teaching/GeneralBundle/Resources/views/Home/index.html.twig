@@ -216,6 +216,13 @@
                         <div class="col-md-3 col-lg-3 margin-top-15">
                             {{ form_widget(form.username, { 'attr': {'class': 'form-control'} }) }}
                         </div>
+                        {% for message in  app.session.flashbag.get('error_user') %}
+
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+
+                        {% endfor %}
                     </div>
                         
                     <br/>
@@ -229,6 +236,13 @@
                         <div class="col-md-3 col-lg-3 margin-top-15">
                             {{ form_widget(form.password, { 'attr': {'class': 'form-control'} }) }}
                         </div>
+                        {% for message in  app.session.flashbag.get('error_password') %}
+
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+
+                        {% endfor %}
                     </div>
                         
                     <br/>
@@ -242,6 +256,13 @@
                         <div class="col-md-3 col-lg-3 margin-top-15" >
                             {{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
                         </div>
+                        {% for message in  app.session.flashbag.get('error_email') %}
+
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+
+                        {% endfor %}
                     </div>
                         
                     <br/>
@@ -255,6 +276,13 @@
                         <div class="col-md-3 col-lg-3 margin-top-15" >
                             {{ form_widget(form.name, { 'attr': {'class': 'form-control'} }) }}
                         </div>
+                        {% for message in  app.session.flashbag.get('error_name') %}
+
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+
+                        {% endfor %}
                     </div>
                         
                     <br/>
@@ -267,6 +295,13 @@
                         <div class="col-md-3 col-lg-3 margin-top-15" >
                             {{ form_widget(form.surname, { 'attr': {'class': 'form-control'} }) }}
                         </div>
+                        {% for message in  app.session.flashbag.get('error_surname') %}
+
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+
+                        {% endfor %}
                         
                     </div>
                     
