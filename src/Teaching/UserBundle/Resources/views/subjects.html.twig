@@ -5,20 +5,17 @@
 {% block actions %}
 
         <div id="actividades"
-             class="col-xs-12
-                    col-sm-4
-                    col-md-4
-                    col-lg-4 menu-actions"
+             class="col-xs-12 col-sm-4 col-md-4 col-lg-4 menu-actions"
              onmouseover="menuOver('actividades');" onmouseout="menuOut('actividades');" onclick="menuShow('actividades');">
             Actividades
         </div>
         <div id="entregadas"
-             class="col-sm-4 col-md-4 col-lg-4 menu-actions"
+             class="col-xs-12 col-sm-4 col-md-4 col-lg-4 menu-actions"
              onmouseover="menuOver('entregadas');" onmouseout="menuOut('entregadas');" onclick="menuShow('entregadas');">
             Entregadas
         </div>
         <div id="pendientes"
-             class="col-sm-4 col-md-4 col-lg-4 menu-actions"
+             class="col-xs-12 col-sm-4 col-md-4 col-lg-4 menu-actions"
              onmouseover="menuOver('pendientes');" onmouseout="menuOut('pendientes');" onclick="menuShow('pendientes');">
             Pendientes
         </div>
@@ -31,21 +28,22 @@
 
     
     {# All activities #}
-    <div class="panel center shadow contenido active" id="actividades-mostrar">
-
-        <div class="panel-heading">
-            <h2>Actividades</h2>
+    <div class="panel padding-bottom-25 shadow contenido active" id="actividades-mostrar">
+        <h2 class="center">Actividades</h2>
+        <div class="panel-heading hidden-xs">
+            
 
             {% if activities | length > 0 %}
                 <br/>
                 <div class="col-sm-3 col-md-3 col-lg-3">
-                    Actividad</div>
+                    <b>Actividad</b></div>
                 <div class="col-sm-2 col-md-2 col-lg-2">
-                    Tipo</div>
+                    <b>Tipo</b></div>
                 <div class="col-sm-4 col-md-4 col-lg-4">
-                    Descripción</div>
+                    <b>Descripción</b></div>
                 <div class="col-sm-3 col-md-3 col-lg-3">
-                    Estado</div>
+                    <b>Estado</b></div>
+                <hr/>
             {% endif %}
 
 
@@ -55,35 +53,44 @@
             
             {% if activities | length > 0 %}
                 {% for a in activities %}
-                    <div class="col-sm-3
-                                col-md-3
-                                col-lg-3">
+
+
+                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Actividad:</b></span>
+                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
                         {{ a.activityName }}
                     </div>
-                    <div class="col-sm-2
-                                col-md-2
-                                col-lg-2">
+
+
+                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Tipo:</b></span>
+                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
                         {{ a.type }}
                     </div>
-                    <div class="col-sm-4
-                                col-md-4
-                                col-lg-4">
+
+
+                    <div class="hidden-xs col-sm-4 col-md-4 col-lg-4">
                         {{ a.description }}
                     </div>
-                    <div class="col-sm-3
-                                col-md-3
-                                col-lg-3">
+
+
+                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Estado:</b></span>
+                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
                         {% if a.state is not null %}
                              {{ a.state }}
                         {% else %}
                             No realizada
                         {% endif %}
                     </div>
+
+
+                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Descripción:</b></span>
+                    <div class="col-xs-12 hidden-sm hidden-md hidden-lg margin-bottom-50">
+                        {{ a.description }}
+                    </div>
+
+
                 {% endfor %}
             {% else %}
-                <div class="col-sm-12
-                            col-md-12
-                            col-lg-12">
+                <div class="center col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     No hay actividades para esta asignatura.
                 </div>
             {% endif %}
@@ -94,21 +101,23 @@
 
 
     {# Activities send #}
-    <div class="panel center shadow contenido" id="entregadas-mostrar">
-        
-        <div class="panel-heading">
-            <h2>Actividades entregadas</h2>
+    <div class="panel padding-bottom-25 shadow contenido" id="entregadas-mostrar">
+        <h2 class="center">Actividades entregadas</h2>
+
+        <div class="panel-heading hidden-xs">
+            
 
             {% if activities_send | length > 0 %}
                 <br/>
                 <div class="col-sm-3 col-md-3 col-lg-3">
-                    Actividad</div>
+                    <b>Actividad</b></div>
                 <div class="col-sm-2 col-md-2 col-lg-2">
-                    Tipo</div>
+                    <b>Tipo</b></div>
                 <div class="col-sm-2 col-md-2 col-lg-2">
-                    Entregado</div>
+                    <b>Entregado</b></div>
                 <div class="col-sm-2 col-md-2 col-lg-5">
-                    Observaciones</div>
+                    <b>Observaciones</b></div>
+                <hr/>
             {% endif %}
 
         </div>
@@ -117,31 +126,36 @@
             
             {% if activities_send | length > 0 %}
                 {% for a_s in activities_send %}
-                    <div class="col-sm-3
-                                col-md-3
-                                col-lg-3">
+
+                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Actividad:</b></span>
+                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
                         {{ a_s.activityName }}
                     </div>
-                    <div class="col-sm-2
-                                col-md-2
-                                col-lg-2">
+
+
+                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Tipo:</b></span>
+                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
                         {{ a_s.type }}
                     </div>
-                    <div class="col-sm-2
-                                col-md-2
-                                col-lg-2">
+
+
+
+                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Entregado:</b></span>
+                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
                         {{ a_s.date | date('d-m-Y, H:m') }}
                     </div>
-                    <div class="col-sm-5
-                                col-md-5
-                                col-lg-5">
+
+
+
+                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Observaciones:</b></span>
+                    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">>
                         {{ a_s.observations }}
                     </div>
+
+
                 {% endfor %}
             {% else %}
-                <div class="col-sm-12
-                            col-md-12
-                            col-lg-12">
+                <div class="center col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     No se ha realizado ninguna actividad.
                 </div>
             {% endif %}
@@ -152,23 +166,25 @@
           
 
     {# Activities not finish #}
-    <div class="panel center shadow contenido" id="pendientes-mostrar">  
+    <div class="panel padding-bottom-25 shadow contenido" id="pendientes-mostrar">  
 
-        <div class="panel-heading">
-            <h2>Actividades pendientes</h2>
+        <h2 class="center">Actividades pendientes</h2>
+        <div class="panel-heading hidden-xs">
+            
 
             {% if activities_pending | length > 0 %}
                 <br/>
                 <div class="col-sm-3 col-md-3 col-lg-3">
-                    Actividad</div>
+                    <b>Actividad</b></div>
                 <div class="col-sm-2 col-md-2 col-lg-2">
-                    Tipo</div>
+                    <b>Tipo</b></div>
                 <div class="col-sm-3 col-md-3 col-lg-3">
-                    Descripción</div>
+                    <b>Descripción</b></div>
                 <div class="col-sm-2 col-md-2 col-lg-2">
-                    Inicio</div>
+                    <b>Inicio</b></div>
                 <div class="col-sm-2 col-md-2 col-lg-2">
-                    Fin</div>
+                    <b>Fin</b></div>
+                <hr/>
             {% endif %}
 
         </div> 
@@ -177,36 +193,45 @@
             
             {% if activities_pending | length > 0 %}
                 {% for a_p in activities_pending %}
-                    <div class="col-sm-3
-                                col-md-3
-                                col-lg-3">
+
+                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Actividad:</b></span>
+                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
                         {{ a_p.activityName }}
                     </div>
-                    <div class="col-sm-2
-                                col-md-2
-                                col-lg-2">
+
+
+                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Tipo:</b></span>
+                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
                         {{ a_p.type }}
                     </div>
-                    <div class="col-sm-3
-                                col-md-3
-                                col-lg-3">
+
+
+                    <div class="hidden-xs col-sm-3 col-md-3 col-lg-3">
                         {{ a_p.description }}
                     </div>
-                    <div class="col-sm-2
-                                col-md-2
-                                col-lg-2">
+
+
+                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Inicio:</b></span>
+                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
                         {{ a_p.dateStart | date('d-m-Y, H:m') }}
                     </div>
-                    <div class="col-sm-2
-                                col-md-2
-                                col-lg-2">
+
+
+                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Fin:</b></span>
+                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
                         {{ a_p.dateEnd | date('d-m-Y, H:m') }}
                     </div>
+
+
+                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Description:</b></span>
+                    <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+                        {{ a_p.description }}
+                    </div>
+
+
                 {% endfor %}
             {% else %}
-                <div class="col-sm-12
-                            col-md-12
-                            col-lg-12">
+                <div class="center col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     No hay actividades pendientes (¡Yujuu!).
                 </div>
             {% endif %}
