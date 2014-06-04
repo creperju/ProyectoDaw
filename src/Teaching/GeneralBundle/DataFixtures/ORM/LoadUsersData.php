@@ -102,6 +102,14 @@ class LoadUsersData extends Controller implements FixtureInterface
                 'email'     => 'fran@gmail.com'
             ),
             '2' => array(
+                'username'  => 'jacobo',
+                'password'  => 'jacobo',
+                'rol'       => 'ROLE_TEACHER',
+                'name'      => 'Jacobo',
+                'surname'   => 'García Milán',
+                'email'     => 'jacobo@teaching.es'
+            ),
+            '3' => array(
                 'username'  => 'admin',
                 'password'  => 'admin',
                 'rol'       => 'ROLE_ADMIN',
@@ -193,6 +201,11 @@ class LoadUsersData extends Controller implements FixtureInterface
                 'name'      => 'Pepe',
                 'surname'   => 'González Navarro',
                 'dni'       => '50281490K'
+            ),
+            '2' => array(
+                'name'      => 'Juan',
+                'surname'   => 'Crespo Perán',
+                'dni'       => '56902941J'
             )
         );
         
@@ -237,6 +250,12 @@ class LoadUsersData extends Controller implements FixtureInterface
                 'student'   => '50281490K',
                 'relation'  => 'Padre',
                 'main'      => false
+            ),
+            '2' => array(
+                'user'      => 'emilio',
+                'student'   => '56902941J',
+                'relation'  => 'Padre',
+                'main'      => true
             )
         );
         
@@ -306,6 +325,11 @@ class LoadUsersData extends Controller implements FixtureInterface
                 'letter' => 'B',
                 'tutor' => 'fran'
             ),
+            '2' => array(
+                'course' => '3º',
+                'letter' => 'B',
+                'tutor' => 'jacobo'
+            ),
         );
         
         // Persist groups to insert into database
@@ -345,6 +369,11 @@ class LoadUsersData extends Controller implements FixtureInterface
             '1' => array(
                 'student'   => '50281490K',
                 'course'    => '1º',
+                'letter'    => 'B'
+            ),
+            '1' => array(
+                'student'   => '56902941J',
+                'course'    => '3º',
                 'letter'    => 'B'
             ),
         );
@@ -485,12 +514,25 @@ class LoadUsersData extends Controller implements FixtureInterface
 			    'Activity_name' => 'Tarea para casa',
 			    'Type' => 'Ejercicios',
 			    'Description' => 'Ejercicios 1, 2, 3 y 4 de la página 17.',
-			    'Date_start' => new \Datetime(),
-			    'Date_end' => new \Datetime(),
+			    'Date_start' => new \Datetime('2014-09-22 09:57:12'),
+			    'Date_end' => new \Datetime('2014-09-23 10:20:00'),
 			),
 		    ),
 		),
 	    ),
+        '3º' => array(
+        'B' => array(
+            'Lengua' => array(
+            '0' => array(
+                'Activity_name' => 'Resumen página 57.',
+                'Type' => 'Ejercicios',
+                'Description' => 'Realizar un resumen de la página 57, en el tema 2 del libro.',
+                'Date_start' => new \Datetime('2014-09-25 12:32:07'),
+                'Date_end' => new \Datetime('2014-09-26 10:20:00'),
+            ),
+            ),
+        ),
+        ),
 	);
 	
 	// Add activities
