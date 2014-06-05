@@ -147,7 +147,7 @@ class UserController extends Controller
     {
 	// Return students assign into user
         $student = $this->findStudents();
-        
+        //echo "<pre>"; print_r($student); echo "</pre>"; exit(0);
         if(count($student))
             return $this->actionSubjects($student, 'Lengua');
         else
@@ -567,6 +567,42 @@ class UserController extends Controller
      */
     private function actionSubjects($students, $subject)
     {
+	
+	$array = array(); $i = 1;
+	
+	foreach ($students as $student){
+	    
+	    $student_id = $student->getId();
+	    $student_name = $student->getName().' '.$student->getSurname();
+	    $subject_id = $this->search($subject, 'Subjects', "name")->getId();
+	    $activities = $this->getActivitiesStudentsToHave($student_id, $subject_id);
+	    $activities_send = $this->getActivitiesStudentsSend($student_id, $subject_id);
+	    $activities_pending = $this->getActivitiesStudentsPending($student_id, $subject_id);
+	    
+	    
+	    $array['student'.$i]['id'] = $student_id;
+	    $array['student'.$i]['name'] = $student_name;
+	    $array['student'.$i]['subject_id'] = $subject_id;
+	    $array['student'.$i]['activities'] = $activities;
+	    $array['student'.$i]['activities_send'] = $activities_send;
+	    $array['student'.$i]['activities_pending'] = $activities_pending;
+	    $array['student'.$i]['class'] = ($i == 1)?'active':'contenido';
+	    
+	    $i++;
+	}
+	
+	//echo "<pre>"; print_r($array); echo "</pre>";exit(0);
+	
+	
+	return $this->render(
+            'TeachingUserBundle::subjects.html.twig',
+            array(
+                'controller' => $subject,
+                'students' => $array
+            )
+        );
+	/*	
+
 	// Get student ID and subject ID
 	$student_id = $students[0]->getId();
 	$subject_id = $this->search($subject, 'Subjects', "name")->getId();
@@ -599,7 +635,7 @@ class UserController extends Controller
                 'activities_pending' => $activities_pending
             )
         );
-        
+        */
     }
     
     
