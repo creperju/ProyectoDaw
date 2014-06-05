@@ -41,4 +41,6 @@ teaching_user_config:
     defaults: { _controller: TeachingUserBundle:User:config }
 
 
-
+teaching_user_config_password:
+    pattern: /usuario/configuracion/changePassword/
+    defaults: { _controller: TeachingUserBundle:User:changePassword}

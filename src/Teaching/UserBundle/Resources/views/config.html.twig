@@ -3,87 +3,79 @@
 
 
 {% block actions %}
-    
-    <p>Cambiar Nombre</p>
-    <p>Cambiar Apellidos</p>
-    <p>Cambiar Correo electrónico</p>
-    <p>Cambiar Contraseña</p>
-    <p>Borrar Usuario</p>
-    
 {% endblock %}
 
 {% block result %}
-
-    {% for message in  app.session.flashbag.get('message_send') %}
-
-        <div class="row show-grid" id="msg_flash">
-            <div class="col-md-9 col-md-offset-1">
-                {{ message }}
+    
+    <div class="row center margin-bottom-15 menu-actions"> <p><h3>Cambiar Nombre y Apellidos</h3></p></div>
+    <div class="panel padding-bottom-25 padding-top-25 shadow panel-body center contenido active">
+        <form id="changeName" name="changeName" >
+            <div class="col-md-offset-1 col-lg-offset-1 col-md-5  col-lg-5 left">
+                <label >Nuevo nombre</label>
             </div>
-        </div>
-
-    {% endfor %}
-
-    <div class="row">
-        <div class="col-md-9 col-md-offset-1">
-            <!-- Div contenido de mensajes -->
-
-            
-            <div class="row show-grid">
-                <div class="col-md-12">Mensajes recibidos</div>
+            <div class=" col-md-3 col-lg-3 ">
+                <input type="text" name="NewName" class="form-control "/>
             </div>
-
-            
-            <div class="row">
-                <div class="col-md-12">
-                    
-                    {% if messages_receibe | length > 0 %}
-                        {% for m in messages_receibe %}
-                            <div class="col-md-4">{{ m.fromUser.username }}</div>
-                            <div class="col-md-4">{{ m.subject }}</div>
-                            <div class="col-md-4">{{ m.date | date('d-m-Y, H:m') }}</div>
-                        {% endfor %}
-                    {% else %}
-                        <p>No tienes mensajes.</p>
-                    {% endif %}
-                    
-                </div>
+            <div class="col-md-offset-1 col-lg-offset-1 col-md-5  col-lg-5 left">
+                <label >Nuevos apellidos </label>
             </div>
-
-
-            <div class="row show-grid">
-                <div class="col-md-12">Mensajes enviados</div>
+            <div class=" col-md-3 col-lg-3 ">
+                <input type="text" name="NewSurname" class="form-control "/><br/>
             </div>
-
-                    
-            <div class="row">
-                <div class="col-md-12">
-                    {% if messages_send | length > 0 %}
-                        {% for m in messages_send %}
-                            <div class="col-md-4">{{ m.toUser.username }}</div>
-                            <div class="col-md-4">{{ m.subject }}</div>
-                            <div class="col-md-4">{{ m.date | date('d-m-Y, H:m') }}</div>
-                        {% endfor %}
-                    {% else %}
-                        <p>No tienes mensajes.</p>
-                    {% endif %}
-                </div>
-            </div>
-                
-                
-            <p/>
-            <div class="row show-grid">
-                <div class="col-md-12">Redactar</div>
-            </div>
-
-            
-            <div class="row">
-                <div class="col-md-12">{{ form(form) }}</div>
-            </div>
-
-            
-         </div>
+                <input type="submit" class="btn-primary btn" value="Cambiar"/>
+        </form>
     </div>
-                       
+
+
+
+    <div class="row center margin-bottom-15 menu-actions"> <p><h3>Cambiar Email</h3></p></div>
+    <div class="panel padding-bottom-25 padding-top-25 shadow panel-body center contenido active">
+        <form id="changeEmail" name="changeEmail">
+            <div class="col-md-offset-1 col-lg-offset-1 col-md-5  col-lg-5 left">
+                <label >Nuevo Email </label>
+            </div>
+            <div class=" col-md-3 col-lg-3 ">
+                <input type="text" name="NewEmail" class="form-control "/><br/>
+            </div>
+                <input type="submit" class="btn-primary btn" value="Cambiar"/>
+        </form>
+    </div>
+
+
+
+    <div class="row center margin-bottom-15 menu-actions" id="changePasswordTitle"  > <p><h3>Cambiar Contraseña</h3></p></div>
+    <div class="row center margin-bottom-15 menu-actions" id="changePasswordLoad" style=" display: none; opacity: 1; background-color: #30A7D7"><p><h3>Cambiando Contraseña <span id="changePasswordLoading"></span></h3></p></div>
+    <div class="row center margin-bottom-15 menu-actions" id="changePasswordSucces" style=" display: none; opacity:1; background-color:#46a546 "> <p><h3>Contraseña cambiada correctamente</h3></p></div>
+    <div class="panel padding-bottom-25 padding-top-25 shadow panel-body center contenido active">
+        <form id="changePassword" name="changePassword">
+            <div class="col-md-offset-1 col-lg-offset-1 col-md-5  col-lg-5 left">
+                <label >Su contraseña actual </label>
+            </div>
+            <div class=" col-md-3 col-lg-3 ">
+                <input type="password" name="CurrentPassword" class="form-control" />
+            </div>
+            <div class="col-md-offset-1 col-lg-offset-1 col-md-5  col-lg-5 left">
+                <label >Su nueva contraseña </label>
+            </div>
+            <div class=" col-md-3 col-lg-3 ">
+                <input type="password" name ="NewPassword" class="form-control "/>
+            </div>
+            <div class="col-md-offset-1 col-lg-offset-1 col-md-5  col-lg-5 left">
+                <label >Repita su nueva contraseña</label>
+            </div>
+            <div class=" col-md-3 col-lg-3 ">
+                <input type="password" name ="NewPassword2" class="form-control"/><br/>
+            </div>
+            
+            <input type="submit" class="btn-primary btn" value="Cambiar"/>
+        </form>
+    </div>
+
+
+
 {% endblock %}
 
+{% block js %}
+    {{parent()}}
+    <script type="text/javascript" src="{{asset('js/ajax.js')}}"></script>
+{% endblock %}
