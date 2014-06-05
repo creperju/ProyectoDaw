@@ -130,6 +130,9 @@ img{ width: 100px; }
 /*       Margin styles       */
 /*****************************/
 
+.margin-top--20{ margin-top: -20px; }
+.margin-botom--20{ margin-bottom: -20px; }
+
 .margin-top-10{ margin-top: 10px; }
 .margin-botom-10{ margin-bottom: 10px; }
 

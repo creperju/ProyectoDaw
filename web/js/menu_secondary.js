@@ -18,6 +18,6 @@ function menuOut(item)
 /* Hidde content and show the current view */
 function menuShow(item)
 {
-    $('.contenido').hide();
-    $('#'+item+'-mostrar').show();
+    $('.active').removeClass('active').addClass('contenido');
+    $('#'+item+'-mostrar').addClass('active');
 }
