@@ -10,7 +10,13 @@ use Teaching\GeneralBundle\Entity\Students;
 /**
  * Affilations
  *
- * @ORM\Table(name="affilations")
+ * @ORM\Table(  name="affilations",
+ *               uniqueConstraints=
+ *               {@ORM\UniqueConstraint(
+ *                      name="aff_idx", 
+ *                      columns={"user_id", "student_id"}
+ *                  )}
+ * )
  * @ORM\Entity
  */
 class Affilations

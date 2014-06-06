@@ -147,7 +147,7 @@ class UserController extends Controller
     {
 	// Return students assign into user
         $student = $this->findStudents();
-        
+        //echo "<pre>"; print_r($student); echo "</pre>"; exit(0);
         if(count($student))
             return $this->actionSubjects($student, 'Lengua');
         else
@@ -480,39 +480,40 @@ class UserController extends Controller
      */
     private function actionSubjects($students, $subject)
     {
-	// Get student ID and subject ID
-	$student_id = $students[0]->getId();
-	$subject_id = $this->search($subject, 'Subjects', "name")->getId();
+	// Create array for students, the first student will be show
+	$array = array(); $i = 1;
 	
-//        echo "Student id: " . $student_id;
-//        echo "<br/>";
-//        echo "Subject id " . $subject_id;
-//        exit(0);
-        
-	// Load all activities
-        $activities = $this->getActivitiesStudentsToHave($student_id, $subject_id);
-	$activities_send = $this->getActivitiesStudentsSend($student_id, $subject_id);
-        $activities_pending = $this->getActivitiesStudentsPending($student_id, $subject_id);
-        
-        
-//        echo "<pre>";
-//        if(count($activities))
-//            echo print_r($activities);
-//        else
-//            echo "No hay actividades";
-//        echo "</pre>";exit(0);
-        
-        
-        return $this->render(
+	foreach ($students as $student){
+	    
+	    // Catch all activities of a student
+	    $student_id = $student->getId();
+	    $student_name = $student->getName().' '.$student->getSurname();
+	    $subject_id = $this->search($subject, 'Subjects', "name")->getId();
+	    $activities = $this->getActivitiesStudentsToHave($student_id, $subject_id);
+	    $activities_send = $this->getActivitiesStudentsSend($student_id, $subject_id);
+	    $activities_pending = $this->getActivitiesStudentsPending($student_id, $subject_id);
+	    
+	    // Add data in array
+	    $array['student'.$i]['id'] = $student_id;
+	    $array['student'.$i]['name'] = $student_name;
+	    $array['student'.$i]['subject_id'] = $subject_id;
+	    $array['student'.$i]['activities'] = $activities;
+	    $array['student'.$i]['activities_send'] = $activities_send;
+	    $array['student'.$i]['activities_pending'] = $activities_pending;
+	    $array['student'.$i]['style'] = ($i == 1)?'block':'none';
+	    
+	    $i++;
+	}
+	
+	// Return students and activities
+	return $this->render(
             'TeachingUserBundle::subjects.html.twig',
             array(
                 'controller' => $subject,
-                'activities' => $activities,
-                'activities_send' => $activities_send,
-                'activities_pending' => $activities_pending
+                'students' => $array
             )
         );
-        
+	
     }
     
     

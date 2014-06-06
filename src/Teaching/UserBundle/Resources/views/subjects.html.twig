@@ -1,24 +1,42 @@
 {% extends "TeachingGeneralBundle:Login:template_with_actions.html.twig" %}
 
 
-
 {% block actions %}
 
-        <div id="actividades"
-             class="col-xs-12 col-sm-4 col-md-4 col-lg-4 menu-actions"
-             onmouseover="menuOver('actividades');" onmouseout="menuOut('actividades');" onclick="menuShow('actividades');">
-            Actividades
+    {% if students | length > 1 %}
+        <div class="row margin-bottom-20 margin-top--20">
+            <span class="h2">Estas viendo las actividades de </span>
+            
+                <div class="btn-group" id="open_button">
+                    <button class="btn btn-default btn-lg dropdown-toggle" value="{{ students.student1.name }}" id="button_students" type="button" data-toggle="dropdown" onclick="open_button();">
+                        {{ students.student1.name }}&nbsp;&nbsp;<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        {% for student in students %}
+                            <li onclick="choose_student('{{ student.id }}','{{ student.name }}');">{{ student.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
         </div>
-        <div id="entregadas"
-             class="col-xs-12 col-sm-4 col-md-4 col-lg-4 menu-actions"
-             onmouseover="menuOver('entregadas');" onmouseout="menuOut('entregadas');" onclick="menuShow('entregadas');">
-            Entregadas
-        </div>
-        <div id="pendientes"
-             class="col-xs-12 col-sm-4 col-md-4 col-lg-4 menu-actions"
-             onmouseover="menuOver('pendientes');" onmouseout="menuOut('pendientes');" onclick="menuShow('pendientes');">
-            Pendientes
-        </div>
+        
+        
+    {% endif %}
+    
+    <div id="actividades"
+         class="col-xs-12 col-sm-4 col-md-4 col-lg-4 menu-actions"
+         onmouseover="menuOver('actividades');" onmouseout="menuOut('actividades');" onclick="menuShow('actividades');">
+        Actividades
+    </div>
+    <div id="entregadas"
+         class="col-xs-12 col-sm-4 col-md-4 col-lg-4 menu-actions"
+         onmouseover="menuOver('entregadas');" onmouseout="menuOut('entregadas');" onclick="menuShow('entregadas');">
+        Entregadas
+    </div>
+    <div id="pendientes"
+         class="col-xs-12 col-sm-4 col-md-4 col-lg-4 menu-actions"
+         onmouseover="menuOver('pendientes');" onmouseout="menuOut('pendientes');" onclick="menuShow('pendientes');">
+        Pendientes
+    </div>
     
 {% endblock %}
 
@@ -26,221 +44,282 @@
 
 {% block result %}
 
-    
     {# All activities #}
-    <div class="panel padding-bottom-25 shadow contenido active" id="actividades-mostrar">
+    <div class="panel padding-bottom-25 shadow contenido" id="actividades-mostrar" style="display: block;">
         <h2 class="center">Actividades</h2>
-        <div class="panel-heading hidden-xs">
-            
-
-            {% if activities | length > 0 %}
-                <br/>
-                <div class="col-sm-3 col-md-3 col-lg-3">
-                    <b>Actividad</b></div>
-                <div class="col-sm-2 col-md-2 col-lg-2">
-                    <b>Tipo</b></div>
-                <div class="col-sm-4 col-md-4 col-lg-4">
-                    <b>Descripción</b></div>
-                <div class="col-sm-3 col-md-3 col-lg-3">
-                    <b>Estado</b></div>
-                <hr/>
-            {% endif %}
-
-
-        </div>
         
-        <div class="panel-body">
+        
+        {% for student in students %}
             
-            {% if activities | length > 0 %}
-                {% for a in activities %}
+            <div class="student" id="{{ student.id }}" style="display: {{ student.style }};">
+                
+                <div class="panel-heading hidden-xs">
 
+                    {% if student.activities | length > 0 %}
+                        <br/>
+                        <div class="col-sm-3 col-md-3 col-lg-3">
+                            <b>Actividad</b></div>
+                        <div class="col-sm-2 col-md-2 col-lg-2">
+                            <b>Tipo</b></div>
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            <b>Descripción</b></div>
+                        <div class="col-sm-3 col-md-3 col-lg-3">
+                            <b>Estado</b></div>
+                        <hr/>
+                    {% endif %}
 
-                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Actividad:</b></span>
-                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-                        {{ a.activityName }}
-                    </div>
-
-
-                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Tipo:</b></span>
-                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-                        {{ a.type }}
-                    </div>
-
-
-                    <div class="hidden-xs col-sm-4 col-md-4 col-lg-4">
-                        {{ a.description }}
-                    </div>
-
-
-                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Estado:</b></span>
-                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-                        {% if a.state is not null %}
-                             {{ a.state }}
-                        {% else %}
-                            No realizada
-                        {% endif %}
-                    </div>
-
-
-                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Descripción:</b></span>
-                    <div class="col-xs-12 hidden-sm hidden-md hidden-lg margin-bottom-50">
-                        {{ a.description }}
-                    </div>
-
-
-                {% endfor %}
-            {% else %}
-                <div class="center col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    No hay actividades para esta asignatura.
                 </div>
-            {% endif %}
+            
+            
+                <div class="panel-body">
 
-        </div> 
+                    {% if student.activities | length > 0 %}
+
+                        {% for a in student.activities %}
+
+                            <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Actividad:</b></span>
+                            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                                {{ a.activityName }}
+                            </div>
+
+
+                            <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Tipo:</b></span>
+                            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                                {{ a.type }}
+                            </div>
+
+
+                            <div class="hidden-xs col-sm-4 col-md-4 col-lg-4">
+                                {{ a.description }}
+                            </div>
+
+
+                            <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Estado:</b></span>
+                            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                                {% if a.state is not null %}
+                                     {{ a.state }}
+                                {% else %}
+                                    No realizada
+                                {% endif %}
+                            </div>
+
+
+                            <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Descripción:</b></span>
+                            <div class="col-xs-12 hidden-sm hidden-md hidden-lg margin-bottom-50">
+                                {{ a.description }}
+                            </div>
+
+                        {% endfor %}
+
+                    {% else %}
+                        <div class="center col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            No hay actividades para esta asignatura.
+                        </div>
+                    {% endif %}
+
+                </div>
+            
+            </div>
+                    
+        {% endfor %}
+            
+            
+         
         
     </div>
 
 
     {# Activities send #}
-    <div class="panel padding-bottom-25 shadow contenido" id="entregadas-mostrar">
+    <div class="panel padding-bottom-25 shadow contenido" id="entregadas-mostrar" style="display: none;">
         <h2 class="center">Actividades entregadas</h2>
 
-        <div class="panel-heading hidden-xs">
+        {% for student in students %}
             
+            <div class="student" id="{{ student.id }}" style="display: {{ student.style }};">
+                
+                
+                <div class="panel-heading hidden-xs">
 
-            {% if activities_send | length > 0 %}
-                <br/>
-                <div class="col-sm-3 col-md-3 col-lg-3">
-                    <b>Actividad</b></div>
-                <div class="col-sm-2 col-md-2 col-lg-2">
-                    <b>Tipo</b></div>
-                <div class="col-sm-2 col-md-2 col-lg-2">
-                    <b>Entregado</b></div>
-                <div class="col-sm-2 col-md-2 col-lg-5">
-                    <b>Observaciones</b></div>
-                <hr/>
-            {% endif %}
+                    {% if student.activities_send | length > 0 %}
+                        <br/>
+                        <div class="col-sm-3 col-md-3 col-lg-3">
+                            <b>Actividad</b></div>
+                        <div class="col-sm-2 col-md-2 col-lg-2">
+                            <b>Tipo</b></div>
+                        <div class="col-sm-2 col-md-2 col-lg-2">
+                            <b>Entregado</b></div>
+                        <div class="col-sm-2 col-md-2 col-lg-5">
+                            <b>Observaciones</b></div>
+                        <hr/>
+                    {% endif %}
 
-        </div>
-          
-        <div class="panel-body">
-            
-            {% if activities_send | length > 0 %}
-                {% for a_s in activities_send %}
-
-                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Actividad:</b></span>
-                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-                        {{ a_s.activityName }}
-                    </div>
-
-
-                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Tipo:</b></span>
-                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-                        {{ a_s.type }}
-                    </div>
-
-
-
-                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Entregado:</b></span>
-                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-                        {{ a_s.date | date('d-m-Y, H:m') }}
-                    </div>
-
-
-
-                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Observaciones:</b></span>
-                    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">>
-                        {{ a_s.observations }}
-                    </div>
-
-
-                {% endfor %}
-            {% else %}
-                <div class="center col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    No se ha realizado ninguna actividad.
                 </div>
-            {% endif %}
+            
+            
+                <div class="panel-body">
 
-        </div>   
-        
+                    {% if student.activities_send | length > 0 %}
+                        {% for a_s in student.activities_send %}
+
+                            <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Actividad:</b></span>
+                            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                                {{ a_s.activityName }}
+                            </div>
+
+
+                            <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Tipo:</b></span>
+                            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                                {{ a_s.type }}
+                            </div>
+
+
+
+                            <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Entregado:</b></span>
+                            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                                {{ a_s.date | date('d-m-Y, H:m') }}
+                            </div>
+
+
+
+                            <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Observaciones:</b></span>
+                            <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">>
+                                {{ a_s.observations }}
+                            </div>
+
+
+                        {% endfor %}
+                    {% else %}
+                        <div class="center col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            No se ha realizado ninguna actividad.
+                        </div>
+                    {% endif %}
+
+                </div>
+            
+            </div>
+            
+                    
+        {% endfor %}
+            
     </div>
           
 
     {# Activities not finish #}
-    <div class="panel padding-bottom-25 shadow contenido" id="pendientes-mostrar">  
+    <div class="panel padding-bottom-25 shadow contenido" id="pendientes-mostrar" style="display: none;">  
 
         <h2 class="center">Actividades pendientes</h2>
-        <div class="panel-heading hidden-xs">
-            
-
-            {% if activities_pending | length > 0 %}
-                <br/>
-                <div class="col-sm-3 col-md-3 col-lg-3">
-                    <b>Actividad</b></div>
-                <div class="col-sm-2 col-md-2 col-lg-2">
-                    <b>Tipo</b></div>
-                <div class="col-sm-3 col-md-3 col-lg-3">
-                    <b>Descripción</b></div>
-                <div class="col-sm-2 col-md-2 col-lg-2">
-                    <b>Inicio</b></div>
-                <div class="col-sm-2 col-md-2 col-lg-2">
-                    <b>Fin</b></div>
-                <hr/>
-            {% endif %}
-
-        </div> 
         
-        <div class="panel-body">
+        
+        {% for student in students %}
             
-            {% if activities_pending | length > 0 %}
-                {% for a_p in activities_pending %}
+            <div class="student" id="{{ student.id }}" style="display: {{ student.style }};">
+            
+            
+                <div class="panel-heading hidden-xs">
 
-                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Actividad:</b></span>
-                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-                        {{ a_p.activityName }}
-                    </div>
+                    {% if student.activities_pending | length > 0 %}
+                        <br/>
+                        <div class="col-sm-3 col-md-3 col-lg-3">
+                            <b>Actividad</b></div>
+                        <div class="col-sm-2 col-md-2 col-lg-2">
+                            <b>Tipo</b></div>
+                        <div class="col-sm-3 col-md-3 col-lg-3">
+                            <b>Descripción</b></div>
+                        <div class="col-sm-2 col-md-2 col-lg-2">
+                            <b>Inicio</b></div>
+                        <div class="col-sm-2 col-md-2 col-lg-2">
+                            <b>Fin</b></div>
+                        <hr/>
+                    {% endif %}
 
-
-                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Tipo:</b></span>
-                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-                        {{ a_p.type }}
-                    </div>
-
-
-                    <div class="hidden-xs col-sm-3 col-md-3 col-lg-3">
-                        {{ a_p.description }}
-                    </div>
-
-
-                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Inicio:</b></span>
-                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-                        {{ a_p.dateStart | date('d-m-Y, H:m') }}
-                    </div>
-
-
-                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Fin:</b></span>
-                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-                        {{ a_p.dateEnd | date('d-m-Y, H:m') }}
-                    </div>
-
-
-                    <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Description:</b></span>
-                    <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
-                        {{ a_p.description }}
-                    </div>
-
-
-                {% endfor %}
-            {% else %}
-                <div class="center col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    No hay actividades pendientes (¡Yujuu!).
                 </div>
-            {% endif %}
+            
+            
+                <div class="panel-body">
 
-        </div>
+                    {% if student.activities_pending | length > 0 %}
+                        {% for a_p in student.activities_pending %}
+
+                            <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Actividad:</b></span>
+                            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                                {{ a_p.activityName }}
+                            </div>
+
+
+                            <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Tipo:</b></span>
+                            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                                {{ a_p.type }}
+                            </div>
+
+
+                            <div class="hidden-xs col-sm-3 col-md-3 col-lg-3">
+                                {{ a_p.description }}
+                            </div>
+
+
+                            <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Inicio:</b></span>
+                            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                                {{ a_p.dateStart | date('d-m-Y, H:m') }}
+                            </div>
+
+
+                            <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Fin:</b></span>
+                            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                                {{ a_p.dateEnd | date('d-m-Y, H:m') }}
+                            </div>
+
+
+                            <span class="col-xs-12 hidden-sm hidden-md hidden-lg"><b>Description:</b></span>
+                            <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+                                {{ a_p.description }}
+                            </div>
+
+
+                        {% endfor %}
+                    {% else %}
+                        <div class="center col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            No hay actividades pendientes (¡Yujuu!).
+                        </div>
+                    {% endif %}
+
+                </div>
+                
+                
+            </div>
+                
+                
+                
+            
+        {% endfor %}
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
     </div>    
                        
             
-
+    
+    
+    
+    
+    
+    
 {% endblock %}
 
+{% block bootstrap %}
+    {{ parent() }}
+    
+    {% if students | length > 1 %}
+        
+        <script type="text/javascript" src="{{ asset('js/more_students.js') }}"></script>
+        
+    {% endif %}
+    
+{% endblock %}
