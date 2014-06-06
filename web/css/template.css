@@ -74,11 +74,6 @@ a { text-decoration: none; }
     filter:alpha(opacity=80); /* For IE8 and earlier */
 }
 
-/* Hidden content of items */
-.contenido { display: none; }
-/* Show content of item */
-.active { display: block; }
-
 
 
 
@@ -104,13 +99,10 @@ img{ width: 100px; }
 /*     Exception styles      */
 /*****************************/
 
-#exception 
-{
-    font-family: calibri;
-	text-align: center;
-	background-color: white;
-	border-radius: 3px;
-	box-shadow: 3px 3px 10px gray;
+#exception{
+    font-family: calibri; text-align: center;
+    background-color: white;
+    border-radius: 3px;	box-shadow: 3px 3px 10px gray;
 }
 
 

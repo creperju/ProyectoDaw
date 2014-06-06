@@ -1,27 +1,25 @@
 
+/***************************************************************************/
+/* Show and hidde differents divs in subjects or messages or configuration */
+/***************************************************************************/
 
-function open_button(){
-    
-    $('#open_button').addClass('open');
-    //document.getElementById('open_button').className += ' open';
-    
+/* Show list of a students */
+function open_button()
+{    
+    // Add class 'open' in button
+    $('#open_button').addClass('open');   
 }
 
-function choose_student(id, name){
-    
-    // Add text in button select
+/* Choose student to show activities of this student */
+function choose_student(id, name)
+{
+    // Add text in button select with name of student
     $('#button_students').html(name + '&nbsp;&nbsp;<span class="caret"></span>');
     $('#open_button').removeClass('open');
     
-    // Hidde all students
-    $('.student').removeClass('active').addClass('contenido');
+    // Hide all students    
+    $('.student').hide();
     
-    // Show student id
-    $('#'+id).removeClass('contenido').addClass('active');
-    
-    //document.getElementById('open_button').className = document.getElementById('open_button').className.replace('open','');
-    
-    //document.getElementById('student').className = document.getElementById('student').className.replace('active',' contenido');
-    
-    //document.getElementById(id).className = document.getElementById('open_button').className.replace('contenido','active');
+    // Show activities of student
+    $('[id*='+id+']').show();
 }
