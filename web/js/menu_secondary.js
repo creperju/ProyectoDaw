@@ -11,13 +11,15 @@ function menuOver(item)
 
 /* Change class on mouse out */
 function menuOut(item)
-{    
+{
     document.getElementById(item).className = document.getElementById(item).className.replace("select", "actions");   
 }
 
 /* Hidde content and show the current view */
 function menuShow(item)
-{
-    $('.active').removeClass('active').addClass('contenido');
-    $('#'+item+'-mostrar').addClass('active');
+{   
+    // Hide content
+    $('.contenido').hide();
+    // Show content item
+    $('#' + item + '-mostrar').show();   
 }

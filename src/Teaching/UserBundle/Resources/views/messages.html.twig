@@ -55,7 +55,7 @@
     {# End message flash #}
 
 
-    <div class="panel padding-bottom-25 shadow contenido active" id="recibidos-mostrar">
+    <div class="panel padding-bottom-25 shadow contenido" id="recibidos-mostrar" style="display: block;">
         <h2 class="center">Mensajes recibidos</h2>
         <div class="panel-heading hidden-xs">
             
@@ -114,14 +114,14 @@
     </div>
 
 
-    <div class="panel padding-bottom-25 shadow contenido" id="enviados-mostrar">
+    <div class="panel padding-bottom-25 shadow contenido" id="enviados-mostrar" style="display: none;">
         
         
         <h2 class="center">Mensajes enviados</h2>
         <div class="panel-heading hidden-xs">
             
 
-            {% if messages_receibe | length > 0 %}
+            {% if messages_send | length > 0 %}
                 <br/>
                 <div class="col-sm-2 col-md-2 col-lg-2">
                     <b>Para</b></div>
@@ -180,7 +180,7 @@
     
 
     
-    <div class="panel center padding-bottom-25 shadow contenido" id="redactar-mostrar">
+    <div class="panel center padding-bottom-25 shadow contenido" id="redactar-mostrar" style="display: none;">
         
         <div class="panel-heading">
             <h2>Enviar mensaje</h2>
