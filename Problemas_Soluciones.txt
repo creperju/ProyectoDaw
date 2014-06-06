@@ -143,4 +143,21 @@ Ejemplo:
     Una vez recuperado el objeto, viene en forma de array, tal que haremos:
         $user[0]->getName()
     Recupera del primer usuario, su nombre.
+
+
+
+Tema:   SELECCIÓN DE ELEMENTOS CON JQUERY
+
+Problema:
+    Sólo seleccionaba por defecto el primer elemento.
+
+Solución:
+    A la hora de seleccionar el elemento, con éste código de aquí se podrá
+    seleccionar todos los elementos con ese id.
+
+Ejemplo:
+    $('[id*='+id+']').show();
+
+    Seleccionaríamos todos los elementos cuyo id sea 'id'.
         
+

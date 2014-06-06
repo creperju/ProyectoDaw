@@ -172,6 +172,13 @@
 || 03/06/2014 || Añadidas validaciones en el formulario de registro de usuarios.       ||
 ||            ||                                                                       ||
 ++------------++-----------------------------------------------------------------------++
+|| 06/06/2014 || Añadido efecto jquery sobre la vista de estudiantes, alternando       ||
+||            || entre ellas.                                                          ||
+||            ||                                                                       ||
+||            || También se ha corregido la vista mensajes que no mostraba la          ||
+||            || descripción de los campos de los mensajes.                            ||
+||            ||                                                                       ||
+++------------++-----------------------------------------------------------------------++
 
 
 
