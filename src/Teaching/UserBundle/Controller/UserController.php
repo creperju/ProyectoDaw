@@ -393,8 +393,9 @@ class UserController extends Controller
                     "Usuario" => $user->getUserName()
                 ));
     }
-    public function changePasswordAction(Request $request, $form){
-        echo "bien";
+    public function changePasswordAction(Request $request){
+        
+        return new \Symfony\Component\HttpFoundation\JsonResponse(array("ok" => "ok"));
     }
  
 
