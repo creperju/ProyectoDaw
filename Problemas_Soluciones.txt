@@ -159,5 +159,60 @@ Ejemplo:
     $('[id*='+id+']').show();
 
     Seleccionaríamos todos los elementos cuyo id sea 'id'.
-        
 
+Comentario:
+    Esto sucede porque los id en html deben ser únicos, por ese motivo jquery solo coge uno,
+    para ese tipo de tareas se deben usar clases. 
+    Aún así el código anterior funciona perfectamente
+
+
+
+
+Tema:   ENVIO DE FORMULARIOS CON AJAX A TRAVÉS DEL ROUTING DE SYMFONY
+
+Problema: 
+    El controlador php no devolvía los datos a la función $.ajax de jquery
+    El siguiente código no funciona:
+        $.ajax({
+            url: url,
+            data: data,
+            dataType: "tipo de dato",
+            success: ok(datosServer),
+            error: fail()
+            
+        });
+
+        function ok(datosServer){
+            alert(datosServer)
+        }
+        function fail(){
+            alert("error")
+        }
+
+    El código siguiente hará el success, datosServer estará indefinido y después hara el error
+
+Solución: 
+    Para solucionar este problema se debe hacer uso de las funciones auto ejecutables de js
+    esto se refiere a las funciones del tipo: 
+        function () {
+            //codigo ejecutable
+        }
+    Teniendo en cuenta lo siguiente el código correcto seria:
+        $.ajax({
+            url: url,
+            data: data,
+            dataType: "tipo de dato",
+            success: function (datosServer){ok(datosServer)}, //linea modificada
+            error: function (){fail()}                        //linea modificada
+            
+        });
+
+        function ok(datosServer){
+            alert(datosServer)
+        }
+        function fail(){
+            alert("error")
+        }
+
+
+    

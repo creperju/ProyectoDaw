@@ -6,75 +6,91 @@
 {% endblock %}
 
 {% block result %}
-    
-    <div class="row center margin-bottom-15 menu-actions" id="changeNameTitle"  > <p><h3>Cambiar Nombre y Apellidos</h3></p></div>
-    <div class="row center margin-bottom-15 menu-actions" id="changeNameLoad" style=" display: none; opacity: 1; background-color: #30A7D7"><p><h3>Cambiando Nombre y Apellidos <span id="changeNameLoading"></span></h3></p></div>
-    <div class="row center margin-bottom-15 menu-actions" id="changeNameSucces" style=" display: none; opacity:1; background-color:#46a546 "> <p><h3>Nombre y Apellidos cambiados correctamente</h3></p></div>
-    <div class="panel padding-bottom-25 padding-top-25 shadow panel-body center contenido active">
-        <form id="changeName" name="changeName" >
-            <div class="col-md-offset-1 col-lg-offset-1 col-md-5  col-lg-5 left">
-                <label >Nuevo nombre</label>
-            </div>
-            <div class=" col-md-3 col-lg-3 ">
-                <input type="text" name="NewName" class="form-control "/>
-            </div>
-            <div class="col-md-offset-1 col-lg-offset-1 col-md-5  col-lg-5 left">
-                <label >Nuevos apellidos </label>
-            </div>
-            <div class=" col-md-3 col-lg-3 ">
-                <input type="text" name="NewSurname" class="form-control "/><br/>
-            </div>
+    <div id="change">
+        <div class="row center margin-bottom-15 menu-actions" id="changeNameTitle"  > <p><h3>Cambiar Nombre y Apellidos</h3></p></div>
+        <div class="row center margin-bottom-15 menu-actions" id="changeNameLoad" style=" display: none; opacity: 1; background-color: #30A7D7"><p><h3>Cambiando Nombre y Apellidos <span id="changeNameLoading"></span></h3></p></div>
+        <div class="row center margin-bottom-15 menu-actions" id="changeNameSucces" style=" display: none; opacity:1; background-color:#46a546 "> <p><h3>Nombre y Apellidos cambiados correctamente</h3></p></div>
+        <div class="row center margin-bottom-15 menu-actions" id="changeNameError" style=" display: none; opacity:1; background-color:#d2322d "> </div>
+        <div class="panel padding-bottom-25 padding-top-25 shadow panel-body center contenido active">
+            <form id="changeName" name="changeName" >
+                <div class="col-md-offset-1 col-lg-offset-1 col-md-5  col-lg-5 left">
+                    <label id="labelNewName">Nuevo nombre</label>
+                </div>
+                <div class=" col-md-3 col-lg-3 ">
+                    <input type="text" name="NewName" class="form-control "/>
+                </div>
+                <div class="col-md-offset-1 col-lg-offset-1 col-md-5  col-lg-5 left">
+                    <label id="labelNewSurname">Nuevos apellidos </label>
+                </div>
+                <div class=" col-md-3 col-lg-3 ">
+                    <input type="text" name="NewSurname" class="form-control "/><br/>
+                </div>
+                    <input type="submit" class="btn-primary btn" value="Cambiar"/>
+            </form>
+        </div>
+
+
+
+        <div class="row center margin-bottom-15 menu-actions" id="changeEmailTitle"  > <p><h3>Cambiar Email</h3></p></div>
+        <div class="row center margin-bottom-15 menu-actions" id="changeEmailLoad" style=" display: none; opacity: 1; background-color: #30A7D7"><p><h3>Cambiando Email <span id="changeEmailLoading"></span></h3></p></div>
+        <div class="row center margin-bottom-15 menu-actions" id="changeEmailSucces" style=" display: none; opacity:1; background-color:#46a546 "> <p><h3>Email cambiado correctamente</h3></p></div>
+        <div class="row center margin-bottom-15 menu-actions" id="changeEmailError" style=" display: none; opacity:1; background-color:#d2322d "> </div>
+        <div class="panel padding-bottom-25 padding-top-25 shadow panel-body center contenido active">
+            <form id="changeEmail" name="changeEmail">
+                <div class="col-md-offset-1 col-lg-offset-1 col-md-5  col-lg-5 left">
+                    <label id="labelNewEmail">Nuevo Email </label>
+                </div>
+                <div class=" col-md-3 col-lg-3 ">
+                    <input type="text" name="NewEmail" class="form-control "/><br/>
+                </div>
+                    <input type="submit" class="btn-primary btn" value="Cambiar"/>
+            </form>
+        </div>
+
+
+
+        <div class="row center margin-bottom-15 menu-actions" id="changePasswordTitle" > <p><h3>Cambiar Contraseña</h3></p></div>
+        <div class="row center margin-bottom-15 menu-actions" id="changePasswordLoad" style=" display: none; opacity: 1; background-color: #30A7D7"><p><h3>Cambiando Contraseña <span id="changePasswordLoading"></span></h3></p></div>
+        <div class="row center margin-bottom-15 menu-actions" id="changePasswordSucces" style=" display: none; opacity:1; background-color:#46a546 "> <p><h3>Contraseña cambiada correctamente</h3></p></div>
+        <div class="row center margin-bottom-15 menu-actions" id="changePasswordError" style=" display: none; opacity:1; background-color:#d2322d "> </div>
+        <div class="panel padding-bottom-25 padding-top-25 shadow panel-body center contenido active">
+            <form id="changePassword" name="changePassword">
+                <div class="col-md-offset-1 col-lg-offset-1 col-md-5  col-lg-5 left">
+                    <label id="labelPassword">Su contraseña actual </label>
+                </div>
+                <div class=" col-md-3 col-lg-3 ">
+                    <input type="password" name="CurrentPassword" class="form-control" />
+                </div>
+                <div class="col-md-offset-1 col-lg-offset-1 col-md-5  col-lg-5 left">
+                    <label id="labelNewPassword">Su nueva contraseña </label>
+                </div>
+                <div class=" col-md-3 col-lg-3 ">
+                    <input type="password" name ="NewPassword" class="form-control "/>
+                </div>
+                <div class="col-md-offset-1 col-lg-offset-1 col-md-5  col-lg-5 left">
+                    <label id="labelNewPassword2">Repita su nueva contraseña</label>
+                </div>
+                <div class=" col-md-3 col-lg-3 ">
+                    <input type="password" name ="NewPassword2" class="form-control"/><br/>
+                </div>
+
                 <input type="submit" class="btn-primary btn" value="Cambiar"/>
-        </form>
+            </form>
+        </div>
     </div>
-
-
-
-    <div class="row center margin-bottom-15 menu-actions" id="changeEmailTitle"  > <p><h3>Cambiar Email</h3></p></div>
-    <div class="row center margin-bottom-15 menu-actions" id="changeEmailLoad" style=" display: none; opacity: 1; background-color: #30A7D7"><p><h3>Cambiando Email <span id="changeEmailLoading"></span></h3></p></div>
-    <div class="row center margin-bottom-15 menu-actions" id="changeEmailSucces" style=" display: none; opacity:1; background-color:#46a546 "> <p><h3>Email cambiado correctamente</h3></p></div>
-    <div class="panel padding-bottom-25 padding-top-25 shadow panel-body center contenido active">
-        <form id="changeEmail" name="changeEmail">
-            <div class="col-md-offset-1 col-lg-offset-1 col-md-5  col-lg-5 left">
-                <label >Nuevo Email </label>
-            </div>
-            <div class=" col-md-3 col-lg-3 ">
-                <input type="text" name="NewEmail" class="form-control "/><br/>
-            </div>
-                <input type="submit" class="btn-primary btn" value="Cambiar"/>
-        </form>
+    <div id="error" style="display: none;">
+        <div class="row center margin-bottom-15 menu-actions" id="changePasswordError" style=" opacity:1; background-color:#d2322d "> ERROR </div>
+        <div class="panel padding-bottom-25 padding-top-25 shadow panel-body center contenido active">
+            <form id="changePassword" name="changePassword">
+                <center>
+                    Ha ocurrido un error de conexión<br/>
+                    Estamos trabajando para solucionarlo lo antes posible <br/>
+                    Inténtelo de nuevo mas tarde<br/>
+                    Lamentamos las molestias
+                </center>
+            </form>
+        </div>
     </div>
-
-
-
-    <div class="row center margin-bottom-15 menu-actions" id="changePasswordTitle"  > <p><h3>Cambiar Contraseña</h3></p></div>
-    <div class="row center margin-bottom-15 menu-actions" id="changePasswordLoad" style=" display: none; opacity: 1; background-color: #30A7D7"><p><h3>Cambiando Contraseña <span id="changePasswordLoading"></span></h3></p></div>
-    <div class="row center margin-bottom-15 menu-actions" id="changePasswordSucces" style=" display: none; opacity:1; background-color:#46a546 "> <p><h3>Contraseña cambiada correctamente</h3></p></div>
-    <div class="panel padding-bottom-25 padding-top-25 shadow panel-body center contenido active">
-        <form id="changePassword" name="changePassword">
-            <div class="col-md-offset-1 col-lg-offset-1 col-md-5  col-lg-5 left">
-                <label >Su contraseña actual </label>
-            </div>
-            <div class=" col-md-3 col-lg-3 ">
-                <input type="password" name="CurrentPassword" class="form-control" />
-            </div>
-            <div class="col-md-offset-1 col-lg-offset-1 col-md-5  col-lg-5 left">
-                <label >Su nueva contraseña </label>
-            </div>
-            <div class=" col-md-3 col-lg-3 ">
-                <input type="password" name ="NewPassword" class="form-control "/>
-            </div>
-            <div class="col-md-offset-1 col-lg-offset-1 col-md-5  col-lg-5 left">
-                <label >Repita su nueva contraseña</label>
-            </div>
-            <div class=" col-md-3 col-lg-3 ">
-                <input type="password" name ="NewPassword2" class="form-control"/><br/>
-            </div>
-            
-            <input type="submit" class="btn-primary btn" value="Cambiar"/>
-        </form>
-    </div>
-
 
 
 {% endblock %}

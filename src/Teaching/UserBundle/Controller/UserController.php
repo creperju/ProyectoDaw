@@ -395,13 +395,25 @@ class UserController extends Controller
     }
     public function changePasswordAction(Request $request){
         
-        return new \Symfony\Component\HttpFoundation\JsonResponse(array("ok" => "ok"));
+        return new \Symfony\Component\HttpFoundation\JsonResponse(array("estado" => "error", "msg" => "Ha Ocurrido un error"));
+        
     }
- 
-
+    
+    public function changeNameAction    (Request $request){
+        
+        return new \Symfony\Component\HttpFoundation\JsonResponse(array("estado" => "error", "msg" => "Ha Ocurrido un error"));
+        
+    }
+    
+    public function changeEmailAction   (Request $request){
+        
+        return new \Symfony\Component\HttpFoundation\JsonResponse(array("estado" => "error", "msg" => "Ha Ocurrido un error"));
+        
+    }
                       
              
-            
+//          EL SIGUIENTE CÓDIGO SE USA PARA DEVOLVER UN OBJETO JSON DEFINIDO EN EL ARRAY QUE SE LE PASA POR PARAMETRO            
+//        return new \Symfony\Component\HttpFoundation\JsonResponse(array("ok" => "ok"));
 
         
  
