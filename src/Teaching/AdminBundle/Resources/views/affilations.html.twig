@@ -1,0 +1,70 @@
+{% extends "TeachingAdminBundle::index.html.twig" %}
+
+{% block content %}
+	
+	<div class="container center">
+
+		<div class="row">
+
+
+			id : {{ id }}<br/>
+			id : {{ id }}<br/>
+			
+			{% for m in messages %}
+
+				<div class="col-sm-12 shadow margin-bottom-25 padding-top-15 padding-bottom-50 center panel">
+					
+					<div class="col-sm-6">
+						<h2>Mensaje</h2>
+						<br/>
+						{{ m.message }}
+						<br/>
+						
+						
+							{% if id == m.id %}
+								{% if back %}
+									<form action="" method="POST">
+										<input type="hidden" value="{{ id }}" />
+
+										<button class="btn btn-danger">
+											<h2>Pedir información</h2>
+										</button>
+									</form>
+								{% endif %}
+							{% endif %}
+						
+					</div>
+
+					<div class="col-sm-6 padding-top-50 right">
+						
+						<form action="{{ url('teaching_admin_affilations') }}" method="POST">
+							{# id message #}
+							<input type="hidden" name="id" value="{{ m.id }}" />
+
+							<button class="btn btn-success"><h2>Comprobar</h2></button>
+
+						</form>
+
+						{% if id == m.id %}
+							{% if next %}
+								<form action="" method="POST">
+									<input type="hidden" value="{{ id }}" />
+
+									<button class="btn btn-success">
+										<h2>Asignar</h2>
+									</button>
+								</form>
+							{% endif %}
+						{% endif %}
+
+					</div>
+
+				</div>
+
+			{% endfor %}
+
+		</div>
+
+	</div>
+
+{% endblock %}

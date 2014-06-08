@@ -1,3 +1,13 @@
 teaching_admin_homepage:
     pattern:  /admin/
     defaults: { _controller: TeachingAdminBundle:Admin:index }
+
+
+teaching_admin_affilations:
+    pattern:  /admin/asignaciones/
+    defaults: { _controller: TeachingAdminBundle:Admin:affilations }
+
+
+teaching_admin_check:
+    pattern:  /admin/comprobar/
+    defaults: { _controller: TeachingAdminBundle:Admin:check }
