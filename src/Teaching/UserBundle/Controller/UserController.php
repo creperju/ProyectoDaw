@@ -394,9 +394,42 @@ class UserController extends Controller
                 ));
     }
     public function changePasswordAction(Request $request){
+//        $user = $this->getUser();
+//        $currentPassword = $request->get("CurrentPassword");
+//        $newPassword = $request ->get("NewPassword");
+//        for ($i=0; $i<10;$i++){
+//            $currentPassword = hash("sha512",$currentPassword);
+//        }
         
-        return new \Symfony\Component\HttpFoundation\JsonResponse(array("estado" => "error", "msg" => "Ha Ocurrido un error"));
+//        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+//            $error = $request->attributes->get(
+//                SecurityContext::AUTHENTICATION_ERROR
+//        );
+//        $defaultEncoder = new MessageDigestPasswordEncoder('sha512', true, 10);
+//        $mensaje = "defaultEncoder: " . $defaultEncoder. "<br/>";
+//        $encoders = array(
+//            'Symfony\\Component\\Security\\Core\\User\\User' => $defaultEncoder,
+//        );
+//        $encoderFactory = new \Symfony\Component\Security\Core\Encoder\EncoderFactory($encoders);
+//        $encoder = $encoderFactory->getEncoder($user);
+//        $validPassword = $encoder->isPasswordValid(
+//            $user->getPassword(), // the encoded password
+//            $currentPassword,       // the submitted password
+//            $user->getSalt()
+//        );
+//        $password = $user->getPassword();
+//        $password = search($user->getId(), 'Users', 'password');
+//        $password = $password ['password'];
+//        $em = $this->getDoctrine()->getManager();
+ 
         
+        return new \Symfony\Component\HttpFoundation\JsonResponse(array("estado" => "error", "msg" => $str));
+//        if($validPassword){
+//            
+//        }
+//        else{
+//            return new \Symfony\Component\HttpFoundation\JsonResponse(array("estado" => "error", "msg" => "Contraseña no válida"));
+//        }
     }
     
     public function changeNameAction    (Request $request){
@@ -412,7 +445,7 @@ class UserController extends Controller
     }
                       
              
-//          EL SIGUIENTE CÓDIGO SE USA PARA DEVOLVER UN OBJETO JSON DEFINIDO EN EL ARRAY QUE SE LE PASA POR PARAMETRO            
+//          EL SIGUIENTE CÓDIGO SE USA PARA DEVOLVER UN OBJETO JSON DEFINIDO EN EL ARRAY QUE SE LE PASA COMO PARAMETRO            
 //        return new \Symfony\Component\HttpFoundation\JsonResponse(array("ok" => "ok"));
 
         
@@ -539,6 +572,8 @@ class UserController extends Controller
      * @param type $field FindOneBy field
      * @return type Result
      */
+    
+    
     private function search($data, $entity, $field, $various = false)
     {
         // Find entity
