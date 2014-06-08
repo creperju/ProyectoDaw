@@ -68,8 +68,9 @@ a { text-decoration: none; }
 }
 /* Change background color on mouse over */
 .menu-select{
+    cursor: pointer;
     padding-top: 15px; padding-bottom: 15px; 
-    color: white; background-color: rgba(51,200,243,0.8);   
+    color: white; background-color: #30A7D7;   
     opacity:0.8;
     filter:alpha(opacity=80); /* For IE8 and earlier */
 }

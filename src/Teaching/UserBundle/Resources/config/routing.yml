@@ -54,3 +54,10 @@ teaching_user_config_name:
 teaching_user_config_email:
     pattern: /usuario/configuracion/changeEmail/
     defaults: { _controller: TeachingUserBundle:User:changeEmail }
+teaching_user_students:
+    pattern:  /alumnos
+    defaults: { _controller: TeachingUserBundle:User:contactStudents }
+
+
+
+

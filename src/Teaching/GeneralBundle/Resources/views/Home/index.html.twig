@@ -4,7 +4,6 @@
 
 {% block header %}
 
-    
     {% if app.user is not null %}
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7">
             <h1>Bienvenido a Teaching! <span class="">{{ app.user.username }}</span></h1>
@@ -48,9 +47,7 @@
                     <input type="text" 
                            class="form-control" placeholder="Usuario" 
                            name="_username" size="15"
-                            value="{% if last_username %}
-                                {{ last_username }}
-                              {% endif %}" />
+                            value="{{ last_username }}" />
                 
                 </div>
                               
@@ -86,6 +83,12 @@
     
     <div class="container" >
             
+        {% if error %}
+            <div class="alert alert-danger" id="msg_flash">
+                Error en el login, inténtelo de nuevo.
+            </div>
+        {% endif %}
+
         {# Show message success or error when register user #}
         {% for message in  app.session.flashbag.get('user_create') %}
         {% for verificate in app.session.flashbag.get('verificate') %}

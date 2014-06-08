@@ -1,8 +1,33 @@
-{% extends "TeachingGeneralBundle::template.html.twig" %}
+{% extends "TeachingGeneralBundle:Login:menu.html.twig" %}
+
 
 
 {% block content %}
 
-    {{ form(form) }}
+    <div class="container center">
+
+    	<div class="row">
+    		
+    		{% for i in item %}
+    			
+    			<a href="{{ path('teaching_admin_affilations') }}">
+                    <div id="{{ i.link }}"
+                         class="item-menu
+                                col-xs-{{ i.dxs }} col-xs-offset-{{ i.oxs }}
+                                col-md-{{ i.dimension }} col-md-offset-{{ i.offset }}
+                                col-sm-{{ i.dimension }} col-sm-offset-{{ i.offset }}
+                                col-lg-{{ i.dimension }} col-lg-offset-{{ i.offset }}" 
+                         style="color: {{ i.color }}; background-color: {{ i.background }};"
+                         onmouseover="over('{{ i.link }}');" onmouseout="out('{{ i.link }}');">
+                        {{ i.name }}
+                    </div>
+                </a>
+
+
+    		{% endfor %}
+
+    	</div>
+
+    </div>
 
 {% endblock %}

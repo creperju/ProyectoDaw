@@ -1,28 +1,70 @@
-{% extends "TeachingGeneralBundle::template.html.twig" %}
+{% extends "TeachingGeneralBundle:Login:template_with_actions.html.twig" %}
 
-{% block header %}
-    
-    <h2>Te encuentras en <b>{{ controller }}</b></h2>, 
-    
-    <a href="{{ path('teaching_user_homepage') }}">
-        Volver</a>
-
-{% endblock %}
 
 {% block content %}
 
-    {#<div class="container">
-        <div class="row">
+    <div class="container center">
+        <div class="panel shadow padding-top-25 padding-bottom-25">
+            {{ message | raw }}
+            
+            <br/><br/>
 
-            <div class="col-sm-10 col-sm-offset-1
-                        col-md-10 col-md-offset-1
-                        col-lg-10 col-lg-offset-1">
-#}
-    <center>{{ message }}</center>
-{#
-            </div>
+            {{ form_start(form) }}
+                <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                    <div class="left
+                                col-xs-12
+                                col-md-offset-3
+                                col-md-2" >
+                        <h3 class="h3">
+                            {{ form_label(form.Nombre) }}
+                        </h3>
+                    </div>
+                    <div class="col-xs-12
+                                col-md-4 margin-top-15">
+                        {{ form_widget(form.Nombre, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                    <div class="left
+                                col-xs-12
+                                col-md-offset-3
+                                col-md-2" >
+                        <h3 class="h3">
+                            {{ form_label(form.Apellidos) }}
+                        </h3>
+                    </div>
+                    <div class="col-xs-12
+                                col-md-4 margin-top-15">
+                        {{ form_widget(form.Apellidos, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                    <div class="left
+                                col-xs-12
+                                col-md-offset-3
+                                col-md-2" >
+                        <h3 class="h3">
+                            {{ form_label(form.Dni) }}
+                        </h3>
+                    </div>
+                    <div class="col-xs-12
+                                col-md-4 margin-top-15">
+                        {{ form_widget(form.Dni, { 'attr': {'class': 'form-control', 'placeholder': 'Ejemplo: 1234567A'}  }) }}
+                    </div>
+                </div>
+
+
+                <br/><br/><br/>
+
+                <button class="btn btn-info margin-top-15">
+                    <h3>Enviar</h3>
+                </button>
+
+            {{ form_end(form) }}
 
         </div>
     </div>
-             #}   
+
 {% endblock %}

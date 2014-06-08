@@ -143,7 +143,7 @@ class UserController extends Controller
      * View Spanish
      * @return type
      */
-    public function spanishAction()
+    public function spanishAction(Request $request)
     {
 	// Return students assign into user
         $student = $this->findStudents();
@@ -151,13 +151,8 @@ class UserController extends Controller
         if(count($student))
             return $this->actionSubjects($student, 'Lengua');
         else
-            return $this->render(
-                'TeachingGeneralBundle:Login:no_data.html.twig',
-                array(
-                    'controller' => 'Lengua',
-                    'message' => 'No tiene asignado ningún alumno, contacte con el administrador.'
-                )
-            );
+            return $this->contactStudentsAction($request, 'Lengua');
+            
     }
     
     
@@ -166,7 +161,7 @@ class UserController extends Controller
      * View English
      * @return type
      */
-    public function englishAction()
+    public function englishAction(Request $request)
     {
         // Return students assign into user
         $student = $this->findStudents();
@@ -174,13 +169,8 @@ class UserController extends Controller
         if(count($student))
             return $this->actionSubjects($student, 'Inglés');
         else
-            return $this->render(
-                'TeachingGeneralBundle:Login:no_data.html.twig',
-                array(
-                    'controller' => 'Inglés',
-                    'message' => 'No tiene asignado ningún alumno, contacte con el administrador.'
-                )
-            );
+            return $this->contactStudentsAction($request,'Inglés');
+             
     }
     
     
@@ -190,7 +180,7 @@ class UserController extends Controller
      * 
      * @return type
      */
-    public function musicAction()
+    public function musicAction(Request $request)
     {
         // Return students assign into user
         $student = $this->findStudents();
@@ -198,13 +188,8 @@ class UserController extends Controller
         if(count($student))
             return $this->actionSubjects($student, 'Música');
         else
-            return $this->render(
-                'TeachingGeneralBundle:Login:no_data.html.twig',
-                array(
-                    'controller' => 'Música',
-                    'message' => 'No tiene asignado ningún alumno, contacte con el administrador.'
-                )
-            );
+            return $this->contactStudentsAction($request, 'Música');
+              
     }
     
     
@@ -213,7 +198,7 @@ class UserController extends Controller
      * View Gymnastics
      * @return type
      */
-    public function gymnasticsAction()
+    public function gymnasticsAction(Request $request)
     {
         // Return students assign into user
         $student = $this->findStudents();
@@ -221,13 +206,8 @@ class UserController extends Controller
         if(count($student))
             return $this->actionSubjects($student, 'Gimnasia');
         else
-            return $this->render(
-                'TeachingGeneralBundle:Login:no_data.html.twig',
-                array(
-                    'controller' => 'Gimnasia',
-                    'message' => 'No tiene asignado ningún alumno, contacte con el administrador.'
-                )
-            );
+            return $this->contactStudentsAction($request, 'Gimnasia');
+
     }
     
     
@@ -236,7 +216,7 @@ class UserController extends Controller
      * View Maths
      * @return type
      */
-    public function mathsAction()
+    public function mathsAction(Request $request)
     {
         // Return students assign into user
         $student = $this->findStudents();
@@ -244,13 +224,8 @@ class UserController extends Controller
         if(count($student))
             return $this->actionSubjects($student, 'Matemáticas');
         else
-            return $this->render(
-                'TeachingGeneralBundle:Login:no_data.html.twig',
-                array(
-                    'controller' => 'Matemáticas',
-                    'message' => 'No tiene asignado ningún alumno, contacte con el administrador.'
-                )
-            );
+            return $this->contactStudentsAction($request, 'Matemáticas');
+            
     }
     
     
@@ -259,21 +234,16 @@ class UserController extends Controller
      * View Nature
      * @return type
      */
-    public function natureAction()
+    public function natureAction(Request $request)
     {
         // Return students assign into user
         $student = $this->findStudents();
         
         if(count($student))
-            return $this->actionSubjects($student, 'Conocimiento del Medio');
+            return $this->actionSubjects($student, 'C. del Medio');
         else
-            return $this->render(
-                'TeachingGeneralBundle:Login:no_data.html.twig',
-                array(
-                    'controller' => 'Conocimiento del Medio',
-                    'message' => 'No tiene asignado ningún alumno, contacte con el administrador.'
-                )
-            );
+            return $this->contactStudentsAction($request, 'C. del Medio');
+               
     }
     
     
@@ -314,27 +284,37 @@ class UserController extends Controller
 		// If there is a user with this username, entry
                 if($to != null){
                     
-		    // Create new class Messages
-                    $message = new Messages();
+                    if($to->getUsername() != 'admin'){
+    		    // Create new class Messages
+                        $message = new Messages();
 
-		    // Edit fields of message
-                    $message->setFromUser($this->search($user->getUsername(), 'Users', 'username'));
-                    $message->setToUser($this->search($data['Para'], 'Users', 'username'));
-                    $message->setSubject($data['Asunto']);
-                    $message->setMessage($data['Mensaje']);
-                    $message->setDate(new \Datetime());
+    		    // Edit fields of message
+                        $message->setFromUser($this->search($user->getUsername(), 'Users', 'username'));
+                        $message->setToUser($to);
+                        $message->setSubject($data['Asunto']);
+                        $message->setMessage($data['Mensaje']);
+                        $message->setDate(new \Datetime());
 
-                    $em = $this->getDoctrine()->getManager();
-                    $em->persist($message);
-                    
-		    $em->flush(); // Send message
+                        $em = $this->getDoctrine()->getManager();
+                        $em->persist($message);
+                        
+    		    $em->flush(); // Send message
 
-                    $msg_flash = 'Mensaje enviado.';
+                        $msg_flash = 'Mensaje enviado.';
 
-                    $this->get('session')->getFlashBag()->add(
-                        'verificate',
-                        'success'
-                    );
+                        $this->get('session')->getFlashBag()->add(
+                            'verificate',
+                            'success'
+                        );
+                    }
+                    else{
+                        $msg_flash = 'Este usuario no admite mensajes.'; 
+
+                        $this->get('session')->getFlashBag()->add(
+                            'verificate',
+                            'error'
+                        );
+                    }
         
                 }
                 else
@@ -377,7 +357,7 @@ class UserController extends Controller
                 'controller' => 'Mensajes',
                 'messages_send' => $messages_send,
                 'messages_receibe' => $messages_receibe,
-                'form'    => $form->createView(),
+                'form'    => $form->createView()
             )
         );
         
@@ -447,6 +427,66 @@ class UserController extends Controller
              
 //          EL SIGUIENTE CÓDIGO SE USA PARA DEVOLVER UN OBJETO JSON DEFINIDO EN EL ARRAY QUE SE LE PASA COMO PARAMETRO            
 //        return new \Symfony\Component\HttpFoundation\JsonResponse(array("ok" => "ok"));
+
+
+    public function contactStudentsAction(Request $request, $controller)
+    {
+        
+        $form = $this->createFormBuilder()
+            ->add('Nombre', 'text')
+            ->add('Apellidos', 'text')
+            ->add('Dni', 'text')
+            ->getForm();
+
+
+        $form->handleRequest($request);
+
+    
+        if ($form->isValid()) {
+
+            $data = $form->getData();
+
+            $name = 'Nombre: ' . $data['Nombre'];
+            $surname = 'Apellidos: ' . $data['Apellidos'];
+            $dni = 'Dni: ' . $data['Dni'];
+
+            $message = new Messages();
+
+            $message->setFromUser($this->search($this->getUser()->getUsername(), 'Users', 'username'));
+            $message->setToUser($this->search('admin', 'Users', 'username'));
+            $message->setSubject('Asignación de alumno/s');
+            $message->setMessage($name .' - '. $surname .' - '. $dni);
+            $message->setDate(new \Datetime());
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($message);
+                    
+            $em->flush(); // Send message
+
+            $msg_flash = 'Mensaje enviado. En breve recibirá una respuesta.';
+
+            $this->get('session')->getFlashBag()->add('message_send', $msg_flash);
+
+            $this->get('session')->getFlashBag()->add(
+                        'verificate',
+                        'success'
+                    );
+
+            return $this->redirect($this->generateUrl('teaching_user_messages'));
+
+        }
+
+
+        return $this->render(
+                'TeachingGeneralBundle:Login:no_data.html.twig',
+                array(
+                    'controller' => $controller,
+                    'message' => '<h2 class="h2">No tiene asignado ningún alumno.</h2><br/>Por favor, rellene el formulario, en breve recibirá una respuesta.',
+                    'form' => $form->createView()
+                )
+        );
+    }     
+            
 
         
  

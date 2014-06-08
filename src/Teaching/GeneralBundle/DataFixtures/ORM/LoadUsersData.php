@@ -364,17 +364,26 @@ class LoadUsersData extends Controller implements FixtureInterface
             '0' => array(
                 'student'   => '55578963A',
                 'course'    => '1º',
-                'letter'    => 'A'
+                'letter'    => 'A',
+                'father'    => '52014495H',
+                'mother'    => null,
+                'tutor'    => null
             ),
             '1' => array(
                 'student'   => '50281490K',
                 'course'    => '1º',
-                'letter'    => 'B'
+                'letter'    => 'B',
+                'father'    => '49182481Y',
+                'mother'    => null,
+                'tutor'    => null
             ),
-            '1' => array(
+            '2' => array(
                 'student'   => '56902941J',
                 'course'    => '3º',
-                'letter'    => 'B'
+                'letter'    => 'B',
+                'father'    => '52014495H',
+                'mother'    => null,
+                'tutor'    => null
             ),
         );
         
@@ -387,6 +396,9 @@ class LoadUsersData extends Controller implements FixtureInterface
             
             $class->setGroup($group);
             $class->setStudent($student);
+            $class->setDniFather($enrollment['father']);
+            $class->setDniMother($enrollment['mother']);
+            $class->setDniTutor($enrollment['tutor']);
             $class->setDateStart(new \Datetime());
             
             $manager->persist($class);
