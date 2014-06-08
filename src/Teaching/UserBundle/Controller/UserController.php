@@ -284,27 +284,37 @@ class UserController extends Controller
 		// If there is a user with this username, entry
                 if($to != null){
                     
-		    // Create new class Messages
-                    $message = new Messages();
+                    if($to->getUsername() != 'admin'){
+    		    // Create new class Messages
+                        $message = new Messages();
 
-		    // Edit fields of message
-                    $message->setFromUser($this->search($user->getUsername(), 'Users', 'username'));
-                    $message->setToUser($this->search($data['Para'], 'Users', 'username'));
-                    $message->setSubject($data['Asunto']);
-                    $message->setMessage($data['Mensaje']);
-                    $message->setDate(new \Datetime());
+    		    // Edit fields of message
+                        $message->setFromUser($this->search($user->getUsername(), 'Users', 'username'));
+                        $message->setToUser($to);
+                        $message->setSubject($data['Asunto']);
+                        $message->setMessage($data['Mensaje']);
+                        $message->setDate(new \Datetime());
 
-                    $em = $this->getDoctrine()->getManager();
-                    $em->persist($message);
-                    
-		    $em->flush(); // Send message
+                        $em = $this->getDoctrine()->getManager();
+                        $em->persist($message);
+                        
+    		    $em->flush(); // Send message
 
-                    $msg_flash = 'Mensaje enviado.';
+                        $msg_flash = 'Mensaje enviado.';
 
-                    $this->get('session')->getFlashBag()->add(
-                        'verificate',
-                        'success'
-                    );
+                        $this->get('session')->getFlashBag()->add(
+                            'verificate',
+                            'success'
+                        );
+                    }
+                    else{
+                        $msg_flash = 'Este usuario no admite mensajes.'; 
+
+                        $this->get('session')->getFlashBag()->add(
+                            'verificate',
+                            'error'
+                        );
+                    }
         
                 }
                 else
