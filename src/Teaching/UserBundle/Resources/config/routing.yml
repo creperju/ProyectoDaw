@@ -41,4 +41,10 @@ teaching_user_config:
     defaults: { _controller: TeachingUserBundle:User:config }
 
 
+teaching_user_students:
+    pattern:  /alumnos
+    defaults: { _controller: TeachingUserBundle:User:contactStudents }
+
+
+
 
