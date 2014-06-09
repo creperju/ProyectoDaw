@@ -1,78 +1,81 @@
-{% extends "TeachingAdminBundle::index.html.twig" %}
+{% extends "TeachingGeneralBundle:Home:index.html.twig" %}
 
 {% block content %}
 	
-	<div class="container center">
+    <div class="container center">
 
-		<div class="row">
+        <div class="row">
 
+            {% if messages | length > 0 %}
+                {% for m in messages %}
 
-			id : {{ id }}<br/>
-			id : {{ id }}<br/>
-			
-			{% if messages | length > 0 %}
-				{% for m in messages %}
+                    <div class="col-sm-12 shadow margin-bottom-25 padding-top-15 padding-bottom-50 center panel">
 
-					<div class="col-sm-12 shadow margin-bottom-25 padding-top-15 padding-bottom-50 center panel">
-						
-						<div class="col-sm-6">
-							<h2>Mensaje</h2>
-							<br/>
-							{{ m.message }}
-							<br/>
-							
-							
-								{% if id == m.id %}
-									{% if back %}
-										<form action="" method="POST">
-											<input type="hidden" value="{{ id }}" />
+                        <div class="col-sm-6">
+                            <h2>Mensaje</h2>
+                            
+                            <br/>{{ m.message }}<br/>
 
-											<button class="btn btn-danger">
-												<h2>Pedir información</h2>
-											</button>
-										</form>
-									{% endif %}
-								{% endif %}
-							
-						</div>
+                            {% if id == m.id %}
+                                
+                                {% if back %}
+                                    <form action="" method="POST">
+                                        <input type="hidden" value="{{ id }}" />
 
-						<div class="col-sm-6 padding-top-50 right">
-							
-							<form action="{{ url('teaching_admin_affilations') }}" method="POST">
-								{# id message #}
-								<input type="hidden" name="id" value="{{ m.id }}" />
+                                        <button class="btn btn-danger">
+                                            <h2>Pedir información</h2>
+                                        </button>
+                                        
+                                    </form>
+                                {% endif %}
+                                
+                            {% endif %}
 
-								<button class="btn btn-success"><h2>Comprobar</h2></button>
+                        </div>
 
-							</form>
+                        <div class="col-sm-6 padding-top-50 right">
 
-							{% if id == m.id %}
-								{% if next %}
-									<form action="" method="POST">
-										<input type="hidden" value="{{ id }}" />
+                            <form action="{{ url('teaching_admin_affilations') }}" method="POST">
+                                {# id message #}
+                                <input type="hidden" name="id" value="{{ m.id }}" />
 
-										<button class="btn btn-success">
-											<h2>Asignar</h2>
-										</button>
-									</form>
-								{% endif %}
-							{% endif %}
+                                <button class="btn btn-success"><h2>Comprobar</h2></button>
 
-						</div>
+                            </form>
 
-					</div>
+                            {% if id == m.id %}
+                                
+                                {% if next %}
+                                    <form action="" method="POST">
+                                        
+                                        <input type="hidden" value="{{ id }}" />
 
-				{% endfor %}
-			{% else %}
-				<div class="col-sm-12 shadow margin-bottom-25 padding-top-15 padding-bottom-50  panel">
-					<h2>Sin peticiones</h2>
-					<br/>
-					No hay peticiones de asignación de usuario.
-				</div>
-			{% endif %}
+                                        <button class="btn btn-success">
+                                            <h2>Asignar</h2>
+                                        </button>
+                                        
+                                    </form>
+                                {% endif %}
+                            {% endif %}
 
-		</div>
+                        </div>
 
-	</div>
+                    </div>
+
+		{% endfor %}
+                
+            {% else %}
+                
+                <div class="col-sm-12 shadow margin-bottom-25 padding-top-15 padding-bottom-50  panel">
+                    <h2>Sin peticiones</h2>
+                    <br/>
+                    No hay peticiones de asignación de usuario.
+                </div>
+                
+            {% endif %}
+
+        </div>
+
+    </div>
 
 {% endblock %}
