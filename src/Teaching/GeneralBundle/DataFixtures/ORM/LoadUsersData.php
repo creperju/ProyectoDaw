@@ -473,92 +473,46 @@ class LoadUsersData extends Controller implements FixtureInterface
      */
     private function loadGroupsSubjects(ObjectManager $manager)
     {
-	// Courses with groups
-//	$courses = array(
-//	    '1º' => array(
-//		'A' => array(),
-//		'B' => array()
-//	    ),
-//	    '2º' => array(
-//		'A' => array(),
-//		'B' => array()
-//	    ),
-//	    '3º' => array(
-//		'A' => array(),
-//		'B' => array()
-//	    ),
-//	    '4º' => array(
-//		'A' => array(),
-//		'B' => array()
-//	    ),
-//	    '5º' => array(
-//		'A' => array(),
-//		'B' => array()
-//	    ),
-//	    '6º' => array(
-//		'A' => array(),
-//		'B' => array()
-//	    )
-//	);
-	
-	// Subjects in courses
-//	$subjects = array('Lengua', 'Matemáticas', 'Inglés', 'Música', 'Conocimiento del Medio', 'Gimnasia');
-	'0' => array(
-                'course' => '1º',
-                'letter' => 'A',
-                'tutor' => 'rafa'
-            ),
-            '1' => array(
-                'course' => '1º',
-                'letter' => 'B',
-                'tutor' => 'lorena'
-            ),
-            '2' => array(
-                'course' => '3º',
-                'letter' => 'B',
-                'tutor' => 'jacobo'
-            ),
-	
+	// Courses with groups	
 	$courses = array(
 	    '1º' => array(
 		'A' => array('rafa', 'lorena', 'lorena', 'jacobo', 'rafa', 'jacobo'),
-        'B' => array('lorena', 'lorena', 'lorena', 'jacobo', 'rafa', 'rafa')
+		'B' => array('lorena', 'lorena', 'lorena', 'jacobo', 'rafa', 'rafa')
 	    ),
-        '3º' => array(
-        'B' => array('rafa', 'jacobo', 'lorena', 'jacobo', 'rafa', 'lorena')
-        ),
+	    '3º' => array(
+		'B' => array('rafa', 'jacobo', 'lorena', 'jacobo', 'rafa', 'lorena')
+	    ),
 	);
 	
-	
+	// Subjects in courses
 	$subjects = array(
-        'Matemáticas', 
-        'Lengua', 
-        'Inglés', 
-        'Música' , 
-        'Conocimiento del Medio', 
-        'Gimnasia'
-    );
+	    'Matemáticas', 
+	    'Lengua', 
+	    'Inglés', 
+	    'Música' , 
+	    'Conocimiento del Medio', 
+	    'Gimnasia'
+	);
 	
-	
-	// Persist teacher, subject, group
-	foreach($courses as $course => $groups){
+	// Persist each groups, subject and teacher
+	foreach( $courses as $course => $groups ){
 	    
-	    foreach($groups as $group => $teachers){
+	    foreach( $groups as $group => $teacher){
 		
-		// For every group, there are a teacher wich teach a subject
-		for($i = 0; $i < count($group); $i++){
+		for( $i = 0; $i < count($subjects); $i++ ){
 		    $class = new GroupsSubjects();
 		    
 		    $class->setGroup($this->searchGroup($course, $group));
 		    $class->setSubject($this->search($subjects[$i], 'Subjects', 'name'));
-		    $class->setTeacher($this->search($teachers[$i], 'Users', 'username'));
+		    $class->setTeacher($this->search($teacher[$i], 'Users', 'username'));
 		    
 		    $manager->persist($class);
 		}
 		
 	    }
-		
+	    
 	}
+	
 	
 	$manager->flush();
 	
@@ -573,7 +527,7 @@ class LoadUsersData extends Controller implements FixtureInterface
      */
     private function loadActivities(ObjectManager $manager)
     {
-	//
+	// Activities in courses
 	$data = array(
 	    '1º' => array(
 		'A' => array(
@@ -587,20 +541,31 @@ class LoadUsersData extends Controller implements FixtureInterface
 			),
 		    ),
 		),
+		'B' => array(
+		    'Música' => array(
+			'0' => array(
+			    'Activity_name' => 'Exámen tema 1 y 2',
+			    'Type' => 'Exámen',
+			    'Description' => 'Exámen de evaluación de los temas 1 y 2.',
+			    'Date_start' => new \Datetime('2014-10-11 09:30:00'),
+			    'Date_end' => new \Datetime('2014-10-11 10:30:00'),
+			),
+		    ),
+		),
 	    ),
-        '3º' => array(
-        'B' => array(
-            'Lengua' => array(
-            '0' => array(
-                'Activity_name' => 'Resumen página 57.',
-                'Type' => 'Ejercicios',
-                'Description' => 'Realizar un resumen de la página 57, en el tema 2 del libro.',
-                'Date_start' => new \Datetime('2014-09-25 12:32:07'),
-                'Date_end' => new \Datetime('2014-09-26 10:20:00'),
-            ),
-            ),
-        ),
-        ),
+	    '3º' => array(
+		'B' => array(
+		    'Lengua' => array(
+			'0' => array(
+			    'Activity_name' => 'Resumen página 57.',
+			    'Type' => 'Ejercicios',
+			    'Description' => 'Realizar un resumen de la página 57, en el tema 2 del libro.',
+			    'Date_start' => new \Datetime('2014-09-25 12:32:07'),
+			    'Date_end' => new \Datetime('2014-09-26 10:20:00'),
+			),
+		    ),
+		),
+	    ),
 	);
 	
 	// Add activities
@@ -657,14 +622,52 @@ class LoadUsersData extends Controller implements FixtureInterface
                                     'state'         => null,
                                     'score'         => null,
                                     'observations'  => 'No Entregado',
-                                    'date'          => new \Datetime()
+                                    'date'          => null
+                                )
+                            ),
+                        ),
+                    ),
+                ),
+		'B' => array(
+                    'Música' => array(
+                        '0' => array(
+                            'name'          => 'Exámen tema 1 y 2',
+			    'type'          => 'Exámen',
+			    'description'   => 'Exámen de evaluación de los temas 1 y 2.',
+                            'students' => array(
+                                '0' => array(
+                                    'student'       => '50281490K',
+                                    'state'         => 'Realizado',
+                                    'score'         => 7,
+                                    'observations'  => 'Muy bien',
+                                    'date'          => new \Datetime('2014-09-26 10:20:00')
+                                )
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+	    '3º' => array(
+                'B' => array(
+                    'Lengua' => array(
+                        '0' => array(
+                            'name'          => 'Resumen página 57.',
+			    'type'          => 'Ejercicios',
+			    'description'   => 'Realizar un resumen de la página 57, en el tema 2 del libro.',
+                            'students' => array(
+                                '0' => array(
+                                    'student'       => '56902941J',
+                                    'state'         => 'Entregado.',
+                                    'score'         => 10,
+                                    'observations'  => 'Perfecto.',
+                                    'date'          => new \Datetime('2014-09-26 10:20:00')
                                 ),
                                 '1' => array(
-                                    'student'       => '50281490K',
+                                    'student'       => '89234922P',
                                     'state'         => 'Entregado.',
                                     'score'         => 8,
                                     'observations'  => 'Entregado correctamente',
-                                    'date'          => new \Datetime()
+                                    'date'          => new \Datetime('2014-09-26 10:20:00')
                                 ),
                             ),
                         ),
@@ -730,17 +733,31 @@ class LoadUsersData extends Controller implements FixtureInterface
             'Matemáticas' => array(
                 '0' => array(
                     'student'   => '55578963A',
+                    'mark'      => '6',
+                    'date'      => new \Datetime()
+                ),
+            ),
+	    'Lengua' => array(
+                '0' => array(
+                    'student'   => '56902941J',
+                    'mark'      => '10',
+                    'date'      => new \Datetime()
+                ),
+		'1' => array(
+                    'student'   => '89234922P',
                     'mark'      => '8',
                     'date'      => new \Datetime()
                 ),
-                '1' => array(
+            ),
+	    'Música' => array(
+                '0' => array(
                     'student'   => '50281490K',
-                    'mark'      => '9',
+                    'mark'      => '7',
                     'date'      => new \Datetime()
                 ),
             ),
         );
-        
+	
         // Persist ratings students
         foreach($data as $subjects => $subject){
             
