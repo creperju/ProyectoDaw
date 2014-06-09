@@ -240,9 +240,9 @@ class UserController extends Controller
         $student = $this->findStudents();
         
         if(count($student))
-            return $this->actionSubjects($student, 'C. del Medio');
+            return $this->actionSubjects($student, 'Conocimiento del Medio', 'C. del Medio');
         else
-            return $this->contactStudentsAction($request, 'C. del Medio');
+            return $this->contactStudentsAction($request, 'Conocimiento del Medio', 'C. del Medio');
                
     }
     
@@ -623,7 +623,7 @@ class UserController extends Controller
      * @param type $subject
      * @return type
      */
-    private function actionSubjects($students, $subject)
+    private function actionSubjects($students, $subject, $controller = null)
     {
 	// Create array for students, the first student will be show
 	$array = array(); $i = 1;
@@ -654,7 +654,7 @@ class UserController extends Controller
 	return $this->render(
             'TeachingUserBundle::subjects.html.twig',
             array(
-                'controller' => $subject,
+                'controller' => ($controller != null)? $controller : $subject,
                 'students' => $array
             )
         );
