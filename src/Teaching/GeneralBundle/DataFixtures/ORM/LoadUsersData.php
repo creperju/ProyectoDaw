@@ -110,6 +110,22 @@ class LoadUsersData extends Controller implements FixtureInterface
                 'email'     => 'jacobo@teaching.es'
             ),
             '3' => array(
+                'username'  => 'rafa',
+                'password'  => 'rafa',
+                'rol'       => 'ROLE_TEACHER',
+                'name'      => 'Rafa',
+                'surname'   => 'González Jaque',
+                'email'     => 'rafa@teaching.es'
+            ),
+            '4' => array(
+                'username'  => 'lorena',
+                'password'  => 'lorena',
+                'rol'       => 'ROLE_TEACHER',
+                'name'      => 'Lorena',
+                'surname'   => 'Peña García',
+                'email'     => 'lorena@teaching.es'
+            ),
+            '5' => array(
                 'username'  => 'admin',
                 'password'  => 'admin',
                 'rol'       => 'ROLE_ADMIN',
@@ -206,7 +222,12 @@ class LoadUsersData extends Controller implements FixtureInterface
                 'name'      => 'Juan',
                 'surname'   => 'Crespo Perán',
                 'dni'       => '56902941J'
-            )
+            ),
+            '3' => array(
+                'name'      => 'Enrique',
+                'surname'   => 'García Íñigo',
+                'dni'       => '89234922P'
+            ),
         );
         
         // Persist some students into database
@@ -318,12 +339,12 @@ class LoadUsersData extends Controller implements FixtureInterface
             '0' => array(
                 'course' => '1º',
                 'letter' => 'A',
-                'tutor' => 'emilio'
+                'tutor' => 'rafa'
             ),
             '1' => array(
                 'course' => '1º',
                 'letter' => 'B',
-                'tutor' => 'fran'
+                'tutor' => 'lorena'
             ),
             '2' => array(
                 'course' => '3º',
@@ -385,6 +406,16 @@ class LoadUsersData extends Controller implements FixtureInterface
                 'mother'    => null,
                 'tutor'    => null
             ),
+            '3' => array(
+                'student'   => '89234922P',
+                'course'    => '3º',
+                'letter'    => 'B',
+                'father'    => '66666666V',
+                'mother'    => '72492417Y',
+                'tutor'    => null
+            ),
+
+            
         );
         
         // Persists enrollments
@@ -472,16 +503,41 @@ class LoadUsersData extends Controller implements FixtureInterface
 	
 	// Subjects in courses
 //	$subjects = array('Lengua', 'Matemáticas', 'Inglés', 'Música', 'Conocimiento del Medio', 'Gimnasia');
-	
+	'0' => array(
+                'course' => '1º',
+                'letter' => 'A',
+                'tutor' => 'rafa'
+            ),
+            '1' => array(
+                'course' => '1º',
+                'letter' => 'B',
+                'tutor' => 'lorena'
+            ),
+            '2' => array(
+                'course' => '3º',
+                'letter' => 'B',
+                'tutor' => 'jacobo'
+            ),
 	
 	$courses = array(
 	    '1º' => array(
-		'A' => array('emilio')
-	    )
+		'A' => array('rafa', 'lorena', 'lorena', 'jacobo', 'rafa', 'jacobo'),
+        'B' => array('lorena', 'lorena', 'lorena', 'jacobo', 'rafa', 'rafa')
+	    ),
+        '3º' => array(
+        'B' => array('rafa', 'jacobo', 'lorena', 'jacobo', 'rafa', 'lorena')
+        ),
 	);
 	
 	
-	$subjects = array('Matemáticas');
+	$subjects = array(
+        'Matemáticas', 
+        'Lengua', 
+        'Inglés', 
+        'Música' , 
+        'Conocimiento del Medio', 
+        'Gimnasia'
+    );
 	
 	
 	// Persist teacher, subject, group
