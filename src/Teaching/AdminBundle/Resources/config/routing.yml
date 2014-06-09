@@ -11,3 +11,14 @@ teaching_admin_affilations:
 teaching_admin_check:
     pattern:  /admin/comprobar/
     defaults: { _controller: TeachingAdminBundle:Admin:check }
+
+
+
+# To assing user in affilations or not
+teaching_admin_asign:
+    pattern:  /admin/asignar/
+    defaults: { _controller: TeachingAdminBundle:Admin:asign }
+    
+teaching_admin_info:
+    pattern:  /admin/masinformacion/
+    defaults: { _controller: TeachingAdminBundle:Admin:moreInfo }

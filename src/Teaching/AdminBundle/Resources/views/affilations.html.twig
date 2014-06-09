@@ -3,7 +3,28 @@
 {% block content %}
 	
     <div class="container center">
-
+        
+        {% for message in  app.session.flashbag.get('msg') %}
+        {% for verificate in app.session.flashbag.get('verificate') %}
+            
+            {% if verificate == 'success' %}
+            
+                <div class="alert alert-success" id="msg_flash">
+                    {{ message }}
+                </div>
+                
+            {% else %}
+                
+                <div class="alert alert-danger" id="msg_flash">
+                    {{ message }}
+                </div>
+                
+            {% endif %}
+            
+        {% endfor %}
+        {% endfor %}
+        
+        
         <div class="row">
 
             {% if messages | length > 0 %}
@@ -16,21 +37,22 @@
                             
                             <br/>{{ m.message }}<br/>
 
-                            {% if id == m.id %}
-                                
+                            {#######################################################################}
+                            {# ONLY SHOW WHEN USER CLICK CHECK BUTTON AND THEN THERE ISN'T RESULT  #}
+                            {#######################################################################}
+                            {% if id == m.id %}                                
                                 {% if back %}
-                                    <form action="" method="POST">
-                                        <input type="hidden" value="{{ id }}" />
-
+                                    <form action="{{ url('teaching_admin_info') }}" method="POST">
+                                        <input type="hidden" name="id" value="{{ m.id }}" />
                                         <button class="btn btn-danger">
                                             <h2>Pedir información</h2>
-                                        </button>
-                                        
+                                        </button>                                        
                                     </form>
-                                {% endif %}
-                                
+                                {% endif %}                                
                             {% endif %}
-
+                            {# End button successful #}
+                            
+                            
                         </div>
 
                         <div class="col-sm-6 padding-top-50 right">
@@ -39,17 +61,18 @@
                                 {# id message #}
                                 <input type="hidden" name="id" value="{{ m.id }}" />
 
-                                <button class="btn btn-success"><h2>Comprobar</h2></button>
+                                <button class="btn btn-warning"><h2>Comprobar</h2></button>
 
                             </form>
-
-                            {% if id == m.id %}
+                            
                                 
+                            {#####################################################################}
+                            {# ONLY SHOW WHEN USER CLICK CHECK BUTTON AND THEN THERE ARE RESULT  #}
+                            {#####################################################################}
+                            {% if id == m.id %}
                                 {% if next %}
-                                    <form action="" method="POST">
-                                        
-                                        <input type="hidden" value="{{ id }}" />
-
+                                    <form action="{{ url('teaching_admin_asign') }}" method="POST">
+                                        <input type="hidden" name="id" value="{{ m.id }}" />
                                         <button class="btn btn-success">
                                             <h2>Asignar</h2>
                                         </button>
@@ -57,9 +80,26 @@
                                     </form>
                                 {% endif %}
                             {% endif %}
+                            {# End button successful #}
 
+                            
                         </div>
+                            
+                        {% if show %}
+                            {% if id == m.id %}
+                                <div class="col-sm-12">
 
+                                    {% if span > 0 %}
+                                        Hay {{ span }} relacionadas.
+                                    {% else %}
+                                        {{ span }} resultados
+                                    {% endif %}
+
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                        
+                        
                     </div>
 
 		{% endfor %}
