@@ -367,13 +367,24 @@ class UserController extends Controller
         
     public function configAction(){
         $user = $this->getUser();
+        
+	// Form to send message
+        $form = $this->createFormBuilder()
+            ->add('CurrentPassword', 'UserPassword')
+            ->add('NewPassword', 'password')
+            ->add('NewPassword2', 'password')
+            ->getForm();
+ 
+        $form->handleRequest($request);
         return $this->render('TeachingUserBundle::config.html.twig', 
                 array(
-                    "controller" => "Configuración",
-                    "Usuario" => $user->getUserName()
+                    "controller"    => "Configuración",
+                    "Usuario"       => $user->getUserName(),
+                    "form"          => $form->createView()
                 ));
     }
     public function changePasswordAction(Request $request){
+        if($request->get("CurrentPassword")){
 //        $user = $this->getUser();
 //        $currentPassword = $request->get("CurrentPassword");
 //        $newPassword = $request ->get("NewPassword");
@@ -403,13 +414,17 @@ class UserController extends Controller
 //        $em = $this->getDoctrine()->getManager();
  
         
-        return new \Symfony\Component\HttpFoundation\JsonResponse(array("estado" => "error", "msg" => $str));
+        return new \Symfony\Component\HttpFoundation\JsonResponse(array("estado" => "error", "msg" => "fallo"));
 //        if($validPassword){
 //            
 //        }
 //        else{
 //            return new \Symfony\Component\HttpFoundation\JsonResponse(array("estado" => "error", "msg" => "Contraseña no válida"));
 //        }
+        }
+        else{
+             return $this->redirect($this->generateUrl('teaching_user_config'));
+        }
     }
     
     public function changeNameAction    (Request $request){
