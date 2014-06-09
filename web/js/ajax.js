@@ -111,7 +111,7 @@ function validarNombre (nombre){
         validname = false;
     }
     if (valuesurname){
-        var patt = /^(\D{1,20}\s{1}\D{1,20}){1,20}$/;
+        var patt = /^\D{1,20}$/;
         var validsurname = patt.test(valuesurname);
     }
     else{
@@ -142,9 +142,6 @@ function validarNombre (nombre){
     else{
         return false;
     }
-    
-    //#333 ok
-    //rgb(210, 50, 45) fallo
 }
 
 

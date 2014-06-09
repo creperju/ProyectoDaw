@@ -369,73 +369,117 @@ class UserController extends Controller
         $user = $this->getUser();
         
 	// Form to send message
-        $form = $this->createFormBuilder()
-            ->add('CurrentPassword', 'UserPassword')
-            ->add('NewPassword', 'password')
-            ->add('NewPassword2', 'password')
-            ->getForm();
- 
-        $form->handleRequest($request);
+//        $form = $this->createFormBuilder()
+//            ->add('CurrentPassword', 'UserPassword')
+//            ->add('NewPassword', 'password')
+//            ->add('NewPassword2', 'password')
+//            ->getForm();
+// 
+//        $form->handleRequest($request);
         return $this->render('TeachingUserBundle::config.html.twig', 
                 array(
                     "controller"    => "Configuración",
-                    "Usuario"       => $user->getUserName(),
-                    "form"          => $form->createView()
+                    "Usuario"       => $user->getUserName()
+//                    "form"          => $form->createView()
                 ));
     }
     public function changePasswordAction(Request $request){
-        if($request->get("CurrentPassword")){
-//        $user = $this->getUser();
-//        $currentPassword = $request->get("CurrentPassword");
-//        $newPassword = $request ->get("NewPassword");
-//        for ($i=0; $i<10;$i++){
-//            $currentPassword = hash("sha512",$currentPassword);
-//        }
-        
-//        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
-//            $error = $request->attributes->get(
-//                SecurityContext::AUTHENTICATION_ERROR
-//        );
-//        $defaultEncoder = new MessageDigestPasswordEncoder('sha512', true, 10);
-//        $mensaje = "defaultEncoder: " . $defaultEncoder. "<br/>";
-//        $encoders = array(
-//            'Symfony\\Component\\Security\\Core\\User\\User' => $defaultEncoder,
-//        );
-//        $encoderFactory = new \Symfony\Component\Security\Core\Encoder\EncoderFactory($encoders);
-//        $encoder = $encoderFactory->getEncoder($user);
-//        $validPassword = $encoder->isPasswordValid(
-//            $user->getPassword(), // the encoded password
-//            $currentPassword,       // the submitted password
-//            $user->getSalt()
-//        );
-//        $password = $user->getPassword();
-//        $password = search($user->getId(), 'Users', 'password');
-//        $password = $password ['password'];
-//        $em = $this->getDoctrine()->getManager();
- 
-        
-        return new \Symfony\Component\HttpFoundation\JsonResponse(array("estado" => "error", "msg" => "fallo"));
-//        if($validPassword){
-//            
-//        }
-//        else{
-//            return new \Symfony\Component\HttpFoundation\JsonResponse(array("estado" => "error", "msg" => "Contraseña no válida"));
-//        }
+        if($request->get("NewPassword")){
+            $user = $this->getUser();
+            $upassword = $user->getPassword();
+            $password =  $request ->get("CurrentPassword");
+            $newPassword = $request ->get("NewPassword");
+            $newPasswordtwo = $request ->get("NewPassword2");
+            $factory = $this->get('security.encoder_factory');
+            $encoder = $factory->getEncoder($user);
+            $salt = $user->getSalt();
+            $passwordSecure = $encoder->encodePassword($password, $salt);
+            $em = $this->getDoctrine()->getManager();
+            $longitud = false;
+            if(strlen($newPassword)>=4 && strlen($newPassword)<=50){
+                $longitud= true;
+            }
+            if ($passwordSecure == $upassword){
+                if($newPassword == $newPasswordtwo && $longitud){
+                    $newsalt = (md5(time() * rand(1, 9999))); 
+                    $user->setSalt($newsalt);
+                    $user->setPassword($encoder->encodePassword($newPassword, $newsalt));
+                    $em->persist($user);
+                    $em->flush();
+                    return new \Symfony\Component\HttpFoundation\JsonResponse(array("estado" => "success", "msg" => "Se ha guardado la nueva contraseña"));
+                }
+                else{
+                    return new \Symfony\Component\HttpFoundation\JsonResponse(array("estado" => "error", "msg" => "La nueva contraseña no coincide en los dos campos o no tiene la longitud adecuada (entre 4 y 50)"));
+                }
+            }
+            else{
+                return new \Symfony\Component\HttpFoundation\JsonResponse(array("estado" => "error", "msg" => "La contraseña actual no coincide con la contraseña del usuario"));
+            }
         }
         else{
              return $this->redirect($this->generateUrl('teaching_user_config'));
         }
     }
     
-    public function changeNameAction    (Request $request){
+    
+    public function changeNameAction(Request $request){
         
-        return new \Symfony\Component\HttpFoundation\JsonResponse(array("estado" => "error", "msg" => "Ha Ocurrido un error"));
-        
+        if ($request->get("NewName")){
+            $user = $this->getUser();
+            $uname = $user->getName();
+            $usurname = $user ->getSurname();
+            $newname = $request ->get("NewName");
+            $newsurname = $request->get("NewSurname");
+            $patt = "/^\D{1,20}$/";
+            $em = $this->getDoctrine()->getManager();
+            if (preg_match($patt, $newname)&& preg_match($patt, $newsurname)){
+                if(($newname != $uname)&&( $newsurname != $usurname)){
+                    $user->setName($newname);
+                    $user->setSurname($newsurname);
+                    $em->persist($user);
+                    $em->flush();
+                    return new \Symfony\Component\HttpFoundation\JsonResponse(array("estado" => "success", "msg" => "Se han guardado los nuevos nombres y apellidos"));
+                }
+                else{
+                    return new \Symfony\Component\HttpFoundation\JsonResponse(array("estado" => "error", "msg" => "No se han modificado el nombre y los apellidos del usuario<br/> porque coinciden los actuales"));
+                }
+                
+            }
+            else{
+                return new \Symfony\Component\HttpFoundation\JsonResponse(array("estado" => "error", "msg" => "Alguno de los campos no es válido <br/>, reviselo y recuerde que no debe sobrepasar los 20 caracteres"));
+            }
+        }
+        else{
+            return $this->redirect($this->generateUrl('teaching_user_config'));
+        }
     }
     
-    public function changeEmailAction   (Request $request){
-        
-        return new \Symfony\Component\HttpFoundation\JsonResponse(array("estado" => "error", "msg" => "Ha Ocurrido un error"));
+    public function changeEmailAction(Request $request){
+         if ($request->get("NewEmail")){
+            $user = $this->getUser();
+            $uemail = $user->getEmail();
+            $newemail = $request ->get("NewEmail");
+            $patt = "/^(\w)([.]*[_]*[-]*\w)+@([a-z])+([.]*[a-z])*[.]([a-z]{2,3})$/";
+            $em = $this->getDoctrine()->getManager();
+            if (preg_match($patt, $newemail)){
+                if($newemail != $uemail){
+                    $user->setEmail($newemail);
+                    $em->persist($user);
+                    $em->flush();
+                    return new \Symfony\Component\HttpFoundation\JsonResponse(array("estado" => "success", "msg" => "Se ha guardado el nuevo email"));
+                }
+                else{
+                    return new \Symfony\Component\HttpFoundation\JsonResponse(array("estado" => "error", "msg" => "No se ha modificado el email<br/> porque coincide con el email actual"));
+                }
+                
+            }
+            else{
+                return new \Symfony\Component\HttpFoundation\JsonResponse(array("estado" => "error", "msg" => "No se ha modificado el email porque no es válido"));
+            }
+        }
+        else{
+            return $this->redirect($this->generateUrl('teaching_user_config'));
+        }
         
     }
                       
