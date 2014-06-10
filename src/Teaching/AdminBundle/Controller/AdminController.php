@@ -251,19 +251,19 @@ class AdminController extends Controller
 		
 		$em->flush();
 		
-//		$message_to_user = new Messages();
-//		
-//		
-//		$message_to_user->setFromUser($this->getUser());
-//		$message_to_user->setToUser($user);
-//		$message_to_user->setSubject('Éxito de asignación');
-//		$message_to_user->setMessage('La asignación de alumnos se ha realizado correctamente. Gracias por usar Teaching!');
-//		$message_to_user->setDate(new \Datetime());
-//		
-//		
-//		$em->persist($message_to_user);
-//			
-//		$em->flush();
+        
+		$message_to_user = new Messages();
+		
+		$message_to_user->setFromUser($this->getUser());
+		$message_to_user->setToUser($user);
+		$message_to_user->setSubject('Éxito de asignación');
+		$message_to_user->setMessage('La asignación de alumnos se ha realizado correctamente. Gracias por usar Teaching!');
+		$message_to_user->setDate(new \Datetime());
+		
+		
+		$em->persist($message_to_user);
+			
+		$em->flush();
 		
 		$this->deleteMessage($message_id);
 		
