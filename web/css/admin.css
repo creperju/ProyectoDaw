@@ -1,0 +1,9 @@
+
+/* Home styles */
+body
+{ 
+    font-size: 20px;
+    background-attachment: fixed;
+    background-image: url('../img/fondos/fondo-4.png');
+    /*background-color: #eee;*/
+}

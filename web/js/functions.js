@@ -2,7 +2,11 @@
 // Show and hidden flash message
 $(document).ready(function(){
   $('#msg_flash').delay(2000).fadeOut('slow');
-  
+  setTimeout(function (){
+      $('#contenido').slideDown('3000');
+      $('#imagen-cargar').slideUp('3000');
+  }, 1000)
+//  $()
 });
 
 

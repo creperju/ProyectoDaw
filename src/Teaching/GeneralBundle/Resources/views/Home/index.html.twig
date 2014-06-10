@@ -8,24 +8,24 @@
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7">
             <h1>Bienvenido a Teaching! <span class="">{{ app.user.username }}</span></h1>
         </div>
-        
-        
+
+
         <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">  
             <a href="
-                {% if (app.user and is_granted('ROLE_USER')) %}
-                    {{ path('teaching_user_homepage')}}
-                {% endif %}
-                {% if (app.user and is_granted('ROLE_ADMIN')) %}
-                    {{ path('teaching_admin_homepage')}}
-                {% endif %}
-                {% if (app.user and is_granted('ROLE_TEACHER')) %}
-                    {{ path('teaching_teacher_homepage')}}
-                {% endif %}
-                ">
+               {% if (app.user and is_granted('ROLE_USER')) %}
+                   {{ path('teaching_user_homepage')}}
+               {% endif %}
+               {% if (app.user and is_granted('ROLE_ADMIN')) %}
+                   {{ path('teaching_admin_homepage')}}
+               {% endif %}
+               {% if (app.user and is_granted('ROLE_TEACHER')) %}
+                   {{ path('teaching_teacher_homepage')}}
+               {% endif %}
+               ">
                 <button class="btn btn-primary margin-top-25 margin-bottom-25" title="Volver"><h4>Volver</h4></button>
             </a>
         </div>
-                
+
         <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
             <a href="{{ path('logout')}}">
                 <button class="btn btn-danger margin-top-25 margin-bottom-25" title="Cerrar sesión"><h4>Cerrar sesión</h4></button>
@@ -34,184 +34,184 @@
     {% else %}
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <h1>Bienvenido a Teaching!<small><br/>Enseñando su futuro</small></h1>
-            
+
         </div>
-        
+
         <form action="{{ path('login_check') }}" method="post">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-            
-                
+
+
                 <div class="input-group margin-top-15">
-                    
+
                     <span class="input-group-addon">Usuario</span>
                     <input type="text" 
                            class="form-control" placeholder="Usuario" 
                            name="_username" size="15"
-                            value="{{ last_username }}" />
-                
+                           value="{{ last_username }}" />
+
                 </div>
-                              
+
                 <div class="input-group" style="margin-top: 5px;">
-                    
+
                     <span class="input-group-addon">Contraseña</span>
                     <input type="password" class="form-control" placeholder="Contraseña"
-                        name="_password" />
-                    
+                           name="_password" />
+
                 </div>
-                
+
                 {# Protection to CSRF attacks #}
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
 
                 {# Redirect to account user #}
                 <input type="hidden" name="_target_path" value="/validado" />
             </div>
-                
+
             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                 <button type="submit" class="btn btn-primary margin-top-15" title="Entrar"><h3>Entrar</h3></button>
             </div>
-                
+
         </form>
-    
+
     {% endif %}
-    
-    
+
+
 {% endblock %}
 
 
 {% block content %}
-    
-    
-    <div class="container" >
-            
-        {% if error %}
-            <div class="alert alert-danger" id="msg_flash">
-                Error en el login, inténtelo de nuevo.
-            </div>
-        {% endif %}
 
-        {# Show message success or error when register user #}
-        {% for message in  app.session.flashbag.get('user_create') %}
-        {% for verificate in app.session.flashbag.get('verificate') %}
-            
-            {% if verificate == 'success' %}
-            
-                <div class="alert alert-success" id="msg_flash">
-                    {{ message }}
-                </div>
-                
-            {% else %}
-                
+
+        <div class="container" >
+
+            {% if error %}
                 <div class="alert alert-danger" id="msg_flash">
-                    {{ message }}
+                    Error en el login, inténtelo de nuevo.
                 </div>
-                
             {% endif %}
-            
-        {% endfor %}
-        {% endfor %}
-        
-        {# Slider JS #}
-        <div class="panel shadow" id="wowslider-container1"
-             style="width:100%; height:50%;max-width:100%;overflow:hidden;border:solid 5px white;padding:0;margin:0 auto;display:block;" 
-             marginheight="0" 
-             marginwidth="0">
-        
-            
-            {# Tittle #}
-            <div class="ws_bullets">
-                <div>
-                    <a href="#" 
-                       title="Sigue su aprendizaje">
-                        <img src="{{ asset('img/galeria/img/img1.png') }}" 
-                             alt="Sigue su aprendizaje"
-                             title="Sigue su aprendizaje" />
-                        1
-                    </a>
-                    <a href="#" 
-                       title="Consulta asignaturas">
-                        <img src="{{ asset('img/galeria/img/img2.png') }}" 
-                             alt="Consulta asignaturas"
-                             title="Consulta asignaturas" />
-                        2
-                    </a>
-                    <a href="#" 
-                       title="Ayuda a tu hijo a estudiar">
-                        <img src="{{ asset('img/galeria/img/img3.png') }}" 
-                             alt="Ayuda a tu hijo a estudiar"
-                             title="Ayuda a tu hijo a estudiar" />
-                        3
-                    </a>
-                    <a href="#registro" 
-                       title="Regístrate">
-                        <img src="{{ asset('img/galeria/img/img4.png') }}" 
-                             alt="Regístrate"
-                             title="Regístrate" />
-                        4
-                    </a>
-                </div>
-            </div>
-                
-                             
-            {# Subtittle #}
-            <div class="ws_images">
-                <ul>
-                    <li>
-                        <img src="{{ asset('img/galeria/img/img1.png') }}" 
-                             alt="Sigue su aprendizaje" 
-                             title="Sigue su aprendizaje" 
-                             id="wows1_0"/>
-                        A través de Teaching!
-                    </li>
-                    <li>
-                        <img src="{{ asset('img/galeria/img/img2.png') }}" 
-                             alt="Consulta asignaturas" 
-                             title="Consulta asignaturas" 
-                             id="wows1_1"/>
-                        Matemáticas, Lengua, Inglés...
-                    </li>
-                    <li>
-                        <img src="{{ asset('img/galeria/img/img3.png') }}" 
-                             alt="Ayuda a tu hijo a estudiar" 
-                             title="Ayuda a tu hijo a estudiar" 
-                             id="wows1_2"/>
-                        Gracias a Teaching!</li>
-                    <li>
-                        <img src="{{ asset('img/galeria/img/img4.png') }}" 
-                             alt="Regístrate" 
-                             title="Regístrate" 
-                             id="wows1_3"
-                             onclick=""/>
-                        ¡Es gratis!                        
-                    </li>
-                </ul>
-            </div>
-                  
 
-            {# Styles Slider JS #}
-            <link rel="stylesheet" type="text/css" href="{{ asset('img/galeria/engine/style.css') }}" />
-            <script type="text/javascript" src="{{ asset('img/galeria/engine/jquery.js') }}"></script>
-    
-            <script type="text/javascript" src="{{ asset('img/galeria/engine/wowslider.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('img/galeria/engine/script.js') }}"></script>
-        
-        </div>
-        
-            
-            
-            
-            
-            
-            
-        <br/><br/><br/> 
-        {# Sign in form #}
-        <div class="panel shadow" id="registro">
-            
-            <div class="panel-heading"><h1 class="h1">¡Regístrate!</h1></div>
-            
-            <div class="panel-body center">
-                
-                {{ form_start(form) }}
-                    
+            {# Show message success or error when register user #}
+            {% for message in  app.session.flashbag.get('user_create') %}
+                {% for verificate in app.session.flashbag.get('verificate') %}
+
+                    {% if verificate == 'success' %}
+
+                        <div class="alert alert-success" id="msg_flash">
+                            {{ message }}
+                        </div>
+
+                    {% else %}
+
+                        <div class="alert alert-danger" id="msg_flash">
+                            {{ message }}
+                        </div>
+
+                    {% endif %}
+
+                {% endfor %}
+            {% endfor %}
+
+            {# Slider JS #}
+            <div class="panel shadow" id="wowslider-container1"
+                 style="width:100%; height:50%;max-width:100%;overflow:hidden;border:solid 5px white;padding:0;margin:0 auto;display:block;" 
+                 marginheight="0" 
+                 marginwidth="0">
+
+
+                {# Tittle #}
+                <div class="ws_bullets">
+                    <div>
+                        <a href="#" 
+                           title="Sigue su aprendizaje">
+                            <img src="{{ asset('img/galeria/img/img1.png') }}" 
+                                 alt="Sigue su aprendizaje"
+                                 title="Sigue su aprendizaje" />
+                            1
+                        </a>
+                        <a href="#" 
+                           title="Consulta asignaturas">
+                            <img src="{{ asset('img/galeria/img/img2.png') }}" 
+                                 alt="Consulta asignaturas"
+                                 title="Consulta asignaturas" />
+                            2
+                        </a>
+                        <a href="#" 
+                           title="Ayuda a tu hijo a estudiar">
+                            <img src="{{ asset('img/galeria/img/img3.png') }}" 
+                                 alt="Ayuda a tu hijo a estudiar"
+                                 title="Ayuda a tu hijo a estudiar" />
+                            3
+                        </a>
+                        <a href="#registro" 
+                           title="Regístrate">
+                            <img src="{{ asset('img/galeria/img/img4.png') }}" 
+                                 alt="Regístrate"
+                                 title="Regístrate" />
+                            4
+                        </a>
+                    </div>
+                </div>
+
+
+                {# Subtittle #}
+                <div class="ws_images">
+                    <ul>
+                        <li>
+                            <img src="{{ asset('img/galeria/img/img1.png') }}" 
+                                 alt="Sigue su aprendizaje" 
+                                 title="Sigue su aprendizaje" 
+                                 id="wows1_0"/>
+                            A través de Teaching!
+                        </li>
+                        <li>
+                            <img src="{{ asset('img/galeria/img/img2.png') }}" 
+                                 alt="Consulta asignaturas" 
+                                 title="Consulta asignaturas" 
+                                 id="wows1_1"/>
+                            Matemáticas, Lengua, Inglés...
+                        </li>
+                        <li>
+                            <img src="{{ asset('img/galeria/img/img3.png') }}" 
+                                 alt="Ayuda a tu hijo a estudiar" 
+                                 title="Ayuda a tu hijo a estudiar" 
+                                 id="wows1_2"/>
+                            Gracias a Teaching!</li>
+                        <li>
+                            <img src="{{ asset('img/galeria/img/img4.png') }}" 
+                                 alt="Regístrate" 
+                                 title="Regístrate" 
+                                 id="wows1_3"
+                                 onclick=""/>
+                            ¡Es gratis!                        
+                        </li>
+                    </ul>
+                </div>
+
+
+                {# Styles Slider JS #}
+                <link rel="stylesheet" type="text/css" href="{{ asset('img/galeria/engine/style.css') }}" />
+                <script type="text/javascript" src="{{ asset('img/galeria/engine/jquery.js') }}"></script>
+
+                <script type="text/javascript" src="{{ asset('img/galeria/engine/wowslider.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('img/galeria/engine/script.js') }}"></script>
+
+            </div>
+
+
+
+
+
+
+
+            <br/><br/><br/> 
+            {# Sign in form #}
+            <div class="panel shadow" id="registro">
+
+                <div class="panel-heading"><h1 class="h1">¡Regístrate!</h1></div>
+
+                <div class="panel-body center">
+
+                    {{ form_start(form) }}
+
                     <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
                         <div class="col-md-offset-1 col-lg-offset-1 col-md-5  col-lg-5" >
                             <h3 class="h3">{{ form_label(form.username, 'Usuario') }}</h3>
@@ -227,12 +227,12 @@
 
                         {% endfor %}
                     </div>
-                        
+
                     <br/>
-                    
-                    
+
+
                     <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
-                        
+
                         <div class="col-md-offset-1 col-lg-offset-1 col-md-5  col-lg-5">
                             <h3 class="h3">{{ form_label(form.password, 'Contraseña') }}</h3>
                         </div>
@@ -247,11 +247,11 @@
 
                         {% endfor %}
                     </div>
-                        
+
                     <br/>
-                    
-                    
-                    
+
+
+
                     <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
                         <div class="col-md-offset-1 col-lg-offset-1 col-md-5  col-lg-5" >
                             <h3 class="h3">{{ form_label(form.email, 'Email') }}</h3>
@@ -267,11 +267,11 @@
 
                         {% endfor %}
                     </div>
-                        
+
                     <br/>
-                    
-                    
-                    
+
+
+
                     <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
                         <div class="col-md-offset-1 col-lg-offset-1 col-md-5  col-lg-5" >
                             <h3 class="h3">{{ form_label(form.name, 'Nombre') }}</h3>
@@ -287,11 +287,11 @@
 
                         {% endfor %}
                     </div>
-                        
+
                     <br/>
-                    
+
                     <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
-                        
+
                         <div class="col-md-offset-1 col-lg-offset-1 col-md-5  col-lg-5">
                             <h3 class="h3">{{ form_label(form.surname, 'Apellidos') }}</h3>
                         </div>
@@ -305,44 +305,52 @@
                             </div>
 
                         {% endfor %}
-                        
+
                     </div>
-                    
-                     
+
+
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 margin-top-15 margin-bottom-15">
-                        
+
                         <br/>
                         <button class="btn btn-info"><h3 class="h3">Registrarse</h3></button>
-                        
+
                     </div>
-                    
-                        
-                        
-                {{ form_end(form) }}
-                
-                
+
+
+
+                    {{ form_end(form) }}
+
+
+                </div>
+
             </div>
-            
-        </div>
-        
-       
-    
-        
-        
 
-  
-    </div> 
 
-    {# This is a trick to refresh page if user sign in and then, press back page, wich reload page home #}
-    <input type="hidden" id="refreshed" value="no" />
-    <script type="text/javascript">
-        onload=function(){
-            var e=document.getElementById("refreshed");
-            if(e.value=="no")e.value="yes";
-            else{e.value="no";location.reload();}
-        }
-    </script>
 
+
+
+
+
+        </div> 
+
+        {# This is a trick to refresh page if user sign in and then, press back page, wich reload page home #}
+        <input type="hidden" id="refreshed" value="no" />
+        <script type="text/javascript">
+            onload = function() {
+                var e = document.getElementById("refreshed");
+                if (e.value == "no")
+                    e.value = "yes";
+                else {
+                    e.value = "no";
+                    location.reload();
+                }
+            }
+        </script>
+
+{% endblock %}
+{% block css %}
+    {{parent()}}
+    <link href="{{ asset('css/home.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 
@@ -350,4 +358,5 @@
 
 
 
- 
+
+

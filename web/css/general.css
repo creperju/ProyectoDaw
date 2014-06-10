@@ -1,0 +1,33 @@
+/*****************************/    
+/*      General styles       */
+/*****************************/
+
+
+/*bottom div styles*/
+#contenido{
+    display: none;
+}
+
+#imagen-cargar{
+    width: 100%;
+    background-color: white;
+}
+
+/* Header styles */    
+#header { 
+    /*margin-top: 10px;*/
+    padding-top: 10px;
+    width: 100%;
+    background-color: white;
+    box-shadow: black 0px 0px 26px;
+}
+
+
+/* Footer styles */
+#footer { 
+    width: 100%;
+    padding-bottom: 50px;
+    /*margin-bottom: 50px;*/
+    background-color: white;
+    box-shadow: black 0px 0px 26px;
+}
