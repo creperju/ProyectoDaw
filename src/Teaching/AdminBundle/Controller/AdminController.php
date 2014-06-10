@@ -45,7 +45,13 @@ class AdminController extends Controller
     }
     
     
-
+    
+    /**
+     * Show all request of users that sign up in teaching and not assing students
+     * 
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @return type
+     */
     public function affilationsAction(Request $request)
     {
         
@@ -107,7 +113,12 @@ class AdminController extends Controller
 
 
 
-
+    /**
+     * Get messages of current user admin
+     * 
+     * @param type $id
+     * @return type
+     */
     private function getMessages($id = null)
     {
 
@@ -128,6 +139,13 @@ class AdminController extends Controller
 
 
 
+    /**
+     * Check if message exist
+     * 
+     * @param type $id
+     * @param type $messages
+     * @return boolean
+     */
     private function checkMessage($id, $messages)
     {
 
@@ -141,14 +159,22 @@ class AdminController extends Controller
 
 
 
-
+    
+    /**
+     * Get dni from message
+     * 
+     * @param type $message_id
+     * @return type
+     */
     private function getDni($message_id)
     {
-
+	// Find message
         $message = $this->getMessages($message_id);
-
+	
+	// Get content message
         $dni = $message[0]->getMessage();
         
+	// Return dni
         return explode("Dni: ", $dni);
     }
 
@@ -163,43 +189,35 @@ class AdminController extends Controller
      */
     private function getUsername($message_id)
     {
-
+	// Get message
         $message = $this->getMessages($message_id);
 	
-	if( $message ){
-        //echo "<pre>";print_r($message[0]->getFromUser()->getUsername()); echo"</pre>";
-        //echo "<br/> otra vez aqui2";
-         //print_r($message[0]->getFromUser()->getId());exit(0);
+	// If not exists message return null, unless return user
+	if( $message )
 	    return $message[0]->getFromUser();
-    }
-	else{
-        
+	else
 	    return null;
-    }
-	
 	
     }
 
 
-    private function findUser($id)
-    {
-        echo $id."  -- ";
-        $em = $this->getDoctrine()->getRepository('TeachingGeneralBundle:Users');
-        
-        $user = $em->findOneBy(array('id' => $id));
-        print_r($user);exit(0);
-        return $user;
-    }
 
     
-    
+    /**
+     * Return all enrollments that match with dni from user
+     * 
+     * @param type $dni
+     * @return string
+     */
     private function getEnrollment($dni)
     {
         
         $em = $this->getDoctrine()->getRepository('TeachingGeneralBundle:Enrollments');
         
+	// Array with [0] => students | [1] => father, mother or tutor
 	$datas = array();
         
+	// Return array with information, unless, return 0
         if( count($students = $em->findBy(array('dni_father' => $dni)) ) > 0 ){
 	    
 	    $datas['0'] = $students;   $datas['1'] = 'Padre';
@@ -225,7 +243,12 @@ class AdminController extends Controller
 
 
     
-    
+    /**
+     * Assign students to user
+     * 
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @return type
+     */
     public function asignAction(Request $request)
     {
 	// Messages receibe to this user
@@ -248,38 +271,19 @@ class AdminController extends Controller
 	    // If there is a match...
             if( count($enrollments) > 1 ){
 		
-		$em = $this->getDoctrine()->getManager();
-		
+		// Get user from message
 		$user = $this->getUsername($message_id);
 		
-		foreach($enrollments['0'] as $enrollment){
-		    $student = $enrollment->getStudent();
-		    
-		    $class = new Affilations();
-		    $class->setRelationship($enrollments['1']);
-		    $class->setStudent($student);
-		    $class->setUser($user);
-		    $class->setMainResponsible(false);
-		    
-		    $em->persist($class);
-		}
+		$this->findStudentsInEnrollments($enrollments, $user);
 		
-		$em->flush();
+		// Subject and message to user
+		$subject = 'Éxito de asignación';
+		$message = 'La asignación de alumnos se ha realizado correctamente. Gracias por usar Teaching!';
 		
-        
-		$message_to_user = new Messages();
+		// Write new message to user
+		$this->writeMessage($user, $subject, $message);
 		
-		$message_to_user->setFromUser($this->getUser());
-		$message_to_user->setToUser($user);
-		$message_to_user->setSubject('Éxito de asignación');
-		$message_to_user->setMessage('La asignación de alumnos se ha realizado correctamente. Gracias por usar Teaching!');
-		$message_to_user->setDate(new \Datetime());
-		
-		
-		$em->persist($message_to_user);
-			
-		$em->flush();
-		
+		// Delete message
 		$this->deleteMessage($message_id);
 		
 		// Flash message error
@@ -306,9 +310,6 @@ class AdminController extends Controller
 		
             }
 
-	    
-	    
-	    
         }
 	else{
 	    // Flash message error
@@ -322,18 +323,20 @@ class AdminController extends Controller
 	    );
 	}
         
-
-	
-	
-	
 	
         // Redirect the response
 	return $this->redirect($this->generateUrl('teaching_admin_affilations'));
 	
-	
     }
     
     
+    
+    /**
+     * User not found in table enrollments, delete message and send message to user
+     * 
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @return type
+     */
     public function moreInfoAction(Request $request)
     {
 	// Messages receibe to this user
@@ -353,32 +356,22 @@ class AdminController extends Controller
             $enrollments = $this->getEnrollment($dni);
 
 	    
-	    
 	    // If there is a match...
             if( count($enrollments) < 2 ){
 		
-		
-		//echo "aquiantes - " . $message_id ;
+		// Get user from message
 		$user = $this->getUsername($message_id);
-		//echo "<pre>"; print_r($user->getId());echo "</pre>";
 		
-		$message_to_user = new Messages();
+		// Subject and message to user
+		$subject = 'Error asignación';
+		$message = 'La asignación de alumnos no se ha realizado correctamente. Vuelva a escribir sus datos personales por favor.';
 		
-		$message_to_user->setFromUser($this->getUser());
-
-		$message_to_user->setToUser($user);
-            
-
-		$message_to_user->setSubject('Error asignación');
-		$message_to_user->setMessage('La asignación de alumnos no se ha realizado correctamente. Vuelva a escribir sus datos personales por favor.');
-		$message_to_user->setDate(new \Datetime());
+		// Write new message to user
+		$this->writeMessage($user, $subject, $message);
 		
-		$em = $this->getDoctrine()->getEntityManager();
-
-		$em->persist($message_to_user);
-		$em->flush();
-		
+		// Delete his message
 		$this->deleteMessage($message_id);
+		
 		
 		// Flash message error
                 $this->get('session')->getFlashBag()->add(
@@ -395,7 +388,7 @@ class AdminController extends Controller
 		// Flash message error
                 $this->get('session')->getFlashBag()->add(
                     'msg',
-                    'Este usuario tiene alumnos para ser asignados.'
+                    'Este usuario ya tiene alumnos asignados.'
                 );
 		$this->get('session')->getFlashBag()->add(
                     'verificate',
@@ -418,27 +411,80 @@ class AdminController extends Controller
 
 	}
 
-	 
-	
-	
         // Redirect the response
 	return $this->redirect($this->generateUrl('teaching_admin_affilations'));
     }
     
     
     
+    /**
+     * Delete messages
+     * 
+     * @param type $id
+     */
     private function deleteMessage($id)
     {
-	//echo "aquiii23";exit(0);
-	$em = $this->getDoctrine()->getEntityManager();
-
+	$em = $this->getDoctrine()->getManager();
 	$message = $em->getRepository('TeachingGeneralBundle:Messages')->find($id);
 	
-	
+	// Get message and delete
 	$em->remove($message);
 	
 	$em->flush();
 	
     }
+    
+    
+    /**
+     * Find students in enrollments and add user <> student in affilation
+     * 
+     * @param type $enrollments
+     * @param type $user
+     */
+    private function findStudentsInEnrollments($enrollments, $user)
+    {
+	
+	$em = $this->getDoctrine()->getManager();
+		
+	
+	foreach($enrollments['0'] as $enrollment){
+	    $student = $enrollment->getStudent();
+
+	    $class = new Affilations();
+	    $class->setRelationship($enrollments['1']);
+	    $class->setStudent($student);
+	    $class->setUser($user);
+	    $class->setMainResponsible(false);
+
+	    $em->persist($class);
+	}
+
+	$em->flush();
+	
+    }
+ 
+    
+    
+    private function writeMessage($user, $subject, $message)
+    {
+	
+	
+	// Edit message to user
+	$message_to_user = new Messages();
+
+	$message_to_user->setFromUser($this->getUser());
+	$message_to_user->setToUser($user);
+	$message_to_user->setSubject($subject);
+	$message_to_user->setMessage($message);
+	$message_to_user->setDate(new \Datetime());
+
+
+	// Send new message
+	$em = $this->getDoctrine()->getManager();
+	$em->persist($message_to_user);
+	$em->flush();
+	
+    }
+    
     
 }
