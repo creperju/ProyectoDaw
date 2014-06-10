@@ -342,8 +342,26 @@ class AdminController extends Controller
 	    // If there is a match...
             if( count($enrollments) < 2 ){
 		
-		$this->deleteMessage($message_id);
 		
+		
+		$user = $this->getUsername($message_id);
+		
+		print_r($user);exit(0);
+		
+		$message_to_user = new Messages();
+		
+		$message_to_user->setFromUser($this->getUser());
+		$message_to_user->setToUser($user);
+		$message_to_user->setSubject('Error asignación');
+		$message_to_user->setMessage('La asignación de alumnos no se ha realizado correctamente. Vuelva a escribir sus datos personales por favor.');
+		$message_to_user->setDate(new \Datetime());
+		
+		
+		$em->persist($message_to_user);
+			
+		$em->flush();
+		
+		$this->deleteMessage($message_id);
 		
 		// Flash message error
                 $this->get('session')->getFlashBag()->add(
