@@ -12,6 +12,12 @@
     width: 100%;
     background-color: white;
 }
+#imagen-precargar{
+    width: 100%;
+    background-color: white;
+    display: none;
+}
+
 
 /* Header styles */    
 #header { 
