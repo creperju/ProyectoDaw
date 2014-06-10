@@ -291,10 +291,10 @@ class HomeController extends Controller
 	
 	$errors = 0;
 	
-	//$pattern = "/^([a-z0-9]+)|| [@][a-z0-9]+[.][a-z]{2,3}$/i";
+	$pattern = "/^(\w)([.]*[_]*[-]*\w)*@([a-z])+([.]*[a-z])*[.]([a-z]{2,3})$/";
 	
 	if(strlen($email) > 50) $errors++;
-	//if(preg_match($pattern, $email)) $errors++;
+	if(!preg_match($pattern, $email)) $errors++;
 	
 	return $errors;
 	
