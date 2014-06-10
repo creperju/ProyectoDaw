@@ -166,15 +166,30 @@ class AdminController extends Controller
 
         $message = $this->getMessages($message_id);
 	
-	if( $message )
+	if( $message ){
+        //echo "<pre>";print_r($message[0]->getFromUser()->getUsername()); echo"</pre>";
+        //echo "<br/> otra vez aqui2";
+         //print_r($message[0]->getFromUser()->getId());exit(0);
 	    return $message[0]->getFromUser();
-	else
+    }
+	else{
+        
 	    return null;
+    }
 	
 	
     }
 
 
+    private function findUser($id)
+    {
+        echo $id."  -- ";
+        $em = $this->getDoctrine()->getRepository('TeachingGeneralBundle:Users');
+        
+        $user = $em->findOneBy(array('id' => $id));
+        print_r($user);exit(0);
+        return $user;
+    }
 
     
     
@@ -343,22 +358,24 @@ class AdminController extends Controller
             if( count($enrollments) < 2 ){
 		
 		
-		
+		//echo "aquiantes - " . $message_id ;
 		$user = $this->getUsername($message_id);
-		
-		print_r($user);exit(0);
+		//echo "<pre>"; print_r($user->getId());echo "</pre>";
 		
 		$message_to_user = new Messages();
 		
 		$message_to_user->setFromUser($this->getUser());
+
 		$message_to_user->setToUser($user);
+            
+
 		$message_to_user->setSubject('Error asignación');
 		$message_to_user->setMessage('La asignación de alumnos no se ha realizado correctamente. Vuelva a escribir sus datos personales por favor.');
 		$message_to_user->setDate(new \Datetime());
 		
-		
+		$em = $this->getDoctrine()->getEntityManager();
+
 		$em->persist($message_to_user);
-			
 		$em->flush();
 		
 		$this->deleteMessage($message_id);

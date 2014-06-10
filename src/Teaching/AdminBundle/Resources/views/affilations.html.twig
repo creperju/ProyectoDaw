@@ -37,20 +37,19 @@
                             
                             <br/>{{ m.message }}<br/>
 
-                            {#######################################################################}
-                            {# ONLY SHOW WHEN USER CLICK CHECK BUTTON AND THEN THERE ISN'T RESULT  #}
-                            {#######################################################################}
-                            {% if id == m.id %}                                
-                                {% if back %}
-                                    <form action="{{ url('teaching_admin_info') }}" method="POST">
-                                        <input type="hidden" name="id" value="{{ m.id }}" />
-                                        <button class="btn btn-danger">
-                                            <h2>Pedir información</h2>
-                                        </button>                                        
-                                    </form>
-                                {% endif %}                                
+                            {% if show %}
+                                {% if id == m.id %}
+                                    <div class="col-sm-12 col-md-12 col-lg-12 margin-top-50">
+
+                                        {% if span > 0 %}
+                                            <div class="alert alert-success">Hay <strong>{{ span }}</strong> coindicencia/s</div>
+                                        {% else %}
+                                            <div class="alert alert-danger">No hay resultados</div>
+                                        {% endif %}
+
+                                    </div>
+                                {% endif %}
                             {% endif %}
-                            {# End button successful #}
                             
                             
                         </div>
@@ -70,6 +69,17 @@
                             {# ONLY SHOW WHEN USER CLICK CHECK BUTTON AND THEN THERE ARE RESULT  #}
                             {#####################################################################}
                             {% if id == m.id %}
+                                <br/>
+                                {% if back %}
+                                    
+                                    <form action="{{ url('teaching_admin_info') }}" method="POST">
+                                        <input type="hidden" name="id" value="{{ m.id }}" />
+                                        <button class="btn btn-danger">
+                                            <h2>Pedir información</h2>
+                                        </button>                 
+                                    </form>
+                                {% endif %}
+
                                 {% if next %}
                                     <form action="{{ url('teaching_admin_asign') }}" method="POST">
                                         <input type="hidden" name="id" value="{{ m.id }}" />
@@ -85,19 +95,7 @@
                             
                         </div>
                             
-                        {% if show %}
-                            {% if id == m.id %}
-                                <div class="col-sm-12">
-
-                                    {% if span > 0 %}
-                                        Hay {{ span }} relacionadas.
-                                    {% else %}
-                                        {{ span }} resultados
-                                    {% endif %}
-
-                                </div>
-                            {% endif %}
-                        {% endif %}
+                        
                         
                         
                     </div>
