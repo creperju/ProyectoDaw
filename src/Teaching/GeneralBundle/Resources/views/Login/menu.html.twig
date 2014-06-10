@@ -199,7 +199,10 @@
 
 
 {% endblock %}
-
+{% block css %}
+    {{parent()}}
+    <link href="{{ asset('css/sections.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
 
 {% block js %}
     

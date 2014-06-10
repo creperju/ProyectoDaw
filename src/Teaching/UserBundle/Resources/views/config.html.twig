@@ -95,7 +95,13 @@
 
 {% endblock %}
 
+{% block css %}
+    {{parent()}}
+    <link href="{{ asset('css/section.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
 {% block js %}
     {{parent()}}
     <script type="text/javascript" src="{{asset('js/ajax.js')}}"></script>
 {% endblock %}
+

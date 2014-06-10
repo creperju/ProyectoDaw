@@ -31,3 +31,7 @@
     </div>
 
 {% endblock %}
+{% block css %}
+    {{parent()}}
+    <link href="{{ asset('css/admin.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
