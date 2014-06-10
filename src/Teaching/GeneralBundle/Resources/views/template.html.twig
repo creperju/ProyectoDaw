@@ -12,55 +12,56 @@
     </head>
     <body>
         <div id="contenido">
-
-            {# Header of application #}
-            <div class="container " id="header">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                        <center><a href="{{ url('teaching_homepage')}}" ><img src="{{ asset('img/logo.png') }}" class="img-responsive" title="Teaching!" /></a> </center>
+            <div id="subcontenido">
+                {# Header of application #}
+                <div class="container " id="header">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                            <center><a href="{{ url('teaching_homepage')}}" ><img src="{{ asset('img/logo.png') }}" class="img-responsive" title="Teaching!" /></a> </center>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+                            <div class="center">{% block header %}{% endblock %}</div>
+                        </div>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
-                        <div class="center">{% block header %}{% endblock %}</div>
+                    <div class="row">
+                        <hr/>
                     </div>
+
+
                 </div>
-                <div class="row">
-                    <hr/>
+
+                <div class="container">
                 </div>
 
+                <br/>
 
-            </div>
+                {# Content of application #}
+                {% block content %}
 
-            <div class="container">
-            </div>
+                {% endblock %}
 
-            <br/>
-
-            {# Content of application #}
-            {% block content %}
-
-            {% endblock %}
-
-            <br/>
+                <br/>
 
 
 
 
-            {# Footer #}
+                {# Footer #}
 
-            <div class="container">
-            </div>
-
-            <div class="container" id="footer">
-                <div class="row">
-                    <hr/>
+                <div class="container">
                 </div>
-                <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-12 center">
-                        <h3 class="h3">Proyecto Daw realizado por Emilio Crespo Perán y Francisco Javier González Navarro</h3>
-                        <br/>
-                        <b>Todos los derechos reservados &copy;</b>
-                        <br/><br/>
-                        <b>Last update:</b> 29/05/2014
+
+                <div class="container" id="footer">
+                    <div class="row">
+                        <hr/>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12 center">
+                            <h3 class="h3">Proyecto Daw realizado por Emilio Crespo Perán y Francisco Javier González Navarro</h3>
+                            <br/>
+                            <b>Todos los derechos reservados &copy;</b>
+                            <br/><br/>
+                            <b>Last update:</b> 29/05/2014
+                        </div>
                     </div>
                 </div>
             </div>
