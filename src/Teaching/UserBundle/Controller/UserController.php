@@ -509,6 +509,10 @@ class UserController extends Controller
             $surname = 'Apellidos: ' . $data['Apellidos'];
             $dni = 'Dni: ' . $data['Dni'];
 
+            $pattern = '/^[0-9]{8}[A-Z]{1}$/';
+            
+
+            if( preg_match($pattern, $dni) ){
             $message = new Messages();
 
             $message->setFromUser($this->search($this->getUser()->getUsername(), 'Users', 'username'));
@@ -530,7 +534,17 @@ class UserController extends Controller
                         'verificate',
                         'success'
                     );
+            }
+            else{
 
+            $msg_flash = 'Dni no válido. Ejemplo: 12345678A';
+            $this->get('session')->getFlashBag()->add('message_send', $msg_flash);
+
+            $this->get('session')->getFlashBag()->add(
+                        'verificate',
+                        'error'
+                    );
+            }
             return $this->redirect($this->generateUrl('teaching_user_messages'));
 
         }
