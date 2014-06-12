@@ -1,7 +1,10 @@
 {% extends "TeachingGeneralBundle:Home:index.html.twig" %}
-
+{% block css %}
+    {{parent()}}
+    <link href="{{ asset('css/admin.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}	
 {% block content %}
-	
+
     <div class="container center">
         
         {% for message in  app.session.flashbag.get('msg') %}
@@ -118,7 +121,3 @@
 
 {% endblock %}
 
-{% block css %}
-    {{parent()}}
-    <link href="{{ asset('css/admin.css') }}" rel="stylesheet" type="text/css" />
-{% endblock %}

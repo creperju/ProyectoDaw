@@ -1,6 +1,9 @@
 {% extends "TeachingGeneralBundle:Login:template_with_actions.html.twig" %}
 
-
+{% block css %}
+    {{parent()}}
+    <link href="{{ asset('css/section.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
 
 {% block actions %}
 {% endblock %}
@@ -95,10 +98,7 @@
 
 {% endblock %}
 
-{% block css %}
-    {{parent()}}
-    <link href="{{ asset('css/section.css') }}" rel="stylesheet" type="text/css" />
-{% endblock %}
+
 
 {% block js %}
     {{parent()}}

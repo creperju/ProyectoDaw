@@ -7,7 +7,7 @@ $(document).ready(function() {
     altura = $("imagen-cargar").height() / 2;
     $("#imagen-cargar").animate({
         marginTop: +altura
-    }, 500, function() {
+    }, 1500, function() {
         $('#contenido').slideDown('3000');
         $('#imagen-cargar').slideUp('3000');
     });
@@ -21,7 +21,7 @@ $(document).ready(function() {
                 $("body").css("background-image", "none");
                 $("#imagen-precargar").animate({
                     marginTop: -alto
-                }, 500, function() {
+                }, 1500, function() {
                     window.location.assign(to);
                 });
             });

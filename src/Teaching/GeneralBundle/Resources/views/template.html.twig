@@ -9,6 +9,11 @@
 
 
 
+    {# CSS #}
+        {% block css %}
+    {#        <link href="{{ asset('css/template.css') }}" rel="stylesheet" type="text/css" />#}
+            <link href="{{ asset('css/general.css') }}" rel="stylesheet" type="text/css" />
+        {% endblock %}
     </head>
     <body>
         <div id="todo">
@@ -98,13 +103,13 @@
         {# Intro JS #}
         <script type="text/javascript" src="{{ asset('introjs/intro.js') }}"></script>
         <link href="{{ asset('introjs/introjs.css') }}" rel="stylesheet" type="text/css" />
-
-
-        {# CSS #}
-        {% block css %}
-            <link href="{{ asset('css/template.css') }}" rel="stylesheet" type="text/css" />
-            <link href="{{ asset('css/general.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('introjs/themes/introjs-nassim.css') }}" rel="stylesheet" type="text/css" />
+		
+        {% block css_shadow %}
+    {#        <link href="{{ asset('css/template.css') }}" rel="stylesheet" type="text/css" />#}
+            <link href="{{ asset('css/shadow.css') }}" rel="stylesheet" type="text/css" />
         {% endblock %}
+
 
 
     </body>
