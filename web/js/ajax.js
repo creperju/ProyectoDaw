@@ -207,7 +207,7 @@ function validarPassword(nombre) {
             var patt = /^\w{4,50}$/;
             validnewpasswordOne = patt.test(valuenewpasswordOne); 
             if (!validnewpasswordOne){
-                fail.html(fail.html()+"La nueva contraseña debe tener entre 4 y 50 caracteres <br/>");
+                fail.html(fail.html()+"La nueva contraseña debe tener entre 4 y 50 caracteres sin espacios en blanco <br/>");
             }
         }
     }
