@@ -1,6 +1,10 @@
 {% extends "TeachingGeneralBundle::template.html.twig" %}
 
 {% block title %}Bienvenido a Teaching!{% endblock %}
+{% block css %}
+    {{parent()}}
+    <link href="{{ asset('css/home.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
 
 {% block header %}
 
@@ -347,10 +351,6 @@
             }
         </script>
 
-{% endblock %}
-{% block css %}
-    {{parent()}}
-    <link href="{{ asset('css/home.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 

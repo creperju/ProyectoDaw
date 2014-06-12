@@ -61,3 +61,158 @@ html,body{
     height: 250px;
   
 }
+
+
+/*****************************/    
+/*       Links styles        */
+/*****************************/
+
+a { text-decoration: none; }
+    /* On link */
+    a:hover { text-decoration: none; color: #003bb3; }
+
+
+    
+    
+/*****************************/    
+/*       Input styles        */
+/*****************************/
+
+/* Input form login */
+#username, #password
+{ 
+    border-color: gray; 
+    text-align: center; 
+    color: #b3b3b3;
+}
+    
+
+
+
+/*****************************/    
+/*        Menu styles        */
+/*****************************/
+
+/* Item menu home */
+.item-menu{ padding-top: 30px; padding-bottom: 30px; }
+.item-menu-help{ padding-top: 88px; padding-bottom: 88px; }
+
+/* Item subjects, messages and configuration */
+/* Change background color on mouse out */
+.menu-actions{
+    padding-top: 15px; padding-bottom: 15px; 
+    color: white; background-color: #333;
+    opacity:0.8; 
+    filter:alpha(opacity=80); /* For IE8 and earlier */
+}
+/* Change background color on mouse over */
+.menu-select{
+    cursor: pointer;
+    padding-top: 15px; padding-bottom: 15px; 
+    color: white; background-color: #30A7D7;   
+    opacity:0.8;
+    filter:alpha(opacity=80); /* For IE8 and earlier */
+}
+
+
+
+
+/*****************************/    
+/*         Hr styles         */
+/*****************************/
+
+hr{
+    border: solid 2px gray;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+
+
+
+/*****************************/    
+/*         Img styles        */
+/*****************************/
+
+img{ width: 100px; }
+
+
+
+
+/*****************************/    
+/*     Exception styles      */
+/*****************************/
+
+#exception{
+    font-family: calibri; text-align: center;
+    background-color: white;
+    border-radius: 3px;	box-shadow: 3px 3px 10px gray;
+}
+
+
+
+
+/*****************************/    
+/*       Shadow styles       */
+/*****************************/
+
+.shadow{ box-shadow: 0px 3px 20px gray; }
+.shadow-black{ box-shadow: 0px 3px 20px black; }
+
+
+
+
+/*****************************/    
+/*       Margin styles       */
+/*****************************/
+
+.margin-top--20{ margin-top: -20px; }
+.margin-botom--20{ margin-bottom: -20px; }
+
+.margin-top-10{ margin-top: 10px; }
+.margin-botom-10{ margin-bottom: 10px; }
+
+.margin-top-15{ margin-top: 15px; }
+.margin-bottom-15{ margin-bottom: 15px; }
+
+.margin-top-20{ margin-top: 20px; }
+.margin-bottom-20{ margin-bottom: 20px; }
+
+.margin-top-25{ margin-top: 25px; }
+.margin-bottom-25{ margin-bottom: 25px; }
+
+.margin-top-50{ margin-top: 50px; }
+.margin-bottom-50{ margin-bottom: 50px; }
+
+
+
+
+/*****************************/    
+/*      Padding styles       */
+/*****************************/
+
+.padding-top-10{ padding-top: 10px; }
+.padding-bottom-10{ padding-bottom: 10px; }
+
+.padding-top-15{ padding-top: 15px; }
+.padding-bottom-15{ padding-bottom: 15px; }
+
+.padding-top-20{ padding-top: 20px; }
+.padding-bottom-20{ padding-bottom: 20px; }
+
+.padding-top-25{ padding-top: 25px; }
+.padding-bottom-25{ padding-bottom: 25px; }
+
+.padding-top-50{ padding-top: 50px; }
+.padding-bottom-50{ padding-bottom: 50px; }
+
+
+
+
+/*****************************/    
+/*     Position styles       */
+/*****************************/
+
+.right{ text-align: right; }
+.left{ text-align: left; }
+.center{ text-align: center; }
