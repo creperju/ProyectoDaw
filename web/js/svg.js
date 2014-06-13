@@ -55,88 +55,32 @@ var dimensiones = [tooshort, notsecure, normal, secure, toosecure];
 $(document).ready(function() {
     ajustar();
     animate(dimensiones[0]);
-    $("#NewPassword").keydown(function(e) {
-        if (e.keyCode == 8) {
-            if ($("#NewPassword").val().length == 1) {
-                $("#grafico").hide(0);
-            }
-            state = valor;
-            cadena = $("#NewPassword").val();
-            ajustar();
-            if (cadena.length >= 4) {
-                if (pattminus.test(cadena)) {
-                    if (minus) {
-                        minus = false;
-                        valor--;
-                    }
-                }
-                if (pattmayus.test(cadena)) {
-                    if (mayus) {
-                        mayus = false;
-                        valor--;
-                    }
-                }
-                if (pattnumber.test(cadena)) {
-                    if (numero) {
-                        numero = false;
-                        valor--;
-                    }
-                }
-                if (pattspecial.test(cadena)) {
-                    if (special) {
-                        special = false;
-                        valor--;
-                    }
-                }
-            }
-            else {
-                valor = 0;
-            }
-//            if (state != valor) {
-            animate(dimensiones[valor]);
-//            }
-
-        }
-    });
     $("#NewPassword").keyup(function(e) {
-        if ($("#NewPassword").val().length != 0) {
-            $("#grafico").show(0);
-        }
+        cadena = $("#password").val();
         state = valor;
-        cadena = $("#NewPassword").val();
+        valor = 0;
         ajustar();
+        minus = pattminus.test(cadena);
+        mayus = pattmayus.test(cadena);
+        numero = pattnumber.test(cadena);
+        special = pattspecial.test(cadena);
         if (cadena.length >= 4) {
-            if (pattminus.test(cadena)) {
-                if (!minus) {
-                    minus = true;
-                    valor++;
-                }
-            }
-            if (pattmayus.test(cadena)) {
-                if (!mayus) {
-                    mayus = true;
-                    valor++;
-                }
-            }
-            if (pattnumber.test(cadena)) {
-                if (!numero) {
-                    numero = true;
-                    valor++;
-                }
-            }
-            if (pattspecial.test(cadena)) {
-                if (!special) {
-                    special = true;
-                    valor++;
-                }
-            }
+            if (minus)
+                valor++;
+            if (mayus)
+                valor++;
+            if (numero)
+                valor++;
+            if (special)
+                valor++;
+
         }
         else {
             valor = 0;
         }
-//        if (state != valor) {
-        animate(dimensiones[valor]);
-//        }
+        if (state != valor) {
+            animate(dimensiones[valor]);
+        }
     });
 
 });
