@@ -22,25 +22,25 @@ var tooshort = {
 };
 var notsecure = {
     x: 200,
-    text: "poco segura",
+    text: "Poco segura",
     color: "#D2322D",
     textColor: "#D2322D"
 };
 var normal = {
     x: 300,
-    text: "normal",
+    text: "Normal",
     color: "#ffc40d",
     textColor: "#ffc40d"
 };
 var secure = {
     x: 400,
-    text: "segura",
+    text: "Segura",
     color: "#30A7D7",
     textColor: "#30A7D7"
 };
 var toosecure = {
     x: 500,
-    text: "muy segura",
+    text: "Muy segura",
     color: "#46A546",
     textColor: "#46A546"
 };
@@ -56,7 +56,13 @@ $(document).ready(function() {
     ajustar();
     animate(dimensiones[0]);
     $("#NewPassword").keyup(function(e) {
-        cadena = $("#password").val();
+        cadena = $("#NewPassword").val();
+        if(cadena.length == 0){
+            $("#grafico").hide(0);
+        }
+        else{
+            $("#grafico").show(0);
+        }
         state = valor;
         valor = 0;
         ajustar();
@@ -77,6 +83,9 @@ $(document).ready(function() {
         }
         else {
             valor = 0;
+            if(state == 0){
+             animate(dimensiones[0])
+            }
         }
         if (state != valor) {
             animate(dimensiones[valor]);
